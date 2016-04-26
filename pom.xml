@@ -66,7 +66,6 @@
 	<!-- ===== Project Information ===== -->
 
 	<name>Game Database</name>
-	<!--<description></description> -->
 	<inceptionYear>2016</inceptionYear>
 	<licenses>
 		<license>
@@ -173,6 +172,20 @@
 	<!-- ===== Modules ===== -->
 
 	<modules>
+		<!-- Contains all models and provides the basic interfaces to access the 
+			data. -->
+		<module>gdb-service</module>
+
+		<!-- Provides the controllers and the page rendering. -->
+		<module>gdb-web-control</module>
+
+		<!-- The services used to connect to 3rd party services. -->
+		<module>gdb-steam</module>
+		<module>gdb-intel</module>
+		<module>gdb-amd</module>
+
+		<!-- Implements the GDB service. -->
+		<module>gdb-service-impl</module>
 	</modules>
 
 
