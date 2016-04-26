@@ -428,3 +428,8 @@ $RECYCLE.BIN/
 ### m2e ###
 .classpath
 .project
+
+
+### Other ###
+# Private files
+/private/
