@@ -10,4 +10,11 @@
 	<artifactId>gdb-service</artifactId>
 
 	<name>Game Database Service</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.lcmanager.gdb</groupId>
+			<artifactId>gdb-base</artifactId>
+		</dependency>
+	</dependencies>
 </project>

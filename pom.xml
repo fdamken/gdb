@@ -205,6 +205,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.lcmanager.gdb</groupId>
+				<artifactId>gdb-base</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.lcmanager.gdb</groupId>
 				<artifactId>gdb-intel</artifactId>
 				<version>${project.version}</version>
 			</dependency>

@@ -10,4 +10,11 @@
 	<artifactId>gdb-intel</artifactId>
 
 	<name>Game Database Intel Accessor</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.lcmanager.gdb</groupId>
+			<artifactId>gdb-base</artifactId>
+		</dependency>
+	</dependencies>
 </project>

@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.web.control;
+package org.lcmanager.gdb;
 
 /**
  * This interface marks the base package and shall only be used in conjunction

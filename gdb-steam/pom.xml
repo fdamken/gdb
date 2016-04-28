@@ -10,4 +10,11 @@
 	<artifactId>gdb-steam</artifactId>
 
 	<name>Game Database Steam Accessor</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.lcmanager.gdb</groupId>
+			<artifactId>gdb-base</artifactId>
+		</dependency>
+	</dependencies>
 </project>
