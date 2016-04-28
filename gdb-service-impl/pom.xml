@@ -3,11 +3,36 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.lcmanager</groupId>
-		<artifactId>gdb</artifactId>
+		<groupId>org.lcmanager.gdb</groupId>
+		<artifactId>gdb-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>gdb-service-impl</artifactId>
 
 	<name>Game Database Service Implementation</name>
+
+	<dependencies>
+		<!-- Spring. -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.lcmanager.gdb</groupId>
+			<artifactId>gdb-amd</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.lcmanager.gdb</groupId>
+			<artifactId>gdb-intel</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.lcmanager.gdb</groupId>
+			<artifactId>gdb-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.lcmanager.gdb</groupId>
+			<artifactId>gdb-steam</artifactId>
+		</dependency>
+	</dependencies>
 </project>
