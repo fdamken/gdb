@@ -17,23 +17,17 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.main;
-
-import org.lcmanager.gdb.config.BaseConfiguration;
-import org.springframework.boot.SpringApplication;
+package org.lcmanager.gdb.web.control;
 
 /**
- * The main class of the game database. Initializes Spring.
+ * This interface marks the base package and shall only be used in conjunction
+ * with Spring or reflection in any case.
+ *
+ * <p>
+ * <b> NOTE: Do not implement this interface! </b>
+ * </p>
  *
  */
-public class GameDatabase {
-    /**
-     * The main method.
-     *
-     * @param args
-     *            The command-line arguments.
-     */
-    public static void main(final String[] args) {
-        SpringApplication.run(BaseConfiguration.class, args);
-    }
+public interface BasePackageMarker {
+    // Nothing to do.
 }

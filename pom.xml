@@ -172,6 +172,9 @@
 	<!-- ===== Modules ===== -->
 
 	<modules>
+		<!-- The base API. -->
+		<module>gdb-base</module>
+
 		<!-- Contains all models and provides the basic interfaces to access the 
 			data. -->
 		<module>gdb-service</module>
@@ -224,6 +227,13 @@
 				<groupId>org.lcmanager.gdb</groupId>
 				<artifactId>gdb-web-control</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+
+			<!-- MyBatis. -->
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>1.0.2</version>
 			</dependency>
 
 			<!-- Lombok. -->
