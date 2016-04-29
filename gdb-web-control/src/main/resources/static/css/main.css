@@ -1,0 +1,19 @@
+.form-group.has-feedback span.glyphicon {
+	visibility: hidden
+}
+
+.form-group.has-success span.glyphicon.glyphicon-ok {
+	visibility: visible;
+}
+
+.form-group.has-success span.glyphicon.glyphicon-remove {
+	visibility: hidden;
+}
+
+.form-group.has-error span.glyphicon.glyphicon-ok {
+	visibility: hidden;
+}
+
+.form-group.has-error span.glyphicon.glyphicon-remove {
+	visibility: visible;
+}

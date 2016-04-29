@@ -183,9 +183,10 @@
 		<module>gdb-web-control</module>
 
 		<!-- The services used to connect to 3rd party services. -->
-		<module>gdb-steam</module>
-		<module>gdb-intel</module>
 		<module>gdb-amd</module>
+		<module>gdb-intel</module>
+		<module>gdb-nvidia</module>
+		<module>gdb-steam</module>
 
 		<!-- Implements the GDB service. -->
 		<module>gdb-service-impl</module>
@@ -258,6 +259,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<!-- Lombok. -->

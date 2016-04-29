@@ -20,9 +20,13 @@
 package org.lcmanager.gdb.web.control.config;
 
 import org.lcmanager.gdb.BasePackageMarker;
+import org.lcmanager.gdb.base.CommonConstants;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  * Configures the application and sets the component scan to the root of the
@@ -31,7 +35,18 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableAutoConfiguration
+@EnableCaching
 @ComponentScan(basePackageClasses = BasePackageMarker.class)
+@ControllerAdvice
 public class BaseConfiguration {
-    // Nothing to do.
+    /**
+     * Sets the attribute <code>dev</code> in every model to the value of
+     * {@link CommonConstants#DEV}.
+     *
+     * @return The value of {@link CommonConstants#DEV}.
+     */
+    @ModelAttribute("dev")
+    public boolean modelAttributeDev() {
+        return CommonConstants.DEV;
+    }
 }
