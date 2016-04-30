@@ -16,5 +16,9 @@
 			<groupId>org.lcmanager.gdb</groupId>
 			<artifactId>gdb-base</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.lcmanager.gdb</groupId>
+			<artifactId>gdb-service</artifactId>
+		</dependency>
 	</dependencies>
 </project>
