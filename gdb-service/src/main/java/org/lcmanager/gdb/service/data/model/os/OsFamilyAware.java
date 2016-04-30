@@ -17,29 +17,17 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model;
-
-import java.io.Serializable;
+package org.lcmanager.gdb.service.data.model.os;
 
 /**
- * Represents the base interface for every model.
+ * Marks a class that it is aware of the OS family is is holding and that all
+ * non-transient properties depend on the OS family.
  *
- * @param <I>
- *            The type of the ID (the primary key).
  */
-public interface BaseModel<I extends Serializable> extends Serializable {
+public interface OsFamilyAware {
     /**
      *
-     * @return The ID.
+     * @return The stored OS family.
      */
-    I getId();
-
-    /**
-     * Sets the ID.
-     *
-     * @param id
-     *            The ID to set.
-     * @return <code>this</code>
-     */
-    BaseModel<I> setId(I id);
+    OsFamily getOsFamily();
 }

@@ -19,27 +19,31 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
-import java.io.Serializable;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * Represents the base interface for every model.
+ * Represents a genre that can be assigned to a game (e.g. <code>Strategy</code>
+ * ).
  *
- * @param <I>
- *            The type of the ID (the primary key).
  */
-public interface BaseModel<I extends Serializable> extends Serializable {
+@Data
+@Accessors(chain = true)
+public class Genre implements BaseModel<Integer> {
     /**
+     * The serial version UID.
      *
-     * @return The ID.
      */
-    I getId();
+    private static final long serialVersionUID = 6694686278031486441L;
 
     /**
-     * Sets the ID.
-     *
-     * @param id
-     *            The ID to set.
-     * @return <code>this</code>
+     * The ID of this genre.
+     * 
      */
-    BaseModel<I> setId(I id);
+    private Integer id;
+    /**
+     * The description of this genre.
+     * 
+     */
+    private String description;
 }

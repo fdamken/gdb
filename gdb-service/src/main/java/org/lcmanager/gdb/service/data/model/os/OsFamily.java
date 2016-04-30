@@ -17,29 +17,34 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model;
-
-import java.io.Serializable;
+package org.lcmanager.gdb.service.data.model.os;
 
 /**
- * Represents the base interface for every model.
+ * An OS family contains multiple operating system that are built upon the same
+ * technologies (e.g. the <code>WINDOWS</code> family contains
+ * <code>Windows XP</code>, <code>Windows 2000</code> and so on).
+ * 
  *
- * @param <I>
- *            The type of the ID (the primary key).
  */
-public interface BaseModel<I extends Serializable> extends Serializable {
+public enum OsFamily {
     /**
-     *
-     * @return The ID.
+     * Windows.
+     * 
      */
-    I getId();
-
+    WINDOWS,
     /**
-     * Sets the ID.
-     *
-     * @param id
-     *            The ID to set.
-     * @return <code>this</code>
+     * Unix.
+     * 
      */
-    BaseModel<I> setId(I id);
+    UNIX,
+    /**
+     * Mac OS.
+     * 
+     */
+    MAC,
+    /**
+     * Other families that are not explicitly listed.
+     * 
+     */
+    OTHER;
 }

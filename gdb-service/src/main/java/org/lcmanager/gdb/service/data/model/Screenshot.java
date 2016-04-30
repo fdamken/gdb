@@ -19,27 +19,24 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
-import java.io.Serializable;
+import java.net.URL;
+
+import lombok.Value;
 
 /**
- * Represents the base interface for every model.
+ * A screenshot has a thumbnail and a full image.
  *
- * @param <I>
- *            The type of the ID (the primary key).
  */
-public interface BaseModel<I extends Serializable> extends Serializable {
+@Value
+public class Screenshot {
     /**
-     *
-     * @return The ID.
+     * The URL of the thumbnail.
+     * 
      */
-    I getId();
-
+    URL thumbnail;
     /**
-     * Sets the ID.
-     *
-     * @param id
-     *            The ID to set.
-     * @return <code>this</code>
+     * The URL of the full image.
+     * 
      */
-    BaseModel<I> setId(I id);
+    URL full;
 }

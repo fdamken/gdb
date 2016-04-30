@@ -17,29 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model;
-
-import java.io.Serializable;
+package org.lcmanager.gdb.service.data.model.processor;
 
 /**
- * Represents the base interface for every model.
+ * TODO: Add type description!
  *
- * @param <I>
- *            The type of the ID (the primary key).
  */
-public interface BaseModel<I extends Serializable> extends Serializable {
-    /**
-     *
-     * @return The ID.
-     */
-    I getId();
-
-    /**
-     * Sets the ID.
-     *
-     * @param id
-     *            The ID to set.
-     * @return <code>this</code>
-     */
-    BaseModel<I> setId(I id);
+public class Processor {
+    // TODO Auto-generated class body.
 }
