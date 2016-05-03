@@ -441,10 +441,6 @@
 							<alias>startcom-class1</alias>
 							<url>file://${basedir}/ssl/sub.class1.server.ca.pem</url>
 						</certificate>
-						<certificate>
-							<alias>lcmanager</alias>
-							<url>file://${basedir}/ssl/lcmanager.org.pem</url>
-						</certificate>
 					</certificates>
 				</configuration>
 			</plugin>
