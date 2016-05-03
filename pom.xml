@@ -420,6 +420,32 @@
 		</pluginManagement>
 		<plugins>
 			<plugin>
+				<groupId>com.intersult</groupId>
+				<artifactId>ssl-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>import-cert</id>
+						<goals>
+							<goal>import-cert</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<certificates>
+						<certificate>
+							<alias>startcom-ca</alias>
+							<url>file://${basedir}/ssl/ca.pem</url>
+						</certificate>
+						<certificate>
+							<alias>startcom-class1</alias>
+							<url>file://${basedir}/ssl/sub.class1.server.ca.pem</url>
+						</certificate>
+					</certificates>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.codehaus.gmavenplus</groupId>
 				<artifactId>gmavenplus-plugin</artifactId>
 				<executions>
