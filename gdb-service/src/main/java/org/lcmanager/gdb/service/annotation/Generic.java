@@ -17,39 +17,23 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model;
+package org.lcmanager.gdb.service.annotation;
 
-import java.net.URL;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * A screenshot has a thumbnail and a full image.
+ * Marks a component as a generic component as it does not connect to 3rd party
+ * services or does delegate to multiple branded components.
  *
  */
-@Data
-@Accessors(chain = true)
-public class Screenshot implements BaseModel<Integer> {
-    /**
-     * The serial version UID.
-     *
-     */
-    private static final long serialVersionUID = -870758489253505002L;
-
-    /**
-     * The ID of this screenshot.
-     * 
-     */
-    private Integer id;
-    /**
-     * The URL of the thumbnail.
-     * 
-     */
-    private URL thumbnail;
-    /**
-     * The URL of the full image.
-     * 
-     */
-    private URL image;
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
+public @interface Generic {
+    // Nothing to do.
 }

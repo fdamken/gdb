@@ -19,8 +19,12 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
+import java.util.Locale;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import org.lcmanager.gdb.base.Formatable;
 
 /**
  * Represents a category that can be assigned to a game.
@@ -28,15 +32,16 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Category implements BaseModel<Integer> {
+public class Category implements BaseModel<Integer>, Formatable {
     /**
      * The serial version UID.
      *
      */
     private static final long serialVersionUID = -1996113727890542205L;
 
+    // ~ Direct ~
     /**
-     * The ID of this category.
+     * The ID of this category. Represents a steam category ID.
      * 
      */
     private Integer id;
@@ -45,4 +50,14 @@ public class Category implements BaseModel<Integer> {
      * 
      */
     private String description;
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.base.Formatable#format(java.util.Locale)
+     */
+    @Override
+    public String format(final Locale locale) {
+        return this.description;
+    }
 }

@@ -17,12 +17,27 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model.graphics;
+package org.lcmanager.gdb.service.data.model;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * TODO: Add type description!
+ * Represents a processor and all its relevant technical data.
  *
  */
-public class Graphics {
-    // TODO Auto-generated class body.
+@Data
+@Accessors(chain = true)
+public class Processor implements BaseModel<Integer> {
+    /**
+     * The serial version UID.
+     *
+     */
+    private static final long serialVersionUID = -1608938574683528407L;
+
+    /**
+     * The ID of this processor.
+     * 
+     */
+    private Integer id;
 }

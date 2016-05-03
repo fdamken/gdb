@@ -2,7 +2,7 @@
  * #%L
  * Game Database
  * %%
- * Copyright (C) 2016 LCManager Group
+ * Copyright (C) 2016 - 2016 LCManager Group
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,14 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb;
+package org.lcmanager.gdb.service.impl.data.mapper;
+
+import org.lcmanager.gdb.service.data.model.Game;
 
 /**
- * This interface marks the base package and shall only be used in conjunction
- * with Spring or reflection in any case.
- *
- * <p>
- * <b> NOTE: Do not implement this interface! </b>
- * </p>
+ * Mapper for {@link Game}.
  *
  */
-public interface BasePackageMarker {
+public interface GameMapper extends BaseMapper<Game, Integer> {
     // Nothing to do.
 }

@@ -22,11 +22,9 @@ package org.lcmanager.gdb.service.data.model;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import org.lcmanager.gdb.service.data.model.graphics.Graphics;
-import org.lcmanager.gdb.service.data.model.os.OsFamily;
-import org.lcmanager.gdb.service.data.model.os.OsFamilyAware;
-import org.lcmanager.gdb.service.data.model.os.OsFamilyAwareOperatingSystemList;
-import org.lcmanager.gdb.service.data.model.processor.Processor;
+import org.lcmanager.gdb.service.data.util.OsFamily;
+import org.lcmanager.gdb.service.data.util.OsFamilyAware;
+import org.lcmanager.gdb.service.data.util.OsFamilyAwareOperatingSystemList;
 
 /**
  * A requirement represents the system setup that is required to run any game.
@@ -41,6 +39,7 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
      */
     private static final long serialVersionUID = 1710929911278504094L;
 
+    // ~ Direct ~
     /**
      * The ID of this requirement.
      * 
@@ -51,6 +50,18 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
      * 
      */
     private OsFamily osFamily;
+    /**
+     * The memory of this requirement in mebibyte.
+     * 
+     */
+    private int memory;
+    /**
+     * The storage of this requirement is mebibyte.
+     * 
+     */
+    private int storage;
+
+    // ~ Mapped ~
     /**
      * The operating systems that are supported.
      * 
@@ -66,16 +77,6 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
      * 
      */
     private Graphics graphics;
-    /**
-     * The memory of this requirement in mebibyte.
-     * 
-     */
-    private int memory;
-    /**
-     * The storage of this requirement is mebibyte.
-     * 
-     */
-    private int storage;
 
     /**
      * Sets {@link #operatingSystems}.

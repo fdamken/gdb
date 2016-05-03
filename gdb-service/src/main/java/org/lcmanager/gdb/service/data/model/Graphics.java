@@ -2,7 +2,7 @@
  * #%L
  * Game Database
  * %%
- * Copyright (C) 2016 LCManager Group
+ * Copyright (C) 2016 - 2016 LCManager Group
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,27 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb;
+package org.lcmanager.gdb.service.data.model;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * This interface marks the base package and shall only be used in conjunction
- * with Spring or reflection in any case.
- *
- * <p>
- * <b> NOTE: Do not implement this interface! </b>
- * </p>
+ * Represents a graphics card and all its relevant technical data.
  *
  */
-public interface BasePackageMarker {
-    // Nothing to do.
+@Data
+@Accessors(chain = true)
+public class Graphics implements BaseModel<Integer> {
+    /**
+     * The serial version UID.
+     *
+     */
+    private static final long serialVersionUID = 5131569989763237510L;
+
+    /**
+     * The ID of this graphics (card).
+     * 
+     */
+    private Integer id;
 }

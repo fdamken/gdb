@@ -17,17 +17,23 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model.os;
+package org.lcmanager.gdb.service.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * Marks a class that it is aware of the OS family is is holding and that all
- * non-transient properties depend on the OS family.
+ * Marks a component as a branded component as it connects to a 3rd party
+ * service (e.g. Steam).
  *
  */
-public interface OsFamilyAware {
-    /**
-     *
-     * @return The stored OS family.
-     */
-    OsFamily getOsFamily();
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
+public @interface Branded {
+    // Nothing to do.
 }

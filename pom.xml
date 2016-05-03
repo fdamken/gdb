@@ -15,6 +15,7 @@
 	<groupId>org.lcmanager.gdb</groupId>
 	<artifactId>gdb-parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
 
 
@@ -264,6 +265,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-instrument</artifactId>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		-->
 
 		<!-- Lombok. -->
 		<dependency>
@@ -404,6 +419,14 @@
 					</execution>
 				</executions>
 				<configuration>
+					<excludes>
+						<exclude>**/angular*js</exclude>
+						<exclude>**/jquery*js</exclude>
+						<exclude>**/bootstrap*js</exclude>
+						<exclude>**/angular*css</exclude>
+						<exclude>**/jquery*css</exclude>
+						<exclude>**/bootstrap*css</exclude>
+					</excludes>
 					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
 					<copyrightOwners>${project.organization.name}</copyrightOwners>
 					<encoding>${project.properties.encoding}</encoding>
@@ -487,5 +510,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<packaging>pom</packaging>
 </project>

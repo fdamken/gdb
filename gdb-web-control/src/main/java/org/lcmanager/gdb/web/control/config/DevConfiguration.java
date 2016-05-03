@@ -24,8 +24,11 @@ import java.util.Properties;
 import lombok.val;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.support.NoOpCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import freemarker.cache.NullCacheStorage;
@@ -37,7 +40,8 @@ import freemarker.cache.NullCacheStorage;
  */
 @Configuration
 @ConditionalOnProperty(name = "dev",
-                       havingValue = "true")
+havingValue = "true")
+@PropertySource("classpath:application.dev.properties")
 public class DevConfiguration {
     /**
      * Configures Freemarker not to cache the templates.
@@ -52,5 +56,15 @@ public class DevConfiguration {
         freeMarkerConfigurer.setFreemarkerSettings(settings);
         freeMarkerConfigurer.setTemplateLoaderPaths("classpath:/templates");
         return freeMarkerConfigurer;
+    }
+
+    /**
+     * Creates a non-caching {@link CacheManager}.
+     *
+     * @return The {@link CacheManager}.
+     */
+    @Bean
+    public CacheManager cacheManager() {
+        return new NoOpCacheManager();
     }
 }

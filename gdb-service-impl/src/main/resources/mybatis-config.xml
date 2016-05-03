@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Game Database
+  %%
+  Copyright (C) 2016 - 2016 LCManager Group
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- Caching is handled by Spring! -->
+		<setting name="cacheEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<!-- Data types. -->
+		<typeAlias type="org.lcmanager.gdb.base.Version" alias="Version" />
+		<typeAlias type="org.lcmanager.gdb.service.data.util.OsFamily" alias="OsFamily" />
+		<typeAlias type="org.lcmanager.gdb.service.data.util.RequirementType" alias="RequirementType" />
+		<typeAlias type="org.lcmanager.gdb.service.data.util.TypedRequirement" alias="TypedRequirement" />
+
+		<!-- Model type. -->
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Category" alias="Category" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Developer" alias="Developer" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Game" alias="Game" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Genre" alias="Genre" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Graphics" alias="Graphics" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.OperatingSystem" alias="OperatingSystem" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Processor" alias="Processor" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Publisher" alias="Publisher" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Requirement" alias="Requirement" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Screenshot" alias="Screenshot" />
+	</typeAliases>
+	<typeHandlers>
+		<typeHandler handler="org.lcmanager.gdb.service.impl.data.handler.OsFamilyHandler" />
+		<typeHandler handler="org.lcmanager.gdb.service.impl.data.handler.RequirementTypeHandler" />
+		<typeHandler handler="org.lcmanager.gdb.service.impl.data.handler.UrlHandler" />
+	</typeHandlers>
+	<mappers>
+		<mapper resource="mapper/GameMapper.xml" />
+	</mappers>
+</configuration>

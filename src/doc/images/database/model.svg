@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="93cm" height="55cm" viewBox="-155 -249 1847 1093" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="330.654" y="-228.566" width="180" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="330.654" y="-228.566" width="180" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="420.654" y="-214.566">User</text>
+    <rect style="fill: #ffffff" x="330.654" y="-210.566" width="180" height="52"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="330.654" y="-210.566" width="180" height="52"/>
+    <polygon style="fill: #000000" points="333.654,-200.566 335.654,-197.566 337.654,-200.566 335.654,-203.566 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.654" y="-194.566">username</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="411.254" y="-194.566">VARCHAR(50)</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="339.654" y1="-192.966" x2="495.954" y2="-192.966"/>
+    <ellipse style="fill: #000000" cx="335.654" cy="-184.566" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.654" y="-178.566">password</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="411.254" y="-178.566">VARCHAR(100)</text>
+    <ellipse style="fill: #000000" cx="335.654" cy="-168.566" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.654" y="-162.566">enabled</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="411.254" y="-162.566">BOOLEAN</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-46.6528" y="-244.044" width="180" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-46.6528" y="-244.044" width="180" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="43.3472" y="-230.044">User_Authority</text>
+    <rect style="fill: #ffffff" x="-46.6528" y="-226.044" width="180" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-46.6528" y="-226.044" width="180" height="36"/>
+    <polygon style="fill: #000000" points="-43.6528,-216.044 -41.6528,-213.044 -39.6528,-216.044 -41.6528,-219.044 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-37.6528" y="-210.044">username</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="41.6472" y="-210.044">VARCHAR(50)</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-37.6528" y1="-208.444" x2="126.347" y2="-208.444"/>
+    <polygon style="fill: #000000" points="-43.6528,-200.044 -41.6528,-197.044 -39.6528,-200.044 -41.6528,-203.044 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-37.6528" y="-194.044">authority</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="41.6472" y="-194.044">VARCHAR(50)</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-37.6528" y1="-192.444" x2="126.347" y2="-192.444"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="707.728" y="195.534" width="203.1" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="707.728" y="195.534" width="203.1" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="809.278" y="209.534">Category</text>
+    <rect style="fill: #ffffff" x="707.728" y="213.534" width="203.1" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="707.728" y="213.534" width="203.1" height="36"/>
+    <polygon style="fill: #000000" points="710.728,223.534 712.728,226.534 714.728,223.534 712.728,220.534 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="716.728" y="229.534">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="811.428" y="229.534">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="716.728" y1="231.134" x2="834.528" y2="231.134"/>
+    <ellipse style="fill: #000000" cx="712.728" cy="239.534" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="716.728" y="245.534">description</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="811.428" y="245.534">VARCHAR(128)</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="535.424" y="318.58" width="203.1" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="535.424" y="318.58" width="203.1" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="636.974" y="332.58">Genre</text>
+    <rect style="fill: #ffffff" x="535.424" y="336.58" width="203.1" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="535.424" y="336.58" width="203.1" height="36"/>
+    <polygon style="fill: #000000" points="538.424,346.58 540.424,349.58 542.424,346.58 540.424,343.58 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="544.424" y="352.58">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="639.124" y="352.58">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="544.424" y1="354.18" x2="662.224" y2="354.18"/>
+    <ellipse style="fill: #000000" cx="540.424" cy="362.58" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="544.424" y="368.58">description</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="639.124" y="368.58">VARCHAR(128)</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="519.968" y="-119.014" width="149.2" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="519.968" y="-119.014" width="149.2" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="594.568" y="-105.014">Developer</text>
+    <rect style="fill: #ffffff" x="519.968" y="-101.014" width="149.2" height="57"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="519.968" y="-101.014" width="149.2" height="57"/>
+    <polygon style="fill: #000000" points="522.968,-91.014 524.968,-88.014 526.968,-91.014 524.968,-94.014 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="528.968" y="-85.014">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="569.768" y="-85.014">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="528.968" y1="-83.414" x2="592.868" y2="-83.414"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="533.968" y="-71.014">AUTO_INCREMENT</text>
+    <ellipse style="fill: #000000" cx="524.968" cy="-54.014" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="528.968" y="-48.014">name</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="569.768" y="-48.014">VARCHAR(128)</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="497.206" y="514.244" width="195.4" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="497.206" y="514.244" width="195.4" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="594.906" y="528.244">Screenshot</text>
+    <rect style="fill: #ffffff" x="497.206" y="532.244" width="195.4" height="73"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="497.206" y="532.244" width="195.4" height="73"/>
+    <polygon style="fill: #000000" points="500.206,542.244 502.206,545.244 504.206,542.244 502.206,539.244 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="506.206" y="548.244">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="585.506" y="548.244">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="506.206" y1="549.844" x2="608.606" y2="549.844"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="511.206" y="562.244">AUTO_INCREMENT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="502.206" cy="579.244" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="506.206" y="585.244">thumbnail</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="585.506" y="585.244">VARCHAR(2083)</text>
+    <ellipse style="fill: #000000" cx="502.206" cy="595.244" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="506.206" y="601.244">image</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="585.506" y="601.244">VARCHAR(2083)</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="186.862" y="35.7638" width="210.8" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="186.862" y="35.7638" width="210.8" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="292.262" y="49.7638">OperatingSystem</text>
+    <rect style="fill: #ffffff" x="186.862" y="53.7638" width="210.8" height="169"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="186.862" y="53.7638" width="210.8" height="169"/>
+    <polygon style="fill: #000000" points="189.862,63.7638 191.862,66.7638 193.862,63.7638 191.862,60.7638 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="69.7638">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="69.7638">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="195.862" y1="71.3638" x2="321.362" y2="71.3638"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="200.862" y="83.7638">AUTO_INCREMENT</text>
+    <ellipse style="fill: #000000" cx="191.862" cy="100.764" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="106.764">developerId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="106.764">INT</text>
+    <ellipse style="fill: #000000" cx="191.862" cy="116.764" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="122.764">osFamily</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="122.764">INT</text>
+    <ellipse style="fill: #000000" cx="191.862" cy="132.764" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="138.764">name</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="138.764">VARCHAR(128)</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="191.862" cy="148.764" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="154.764">versionName</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="154.764">VARCHAR(128)</text>
+    <ellipse style="fill: #000000" cx="191.862" cy="164.764" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="170.764">versionMajor</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="170.764">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="191.862" cy="180.764" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="186.764">versionMinor</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="186.764">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="191.862" cy="196.764" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="202.764">versionBugfx</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="202.764">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="191.862" cy="212.764" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="195.862" y="218.764">versionBuild</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="298.262" y="218.764">INT</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="420.654,-228.566 420.654,-248.566 232.001,-248.566 232.001,-170.044 43.3472,-170.044 43.3472,-190.044 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="424.654" y="-232.566">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="47.3472" y="-178.044">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="292.262,222.764 292.262,242.764 424.765,242.764 424.765,-139.014 557.268,-139.014 557.268,-119.014 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="296.262" y="234.764">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="561.268" y="-123.014">n</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-62.328" y="350.12" width="119.85" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-62.328" y="350.12" width="119.85" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="-2.403" y="364.12">Processor</text>
+    <rect style="fill: #ffffff" x="-62.328" y="368.12" width="119.85" height="41"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-62.328" y="368.12" width="119.85" height="41"/>
+    <polygon style="fill: #000000" points="-59.328,378.12 -57.328,381.12 -55.328,378.12 -57.328,375.12 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-53.328" y="384.12">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-27.928" y="384.12">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-53.328" y1="385.72" x2="-4.828" y2="385.72"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="-48.328" y="398.12">AUTO_INCREMENT</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-154.046" y="510.656" width="119.85" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-154.046" y="510.656" width="119.85" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="-94.1214" y="524.656">Graphics</text>
+    <rect style="fill: #ffffff" x="-154.046" y="528.656" width="119.85" height="41"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-154.046" y="528.656" width="119.85" height="41"/>
+    <polygon style="fill: #000000" points="-151.046,538.656 -149.046,541.656 -147.046,538.656 -149.046,535.656 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-145.046" y="544.656">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-119.646" y="544.656">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-145.046" y1="546.256" x2="-96.5464" y2="546.256"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="-140.046" y="558.656">AUTO_INCREMENT</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="103.764" y="665.816" width="133.8" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="103.764" y="665.816" width="133.8" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="170.664" y="679.816">Requirement</text>
+    <rect style="fill: #ffffff" x="103.764" y="683.816" width="133.8" height="121"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="103.764" y="683.816" width="133.8" height="121"/>
+    <polygon style="fill: #000000" points="106.764,693.816 108.764,696.816 110.764,693.816 108.764,690.816 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="112.764" y="699.816">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="207.464" y="699.816">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="112.764" y1="701.416" x2="230.564" y2="701.416"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="117.764" y="713.816">AUTO_INCREMENT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="108.764" cy="730.816" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="112.764" y="736.816">processorId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="207.464" y="736.816">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="108.764" cy="746.816" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="112.764" y="752.816">graphicsId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="207.464" y="752.816">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="108.764" cy="762.816" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="112.764" y="768.816">osFamily</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="207.464" y="768.816">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="108.764" cy="778.816" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="112.764" y="784.816">memory</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="207.464" y="784.816">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="108.764" cy="794.816" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="112.764" y="800.816">storage</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="207.464" y="800.816">INT</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="204.114,804.816 204.114,843.722 49.7652,843.722 49.7652,490.656 -94.1214,490.656 -94.1214,510.656 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="208.114" y="816.816">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-90.1214" y="506.656">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="170.664,804.816 170.664,824.816 84.1307,824.816 84.1307,330.12 -2.403,330.12 -2.403,350.12 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="174.664" y="816.816">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1.597" y="346.12">n</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="158.454" y="335.14" width="207.15" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="158.454" y="335.14" width="207.15" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="262.029" y="349.14">Requirement_OperatingSystem</text>
+    <rect style="fill: #ffffff" x="158.454" y="353.14" width="207.15" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="158.454" y="353.14" width="207.15" height="36"/>
+    <polygon style="fill: #000000" points="161.454,363.14 163.454,366.14 165.454,363.14 163.454,360.14 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="167.454" y="369.14">requirementId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="308.354" y="369.14">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="167.454" y1="370.74" x2="331.454" y2="370.74"/>
+    <polygon style="fill: #000000" points="161.454,379.14 163.454,382.14 165.454,379.14 163.454,376.14 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="167.454" y="385.14">operatingSystemId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="308.354" y="385.14">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="167.454" y1="386.74" x2="331.454" y2="386.74"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="170.664,665.816 170.664,527.478 313.817,527.478 313.817,389.14 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="174.664" y="661.816">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="317.817" y="401.14">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="210.242,389.14 210.242,409.14 131.028,409.14 131.028,0.609492 292.262,0.609492 292.262,35.7638 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="214.242" y="401.14">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="296.262" y="31.7638">n</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1430.97" y="529.666" width="241.6" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1430.97" y="529.666" width="241.6" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1551.77" y="543.666">Game</text>
+    <rect style="fill: #ffffff" x="1430.97" y="547.666" width="241.6" height="164"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1430.97" y="547.666" width="241.6" height="164"/>
+    <polygon style="fill: #000000" points="1433.97,557.666 1435.97,560.666 1437.97,557.666 1435.97,554.666 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="563.666">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="563.666">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1439.97" y1="565.266" x2="1588.57" y2="565.266"/>
+    <ellipse style="fill: #000000" cx="1435.97" cy="573.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="579.666">name</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="579.666">VARCHAR(128)</text>
+    <ellipse style="fill: #000000" cx="1435.97" cy="589.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="595.666">requiredAge</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="595.666">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="1435.97" cy="605.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="611.666">description</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="611.666">TEXT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="1435.97" cy="621.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="627.666">headerImage</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="627.666">VARCHAR(2083)</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="1435.97" cy="637.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="643.666">website</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="643.666">VARCHAR(2083)</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="1435.97" cy="653.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="659.666">metacriticScore</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="659.666">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="1435.97" cy="669.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="675.666">metacriticUrl</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="675.666">VARCHAR(2083)</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="1435.97" cy="685.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="691.666">releaseDate</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="691.666">DATE</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="1435.97" cy="701.666" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1439.97" y="707.666">backgroundImage</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1565.47" y="707.666">VARCHAR(2083)</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="786.53" y="-100.072" width="133.8" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="786.53" y="-100.072" width="133.8" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="853.43" y="-86.072">Game_Developer</text>
+    <rect style="fill: #ffffff" x="786.53" y="-82.072" width="133.8" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="786.53" y="-82.072" width="133.8" height="36"/>
+    <polygon style="fill: #000000" points="789.53,-72.072 791.53,-69.072 793.53,-72.072 791.53,-75.072 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="795.53" y="-66.072">gameId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="890.23" y="-66.072">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="795.53" y1="-64.472" x2="913.33" y2="-64.472"/>
+    <polygon style="fill: #000000" points="789.53,-56.072 791.53,-53.072 793.53,-56.072 791.53,-59.072 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="795.53" y="-50.072">developerId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="890.23" y="-50.072">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="795.53" y1="-48.472" x2="913.33" y2="-48.472"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="819.98,-46.072 819.98,-26.072 725.924,-26.072 725.924,-139.014 631.868,-139.014 631.868,-119.014 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="823.98" y="-34.072">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="635.868" y="-123.014">n</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="531.062" y="74.478" width="149.2" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="531.062" y="74.478" width="149.2" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="605.662" y="88.478">Publisher</text>
+    <rect style="fill: #ffffff" x="531.062" y="92.478" width="149.2" height="57"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="531.062" y="92.478" width="149.2" height="57"/>
+    <polygon style="fill: #000000" points="534.062,102.478 536.062,105.478 538.062,102.478 536.062,99.478 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="540.062" y="108.478">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="580.862" y="108.478">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="540.062" y1="110.078" x2="603.962" y2="110.078"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="545.062" y="122.478">AUTO_INCREMENT</text>
+    <ellipse style="fill: #000000" cx="536.062" cy="139.478" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="540.062" y="145.478">name</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="580.862" y="145.478">VARCHAR(128)</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1230.21" y="81.6688" width="133.8" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1230.21" y="81.6688" width="133.8" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1297.11" y="95.6688">Game_Publisher</text>
+    <rect style="fill: #ffffff" x="1230.21" y="99.6688" width="133.8" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1230.21" y="99.6688" width="133.8" height="36"/>
+    <polygon style="fill: #000000" points="1233.21,109.669 1235.21,112.669 1237.21,109.669 1235.21,106.669 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1239.21" y="115.669">gameId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1333.91" y="115.669">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1239.21" y1="117.269" x2="1357.01" y2="117.269"/>
+    <polygon style="fill: #000000" points="1233.21,125.669 1235.21,128.669 1237.21,125.669 1235.21,122.669 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1239.21" y="131.669">publisherId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1333.91" y="131.669">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1239.21" y1="133.269" x2="1357.01" y2="133.269"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1263.66,135.669 1263.66,155.669 934.66,155.669 934.66,54.478 605.662,54.478 605.662,74.478 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1267.66" y="147.669">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="609.662" y="70.478">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1612.17,529.666 1612.17,332.667 1330.56,332.667 1330.56,135.669 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1616.17" y="525.666">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1334.56" y="147.669">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1672.57,538.666 1692.57,538.666 1692.57,4.11034 886.88,4.11034 886.88,-46.072 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1676.57" y="534.666">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="890.88" y="-34.072">n</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1480.93" y="92.4368" width="110.7" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1480.93" y="92.4368" width="110.7" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1536.28" y="106.437">Game_OsFamily</text>
+    <rect style="fill: #ffffff" x="1480.93" y="110.437" width="110.7" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1480.93" y="110.437" width="110.7" height="36"/>
+    <polygon style="fill: #000000" points="1483.93,120.437 1485.93,123.437 1487.93,120.437 1485.93,117.437 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1489.93" y="126.437">gameId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1561.53" y="126.437">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1489.93" y1="128.037" x2="1584.63" y2="128.037"/>
+    <polygon style="fill: #000000" points="1483.93,136.437 1485.93,139.437 1487.93,136.437 1485.93,133.437 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1489.93" y="142.437">osFamily</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1561.53" y="142.437">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1489.93" y1="144.037" x2="1584.63" y2="144.037"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1672.57,529.666 1672.57,236.09 1536.28,236.09 1536.28,146.437 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1676.57" y="525.666">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1540.28" y="158.437">n</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1080.8" y="209.848" width="126.1" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1080.8" y="209.848" width="126.1" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1143.85" y="223.848">Game_Category</text>
+    <rect style="fill: #ffffff" x="1080.8" y="227.848" width="126.1" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1080.8" y="227.848" width="126.1" height="36"/>
+    <polygon style="fill: #000000" points="1083.8,237.848 1085.8,240.848 1087.8,237.848 1085.8,234.848 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1089.8" y="243.848">gameId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1176.8" y="243.848">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1089.8" y1="245.448" x2="1199.9" y2="245.448"/>
+    <polygon style="fill: #000000" points="1083.8,253.848 1085.8,256.848 1087.8,253.848 1085.8,250.848 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1089.8" y="259.848">categoryId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1176.8" y="259.848">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1089.8" y1="261.448" x2="1199.9" y2="261.448"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1551.77,529.666 1551.77,396.757 1175.38,396.757 1175.38,263.848 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1555.77" y="525.666">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1179.38" y="275.848">n</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1019.72" y="329.222" width="103" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1019.72" y="329.222" width="103" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1071.22" y="343.222">Game_Genre</text>
+    <rect style="fill: #ffffff" x="1019.72" y="347.222" width="103" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1019.72" y="347.222" width="103" height="36"/>
+    <polygon style="fill: #000000" points="1022.72,357.222 1024.72,360.222 1026.72,357.222 1024.72,354.222 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1028.72" y="363.222">gameId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1092.62" y="363.222">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1028.72" y1="364.822" x2="1115.72" y2="364.822"/>
+    <polygon style="fill: #000000" points="1022.72,373.222 1024.72,376.222 1026.72,373.222 1024.72,370.222 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1028.72" y="379.222">genreId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1092.62" y="379.222">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="1028.72" y1="380.822" x2="1115.72" y2="380.822"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="886.23" y="440.476" width="141.5" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="886.23" y="440.476" width="141.5" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="956.98" y="454.476">Game_Screenshot</text>
+    <rect style="fill: #ffffff" x="886.23" y="458.476" width="141.5" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="886.23" y="458.476" width="141.5" height="36"/>
+    <polygon style="fill: #000000" points="889.23,468.476 891.23,471.476 893.23,468.476 891.23,465.476 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="895.23" y="474.476">gameId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="997.63" y="474.476">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="895.23" y1="476.076" x2="1020.73" y2="476.076"/>
+    <polygon style="fill: #000000" points="889.23,484.476 891.23,487.476 893.23,484.476 891.23,481.476 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="895.23" y="490.476">screenshotId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="997.63" y="490.476">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="895.23" y1="492.076" x2="1020.73" y2="492.076"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1491.37,529.666 1491.37,456.444 1096.97,456.444 1096.97,383.222 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1495.37" y="525.666">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1100.97" y="395.222">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1430.97,529.666 1430.97,512.071 992.355,512.071 992.355,494.476 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1434.97" y="525.666">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="996.355" y="506.476">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1045.47,383.222 1045.47,403.222 841.221,403.222 841.221,298.58 636.974,298.58 636.974,318.58 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1049.47" y="395.222">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="640.974" y="314.58">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="921.605,494.476 921.605,514.476 758.255,514.476 758.255,494.244 594.906,494.244 594.906,514.244 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="925.605" y="506.476">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="598.906" y="510.244">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1112.33,263.848 1112.33,283.848 960.802,283.848 960.802,175.534 809.278,175.534 809.278,195.534 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="1116.33" y="275.848">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="813.278" y="191.534">n</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="830.462" y="721.322" width="149.2" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="830.462" y="721.322" width="149.2" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="905.062" y="735.322">Game_Requirement</text>
+    <rect style="fill: #ffffff" x="830.462" y="739.322" width="149.2" height="68"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="830.462" y="739.322" width="149.2" height="68"/>
+    <polygon style="fill: #000000" points="833.462,749.322 835.462,752.322 837.462,749.322 835.462,746.322 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="839.462" y="755.322">gameId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="949.562" y="755.322">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="839.462" y1="756.922" x2="972.662" y2="756.922"/>
+    <polygon style="fill: #000000" points="833.462,765.322 835.462,768.322 837.462,765.322 835.462,762.322 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="839.462" y="771.322">osFamily</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="949.562" y="771.322">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="839.462" y1="772.922" x2="972.662" y2="772.922"/>
+    <ellipse style="fill: #000000" cx="835.462" cy="781.322" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="839.462" y="787.322">requirementId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="949.562" y="787.322">INT</text>
+    <ellipse style="fill: #000000" cx="835.462" cy="797.322" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="839.462" y="803.322">reqType</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="949.562" y="803.322">INT</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="867.762,807.322 867.762,827.322 535.938,827.322 535.938,645.816 204.114,645.816 204.114,665.816 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="871.762" y="819.322">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="208.114" y="661.816">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1430.97,538.666 1410.97,538.666 1410.97,827.322 905.062,827.322 905.062,807.322 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="1426.97" y="534.666">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="909.062" y="819.322">n</text>
+  </g>
+</svg>

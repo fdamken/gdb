@@ -19,6 +19,9 @@
  */
 package org.lcmanager.gdb.service.impl.config;
 
+import javax.annotation.PostConstruct;
+
+import org.apache.ibatis.logging.LogFactory;
 import org.lcmanager.gdb.service.impl.data.mapper.BaseMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +31,15 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@MapperScan(basePackageClasses = BaseMapper.class)
+@MapperScan(basePackageClasses = BaseMapper.class,
+            markerInterface = BaseMapper.class)
 public class DatabaseConfiguration {
-    // Nothing to do.
+    /**
+     * Configures some static settings.
+     *
+     */
+    @PostConstruct
+    public void configure() {
+        LogFactory.useSlf4jLogging();
+    }
 }

@@ -17,34 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model.os;
+package org.lcmanager.gdb.service.game;
+
+import org.lcmanager.gdb.service.data.model.Game;
 
 /**
- * An OS family contains multiple operating system that are built upon the same
- * technologies (e.g. the <code>WINDOWS</code> family contains
- * <code>Windows XP</code>, <code>Windows 2000</code> and so on).
- * 
+ * The game service is used for any interaction with games.
  *
  */
-public enum OsFamily {
+public interface GameService {
     /**
-     * Windows.
-     * 
+     * Retrieves the game with the given ID.
+     *
+     * @param gameId
+     *            The ID of the game to retrieve.
+     * @return The {@link Game}, if any. Otherwise <code>null</code>.
      */
-    WINDOWS,
-    /**
-     * Unix.
-     * 
-     */
-    UNIX,
-    /**
-     * Mac OS.
-     * 
-     */
-    MAC,
-    /**
-     * Other families that are not explicitly listed.
-     * 
-     */
-    OTHER;
+    Game retrieveGame(final int gameId);
 }

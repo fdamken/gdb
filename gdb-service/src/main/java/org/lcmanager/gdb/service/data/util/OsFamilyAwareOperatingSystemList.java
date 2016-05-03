@@ -17,10 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model.os;
+package org.lcmanager.gdb.service.data.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import org.lcmanager.gdb.service.data.model.OperatingSystem;
 
 import lombok.Getter;
 

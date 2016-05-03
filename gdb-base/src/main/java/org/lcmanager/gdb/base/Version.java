@@ -85,9 +85,36 @@ public class Version {
     public Version(final String codename, final int major, final int minor, final int bugfx, final int build) {
         this.codename = codename;
         this.major = major;
-        this.minor = minor;
-        this.bugfx = bugfx;
-        this.build = build;
+        this.minor = minor < 0 ? -1 : minor;
+        this.bugfx = minor < 0 || bugfx < 0 ? -1 : bugfx;
+        this.build = minor < 0 || bugfx < 0 || build < 0 ? -1 : bugfx;
+    }
+
+    /**
+     * Constructor of Version.
+     * 
+     * <p>
+     * <b> NOTE: This makes MyBatis happy. </b>
+     * </p>
+     * 
+     * @param codename
+     *            The code name.
+     * @param major
+     *            The major version. If <code>null</code>, treated as
+     *            <code>-1</code>.
+     * @param minor
+     *            The minor version. If <code>null</code>, treated as
+     *            <code>-1</code>.
+     * @param bugfx
+     *            The bugfix version. If <code>null</code>, treated as
+     *            <code>-1</code>.
+     * @param build
+     *            The build number. If <code>null</code>, treated as
+     *            <code>-1</code>.
+     */
+    public Version(final String codename, final Integer major, final Integer minor, final Integer bugfx, final Integer build) {
+        this(codename, major == null ? -1 : major, minor == null ? -1 : minor, bugfx == null ? -1 : bugfx, build == null ? -1
+                : build);
     }
 
     /**

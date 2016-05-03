@@ -17,12 +17,33 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model.processor;
+package org.lcmanager.gdb.service.data.model;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * TODO: Add type description!
+ * Represents a publisher that can be mapped to any 'publishable' thing (e.g.
+ * software).
  *
  */
-public class Processor {
-    // TODO Auto-generated class body.
+@Data
+@Accessors(chain = true)
+public class Publisher implements BaseModel<Integer> {
+    /**
+     * The serial version UID.
+     * 
+     */
+    private static final long serialVersionUID = 4379949017948893695L;
+
+    /**
+     * The ID of this publisher.
+     * 
+     */
+    private Integer id;
+    /**
+     * The name of this publisher.
+     * 
+     */
+    private String name;
 }

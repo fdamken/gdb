@@ -17,40 +17,60 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model.os;
+package org.lcmanager.gdb.service.data.model;
 
-import lombok.Value;
+import java.util.Locale;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import org.lcmanager.gdb.base.Formatable;
 import org.lcmanager.gdb.base.Version;
+import org.lcmanager.gdb.service.data.util.OsFamily;
 
 /**
  * Represents an operating system including its version and the developer.
  *
  */
-@Value
-public class OperatingSystem {
+@Data
+@Accessors(chain = true)
+public class OperatingSystem implements BaseModel<Integer>, Formatable {
+    /**
+     * The serial version UID.
+     *
+     */
+    private static final long serialVersionUID = 5104011880865239861L;
+
+    // ~ Direct ~
+    /**
+     * The ID of this OS.
+     * 
+     */
+    private Integer id;
     /**
      * The OS family this operating system belongs to.
      * 
      */
-    OsFamily osFamily;
-    /**
-     * The developer of this operation system (may be a company or a person,
-     * respectively).
-     * 
-     */
-    String developer;
+    private OsFamily osFamily;
     /**
      * The name of this operation system not including the version (e.g.
      * <code>Windows</code>).
      * 
      */
-    String name;
+    private String name;
     /**
      * The version of this operation system.
      * 
      */
-    Version version;
+    private Version version;
+
+    // ~ Mapped ~
+    /**
+     * The developer of this operation system (may be a company or a person,
+     * respectively).
+     * 
+     */
+    private Developer developer;
 
     /**
      * {@inheritDoc}
@@ -58,7 +78,7 @@ public class OperatingSystem {
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString() {
-        return this.developer + " " + this.name + " " + this.version;
+    public String format(final Locale locale) {
+        return this.developer.getName() + " " + this.name + " " + this.version;
     }
 }

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="49cm" height="25cm" viewBox="18 138 963 483" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ebebeb" x="20" y="140" width="960" height="380"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="20" y="140" width="960" height="380"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="500" y="333.9">
+      <tspan x="500" y="333.9"></tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffd300" x="780" y="320" width="140" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="780" y="320" width="140" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="850" y="343.9">
+      <tspan x="850" y="343.9">GDB Service</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #0083ff" x="440" y="320" width="220" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="440" y="320" width="220" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="550" y="343.9">
+      <tspan x="550" y="343.9">GDB Service Implementation</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #b5b5b5" x="140" y="380" width="160" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="140" y="380" width="160" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="403.9">
+      <tspan x="220" y="403.9">GDB Steam Accessor</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #b5b5b5" x="140" y="320" width="160" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="140" y="320" width="160" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="343.9">
+      <tspan x="220" y="343.9">GDB Intel Accessor</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #b5b5b5" x="140" y="260" width="160" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="140" y="260" width="160" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="283.9">
+      <tspan x="220" y="283.9">GDB AMD Accessor</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ff6000" x="780" y="420" width="140" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="780" y="420" width="140" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="850" y="443.9">
+      <tspan x="850" y="443.9">GDB Web Control</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="440,350 380,350 380,400 309.736,400 "/>
+    <polygon style="fill: #000000" points="302.236,400 312.236,395 309.736,400 312.236,405 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="302.236,400 312.236,395 309.736,400 312.236,405 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="440,330 380,330 380,280 309.736,280 "/>
+    <polygon style="fill: #000000" points="302.236,280 312.236,275 309.736,280 312.236,285 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="302.236,280 312.236,275 309.736,280 312.236,285 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="440" y1="340" x2="309.736" y2="340"/>
+    <polygon style="fill: #000000" points="302.236,340 312.236,335 309.736,340 312.236,345 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="302.236,340 312.236,335 309.736,340 312.236,345 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="400" y="316.95">
+    <tspan x="400" y="316.95">Uses</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="400" y="371.9">
+    <tspan x="400" y="371.9">Uses</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="340" y="351.9">
+    <tspan x="340" y="351.9">Uses</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="660" y1="340" x2="769" y2="340"/>
+    <polygon style="fill: #000000" points="769,345 779,340 769,335 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="769,345 779,340 769,335 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="680" y="356.95">
+    <tspan x="680" y="356.95">Implements</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="850" y1="415.528" x2="850" y2="364.472"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="845,407.764 850,417.764 855,407.764 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="855,372.236 850,362.236 845,372.236 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="840" y="391.9">
+    <tspan x="840" y="391.9">Communicates</tspan>
+  </text>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 20; stroke: #d0d0d0" points="550,360 550,440 780,440 "/>
+  <text font-size="12.8" style="fill: #d0d0d0;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="560" y="431.9">
+    <tspan x="560" y="431.9">Wired by Spring</tspan>
+  </text>
+  <g>
+    <rect style="fill: #91ff00" x="780" y="580" width="140" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="780" y="580" width="140" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="850" y="603.9">
+      <tspan x="850" y="603.9">User</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="850" y1="464.472" x2="850" y2="575.528"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="855,472.236 850,462.236 845,472.236 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="845,567.764 850,577.764 855,567.764 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="840" y="551.9">
+    <tspan x="840" y="551.9">Communicates</tspan>
+  </text>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="140,280 119,280 119,240 815,240 815,310.264 "/>
+    <polygon style="fill: #000000" points="815,317.764 810,307.764 815,310.264 820,307.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="815,317.764 810,307.764 815,310.264 820,307.764 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="140,340 100,340 100,220 850,220 850,310.264 "/>
+    <polygon style="fill: #000000" points="850,317.764 845,307.764 850,310.264 855,307.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="850,317.764 845,307.764 850,310.264 855,307.764 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="140,400 80,400 80,200 885,200 885,310.264 "/>
+    <polygon style="fill: #000000" points="885,317.764 880,307.764 885,310.264 890,307.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="885,317.764 880,307.764 885,310.264 890,307.764 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="780" y="231.9">
+    <tspan x="780" y="231.9">Implements</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="780" y="211.9">
+    <tspan x="780" y="211.9">Implements</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="780" y="251.9">
+    <tspan x="780" y="251.9">Implements</tspan>
+  </text>
+</svg>

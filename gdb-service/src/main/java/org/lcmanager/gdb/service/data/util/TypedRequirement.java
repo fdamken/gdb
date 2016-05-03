@@ -17,39 +17,30 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.data.model;
-
-import java.net.URL;
+package org.lcmanager.gdb.service.data.util;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.EqualsAndHashCode;
+
+import org.lcmanager.gdb.service.data.model.Requirement;
 
 /**
- * A screenshot has a thumbnail and a full image.
+ * This is an extension of {@link Requirement} that also holds the
+ * {@link RequirementType type of the requirement}.
  *
  */
 @Data
-@Accessors(chain = true)
-public class Screenshot implements BaseModel<Integer> {
+@EqualsAndHashCode(callSuper = true)
+public class TypedRequirement extends Requirement {
     /**
      * The serial version UID.
      *
      */
-    private static final long serialVersionUID = -870758489253505002L;
+    private static final long serialVersionUID = 8802405720132514738L;
 
     /**
-     * The ID of this screenshot.
+     * The type of the requirement.
      * 
      */
-    private Integer id;
-    /**
-     * The URL of the thumbnail.
-     * 
-     */
-    private URL thumbnail;
-    /**
-     * The URL of the full image.
-     * 
-     */
-    private URL image;
+    private RequirementType type;
 }

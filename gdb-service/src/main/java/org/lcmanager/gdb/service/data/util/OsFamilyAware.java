@@ -2,7 +2,7 @@
  * #%L
  * Game Database
  * %%
- * Copyright (C) 2016 LCManager Group
+ * Copyright (C) 2016 - 2016 LCManager Group
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,18 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb;
+package org.lcmanager.gdb.service.data.util;
+
 
 /**
- * This interface marks the base package and shall only be used in conjunction
- * with Spring or reflection in any case.
- *
- * <p>
- * <b> NOTE: Do not implement this interface! </b>
- * </p>
+ * Marks a class that it is aware of the OS family is is holding and that all
+ * non-transient properties depend on the OS family.
  *
  */
-public interface BasePackageMarker {
-    // Nothing to do.
+public interface OsFamilyAware {
+    /**
+     *
+     * @return The stored OS family.
+     */
+    OsFamily getOsFamily();
 }

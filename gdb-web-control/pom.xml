@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>gdb-web-control</artifactId>
 
-	<name>Game Database Control</name>
+	<name>Game Database Web Control</name>
 
 	<dependencies>
 		<!-- Spring. -->

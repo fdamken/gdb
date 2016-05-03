@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Game Database
+  %%
+  Copyright (C) 2016 - 2016 LCManager Group
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.GameMapper">
+	<resultMap type="Game" id="game">
+		<id property="id" column="gameId" />
+		<result property="name" column="gameName" />
+		<result property="requiredAge" column="gameRequiredAge" />
+		<result property="description" column="gameDescription" />
+		<result property="headerImage" column="gameHeaderImage" />
+		<result property="website" column="gameWebsite" />
+		<result property="metacriticScore" column="gameMetacriticScore" />
+		<result property="metacriticUrl" column="gameMetacriticUrl" />
+		<result property="releaseDate" column="gameReleaseDate" />
+		<result property="backgroundImage" column="gameBackgroundImage" />
+		<collection property="screenshots" ofType="Screenshot" foreignColumn="gameScreenshotGameId">
+			<id property="id" column="gameScreenshotId" />
+			<result property="thumbnail" column="gameScreenshotThumbnail" />
+			<result property="image" column="gameScreenshotImage" />
+		</collection>
+		<collection property="genres" ofType="Genre" foreignColumn="gameGenreGameId">
+			<id property="id" column="gameGenreId" />
+			<result property="description" column="gameGenreDescription" />
+		</collection>
+		<collection property="categories" ofType="Category" foreignColumn="gameCategoryGameId">
+			<id property="id" column="gameCategoryId" />
+			<result property="description" column="gameCategoryDescription" />
+		</collection>
+		<collection property="publishers" ofType="Publisher" foreignColumn="gamePublisherGameId">
+			<id property="id" column="gamePublisherId" />
+			<result property="name" column="gamePublisherName" />
+		</collection>
+		<collection property="developers" ofType="Developer" foreignColumn="gameDeveloperGameId">
+			<id property="id" column="gameDeveloperId" />
+			<result property="name" column="gameDeveloperName" />
+		</collection>
+		<collection property="platforms" column="gameOsFamily" ofType="OsFamily" foreignColumn="gameOsFamilyGameId" />
+		<collection property="requirementAdder" ofType="TypedRequirement" foreignColumn="requirementGameId">
+			<id property="id" column="requirementId" />
+			<result property="type" column="requirementType" />
+			<result property="osFamily" column="requirementOsFamily" />
+			<result property="memory" column="requirementMemory" />
+			<result property="storage" column="requirementStorage" />
+			<association property="processor" javaType="Processor" foreignColumn="requirementProcessorId">
+				<id property="id" column="requirementProcessorId" />
+			</association>
+			<association property="graphics" javaType="Graphics" foreignColumn="requirementGraphicsId">
+				<id property="id" column="requirementGraphicsId" />
+			</association>
+			<collection property="operatingSystems" ofType="OperatingSystem" foreignColumn="requirementOperatingSystemRequirementId">
+				<id property="id" column="requirementOperatingSystemId" />
+				<result property="osFamily" column="requirementOperatingSystemFamily" />
+				<result property="name" column="requirementOperatingSystemName" />
+				<association property="version" javaType="Version" foreignColumn="requirementOperatingSystemRequirementId">
+					<constructor>
+						<arg column="requirementOperatingSystemVersionName" javaType="String" />
+						<arg column="requirementOperatingSystemVersionMajor" javaType="int" />
+						<arg column="requirementOperatingSystemVersionMinor" javaType="int" />
+						<arg column="requirementOperatingSystemVersionBugfx" javaType="int" />
+						<arg column="requirementOperatingSystemVersionBuild" javaType="int" />
+					</constructor>
+				</association>
+				<association property="developer" javaType="Developer" foreignColumn="requirementOperatingSystemRequirementId">
+					<id property="id" column="requirementOperatingSystemDeveloperId" />
+					<result property="name" column="requirementOperatingSystemDeveloperName" />
+				</association>
+			</collection>
+		</collection>
+	</resultMap>
+
+	<sql id="gameFieldNames">
+		one,
+
+		gameId,
+		gameName,
+		gameRequiredAge,
+		gameDescription,
+		gameHeaderImage,
+		gameWebsite,
+		gameMetacriticScore,
+		gameMetacriticUrl,
+		gameReleaseDate,
+		gameBackgroundImage,
+
+		gameScreenshotGameId,
+		gameScreenshotId,
+		gameScreenshotThumbnail,
+		gameScreenshotImage,
+
+		gameGenreGameId,
+		gameGenreId,
+		gameGenreDescription,
+
+		gameCategoryGameId,
+		gameCategoryId,
+		gameCategoryDescription,
+
+		gamePublisherGameId,
+		gamePublisherId,
+		gamePublisherName,
+
+		gameDeveloperGameId,
+		gameDeveloperId,
+		gameDeveloperName,
+
+		gameOsFamilyGameId,
+		gameOsFamily,
+
+		requirementGameId,
+		requirementType,
+		requirementId,
+		requirementOsFamily,
+		requirementMemory,
+		requirementStorage,
+
+		requirementOperatingSystemRequirementId,
+		requirementOperatingSystemId,
+		requirementOperatingSystemFamily,
+		requirementOperatingSystemName,
+		requirementOperatingSystemVersionName,
+		requirementOperatingSystemVersionMajor,
+		requirementOperatingSystemVersionMinor,
+		requirementOperatingSystemVersionBugfx,
+		requirementOperatingSystemVersionBuild,
+		requirementOperatingSystemDeveloperId,
+		requirementOperatingSystemDeveloperName,
+
+		requirementProcessorId,
+
+		requirementGraphicsId
+	</sql>
+
+	<!-- Methods from BaseMapper. -->
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+	</insert>
+	<update id="update" parameterType="Map">
+	</update>
+	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+	</insert>
+	<delete id="delete" parameterType="Map">
+	</delete>
+	<select id="exists" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			Game
+		WHERE
+			id = #{id}
+	</select>
+	<select id="findById" parameterType="Map" resultMap="game">
+		SELECT
+			<include refid="gameFieldNames" />
+		FROM
+			View_Game
+		WHERE
+			gameId = #{id}
+	</select>
+	<select id="find" resultMap="game">
+		SELECT
+			<include refid="gameFieldNames" />
+		FROM
+			View_Game
+	</select>
+
+	<!-- Methods from GameMapper. -->
+</mapper>
