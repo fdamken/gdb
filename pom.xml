@@ -187,7 +187,7 @@
 	<repositories>
 		<repository>
 			<id>lcm-repo</id>
-			<url>https://secure.lcmanager.org/repo</url>
+			<url>http://secure.lcmanager.org/repo</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -197,7 +197,7 @@
 		</repository>
 		<repository>
 			<id>lcm-snap-repo</id>
-			<url>https>://secure.lcmanager.org/snap-repo</url>
+			<url>http://secure.lcmanager.org/snap-repo</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
