@@ -474,6 +474,14 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<extensions>
+			<!-- Used as repository connector. -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.5</version>
+			</extension>
+		</extensions>
 	</build>
 
 
