@@ -53,7 +53,9 @@
 			<id property="id" column="gameDeveloperId" />
 			<result property="name" column="gameDeveloperName" />
 		</collection>
-		<collection property="platforms" column="gameOsFamily" ofType="OsFamily" foreignColumn="gameOsFamilyGameId" />
+		<collection property="platforms" ofType="OsFamily" foreignColumn="gameOsFamilyGameId">
+			<id property="id" column="gameOsFamily" />
+		</collection>
 		<collection property="requirementAdder" ofType="TypedRequirement" foreignColumn="requirementGameId">
 			<id property="id" column="requirementId" />
 			<result property="type" column="requirementType" />
@@ -88,8 +90,6 @@
 	</resultMap>
 
 	<sql id="gameFieldNames">
-		one,
-
 		gameId,
 		gameName,
 		gameRequiredAge,

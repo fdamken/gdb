@@ -216,8 +216,6 @@ CREATE TABLE IF NOT EXISTS Game_Requirement (
 
 CREATE OR REPLACE VIEW View_Game AS
 	SELECT
-		1					AS one,
-
 		Ga.id				AS gameId,
 		Ga.name				AS gameName,
 		Ga.requiredAge		AS gameRequiredAge,
