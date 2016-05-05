@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.base.aspect;
+package org.lcmanager.gdb.appl.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -26,6 +26,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -37,40 +38,11 @@ import org.springframework.util.StopWatch;
 @Aspect
 public class LoggingAspect {
     /**
-     * The logger.
-     *
+     * The log threshold (in milliseconds).
+     * 
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
-
-    /**
-     * The system property for {@link LoggingAspect#LOG_THRESHOLD}.
-     *
-     */
-    private static final String LOG_THRESHOLD_PROPERTY = "log.threshold";
-    /**
-     * The default value for {@link LoggingAspect#LOG_THRESHOLD_DEFAULT}.
-     *
-     */
-    private static final int LOG_THRESHOLD_DEFAULT = 10;
-    /**
-     * The logging threshold. It specifies, in milliseconds, the time a method
-     * execution should take until it gets logged.
-     *
-     */
-    private static final int LOG_THRESHOLD;
-
-    static {
-        int logThreshold = -1;
-        final String logThresholdProperty = System.getProperty(LoggingAspect.LOG_THRESHOLD_PROPERTY);
-        try {
-            logThreshold = Integer.parseInt(logThresholdProperty);
-        } catch (final NumberFormatException dummy) {
-            LoggingAspect.LOGGER.warn("Unable to fetch log threshold from syspop " + LoggingAspect.LOG_THRESHOLD_PROPERTY
-                    + "! Was: " + logThresholdProperty + ", falling back to: " + LoggingAspect.LOG_THRESHOLD_DEFAULT);
-            logThreshold = LoggingAspect.LOG_THRESHOLD_DEFAULT;
-        }
-        LOG_THRESHOLD = logThreshold;
-    }
+    @Value("${log.threshold}")
+    private int logThreshold;
 
     /**
      * Logs the execution of the given {@link ProceedingJoinPoint}.
@@ -133,7 +105,7 @@ public class LoggingAspect {
         final Logger logger = LoggerFactory.getLogger(signature.getDeclaringType());
 
         final long time = stopWatch.getTotalTimeMillis();
-        if (time >= LoggingAspect.LOG_THRESHOLD) {
+        if (time >= this.logThreshold) {
             String msg = "Executed " + signature + " in " + time + "ms!";
             if (throwable != null) {
                 msg += " Threw an exception: " + throwable.getClass() + " (" + throwable.getMessage() + ")!";
@@ -155,7 +127,7 @@ public class LoggingAspect {
      * Pointcut for {@link LoggingAspect}.
      *
      */
-    @Pointcut("within(org.lcmanager.gdb.base.aspect.LoggingAspect)")
+    @Pointcut("within(org.lcmanager.gdb.appl.aspect.LoggingAspect)")
     private void me() {
         // Nothing to do.
     }

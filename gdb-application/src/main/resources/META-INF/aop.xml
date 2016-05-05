@@ -20,6 +20,6 @@
   -->
 
 <aspectj>
-	<weaver options="-verbose">
+	<weaver options="-verbose -Xset:weaveJavaxPackages=true">
 	</weaver>
 </aspectj>

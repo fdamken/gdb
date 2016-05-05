@@ -2,7 +2,7 @@
  * #%L
  * Game Database
  * %%
- * Copyright (C) 2016 LCManager Group
+ * Copyright (C) 2016 - 2016 LCManager Group
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.web.control.main;
+package org.lcmanager.gdb.appl;
 
-import org.lcmanager.gdb.web.control.config.BaseConfiguration;
+import org.lcmanager.gdb.config.BaseConfiguration;
 import org.springframework.boot.SpringApplication;
 
 /**
- * The main class of the game database. Initializes Spring.
+ * The main class of the Game Database.
  *
  */
 public class GameDatabase {
     /**
-     * The main method.
+     * The main method of the Game Database.
      *
      * @param args
-     *            The command-line arguments.
+     *            The supplied arguments from the command line.
      */
     public static void main(final String[] args) {
         SpringApplication.run(BaseConfiguration.class, args);

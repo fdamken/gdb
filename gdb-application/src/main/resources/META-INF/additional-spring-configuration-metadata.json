@@ -1,0 +1,14 @@
+{
+    "properties": [
+        {
+            "name": "log.threshold",
+            "type": "java.lang.Integer",
+            "description": "The time is milliseconds that a method must take in order to be logged."
+        },
+        {
+            "name": "dev",
+            "type": "java.lang.Boolean",
+            "description": "Whether to run in development mode or not. Must be 'true' to run in development mode."
+        }
+    ]
+}

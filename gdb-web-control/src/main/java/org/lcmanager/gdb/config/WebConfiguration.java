@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.web.control.config;
+package org.lcmanager.gdb.config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 
 /**
- * Configures Spring Web MVC.
+ * Configures Spring Web (MVC).
  *
  */
 @Configuration

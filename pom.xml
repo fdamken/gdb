@@ -144,7 +144,7 @@
 	</issueManagement>
 	<ciManagement>
 		<system>${ci-management.system}</system>
-		<url>${ci-management.url}</url> 
+		<url>${ci-management.url}</url>
 	</ciManagement>
 	<scm>
 		<connection>scm:git:git@github.com/${scm.repository.repo}.git</connection>
@@ -231,6 +231,9 @@
 
 		<!-- Implements the GDB service. -->
 		<module>gdb-service-impl</module>
+
+		<!-- Wires all modules together and provides the application. -->
+		<module>gdb-application</module>
 	</modules>
 
 
@@ -253,6 +256,11 @@
 			<dependency>
 				<groupId>org.lcmanager.gdb</groupId>
 				<artifactId>gdb-intel</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.lcmanager.gdb</groupId>
+				<artifactId>gdb-nvidia</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

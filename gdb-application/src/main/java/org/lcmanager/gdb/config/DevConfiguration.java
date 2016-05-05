@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.web.control.config;
+package org.lcmanager.gdb.config;
 
 import java.util.Properties;
 
@@ -40,7 +40,7 @@ import freemarker.cache.NullCacheStorage;
  */
 @Configuration
 @ConditionalOnProperty(name = "dev",
-havingValue = "true")
+                       havingValue = "true")
 @PropertySource("classpath:application.dev.properties")
 public class DevConfiguration {
     /**

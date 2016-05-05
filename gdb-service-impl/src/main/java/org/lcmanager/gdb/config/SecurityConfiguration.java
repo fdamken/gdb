@@ -17,14 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.web.control.config;
+package org.lcmanager.gdb.config;
 
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -37,7 +35,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  *
  */
 @Configuration
-@Order(Ordered.HIGHEST_PRECEDENCE)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
     /**

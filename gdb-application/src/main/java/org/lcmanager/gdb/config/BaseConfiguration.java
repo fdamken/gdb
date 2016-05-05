@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.web.control.config;
+package org.lcmanager.gdb.config;
 
 import org.lcmanager.gdb.BasePackageMarker;
 import org.lcmanager.gdb.base.CommonConstants;

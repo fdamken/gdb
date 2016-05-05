@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.impl.config;
+package org.lcmanager.gdb.config;
 
 import javax.annotation.PostConstruct;
 
@@ -25,6 +25,7 @@ import org.apache.ibatis.logging.LogFactory;
 import org.lcmanager.gdb.service.impl.data.mapper.BaseMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * Configures the database and MyBatis.
@@ -33,6 +34,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan(basePackageClasses = BaseMapper.class,
             markerInterface = BaseMapper.class)
+@PropertySource("classpath:database.properties")
 public class DatabaseConfiguration {
     /**
      * Configures some static settings.
