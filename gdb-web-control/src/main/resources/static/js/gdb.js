@@ -17,4 +17,5 @@
  * limitations under the License.
  * #L%
  */
+
 var gdbApp = angular.module('gdbApp');

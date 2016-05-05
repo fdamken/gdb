@@ -17,6 +17,7 @@
  limitations under the License.
  #L%
 -->
+
 <#macro renderScripts>
 	<script src="/js/controller/loginController.js"></script>
 </#macro>

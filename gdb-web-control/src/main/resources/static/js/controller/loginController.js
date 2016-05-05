@@ -17,6 +17,7 @@
  * limitations under the License.
  * #L%
  */
+
 angular.module('gdbApp').controller('loginController', ['$http', '$scope', 'csrf', function($http, $scope, csrf) {
 	$scope.username = null;
 	$scope.password = null;

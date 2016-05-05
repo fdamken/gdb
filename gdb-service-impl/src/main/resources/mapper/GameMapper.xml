@@ -150,11 +150,11 @@
 	</sql>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
 	</insert>
 	<update id="update" parameterType="Map">
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
 	</insert>
 	<delete id="delete" parameterType="Map">
 	</delete>

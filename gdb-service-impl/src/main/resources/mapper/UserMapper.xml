@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Game Database
+  %%
+  Copyright (C) 2016 - 2016 LCManager Group
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.UserMapper">
+	<resultMap type="User" id="user">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="displayName" column="displayName" />
+		<result property="enabled" column="enabled" />
+		<collection property="authorities" ofType="org.springframework.security.core.authority.SimpleGrantedAuthority">
+			<constructor>
+				<arg javaType="String" column="authority" />
+			</constructor>
+		</collection>
+	</resultMap>
+
+	<sql id="selectUser">
+		SELECT
+			U.id,
+			U.username,
+			U.displayName,
+			U.enabled,
+			UA.authority
+		FROM
+			User AS U
+		LEFT JOIN User_Authority AS UA ON U.id = UA.userId
+	</sql>
+
+	<!-- Methods from BaseMapper. -->
+	<update id="update" parameterType="Map">
+		UPDATE
+			User
+		SET
+			username = #{obj.username},
+			displayName = #{obj.displayName},
+			enabled = #{obj.enabled}
+		WHERE
+			id = #{obj.id}
+	</update>
+	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO User (
+			username,
+			displayName,
+			password,
+			enabled
+		) VALUES (
+			#{obj.username},
+			#{obj.displayName},
+			#{obj.enabled}
+		) ON DUPLICATE KEY UPDATE
+			username = #{obj.username},
+			displayName = #{obj.displayName},
+			enabled = #{obj.enabled}
+	</insert>
+	<delete id="delete" parameterType="Map">
+		DELETE
+		FROM
+			User
+		WHERE
+			id = #{id}
+	</delete>
+	<select id="exists" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			User
+		WHERE
+			id = #{id}
+	</select>
+	<select id="findById" parameterType="Map" resultMap="user">
+		<include refid="selectUser" />
+		WHERE
+			id = #{id}
+	</select>
+	<select id="find" resultMap="user">
+		<include refid="selectUser" />
+	</select>
+
+	<!-- Methods from UserMapper. -->
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="user.id">
+		INSERT INTO User (
+			username,
+			displayName,
+			password,
+			enabled
+		) VALUES (
+			#{user.username},
+			#{user.displayName},
+			#{password},
+			#{user.enabled}
+		)
+	</insert>
+	<update id="updatePassword" parameterType="Map">
+		UPDATE
+			User
+		SET
+			password = #{password}
+		WHERE
+			username = #{userName}
+	</update>
+	<delete id="deleteUserName" parameterType="Map">
+		DELETE
+		FROM
+			User
+		WHERE
+			username = #{userName}
+	</delete>
+	<insert id="addAuthority" parameterType="Map">
+		INSERT IGNORE INTO User_Authority (
+			userId,
+			authority
+		) VALUES (
+			#{id},
+			#{authority}
+		)
+	</insert>
+	<delete id="removeAuthority" parameterType="Map">
+		DELETE
+		FROM
+			User_Authority
+		WHERE
+			userId = #{id}
+			AND
+			authority = #{authority}
+	</delete>
+	<select id="existsUserName" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			User
+		WHERE
+			username = #{userName}
+	</select>
+	<select id="findByUserName" parameterType="Map" resultMap="user">
+		<include refid="selectUser" />
+		WHERE
+			username = #{userName}
+	</select>
+	<select id="findPasswordByUserName" parameterType="Map" resultType="String">
+		SELECT
+			password
+		FROM
+			User
+		WHERE
+			username = #{userName}
+	</select>
+</mapper>

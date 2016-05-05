@@ -19,79 +19,39 @@
  */
 package org.lcmanager.gdb.web.control.config;
 
-import javax.sql.DataSource;
+import java.util.List;
 
-import lombok.val;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  * Configures Spring Security.
  *
  */
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+@Order(Ordered.HIGHEST_PRECEDENCE)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfiguration {
     /**
-     * {@inheritDoc}
+     * Creates an {@link AuthenticationManager authentication manager} with all
+     * {@link AuthenticationProvider authentication providers} available.
      *
-     * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
+     * @param authProviders
+     *            All {@link AuthenticationProvider authentication providers}
+     *            available.
+     * @return The {@link AuthenticationManager authentication manager}.
      */
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        http
-            .csrf()
-                .csrfTokenRepository(this.csrfTokenRepository())
-            .and()
-                .authorizeRequests()
-                    .antMatchers("/a/**", "/m/**")
-                        .hasRole("ADMIN")
-                    .antMatchers("/u/**")
-                        .hasRole("USER")
-                    .antMatchers("/o/**")
-                        .permitAll()
-            .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .failureUrl("/login/failed")
-                    .defaultSuccessUrl("/u")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .permitAll()
-            .and()
-                .logout()
-                    .logoutSuccessUrl("/login/out")
-                    .permitAll();
-    }
-
-    /**
-     * Configures the authentication.
-     *
-     * @param auth
-     *            The authentication manager builder.
-     * @param dataSource
-     *            The data source.
-     * @param passwordEncoder
-     *            The password encoder.
-     * @throws Exception
-     *             If any error occurs
-     */
-    @Autowired
-    public void configureAuthentication(final AuthenticationManagerBuilder auth, final DataSource dataSource,
-            final PasswordEncoder passwordEncoder) throws Exception {
-        auth.jdbcAuthentication()
-            .dataSource(dataSource)
-            .passwordEncoder(passwordEncoder)
-            .usersByUsernameQuery("SELECT username, password, enabled FROM User WHERE username = ?")
-            .authoritiesByUsernameQuery("SELECT username, authority FROM User_Authority WHERE username = ?");
+    @Bean
+    public AuthenticationManager providerManager(final List<AuthenticationProvider> authProviders) {
+        return new ProviderManager(authProviders);
     }
 
     /**
@@ -102,17 +62,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    /**
-     * Creates a {@link CsrfTokenRepository} that sets the token name to
-     * <code>_csrf</code>.
-     *
-     * @return The {@link CsrfTokenRepository}.
-     */
-    private CsrfTokenRepository csrfTokenRepository() {
-        val csrfTokenRepository = new HttpSessionCsrfTokenRepository();
-        csrfTokenRepository.setSessionAttributeName("_csrf");
-        return csrfTokenRepository;
     }
 }

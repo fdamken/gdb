@@ -23,13 +23,9 @@ import java.util.Map;
 
 import lombok.Value;
 
-import org.lcmanager.gdb.base.SimpleUser;
+import org.lcmanager.gdb.service.data.model.User;
+import org.lcmanager.gdb.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,11 +42,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthenticationController {
     /**
-     * The {@link AuthenticationManager}.
+     * The {@link UserService}.
      * 
      */
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserService userService;
 
     /**
      * Creates an authentication status that represents the current
@@ -60,11 +56,11 @@ public class AuthenticationController {
      */
     @RequestMapping
     public AuthenticationStatus loginStatus() {
-        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || auth.getName().equalsIgnoreCase("anonymousUser") || !auth.isAuthenticated()) {
+        final User user = this.userService.retrieveUser();
+        if (user == null) {
             return AuthenticationStatus.NOT_AUTHENTICATED;
         }
-        return new AuthenticationStatus(true, (UserDetails) auth.getPrincipal());
+        return new AuthenticationStatus(true, user);
     }
 
     /**
@@ -84,18 +80,14 @@ public class AuthenticationController {
             @RequestBody final Map<String, String> body) {
         final String username = body.get("username");
         final String password = body.get("password");
-        final UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-        token.setDetails(new SimpleUser(username));
-
-        try {
-            final Authentication auth = this.authenticationManager.authenticate(token);
-            if (!checkOnly) {
-                SecurityContextHolder.getContext().setAuthentication(auth);
-            }
-            return new AuthenticationStatus(auth.isAuthenticated(), (UserDetails) auth.getPrincipal());
-        } catch (final AuthenticationException cause) {
-            return AuthenticationStatus.NOT_AUTHENTICATED;
+        final User user = this.userService.authenticate(username, password, checkOnly);
+        final AuthenticationStatus result;
+        if (user == null) {
+            result = AuthenticationStatus.NOT_AUTHENTICATED;
+        } else {
+            result = new AuthenticationStatus(true, user);
         }
+        return result;
     }
 
     /**

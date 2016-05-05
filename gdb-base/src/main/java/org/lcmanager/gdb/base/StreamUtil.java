@@ -50,6 +50,17 @@ public final class StreamUtil {
     }
 
     /**
+     * Checks whether the given stream is empty.
+     *
+     * @param stream
+     *            The stream to check.
+     * @return Whether the stream is empty or not.
+     */
+    public static <T> boolean isEmpty(final Stream<T> stream) {
+        return stream.count() <= 0;
+    }
+
+    /**
      * Instantiates a {@link Collector} that is resulting in a {@link Map} which
      * collects all elements of the stream it is used on and retrieves a key for
      * every value from the given supplier which is than used to map the

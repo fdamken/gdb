@@ -20,6 +20,7 @@
 package org.lcmanager.gdb.service.impl.data.mapper;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.lcmanager.gdb.service.data.model.BaseModel;
@@ -115,5 +116,5 @@ public interface BaseMapper<T extends BaseModel<I>, I extends Serializable> {
      *
      * @return All models.
      */
-    Iterable<T> find();
+    List<T> find();
 }

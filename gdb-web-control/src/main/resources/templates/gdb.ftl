@@ -17,6 +17,7 @@
  limitations under the License.
  #L%
 -->
+
 <!-- HTML structure macros. -->
 <#macro bootstrap>
 	<meta encoding="UTF-8">

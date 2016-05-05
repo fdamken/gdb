@@ -24,13 +24,13 @@ import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.game.GameService;
 import org.lcmanager.gdb.service.impl.data.mapper.GameMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * A generic implementation of {@link GameService} that accesses the database.
  *
  */
-@Component
+@Service
 @Generic
 public class DatabaseGameService implements GameService {
     /**

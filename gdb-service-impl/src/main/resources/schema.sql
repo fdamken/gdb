@@ -29,18 +29,20 @@
 
 -- Create table 'User'.
 CREATE TABLE IF NOT EXISTS User (
-	username VARCHAR(50) NOT NULL,
-	password VARCHAR(100) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(128) NOT NULL,
+	displayName VARCHAR(128) NULL,
+	password VARCHAR(127) NOT NULL,
 	enabled BOOLEAN DEFAULT TRUE NOT NULL,
-	PRIMARY KEY (username)
+	PRIMARY KEY (id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'User_Authority'.
 CREATE TABLE IF NOT EXISTS User_Authority (
-	username VARCHAR(50) NOT NULL,
+	userId INT NOT NULL,
 	authority VARCHAR(50) NOT NULL,
-	PRIMARY KEY (username, authority),
-	FOREIGN KEY (username) REFERENCES User(username)
+	PRIMARY KEY (userId, authority),
+	FOREIGN KEY (userId) REFERENCES User(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'Processor'.

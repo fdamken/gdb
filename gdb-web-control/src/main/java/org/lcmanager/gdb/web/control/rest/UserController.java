@@ -19,8 +19,8 @@
  */
 package org.lcmanager.gdb.web.control.rest;
 
-import org.lcmanager.gdb.service.data.model.Game;
-import org.lcmanager.gdb.service.game.GameService;
+import org.lcmanager.gdb.service.data.model.User;
+import org.lcmanager.gdb.service.user.UserService;
 import org.lcmanager.gdb.web.control.status.GenerateStatus;
 import org.lcmanager.gdb.web.control.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,34 +36,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Handles the interaction with the game REST API.
+ * Handles the REST API to interact with users on <code>/api/user</code>.
  *
  */
 @RestController
-@RequestMapping("/api/game")
+@RequestMapping("/api/user")
 @GenerateStatus
-@CacheConfig(cacheNames = "game-controller")
-public class GameController {
+@CacheConfig(cacheNames = "user-controller")
+public class UserController {
     /**
-     * The {@link GameService}.
+     * The {@link UserService}.
      * 
      */
     @Autowired
-    private GameService gameService;
+    private UserService userService;
 
     /**
-     * Retrieves a single game.
+     * Lists all users.
      *
-     * @param gameId
-     *            The ID the of game to retrieve.
-     * @return The retrieved game wrapped by a {@link ResponseEntity}.
+     * @return All users.
      */
-    @RequestMapping("/{gameId}")
+    @RequestMapping
     @Cacheable
-    public ResponseEntity<ResourceSupport> handleById(@PathVariable final int gameId) {
-        final Resource<Game> resource = ControllerUtil.createResource(this.gameService.retrieveGame(gameId));
+    public ResponseEntity<ResourceSupport> handleFind() {
+        final Resources<User> resource = ControllerUtil.createResources(this.userService.retrieveUsers());
 
-        resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(GameController.class).handleById(gameId))
+        resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(UserController.class).handleFind())
+                .withSelfRel());
+
+        return ControllerUtil.createResponse(resource);
+    }
+
+    /**
+     * Finds the user with the given ID.
+     *
+     * @param id
+     *            The ID to search for.
+     * @return The found user.
+     */
+    @RequestMapping("/{id}")
+    @Cacheable
+    public ResponseEntity<ResourceSupport> handleFindById(@PathVariable final int id) {
+        final Resource<User> resource = ControllerUtil.createResource(this.userService.retrieveUser(id));
+
+        resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(UserController.class).handleFindById(id))
                 .withSelfRel());
 
         return ControllerUtil.createResponse(resource);

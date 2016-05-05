@@ -43,6 +43,7 @@
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Publisher" alias="Publisher" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Requirement" alias="Requirement" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Screenshot" alias="Screenshot" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.User" alias="User" />
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="org.lcmanager.gdb.service.impl.data.handler.OsFamilyHandler" />
@@ -51,5 +52,6 @@
 	</typeHandlers>
 	<mappers>
 		<mapper resource="mapper/GameMapper.xml" />
+		<mapper resource="mapper/UserMapper.xml" />
 	</mappers>
 </configuration>
