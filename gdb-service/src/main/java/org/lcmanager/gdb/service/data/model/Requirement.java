@@ -19,12 +19,14 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+import java.util.Map;
 
 import org.lcmanager.gdb.service.data.util.OsFamily;
 import org.lcmanager.gdb.service.data.util.OsFamilyAware;
 import org.lcmanager.gdb.service.data.util.OsFamilyAwareOperatingSystemList;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * A requirement represents the system setup that is required to run any game.
@@ -71,12 +73,12 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
      * The processor of this requirement.
      * 
      */
-    private Processor processor;
+    private Map<Brand, Processor> processors;
     /**
      * The graphics (card) of this requirement.
      * 
      */
-    private Graphics graphics;
+    private Map<Brand, Graphics> graphics;
 
     /**
      * Sets {@link #operatingSystems}.

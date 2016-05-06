@@ -17,23 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.annotation;
+package org.lcmanager.gdb.service.graphics;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.lcmanager.gdb.service.data.model.Graphics;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+public interface GraphicsService {
+    Graphics retrieveGraphics(String brand, String model);
 
-/**
- * Marks a component as a branded component as it connects to a 3rd party
- * service (e.g. Steam).
- *
- */
-@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
-public @interface Branded {
-    // Nothing to do.
+    boolean isReponse(String brand);
 }

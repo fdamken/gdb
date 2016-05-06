@@ -17,23 +17,14 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.annotation;
+package org.lcmanager.gdb.service.data.model;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-
-/**
- * Marks a component as a branded component as it connects to a 3rd party
- * service (e.g. Steam).
- *
- */
-@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
-public @interface Branded {
-    // Nothing to do.
+@Data
+@Accessors(chain = true)
+public class Brand implements BaseModel<String> {
+    private String id;
+    private String name;
 }

@@ -28,7 +28,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Processor implements BaseModel<Integer> {
+public class Processor implements BaseModel<Integer>, Comparable<Process> {
     /**
      * The serial version UID.
      *
@@ -40,4 +40,45 @@ public class Processor implements BaseModel<Integer> {
      * 
      */
     private Integer id;
+    /**
+     * The brand of the processor.
+     * 
+     */
+    private String brand;
+    /**
+     * The model ID of the processor.
+     * 
+     */
+    private String model;
+    /**
+     * The number of processor cores.
+     * 
+     */
+    private Integer cores;
+    /**
+     * The number of processor threads.
+     * 
+     */
+    private Integer threads;
+    /**
+     * The processor frequency in Megahertz.
+     * 
+     */
+    private Integer frequency;
+    /**
+     * The with of the instruction set (e.g. 32 or 64 Bit).
+     * 
+     */
+    private Integer instructionSet;
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(final Process processor) {
+        // TODO Auto-generated method body.
+        return 0;
+    }
 }

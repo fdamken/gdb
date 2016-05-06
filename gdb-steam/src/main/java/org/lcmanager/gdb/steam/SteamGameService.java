@@ -17,46 +17,23 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.impl.game;
+package org.lcmanager.gdb.steam;
 
 import org.lcmanager.gdb.base.Pagination;
 import org.lcmanager.gdb.base.PaginationMetadata;
 import org.lcmanager.gdb.service.annotation.Branded;
-import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
- * Generic implementation of {@link GameService} that just delegates to other
- * {@link GameService game services} (both generic and branded ones).
+ * The Steam implementation of {@link GameService}.
  *
  */
 @Service
-@Generic
-@Primary
-@CacheConfig(cacheNames = "game-service")
-public class DelegatingGameService implements GameService {
-    /**
-     * The generic {@link DatabaseGameService}.
-     * 
-     */
-    @Autowired
-    @Generic
-    private DatabaseGameService dbGameService;
-    /**
-     * The steam-branded {@link GameService}.
-     * 
-     */
-    @Autowired
-    @Branded
-    private GameService steamGameService;
-
+@Branded
+public class SteamGameService implements GameService {
     /**
      * {@inheritDoc}
      *
@@ -64,9 +41,8 @@ public class DelegatingGameService implements GameService {
      *      org.lcmanager.gdb.base.PaginationMetadata)
      */
     @Override
-    @Cacheable
     public Pagination<Game> retrieveGames(final GameQuery query, final PaginationMetadata paginationMetadata) {
-        return this.steamGameService.retrieveGames(query, paginationMetadata);
+        return /* TODO: some steam magic */ null;
     }
 
     /**
@@ -75,12 +51,8 @@ public class DelegatingGameService implements GameService {
      * @see org.lcmanager.gdb.service.game.GameService#retrieveGame(int)
      */
     @Override
-    @Cacheable
     public Game retrieveGame(final int gameId) {
-        Game game = this.dbGameService.retrieveGame(gameId);
-        if (game == null) {
-            game = this.steamGameService.retrieveGame(gameId);
-        }
-        return game;
+        // TODO Auto-generated method body.
+        return null;
     }
 }
