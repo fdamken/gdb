@@ -99,10 +99,20 @@ public class GameQuery {
         this.publishers = Collections.unmodifiableList(publishers);
     }
 
+    /**
+     * Creates a new {@link Builder}.
+     *
+     * @return The new {@link Builder}.
+     */
     public static GameQuery.Builder.Property builder() {
         return new Builder().new Property();
     }
 
+    /**
+     * This class is used to instantiate a {@link GameQuery} in a user-friendly
+     * way.
+     *
+     */
     public static class Builder {
         /**
          * The term to search for.
@@ -140,51 +150,121 @@ public class GameQuery {
          */
         private final List<Publisher> publishers = new ArrayList<>();
 
+        /**
+         * Constructor of Builder.
+         *
+         */
+        private Builder() {
+            // Nothing to do.
+        }
+
+        /**
+         * Adds a new property to query for.
+         *
+         * @return The new property.
+         */
         public Property and() {
             return new Property();
         }
 
+        /**
+         * Builds the actual {@link GameQuery}.
+         *
+         * @return The {@link GameQuery}.
+         */
         public GameQuery build() {
             return new GameQuery(this.term, this.categories, this.developers, this.genres, this.platforms, this.publishers);
         }
 
+        /**
+         * Represents a property to search for.
+         *
+         */
         public class Property {
+            /**
+             * Sets the query term.
+             *
+             * @param term
+             *            The term to set.
+             * @return The {@link Builder}.
+             */
             public Builder term(final String term) {
                 Builder.this.term = term;
 
                 return Builder.this;
             }
 
+            /**
+             * Adds the given category to the query.
+             * 
+             * @param category
+             *            The category to add.
+             * @return The {@link Builder}.
+             */
             public Builder category(final Category category) {
                 Builder.this.categories.add(category);
 
                 return Builder.this;
             }
 
+            /**
+             * Adds the given developer to the query.
+             * 
+             * @param developer
+             *            The developer to add.
+             * @return The {@link Builder}.
+             */
             public Builder developer(final Developer developer) {
                 Builder.this.developers.add(developer);
 
                 return Builder.this;
             }
 
+            /**
+             * Adds the given genre to the query.
+             * 
+             * @param genre
+             *            The genre to add.
+             * @return The {@link Builder}.
+             */
             public Builder genre(final Genre genre) {
                 Builder.this.genres.add(genre);
 
                 return Builder.this;
             }
 
+            /**
+             * Adds the given platform to the query.
+             * 
+             * @param platform
+             *            The platform to add.
+             * @return The {@link Builder}.
+             */
             public Builder platform(final OsFamily platform) {
                 Builder.this.platforms.add(platform);
 
                 return Builder.this;
             }
 
+            /**
+             * Adds the given publisher to the query.
+             * 
+             * @param publisher
+             *            The publisher to add.
+             * @return The {@link Builder}.
+             */
             public Builder publisher(final Publisher publisher) {
                 Builder.this.publishers.add(publisher);
 
                 return Builder.this;
             }
 
+            /**
+             * Delegates to {@link Builder#build()}.
+             *
+             * @return The result of {@link Builder#build()}
+             * @see org.lcmanager.gdb.service.game.GameQuery.Builder#build()
+             */
             public GameQuery build() {
                 return Builder.this.build();
             }
