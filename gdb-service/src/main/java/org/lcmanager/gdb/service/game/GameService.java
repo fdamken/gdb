@@ -19,6 +19,8 @@
  */
 package org.lcmanager.gdb.service.game;
 
+import org.lcmanager.gdb.base.Pagination;
+import org.lcmanager.gdb.base.PaginationMetadata;
 import org.lcmanager.gdb.service.data.model.Game;
 
 /**
@@ -26,6 +28,18 @@ import org.lcmanager.gdb.service.data.model.Game;
  *
  */
 public interface GameService {
+    /**
+     * Retrieves all games that match the given game query.
+     *
+     * @param query
+     *            The game query to retrieve the games for.
+     * @param paginationMetadata
+     *            The {@link PaginationMetadata} that is used to page the
+     *            result.
+     * @return The pagination containing the games that match the given query.
+     */
+    Pagination<Game> retrieveGames(final GameQuery query, final PaginationMetadata paginationMetadata);
+
     /**
      * Retrieves the game with the given ID.
      *

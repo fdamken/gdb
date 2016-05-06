@@ -21,27 +21,41 @@ package org.lcmanager.gdb.service.impl.game;
 
 import org.lcmanager.gdb.base.Pagination;
 import org.lcmanager.gdb.base.PaginationMetadata;
+import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
-import org.lcmanager.gdb.service.impl.data.mapper.GameMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
- * A generic implementation of {@link GameService} that accesses the database.
+ * Generic implementation of {@link GameService} that just delegates to other
+ * {@link GameService game services} (both generic and branded ones).
  *
  */
 @Service
 @Generic
-public class DatabaseGameService implements GameService {
+@Primary
+@CacheConfig(cacheNames = "game-service")
+public class DelegatingGameService implements GameService {
     /**
-     * The {@link Game} mapper.
+     * The generic {@link DatabaseGameService}.
      * 
      */
     @Autowired
-    private GameMapper gameMapper;
+    @Generic
+    private DatabaseGameService dbGameService;
+    /**
+     * The steam-branded {@link GameService}.
+     * 
+     */
+    @Autowired
+    @Branded("steam")
+    private GameService steamGameService;
 
     /**
      * {@inheritDoc}
@@ -50,8 +64,9 @@ public class DatabaseGameService implements GameService {
      *      org.lcmanager.gdb.base.PaginationMetadata)
      */
     @Override
+    @Cacheable
     public Pagination<Game> retrieveGames(final GameQuery query, final PaginationMetadata paginationMetadata) {
-        throw new UnsupportedOperationException("This operation is not supported! Use a branded service instead!");
+        return this.steamGameService.retrieveGames(query, paginationMetadata);
     }
 
     /**
@@ -59,9 +74,13 @@ public class DatabaseGameService implements GameService {
      *
      * @see org.lcmanager.gdb.service.game.GameService#retrieveGame(int)
      */
-    // @Transactional(readOnly = true)
     @Override
+    @Cacheable
     public Game retrieveGame(final int gameId) {
-        return this.gameMapper.findById(gameId);
+        Game game = this.dbGameService.retrieveGame(gameId);
+        if (game == null) {
+            game = this.steamGameService.retrieveGame(gameId);
+        }
+        return game;
     }
 }

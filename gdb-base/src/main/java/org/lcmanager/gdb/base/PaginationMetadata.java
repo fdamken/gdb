@@ -17,27 +17,24 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.annotation;
+package org.lcmanager.gdb.base;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.Value;
 
 /**
- * Marks a component as a branded component as it connects to a 3rd party
- * service (e.g. Steam).
+ * Represents the metadata about any pagination.
  *
  */
-@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
-public @interface Branded {
+@Value
+public class PaginationMetadata {
     /**
-     *
-     * @return The brand name.
+     * The number of the current page.
+     * 
      */
-    String value();
+    int page;
+    /**
+     * The size of all pages.
+     * 
+     */
+    int pageSize;
 }
