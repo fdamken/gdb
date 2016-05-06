@@ -19,10 +19,33 @@
  */
 package org.lcmanager.gdb.service.processor;
 
+import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Processor;
 
+/**
+ * The processor service is used to interaction with processors (e.g. load them
+ * from 3rd party sources).
+ *
+ */
 public interface ProcessorService {
-    Processor retrieveProcessor(String brand, String model);
+    /**
+     * Retrieves the processor with the given model identifier of the given
+     * {@link Brand}.
+     *
+     * @param brand
+     *            The {@link Brand} of the processor.
+     * @param model
+     *            The model identifier of the processor.
+     * @return The retrieved processor.
+     */
+    Processor retrieveProcessor(Brand brand, String model);
 
-    boolean isResponsible(String brand);
+    /**
+     * Checks whether the implementing class is responsible for the given brand.
+     *
+     * @param brand
+     *            The brand to check the responsibility for.
+     * @return Whether this service is responsible for the given brand.
+     */
+    boolean isResponsible(Brand brand);
 }

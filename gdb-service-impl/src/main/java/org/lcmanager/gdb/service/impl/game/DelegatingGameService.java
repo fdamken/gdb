@@ -38,7 +38,6 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-@Generic
 @Primary
 @CacheConfig(cacheNames = "game-service")
 public class DelegatingGameService implements GameService {
@@ -48,7 +47,7 @@ public class DelegatingGameService implements GameService {
      */
     @Autowired
     @Generic
-    private DatabaseGameService dbGameService;
+    private GameService dbGameService;
     /**
      * The steam-branded {@link GameService}.
      * 
