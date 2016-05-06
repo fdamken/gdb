@@ -96,6 +96,34 @@ public final class StreamUtil {
     }
 
     /**
+     * Instantiates a {@link Collector} that is resulting in a {@link String}
+     * which collects all elements of the stream that it may be used in
+     * conjunction with and appends them to each other (like a regular join(...)
+     * method does, but using {@link Stream Streams}).
+     *
+     * @param delimiter
+     *            The delimiter that is places between all parts of the created
+     *            {@link String}. It is not appended to the end and therefore
+     *            provides a join(...) method.
+     * @return The collector for collecting the elements as described above.
+     */
+    public static Collector<Object, StringBuilder, String> collectString(final String delimiter) {
+        return new CollectorImpl<>(StringBuilder::new, (builder, str) -> builder.append(str).append(delimiter),
+                (left, right) -> left.append(right),
+                builder -> builder.delete(builder.length() - delimiter.length(), builder.length()).toString());
+    }
+
+    /**
+     * Invokes {@link #collectString(String)} with <code>delimiter = ""</code>.
+     *
+     * @return See {@link #collectString(String)}.
+     * @see org.lcmanager.gdb.base.StreamUtil#collectString(java.lang.String)
+     */
+    public static Collector<Object, StringBuilder, String> collectString() {
+        return StreamUtil.collectString("");
+    }
+
+    /**
      * Provides a simple POJO implementation of {@link Collector}.
      *
      * @param <T>

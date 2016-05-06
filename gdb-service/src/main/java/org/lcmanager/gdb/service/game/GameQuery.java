@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.lcmanager.gdb.base.Sorting;
 import org.lcmanager.gdb.service.data.model.Category;
 import org.lcmanager.gdb.service.data.model.Developer;
 import org.lcmanager.gdb.service.data.model.Genre;
@@ -42,6 +43,11 @@ public class GameQuery {
      * 
      */
     private String term;
+    /**
+     * The sorting;
+     * 
+     */
+    private Sorting sorting;
     /**
      * A list of categories that must be present on a game to make it eligable
      * for the result.
@@ -78,6 +84,8 @@ public class GameQuery {
      *
      * @param term
      *            The {@link #term} to set.
+     * @param sorting
+     *            The {@link #sorting} to set.
      * @param categories
      *            The {@link #categories} to set.
      * @param developers
@@ -89,9 +97,10 @@ public class GameQuery {
      * @param publishers
      *            The {@link #publishers} to set.
      */
-    public GameQuery(final String term, final List<Category> categories, final List<Developer> developers,
+    public GameQuery(final String term, final Sorting sorting, final List<Category> categories, final List<Developer> developers,
             final List<Genre> genres, final List<OsFamily> platforms, final List<Publisher> publishers) {
         this.term = term;
+        this.sorting = sorting;
         this.categories = Collections.unmodifiableList(categories);
         this.developers = Collections.unmodifiableList(developers);
         this.genres = Collections.unmodifiableList(genres);
@@ -119,6 +128,11 @@ public class GameQuery {
          * 
          */
         private String term;
+        /**
+         * The sorting.
+         * 
+         */
+        private Sorting sorting;
         /**
          * A list of categories that must be present on a game to make it
          * eligable for the result.
@@ -168,12 +182,22 @@ public class GameQuery {
         }
 
         /**
+         * Sets the query sorting.
+         *
+         * @return A sort builder.
+         */
+        public SortBuilder sort() {
+            return new SortBuilder();
+        }
+
+        /**
          * Builds the actual {@link GameQuery}.
          *
          * @return The {@link GameQuery}.
          */
         public GameQuery build() {
-            return new GameQuery(this.term, this.categories, this.developers, this.genres, this.platforms, this.publishers);
+            return new GameQuery(this.term, this.sorting, this.categories, this.developers, this.genres, this.platforms,
+                    this.publishers);
         }
 
         /**
@@ -267,6 +291,93 @@ public class GameQuery {
              */
             public GameQuery build() {
                 return Builder.this.build();
+            }
+        }
+
+        /**
+         * Builds the sorting for a game query.
+         *
+         */
+        public class SortBuilder {
+            /**
+             * The sorting term (e.g. name).
+             * 
+             */
+            private String term;
+            /**
+             * The sorting direction.
+             * 
+             */
+            private Sorting.Direction direction;
+
+            /**
+             * Sets the term.
+             *
+             * @param term
+             *            The {@link #term} to set.
+             * @return The sorting direction builder.
+             */
+            public SortDirectionBuilder by(final String term) {
+                this.term = term;
+
+                return new SortDirectionBuilder();
+            }
+
+            /**
+             * Builds the sorting direction and returns to the initial builder.
+             *
+             */
+            public class SortDirectionBuilder {
+                /**
+                 * Sets the sorting direction to ascending.
+                 *
+                 * @return The initial builder.
+                 */
+                public Builder ascending() {
+                    SortBuilder.this.direction = Sorting.Direction.ASCENDING;
+
+                    return this.build();
+                }
+
+                /**
+                 * Sets the sorting direction to ascending.
+                 *
+                 * @return The initial builder.
+                 */
+                public Builder asc() {
+                    return this.ascending();
+                }
+
+                /**
+                 * Sets the sorting direction to descending.
+                 *
+                 * @return The initial builder.
+                 */
+                public Builder descending() {
+                    SortBuilder.this.direction = Sorting.Direction.DESCENDING;
+
+                    return this.build();
+                }
+
+                /**
+                 * Sets the sorting direction to descending.
+                 *
+                 * @return The initial builder.
+                 */
+                public Builder desc() {
+                    return this.descending();
+                }
+
+                /**
+                 * Sets the sorting property on the initial builder.
+                 *
+                 * @return The initial builder.
+                 */
+                private Builder build() {
+                    Builder.this.sorting = new Sorting(SortBuilder.this.direction, SortBuilder.this.term);
+
+                    return Builder.this;
+                }
             }
         }
     }

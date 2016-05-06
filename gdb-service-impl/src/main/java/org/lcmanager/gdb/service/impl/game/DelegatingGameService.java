@@ -27,6 +27,7 @@ import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
@@ -46,6 +47,7 @@ public class DelegatingGameService implements GameService {
      * 
      */
     @Autowired
+    @Qualifier("dbGameService")
     @Generic
     private GameService dbGameService;
     /**

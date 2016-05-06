@@ -21,11 +21,16 @@ package org.lcmanager.gdb.steam;
 
 import org.lcmanager.gdb.base.Pagination;
 import org.lcmanager.gdb.base.PaginationMetadata;
+import org.lcmanager.gdb.base.StreamUtil;
 import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.data.model.Game;
+import org.lcmanager.gdb.service.data.util.OsFamily;
 import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
 import org.springframework.stereotype.Service;
+
+import groovy.json.internal.Charsets;
+import io.mikael.urlbuilder.UrlBuilder;
 
 /**
  * The Steam implementation of {@link GameService}.
@@ -54,5 +59,53 @@ public class SteamGameService implements GameService {
     public Game retrieveGame(final int gameId) {
         // TODO Auto-generated method body.
         return null;
+    }
+
+    private String buildUrl(final GameQuery query, final PaginationMetadata paginationMetadata) {
+        UrlBuilder builder = UrlBuilder.empty() //
+                .encodeAs(Charsets.UTF_8) //
+                .withScheme("http") //
+                .withHost("store.steampowered.com") //
+                .withPath("/search");
+
+        builder = builder.addParameter("category1", String.valueOf(993));
+
+        query.getCategories(); // TODO
+
+        query.getDevelopers(); // TODO
+
+        query.getGenres(); // TODO
+
+        query.getPlatforms(); // TODO
+
+        builder = builder.addParameter("os", query.getPlatforms().stream() //
+                .filter(platform -> !platform.equals(OsFamily.OTHER)).map(platform -> {
+                    if (platform.equals(OsFamily.WINDOWS)) {
+                        return "win";
+                    } else if (platform.equals(OsFamily.MAC)) {
+                        return "mac";
+                    } else if (platform.equals(OsFamily.UNIX)) {
+                        return "linux";
+                    } else {
+                        return null;
+                    }
+                }).collect(StreamUtil.collectString(",")));
+
+        query.getPublishers(); // TODO
+
+        if (query.getSorting() == null) {
+            builder = builder.addParameter("sort_by", "_ASC");
+        } else {
+            builder = builder.addParameter("sort_by",
+                    query.getSorting().getTerm() + "_" + query.getSorting().getDirection().getAbbreviation());
+        }
+
+        if (query.getTerm() != null) {
+            builder = builder.addParameter("term", query.getTerm());
+        }
+
+        builder = builder.addParameter("page", String.valueOf(paginationMetadata.getPage()));
+
+        return builder.toString();
     }
 }

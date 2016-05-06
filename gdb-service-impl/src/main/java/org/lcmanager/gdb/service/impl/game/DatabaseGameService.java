@@ -28,12 +28,13 @@ import org.lcmanager.gdb.service.game.GameService;
 import org.lcmanager.gdb.service.impl.data.mapper.GameMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * A generic implementation of {@link GameService} that accesses the database.
  *
  */
-@Service
+@Service("dbGameService")
 @Generic
 public class DatabaseGameService implements GameService {
     /**
@@ -59,7 +60,7 @@ public class DatabaseGameService implements GameService {
      *
      * @see org.lcmanager.gdb.service.game.GameService#retrieveGame(int)
      */
-    // @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public Game retrieveGame(final int gameId) {
         return this.gameMapper.findById(gameId);
