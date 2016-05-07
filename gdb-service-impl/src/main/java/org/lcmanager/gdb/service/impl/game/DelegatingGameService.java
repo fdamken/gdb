@@ -19,13 +19,13 @@
  */
 package org.lcmanager.gdb.service.impl.game;
 
-import org.lcmanager.gdb.base.Pagination;
-import org.lcmanager.gdb.base.PaginationMetadata;
+import org.lcmanager.gdb.base.Paged;
 import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
+import org.lcmanager.gdb.service.game.exception.GameServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
@@ -51,23 +51,23 @@ public class DelegatingGameService implements GameService {
     @Generic
     private GameService dbGameService;
     /**
-     * The steam-branded {@link GameService}.
+     * The branded {@link GameService}.
      * 
      */
     @Autowired
     @Branded
-    private GameService steamGameService;
+    private GameService brandedGameService;
 
     /**
      * {@inheritDoc}
      *
      * @see org.lcmanager.gdb.service.game.GameService#retrieveGames(org.lcmanager.gdb.service.game.GameQuery,
-     *      org.lcmanager.gdb.base.PaginationMetadata)
+     *      int)
      */
     @Override
     @Cacheable
-    public Pagination<Game> retrieveGames(final GameQuery query, final PaginationMetadata paginationMetadata) {
-        return this.steamGameService.retrieveGames(query, paginationMetadata);
+    public Paged<Game> retrieveGames(final GameQuery query, final int page) throws GameServiceException {
+        return this.brandedGameService.retrieveGames(query, page);
     }
 
     /**
@@ -77,10 +77,10 @@ public class DelegatingGameService implements GameService {
      */
     @Override
     @Cacheable
-    public Game retrieveGame(final int gameId) {
+    public Game retrieveGame(final int gameId) throws GameServiceException {
         Game game = this.dbGameService.retrieveGame(gameId);
         if (game == null) {
-            game = this.steamGameService.retrieveGame(gameId);
+            game = this.brandedGameService.retrieveGame(gameId);
         }
         return game;
     }

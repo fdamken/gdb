@@ -19,9 +19,9 @@
  */
 package org.lcmanager.gdb.service.game;
 
-import org.lcmanager.gdb.base.Pagination;
-import org.lcmanager.gdb.base.PaginationMetadata;
+import org.lcmanager.gdb.base.Paged;
 import org.lcmanager.gdb.service.data.model.Game;
+import org.lcmanager.gdb.service.game.exception.GameServiceException;
 
 /**
  * The game service is used for any interaction with games.
@@ -29,16 +29,24 @@ import org.lcmanager.gdb.service.data.model.Game;
  */
 public interface GameService {
     /**
+     * The site of any page. {@value #PAGE_SIZE}.
+     * 
+     */
+    int PAGE_SIZE = 25;
+
+    /**
      * Retrieves all games that match the given game query.
      *
      * @param query
      *            The game query to retrieve the games for.
-     * @param paginationMetadata
-     *            The {@link PaginationMetadata} that is used to page the
-     *            result.
+     * @param page
+     *            The page to load. Each page contains {@value #PAGE_SIZE}
+     *            elements.
      * @return The pagination containing the games that match the given query.
+     * @throws GameServiceException
+     *             If any error occurs whilst retrieving the games.
      */
-    Pagination<Game> retrieveGames(final GameQuery query, final PaginationMetadata paginationMetadata);
+    Paged<Game> retrieveGames(final GameQuery query, final int page) throws GameServiceException;
 
     /**
      * Retrieves the game with the given ID.
@@ -46,6 +54,8 @@ public interface GameService {
      * @param gameId
      *            The ID of the game to retrieve.
      * @return The {@link Game}, if any. Otherwise <code>null</code>.
+     * @throws GameServiceException
+     *             If any error occurs whilst retrieving the game.
      */
-    Game retrieveGame(final int gameId);
+    Game retrieveGame(final int gameId) throws GameServiceException;
 }

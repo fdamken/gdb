@@ -20,20 +20,52 @@
 package org.lcmanager.gdb.base;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
+/**
+ * Represents a sorting containing the direction and the term (or column) to
+ * sort by.
+ *
+ */
 @Value
 public class Sorting {
+    /**
+     * The sorting direction.
+     * 
+     */
+    @NonNull
     Direction direction;
+    /**
+     * The sorting term.
+     * 
+     */
+    @NonNull
     String term;
 
+    /**
+     * Represents a sorting direction.
+     *
+     */
     @Getter
     @RequiredArgsConstructor
     public static enum Direction {
+        /**
+         * Ascending sorting.
+         * 
+         */
         ASCENDING("ASC"),
+        /**
+         * Descending sorting.
+         * 
+         */
         DESCENDING("DESC");
 
+        /**
+         * The abbreviation for this sorting direction.
+         * 
+         */
         private final String abbreviation;
     }
 }

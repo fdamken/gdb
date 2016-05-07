@@ -19,8 +19,7 @@
  */
 package org.lcmanager.gdb.service.impl.game;
 
-import org.lcmanager.gdb.base.Pagination;
-import org.lcmanager.gdb.base.PaginationMetadata;
+import org.lcmanager.gdb.base.Paged;
 import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.game.GameQuery;
@@ -48,10 +47,10 @@ public class DatabaseGameService implements GameService {
      * {@inheritDoc}
      *
      * @see org.lcmanager.gdb.service.game.GameService#retrieveGames(org.lcmanager.gdb.service.game.GameQuery,
-     *      org.lcmanager.gdb.base.PaginationMetadata)
+     *      int)
      */
     @Override
-    public Pagination<Game> retrieveGames(final GameQuery query, final PaginationMetadata paginationMetadata) {
+    public Paged<Game> retrieveGames(final GameQuery query, final int page) {
         throw new UnsupportedOperationException("This operation is not supported! Use a branded service instead!");
     }
 

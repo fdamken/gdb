@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.web.control.rest;
 
+import org.lcmanager.gdb.base.exception.GdbException;
 import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.game.GameService;
 import org.lcmanager.gdb.web.control.status.GenerateStatus;
@@ -56,10 +57,12 @@ public class GameController {
      * @param gameId
      *            The ID the of game to retrieve.
      * @return The retrieved game wrapped by a {@link ResponseEntity}.
+     * @throws GdbException
+     *             If any GDB error occurs.
      */
     @RequestMapping("/{gameId}")
     @Cacheable
-    public ResponseEntity<ResourceSupport> handleById(@PathVariable final int gameId) {
+    public ResponseEntity<ResourceSupport> handleById(@PathVariable final int gameId) throws GdbException {
         final Resource<Game> resource = ControllerUtil.createResource(this.gameService.retrieveGame(gameId));
 
         resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(GameController.class).handleById(gameId))

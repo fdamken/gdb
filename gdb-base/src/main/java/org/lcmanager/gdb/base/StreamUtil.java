@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
@@ -109,8 +110,8 @@ public final class StreamUtil {
      */
     public static Collector<Object, StringBuilder, String> collectString(final String delimiter) {
         return new CollectorImpl<>(StringBuilder::new, (builder, str) -> builder.append(str).append(delimiter),
-                (left, right) -> left.append(right),
-                builder -> builder.delete(builder.length() - delimiter.length(), builder.length()).toString());
+                (left, right) -> left.append(right), builder -> (builder.length() > 0
+                        ? builder.delete(builder.length() - delimiter.length(), builder.length()) : builder).toString());
     }
 
     /**
@@ -121,6 +122,18 @@ public final class StreamUtil {
      */
     public static Collector<Object, StringBuilder, String> collectString() {
         return StreamUtil.collectString("");
+    }
+
+    /**
+     * Finds the last element of the given stream.
+     *
+     * @param stream
+     *            The stream to find the last element of.
+     * @return The last element of the stream within an optional. If no element
+     *         was found, an empty {@link Optional} is returned.
+     */
+    public static <T> Optional<T> findLast(final Stream<T> stream) {
+        return stream.reduce((a, b) -> b);
     }
 
     /**

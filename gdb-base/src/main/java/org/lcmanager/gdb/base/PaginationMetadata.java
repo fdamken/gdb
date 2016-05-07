@@ -22,11 +22,18 @@ package org.lcmanager.gdb.base;
 import lombok.Value;
 
 /**
- * Represents the metadata about any pagination.
+ * Represents the meta-data about any pagination.
  *
  */
 @Value
 public class PaginationMetadata {
+    /**
+     * Represents an empty pagination meta-data. That is on page <code>1</code>
+     * with with a total items of <code>0</code>.
+     * 
+     */
+    public static final PaginationMetadata EMPTY = new PaginationMetadata(1, 0, 0, 1);
+
     /**
      * The number of the current page.
      * 
@@ -37,4 +44,60 @@ public class PaginationMetadata {
      * 
      */
     int pageSize;
+    /**
+     * The total count of the items.
+     * 
+     * <p>
+     * All values below zero represent that no value was set.
+     * </p>
+     * 
+     */
+    int totalItems;
+    /**
+     * The total count of the pages.
+     * 
+     * <p>
+     * All values below zero represent that no value was set.
+     * </p>
+     * 
+     */
+    int totalPages;
+
+    /**
+     * Constructor of PaginationMetadata.
+     *
+     * @param page
+     *            The {@link #page} to set.
+     * @param pageSize
+     *            The {@link #pageSize} to set.
+     * @param totalItems
+     *            The {@link #totalItems} to set.
+     * @param totalPages
+     *            The {@link #totalPages} to set.
+     */
+    public PaginationMetadata(final int page, final int pageSize, final int totalItems, final int totalPages) {
+        if (page < 1) {
+            throw new IllegalArgumentException("Page must not be lower than one!");
+        }
+        if (pageSize < 0) {
+            throw new IllegalArgumentException("Page size must not be lower than zero!");
+        }
+
+        this.page = page;
+        this.pageSize = pageSize;
+        this.totalItems = totalItems;
+        this.totalPages = totalPages;
+    }
+
+    /**
+     * Constructor of PaginationMetadata.
+     *
+     * @param page
+     *            The {@link #page} to set.
+     * @param pageSize
+     *            The {@link #pageSize} to set
+     */
+    public PaginationMetadata(final int page, final int pageSize) {
+        this(page, pageSize, -1, -1);
+    }
 }
