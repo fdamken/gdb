@@ -21,10 +21,10 @@ package org.lcmanager.gdb.service.data.model;
 
 import java.util.Locale;
 
+import org.lcmanager.gdb.base.Formatable;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-import org.lcmanager.gdb.base.Formatable;
 
 /**
  * Represents a category that can be assigned to a game.

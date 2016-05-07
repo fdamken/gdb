@@ -19,13 +19,18 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.service.data.util.OsFamily;
 import org.lcmanager.gdb.service.data.util.OsFamilyAware;
 import org.lcmanager.gdb.service.data.util.OsFamilyAwareOperatingSystemList;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.Accessors;
 
 /**
@@ -73,12 +78,28 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
      * The processor of this requirement.
      * 
      */
-    private Map<Brand, Processor> processors;
+    private Map<Brand, Processor> processors = new HashMap<>();
     /**
      * The graphics (card) of this requirement.
      * 
      */
-    private Map<Brand, Graphics> graphics;
+    private Map<Brand, Graphics> graphics = new HashMap<>();
+
+    // ~ Transient ~
+    /**
+     * A list that is used by MyBatis only to add processors without mapping
+     * them explicitly to a map.
+     * 
+     */
+    @Getter(AccessLevel.PRIVATE)
+    private final transient List<Processor> processorAdder = CollectionUtil.createAddOnlyList(this::addProcessor);
+    /**
+     * A list that is used by MyBatis only to add graphics cards without mapping
+     * them explicitly to a map.
+     * 
+     */
+    @Getter(AccessLevel.PRIVATE)
+    private final transient List<Graphics> graphicsAdder = CollectionUtil.createAddOnlyList(this::addGraphics);
 
     /**
      * Sets {@link #operatingSystems}.
@@ -100,5 +121,43 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
         this.operatingSystems = operatingSystems;
 
         return this;
+    }
+
+    /**
+     * Adds the given processor to {@link #processors}.
+     *
+     * <p>
+     * This method is also invoked when invoking the {@link List#add(Object)} on
+     * {@link #getProcessorAdder()}.
+     * </p>
+     * 
+     * @param processor
+     *            The processor to add.
+     */
+    private void addProcessor(final Processor processor) {
+        if (processor == null || processor.getBrand() == null) {
+            throw new IllegalArgumentException("Neither processor not processor.brand shall be null!");
+        }
+
+        this.processors.put(processor.getBrand(), processor);
+    }
+
+    /**
+     * Adds the given graphics card to {@link #graphics}.
+     *
+     * <p>
+     * This method is also invoked when invoking the {@link List#add(Object)} on
+     * {@link #getGraphicsAdder()}.
+     * </p>
+     * 
+     * @param graphics
+     *            The graphics card to add.
+     */
+    private void addGraphics(final Graphics graphics) {
+        if (graphics == null || graphics.getBrand() == null) {
+            throw new IllegalArgumentException("Neither graphics not graphics.brand shall be null!");
+        }
+
+        this.graphics.put(graphics.getBrand(), graphics);
     }
 }

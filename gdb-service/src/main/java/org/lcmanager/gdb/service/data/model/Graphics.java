@@ -58,7 +58,7 @@ public class Graphics implements BaseModel<Integer>, Comparable<Graphics> {
      * The brand of this graphics card.
      * 
      */
-    private String brand;
+    private Brand brand;
     /**
      * The model of this graphics card.
      * 
@@ -77,8 +77,16 @@ public class Graphics implements BaseModel<Integer>, Comparable<Graphics> {
     /**
      * The DirectX version this graphics card supports.
      * 
-     * <p>
-     * The version is encoded in the format <code>XXYYYZZZ</code> where
+     */
+    private String directXVersion;
+    /**
+     * The OpenGL version this graphics card supports.
+     * 
+     */
+    private String openGlVersion;
+
+    /**
+     * Encodes the DirectX version in the format <code>XXYYYZZZ</code> where
      * <code>XX</code> represents the major version, <code>YYY</code> represents
      * the minor version and <code>ZZZ</code> the letter of the version starting
      * from <code>a = 1</code>.
@@ -86,46 +94,12 @@ public class Graphics implements BaseModel<Integer>, Comparable<Graphics> {
      * For example, the DirectX version <code>9.0c</code> would be
      * <code>9000003</code>.
      * </p>
-     * </p>
-     * 
-     */
-    private Integer directXVersion;
-    /**
-     * The OpenGL version this graphics card supports.
-     * 
-     * <p>
-     * This version is encoded in the format <code>XXYYY</code> where
-     * <code>XX</code> represents the major version and <code>YYY</code>
-     * represents the minor version.
-     * <p>
-     * For example, the OpenGL version <code>3.2</code> would be
-     * <code>3001</code>.
-     * </p>
-     * </p>
-     * 
-     */
-    private Integer openGlVersion;
-
-    /**
-     * Parses the given DirectX version using the pattern
-     * {@link #DIRECTX_VERSION_REGEX} and encodes it to the format described
-     * {@link #directXVersion here}.
      *
-     * @param version
-     *            The version to parse.
-     * @return <code>this</code>
-     * @throws IllegalArgumentException
-     *             If the given version does not match the pattern
-     *             {@link #DIRECTX_VERSION_REGEX}.
+     * @return The encoded DirectX version.
      */
-    public Graphics setDirectXVersion(final String version) {
-        final Matcher matcher = Graphics.DIRECTX_VERSION_REGEX.matcher(version);
-
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException(
-                    version + " does not match the regex " + Graphics.DIRECTX_VERSION_REGEX.pattern() + "!");
-        }
-
+    public long encodeDirectXVersion() {
+        final Matcher matcher = Graphics.DIRECTX_VERSION_REGEX.matcher(this.directXVersion);
+        matcher.matches();
         String majorStr = null;
         try {
             majorStr = matcher.group(1);
@@ -145,42 +119,34 @@ public class Graphics implements BaseModel<Integer>, Comparable<Graphics> {
             // No match --> letterStr = null
         }
 
-        int directXVersion = 0;
+        long encodedDirectXVersion = 0;
         if (majorStr != null) {
-            directXVersion += Integer.parseInt(majorStr) * 1_000_000;
+            encodedDirectXVersion += Integer.parseInt(majorStr) * 1_000_000;
         }
         if (minorStr != null) {
-            directXVersion += Integer.parseInt(minorStr) * 1_000;
+            encodedDirectXVersion += Integer.parseInt(minorStr) * 1_000;
         }
         if (letterStr != null) {
-            directXVersion += letterStr.charAt(0) - ('a' - 1);
+            encodedDirectXVersion += letterStr.charAt(0) - ('a' - 1);
         }
 
-        this.directXVersion = directXVersion;
-
-        return this;
+        return encodedDirectXVersion;
     }
 
     /**
-     * Parses the given OpenGL version using the pattern
-     * {@link #OPENGL_VERSION_REGEX} and encodes it to the format described
-     * {@link #openGlVersion here}.
+     * Encodes the OpenGL version in the format <code>XXYYY</code> where
+     * <code>XX</code> represents the major version and <code>YYY</code>
+     * represents the minor version.
+     * <p>
+     * For example, the OpenGL version <code>3.2</code> would be
+     * <code>3001</code>.
+     * </p>
      *
-     * @param version
-     *            The version to parse.
-     * @return <code>this</code>
-     * @throws IllegalArgumentException
-     *             If the given version does not match the pattern
-     *             {@link #OPENGL_VERSION_REGEX}.
+     * @return The encoded OpenGL version
      */
-    public Graphics setOpenGlVersion(final String version) {
-        final Matcher matcher = Graphics.OPENGL_VERSION_REGEX.matcher(version);
-
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException(
-                    version + " does not match the regex " + Graphics.OPENGL_VERSION_REGEX.pattern() + "!");
-        }
-
+    public long setOpenGlVersion() {
+        final Matcher matcher = Graphics.OPENGL_VERSION_REGEX.matcher(this.openGlVersion);
+        matcher.matches();
         String majorStr = null;
         try {
             majorStr = matcher.group(1);
@@ -194,17 +160,15 @@ public class Graphics implements BaseModel<Integer>, Comparable<Graphics> {
             // No match --> minorStr = null
         }
 
-        int openGlVersion = 0;
+        long encodedOpenGlVersion = 0;
         if (majorStr != null) {
-            openGlVersion += Integer.parseInt(majorStr) * 1_000;
+            encodedOpenGlVersion += Integer.parseInt(majorStr) * 1_000;
         }
         if (minorStr != null) {
-            openGlVersion += Integer.parseInt(minorStr);
+            encodedOpenGlVersion += Integer.parseInt(minorStr);
         }
 
-        this.openGlVersion = openGlVersion;
-
-        return this;
+        return encodedOpenGlVersion;
     }
 
     /**

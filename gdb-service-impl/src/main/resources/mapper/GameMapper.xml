@@ -56,19 +56,36 @@
 		<collection property="platforms" ofType="OsFamily" foreignColumn="gameOsFamilyGameId">
 			<id property="id" column="gameOsFamily" />
 		</collection>
-		<!--
 		<collection property="requirementAdder" ofType="TypedRequirement" foreignColumn="requirementGameId">
 			<id property="id" column="requirementId" />
 			<result property="type" column="requirementType" />
 			<result property="osFamily" column="requirementOsFamily" />
 			<result property="memory" column="requirementMemory" />
 			<result property="storage" column="requirementStorage" />
-			<association property="processor" javaType="Processor" foreignColumn="requirementProcessorId">
+			<collection property="processorAdder" ofType="Processor" foreignColumn="requirementProcessorRequirementId">
 				<id property="id" column="requirementProcessorId" />
-			</association>
-			<association property="graphics" javaType="Graphics" foreignColumn="requirementGraphicsId">
+				<result property="model" column="requirementProcessorModel" />
+				<result property="cores" column="requirementProcessorCores" />
+				<result property="threads" column="requirementProcessorThreads" />
+				<result property="frequency" column="requirementProcessorFrequency" />
+				<result property="instructionSet" column="requirementProcessorInstructionSet" />
+				<association property="brand" javaType="Brand" foreignColumn="requirementProcessorRequirementId">
+					<id property="id" column="requirementProcessorBrandId" />
+					<result property="name" column="requirementProcessorBrandName" />
+				</association>
+			</collection>
+			<collection property="graphicsAdder" ofType="Graphics" foreignColumn="requirementGraphicsRequirementId">
 				<id property="id" column="requirementGraphicsId" />
-			</association>
+				<result property="model" column="requirementGraphicsModel" />
+				<result property="memory" column="requirementGraphicsMemory" />
+				<result property="frequency" column="requirementGraphicsFrequency" />
+				<result property="directXVersion" column="requirementGraphicsDirectXVersion" />
+				<result property="openGlVersion" column="requirementGraphicsOpenGlVersion" />
+				<association property="brand" javaType="Brand" foreignColumn="requirementGraphicsRequirementId">
+					<id property="id" column="requirementGraphicsBrandId" />
+					<result property="name" column="requirementGraphicsBrandName" />
+				</association>
+			</collection>
 			<collection property="operatingSystems" ofType="OperatingSystem" foreignColumn="requirementOperatingSystemRequirementId">
 				<id property="id" column="requirementOperatingSystemId" />
 				<result property="osFamily" column="requirementOperatingSystemFamily" />
@@ -88,7 +105,6 @@
 				</association>
 			</collection>
 		</collection>
-		-->
 	</resultMap>
 
 	<sql id="gameFieldNames">
@@ -146,9 +162,25 @@
 		requirementOperatingSystemDeveloperId,
 		requirementOperatingSystemDeveloperName,
 
+		requirementProcessorRequirementId,
 		requirementProcessorId,
+		requirementProcessorModel,
+		requirementProcessorCores,
+		requirementProcessorThreads,
+		requirementProcessorFrequency,
+		requirementProcessorInstructionSet,
+		requirementProcessorBrandId,
+		requirementProcessorBrandName,
 
-		requirementGraphicsId
+		requirementGraphicsRequirementId,
+		requirementGraphicsId,
+		requirementGraphicsModel,
+		requirementGraphicsMemory,
+		requirementGraphicsFrequency,
+		requirementGraphicsDirectXVersion,
+		requirementGraphicsOpenGlVersion,
+		requirementGraphicsBrandId,
+		requirementGraphicsBrandName
 	</sql>
 
 	<!-- Methods from BaseMapper. -->

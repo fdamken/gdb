@@ -44,7 +44,7 @@ public class Processor implements BaseModel<Integer>, Comparable<Process> {
      * The brand of the processor.
      * 
      */
-    private String brand;
+    private Brand brand;
     /**
      * The model ID of the processor.
      * 
@@ -61,7 +61,7 @@ public class Processor implements BaseModel<Integer>, Comparable<Process> {
      */
     private Integer threads;
     /**
-     * The processor frequency in Megahertz.
+     * The processor frequency in megahertz.
      * 
      */
     private Integer frequency;

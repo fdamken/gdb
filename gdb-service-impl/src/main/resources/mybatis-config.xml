@@ -33,6 +33,7 @@
 		<typeAlias type="org.lcmanager.gdb.service.data.util.TypedRequirement" alias="TypedRequirement" />
 
 		<!-- Model type. -->
+		<typeAlias type="org.lcmanager.gdb.service.data.model.Brand" alias="Brand" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Category" alias="Category" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Developer" alias="Developer" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Game" alias="Game" />

@@ -45,37 +45,64 @@ CREATE TABLE IF NOT EXISTS User_Authority (
 	FOREIGN KEY (userId) REFERENCES User(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
+-- Create table 'Brand'.
+CREATE TABLE IF NOT EXISTS Brand (
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(128) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name)
+) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
+
 -- Create table 'Processor'.
 CREATE TABLE IF NOT EXISTS Processor (
 	id INT NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (id)
+	brandId INT NOT NULL,
+	model VARCHAR(128),
+	cores INT NOT NULL,
+	threads INT NULL,
+	frequency INT NOT NULL,
+	instructionSet INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (brandId, model),
+	FOREIGN KEY (brandId) REFERENCES Brand(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'Graphics'.
 CREATE TABLE IF NOT EXISTS Graphics (
 	id INT NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (id)
+	brandId INT NOT NULL,
+	model VARCHAR(128) NOT NULL,
+	memory INT NOT NULL,
+	frequency INT NOT NULL,
+	directXVersion VARCHAR(128) NULL,
+	openGlVersion VARCHAR(128) NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (brandId, model),
+	FOREIGN KEY (brandId) REFERENCES Brand(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'Developer'.
 CREATE TABLE IF NOT EXISTS Developer (
 	id INT NOT NULL AUTO_INCREMENT,
-	name VARCHAR(128) NOT NULL UNIQUE,
-	PRIMARY KEY (id)
+	name VARCHAR(128) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'Publisher'.
 CREATE TABLE IF NOT EXISTS Publisher (
 	id INT NOT NULL AUTO_INCREMENT,
-	name VARCHAR(128) NOT NULL UNIQUE,
-	PRIMARY KEY (id)
+	name VARCHAR(128) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'Genre'.
 CREATE TABLE IF NOT EXISTS Genre (
 	id INT NOT NULL,
-	description VARCHAR(128) NOT NULL UNIQUE,
-	PRIMARY KEY (id)
+	description VARCHAR(128) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (description)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'Screenshot'.
@@ -89,20 +116,35 @@ CREATE TABLE IF NOT EXISTS Screenshot (
 -- Create table 'Category'.
 CREATE TABLE IF NOT EXISTS Category (
 	id INT NOT NULL,
-	description VARCHAR(128) NOT NULL UNIQUE,
-	PRIMARY KEY (id)
+	description VARCHAR(128) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (description)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'Requirement'.
 CREATE TABLE IF NOT EXISTS Requirement (
 	id INT NOT NULL AUTO_INCREMENT,
-	processorId INT NULL,
-	graphicsId INT NULL,
 	osFamily INT NULL,
 	memory INT NULL,
 	storage INT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (processorId) REFERENCES Processor(id),
+	PRIMARY KEY (id)
+) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
+
+-- Create table 'Requirement_Processor'.
+CREATE TABLE IF NOT EXISTS Requirement_Processor (
+	requirementId INT NOT NULL,
+	processorId INT NOT NULL,
+	PRIMARY KEY (requirementId, processorId),
+	FOREIGN KEY (requirementId) REFERENCES Requirement(id),
+	FOREIGN KEY (processorId) REFERENCES Processor(id)
+) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
+
+-- Create table 'Requirement_Graphics'.
+CREATE TABLE IF NOT EXISTS Requirement_Graphics (
+	requirementId INT NOT NULL,
+	graphicsId INT NOT NULL,
+	PRIMARY KEY (requirementId, graphicsId),
+	FOREIGN KEY (requirementId) REFERENCES Requirement(id),
 	FOREIGN KEY (graphicsId) REFERENCES Graphics(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
@@ -270,9 +312,25 @@ CREATE OR REPLACE VIEW View_Game AS
 		Df.id				AS requirementOperatingSystemDeveloperId,
 		Df.name				AS requirementOperatingSystemDeveloperName,
 
+		RePr.requirementId	AS requirementProcessorRequirementId,
 		Pr.id				AS requirementProcessorId,
+		Pr.model			AS requirementProcessorModel,
+		Pr.cores			AS requirementProcessorCores,
+		Pr.threads			AS requirementProcessorThreads,
+		Pr.frequency		AS requirementProcessorFrequency,
+		Pr.instructionSet	AS requirementProcessorInstructionSet,
+		PrBr.id				AS requirementProcessorBrandId,
+		PrBr.name			AS requirementProcessorBrandName,
 
-		Gr.id				AS requirementGraphicsId
+		ReGr.requirementId	AS requirementGraphicsRequirementId,
+		Gr.id				AS requirementGraphicsId,
+		Gr.model			AS requirementGraphicsModel,
+		Gr.memory			AS requirementGraphicsMemory,
+		Gr.frequency		AS requirementGraphicsFrequency,
+		Gr.directXVersion	AS requirementGraphicsDirectXVersion,
+		Gr.openGlVersion	AS requirementGraphicsOpenGlVersion,
+		GrBr.id				AS requirementGraphicsBrandId,
+		GrBr.name			AS requirementGraphicsBrandName
 	FROM
 		Game AS Ga
 	-- Screenshot
@@ -302,7 +360,13 @@ CREATE OR REPLACE VIEW View_Game AS
 	-- Requirement: Developer
 	LEFT JOIN Developer			AS Df	ON Df.id = Op.developerId
 	-- Requirement: Processor
-	LEFT JOIN Processor			AS Pr	ON Pr.id = Re.processorId
+	LEFT JOIN Requirement_Processor
+								AS RePr	ON Re.id = RePr.requirementId
+	LEFT JOIN Processor			AS Pr	ON Pr.id = RePr.processorId
+	LEFT JOIN Brand				AS PrBr	ON PrBr.id = Pr.brandId
 	-- Requirement: Graphics
-	LEFT JOIN Graphics			AS Gr	ON Gr.id = Re.graphicsId
+	LEFT JOIN Requirement_Graphics
+								AS ReGr	ON Re.id = ReGr.requirementId
+	LEFT JOIN Graphics			AS Gr	ON Pr.id = ReGr.graphicsId
+	LEFT JOIN Brand				AS GrBr	ON GrBr.id = Gr.brandId
 ;

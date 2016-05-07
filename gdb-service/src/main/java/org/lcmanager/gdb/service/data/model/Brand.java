@@ -19,6 +19,10 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
+import java.util.Locale;
+
+import org.lcmanager.gdb.base.Formatable;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +35,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Brand implements BaseModel<String> {
+public class Brand implements BaseModel<Integer>, Formatable {
     /**
      * The serial version UID.
      * 
@@ -42,7 +46,7 @@ public class Brand implements BaseModel<String> {
      * The ID of this brand.
      * 
      */
-    private String id;
+    private Integer id;
     /**
      * The name of this brand.
      * 
@@ -50,22 +54,27 @@ public class Brand implements BaseModel<String> {
     private String name;
 
     /**
-     * Creates a new {@link Brand} with the given brand ID.
+     * {@inheritDoc}
      *
-     * @param brandId
-     *            The brand ID. Case insensitive.
-     * @return The newly created brand.
+     * @see org.lcmanager.gdb.base.Formatable#format(java.util.Locale)
      */
-    public static Brand makeBrand(final String brandId) {
-        if (brandId == null || brandId.trim().isEmpty()) {
-            throw new IllegalArgumentException("BrandId must not be null or empty!");
-        }
-
-        return new Brand().setId(brandId.toLowerCase().trim());
+    @Override
+    public String format(final Locale locale) {
+        return this.name;
     }
 
     /**
-     * Constains some well-known brands.
+     * {@inheritDoc}
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
+    /**
+     * Contains some well-known brands.
      *
      */
     @Getter
@@ -75,23 +84,23 @@ public class Brand implements BaseModel<String> {
          * Represents the brand <code>AMD</code>.
          * 
          */
-        AMD("amd", "AMD"),
+        AMD(1, "AMD"),
         /**
          * Represents the brand <code>Intel</code>.
          * 
          */
-        INTEL("intel", "Intel"),
+        INTEL(2, "Intel"),
         /**
          * Represents the brand <code>Nvidia</code>.
          * 
          */
-        NVIDIA("nvidia", "Nvidia");
+        NVIDIA(3, "Nvidia");
 
         /**
          * The ID of this brand.
          * 
          */
-        private final String id;
+        private final int id;
         /**
          * The name of this brand.
          * 
@@ -103,7 +112,7 @@ public class Brand implements BaseModel<String> {
          * @return The representing {@link Brand}.
          */
         public Brand getBrand() {
-            return Brand.makeBrand(this.id).setName(this.name);
+            return new Brand().setId(this.id).setName(this.name);
         }
     }
 }
