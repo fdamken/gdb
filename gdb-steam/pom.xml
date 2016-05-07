@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>gdb-steam</artifactId>
 
-	<name>Game Database Steam Accessor</name>
+	<name>Game Database Steam Mapper</name>
 
 	<dependencies>
 		<dependency>

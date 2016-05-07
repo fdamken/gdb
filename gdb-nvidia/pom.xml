@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>gdb-nvidia</artifactId>
 
-	<name>Game Database NVIDIA Accessor</name>
+	<name>Game Database NVIDIA Mapper</name>
 
 	<dependencies>
 		<dependency>

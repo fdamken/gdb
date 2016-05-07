@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>gdb-intel</artifactId>
 
-	<name>Game Database Intel Accessor</name>
+	<name>Game Database Intel Mapper</name>
 
 	<dependencies>
 		<dependency>

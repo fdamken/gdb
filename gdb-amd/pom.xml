@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>gdb-amd</artifactId>
 
-	<name>Game Database AMD Accessor</name>
+	<name>Game Database AMD Mapper</name>
 
 	<dependencies>
 		<dependency>
