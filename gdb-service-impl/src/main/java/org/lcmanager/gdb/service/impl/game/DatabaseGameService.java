@@ -62,6 +62,9 @@ public class DatabaseGameService implements GameService {
     @Transactional(readOnly = true)
     @Override
     public Game retrieveGame(final int gameId) {
+        if (!this.gameMapper.exists(gameId)) {
+            return null;
+        }
         return this.gameMapper.findById(gameId);
     }
 }
