@@ -26,6 +26,8 @@ import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
 import org.lcmanager.gdb.service.impl.data.mapper.GameMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("dbGameService")
 @Generic
+@CacheConfig(cacheNames = "db-game-service")
 public class DatabaseGameService implements GameService {
     /**
      * The {@link Game} mapper.
@@ -61,6 +64,7 @@ public class DatabaseGameService implements GameService {
      */
     @Transactional(readOnly = true)
     @Override
+    @Cacheable
     public Game retrieveGame(final int gameId) {
         if (!this.gameMapper.exists(gameId)) {
             return null;

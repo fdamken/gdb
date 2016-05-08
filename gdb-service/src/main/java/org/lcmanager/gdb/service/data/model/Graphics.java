@@ -144,7 +144,7 @@ public class Graphics implements BaseModel<Integer>, Comparable<Graphics> {
      *
      * @return The encoded OpenGL version
      */
-    public long setOpenGlVersion() {
+    public long encodeOpenGlVersion() {
         final Matcher matcher = Graphics.OPENGL_VERSION_REGEX.matcher(this.openGlVersion);
         matcher.matches();
         String majorStr = null;

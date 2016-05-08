@@ -21,6 +21,7 @@ package org.lcmanager.gdb.service.graphics;
 
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Graphics;
+import org.lcmanager.gdb.service.graphics.exception.GraphicsServiceException;
 
 /**
  * The graphics service is used to interaction with graphics cards (e.g. load
@@ -37,8 +38,10 @@ public interface GraphicsService {
      * @param model
      *            The model identifier of the graphics card.
      * @return The retrieved graphics card.
+     * @throws GraphicsServiceException
+     *             If an error occurs whilst retrieving the graphics card.
      */
-    Graphics retrieveGraphics(Brand brand, String model);
+    Graphics retrieveGraphics(Brand brand, String model) throws GraphicsServiceException;
 
     /**
      * Checks whether the implementing class is responsible for the given brand.

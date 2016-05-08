@@ -40,7 +40,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Primary
-@CacheConfig(cacheNames = "game-service")
+@CacheConfig(cacheNames = "delegating-game-service")
 public class DelegatingGameService implements GameService {
     /**
      * The generic {@link DatabaseGameService}.

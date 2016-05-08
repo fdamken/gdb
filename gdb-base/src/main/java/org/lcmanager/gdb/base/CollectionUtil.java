@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import lombok.experimental.UtilityClass;
 
@@ -37,6 +39,57 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class CollectionUtil {
+    /**
+     * Finds a value of the given map that is associated with the key that the
+     * given predicate returns <code>true</code> for.
+     *
+     * @param <K>
+     *            The key type of the map.
+     * @param <V>
+     *            The value type of the map.
+     * @param <R>
+     *            The result type.
+     * @param map
+     *            The map to find the value of.
+     * @param keyPredicate
+     *            The predicate that decides whether a key is eligible to get
+     *            the value. The given key is never <code>null</code>.
+     * @param finisher
+     *            Is invoked after a value was found with the found value. This
+     *            may be used in order to finalize the value and make is
+     *            eligible for further processing (e.g. converting the value
+     *            type). If the value was <code>null</code>, the finisher is not
+     *            invoked.
+     * @return The value that is associated with any key the predicate returns
+     *         <code>true</code> for or <code>null</code> is no value was found
+     *         or the associated value is null or no key was found matched.
+     */
+    public static <K, V, R> R findValue(final Map<K, V> map, final Predicate<K> keyPredicate, final Function<V, R> finisher) {
+        final V value = map
+                .get(map.keySet().stream().filter(FunctionUtil.notNull()).filter(keyPredicate::test).findAny().orElse(null));
+        if (value == null) {
+            return null;
+        }
+        return finisher.apply(value);
+    }
+
+    /**
+     * Finds a value of the given map that is associated with the key that the
+     * given predicate returns <code>true</code> for.
+     *
+     * @param map
+     *            The map to find the value of.
+     * @param keyPredicate
+     *            The predicate that decides whether a key is eligible to get
+     *            the value. The given key is never <code>null</code>.
+     * @return The value that is associated with any key the predicate returns
+     *         <code>true</code> for or <code>null</code> is no value was found
+     *         or the associated value is null or no key was found matched.
+     */
+    public static <K, V> V findValue(final Map<K, V> map, final Predicate<K> keyPredicate) {
+        return CollectionUtil.findValue(map, keyPredicate, FunctionUtil.noopFunction());
+    }
+
     /**
      * Creates an instance of {@link AddOnlyListSet} with the given
      * {@link Consumer} as the <code>adder</code>.

@@ -38,7 +38,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.lcmanager.gdb.base.Charsets;
 import org.lcmanager.gdb.base.Paged;
 import org.lcmanager.gdb.base.PaginationMetadata;
 import org.lcmanager.gdb.base.StreamUtil;
@@ -57,6 +56,8 @@ import org.lcmanager.gdb.service.game.exception.GameServiceException;
 import org.lcmanager.gdb.steam.exception.SteamGameServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import io.mikael.urlbuilder.UrlBuilder;
@@ -67,6 +68,7 @@ import io.mikael.urlbuilder.UrlBuilder;
  */
 @Service
 @Branded
+@CacheConfig(cacheNames = "steam-game-service")
 public class SteamGameService implements GameService {
     /**
      * The pattern of Steams <code>'pagination_left'</code> element.
@@ -99,6 +101,7 @@ public class SteamGameService implements GameService {
      *      int)
      */
     @Override
+    @Cacheable
     public Paged<Game> retrieveGames(final GameQuery query, final int page) throws GameServiceException {
         final URL url = this.buildUrl(query, page);
         final Document document = this.retrieveDocument(url);
@@ -120,6 +123,7 @@ public class SteamGameService implements GameService {
      */
     @SuppressWarnings("unchecked")
     @Override
+    @Cacheable
     public Game retrieveGame(final int gameId) throws GameServiceException {
         final Map<String, Object> gameData = this.retrieveGameData(gameId);
 
@@ -338,7 +342,6 @@ public class SteamGameService implements GameService {
      */
     private URL buildUrl(final GameQuery query, final int page) {
         UrlBuilder builder = UrlBuilder.empty() //
-                .encodeAs(Charsets.UTF_8) //
                 .withScheme("http") //
                 .withHost("store.steampowered.com") //
                 .withPath("/search");

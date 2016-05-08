@@ -21,6 +21,7 @@ package org.lcmanager.gdb.base;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import lombok.experimental.UtilityClass;
 
@@ -31,6 +32,16 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class FunctionUtil {
+    /**
+     * Creates a predication that returns <code>true</code> if the value is not
+     * <code>null</code> and <code>false</code> if it is.
+     *
+     * @return The predicate.
+     */
+    public static <T> Predicate<T> notNull() {
+        return obj -> obj != null;
+    }
+
     /**
      * Creates a {@link Function} using the given type that does nothing
      * (NO-OPeration).

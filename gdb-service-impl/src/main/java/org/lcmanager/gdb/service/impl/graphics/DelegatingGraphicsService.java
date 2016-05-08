@@ -28,6 +28,7 @@ import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Graphics;
 import org.lcmanager.gdb.service.graphics.GraphicsService;
+import org.lcmanager.gdb.service.graphics.exception.GraphicsServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -60,7 +61,7 @@ public class DelegatingGraphicsService implements GraphicsService {
      */
     @Override
     @Cacheable
-    public Graphics retrieveGraphics(final Brand brand, final String model) {
+    public Graphics retrieveGraphics(final Brand brand, final String model) throws GraphicsServiceException {
         if (!this.isResponsible(brand)) {
             throw new UnsupportedOperationException("Brand " + brand + " is not supported!");
         }
