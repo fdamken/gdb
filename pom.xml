@@ -444,6 +444,7 @@
 						<exclude>**/angular*css</exclude>
 						<exclude>**/jquery*css</exclude>
 						<exclude>**/bootstrap*css</exclude>
+						<exclude>**/*spring*json</exclude>
 					</excludes>
 					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
 					<copyrightOwners>${project.organization.name}</copyrightOwners>
