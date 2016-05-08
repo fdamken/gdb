@@ -20,7 +20,7 @@
 package org.lcmanager.gdb.config;
 
 import org.lcmanager.gdb.BasePackageMarker;
-import org.lcmanager.gdb.base.CommonConstants;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.AdviceMode;
@@ -46,13 +46,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @ControllerAdvice
 public class BaseConfiguration {
     /**
-     * Sets the attribute <code>dev</code> in every model to the value of
-     * {@link CommonConstants#DEV}.
+     * Whether GDB is running in development mode.
+     * 
+     */
+    @Value("${dev:false}")
+    private boolean dev;
+
+    /**
+     * Sets the attribute <code>dev</code> to <code>true</code> if GDB is
+     * running in development mode. <code>false</code> otherwise.
      *
-     * @return The value of {@link CommonConstants#DEV}.
+     * @return Whether GDB is running in development mode.
      */
     @ModelAttribute("dev")
     public boolean modelAttributeDev() {
-        return CommonConstants.DEV;
+        return this.dev;
     }
 }

@@ -28,12 +28,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
  */
 public interface CommonConstants {
     /**
-     * Whether GDB is running in debug mode or not.
-     * 
-     */
-    boolean DEV = Boolean.parseBoolean(System.getProperty("dev"));
-
-    /**
      * Defines all available roles (authorities).
      *
      */

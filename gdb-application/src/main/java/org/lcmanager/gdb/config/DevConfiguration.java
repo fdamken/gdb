@@ -21,17 +21,16 @@ package org.lcmanager.gdb.config;
 
 import java.util.Properties;
 
-import lombok.val;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.support.NoOpCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import freemarker.cache.NullCacheStorage;
+import lombok.val;
 
 /**
  * Configures some things that only make sense during development (e.g. disable
@@ -39,8 +38,7 @@ import freemarker.cache.NullCacheStorage;
  *
  */
 @Configuration
-@ConditionalOnProperty(name = "dev",
-                       havingValue = "true")
+@Profile("dev")
 @PropertySource("classpath:application.dev.properties")
 public class DevConfiguration {
     /**

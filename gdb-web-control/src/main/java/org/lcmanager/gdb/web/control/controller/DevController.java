@@ -25,7 +25,7 @@ import org.lcmanager.gdb.service.data.model.User;
 import org.lcmanager.gdb.service.user.UserService;
 import org.lcmanager.gdb.web.control.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,15 +39,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Provides a utility page for developers.
  * 
  * <p>
- * <b> NOTE: This controller is only activated when running in development mode.
- * </b>
+ * <b> NOTE: This controller is only activated when running in development
+ * mode. </b>
  * </p>
  *
  */
 @Controller
 @RequestMapping("/dev")
-@ConditionalOnProperty(name = "dev",
-                       havingValue = "true")
+@Profile("dev")
 public class DevController {
     /**
      * The {@link PasswordEncoder}.

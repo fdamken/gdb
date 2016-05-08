@@ -44,6 +44,11 @@
 			<groupId>org.lcmanager.gdb</groupId>
 			<artifactId>gdb-web-control</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>janino</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

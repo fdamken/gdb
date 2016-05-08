@@ -21,10 +21,12 @@
   -->
 
 <configuration>
-	<logger name="org.lcmanager.gdb" level="TRACE" />
-	<logger name="org.apache.ibatis" level="DEBUG" />
-	<logger name="org.mybatis" level="DEBUG" />
-	<logger name="org.springframework" level="INFO" />
+	<springProfile name="dev">
+		<logger name="org.lcmanager.gdb" level="TRACE" />
+		<logger name="org.apache.ibatis" level="DEBUG" />
+		<logger name="org.mybatis" level="DEBUG" />
+		<logger name="org.springframework" level="INFO" />
+	</springProfile>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
