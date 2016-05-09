@@ -321,7 +321,15 @@ public class SteamGameService implements GameService {
                     try {
                         game.setWebsite(new URL((String) urlObj));
                     } catch (final MalformedURLException cause) {
-                        throw new SteamGameServiceException("Failed to parse the support info URL!", cause);
+                        if (cause.getMessage().contains("no protocol")) {
+                            try {
+                                game.setWebsite(new URL("http://" + (String) urlObj));
+                            } catch (final MalformedURLException cause2) {
+                                throw new SteamGameServiceException("Failed to parse the support info URL!", cause2);
+                            }
+                        } else {
+                            throw new SteamGameServiceException("Failed to parse the support info URL!", cause);
+                        }
                     }
                 }
             }
