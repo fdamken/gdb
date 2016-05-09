@@ -37,6 +37,13 @@
 
 	<div id="container" class="containers">
 		<@m.navigation />
+		<div id="content">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<@m.search />
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<@gdb.tail />

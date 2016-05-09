@@ -18,10 +18,12 @@
  * #L%
  */
 
-angular.module('gdbApp').controller('navController', ['$scope', function($scope) {
+angular.module('gdbApp').controller('navController', ['$scope', '$rootScope', function($scope, $rootScope) {
 	$scope.query = '';
 
 	$scope.executeQuery = function() {
-		console.log('Executing query ' + $scope.query + '!');
+		$rootScope.$broadcast('search_query-changed', {
+			query : $scope.query
+		});
 	};
 }]);

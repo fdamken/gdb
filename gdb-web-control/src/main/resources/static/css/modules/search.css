@@ -18,14 +18,12 @@
  * #L%
  */
 
-@import '/css/form.css';
-
-* {
-	border-radius: 0 !important;
-	border-radius: 0 !important;
-	border-radius: 0 !important;
+#search-results .name {
+	width: 60%;
 }
-
-body {
-	margin: 0 20px 0 20px;
+#search-results .platforms {
+	width: 30%;
+}
+#search-results .release-date {
+	width: 10%;
 }

@@ -84,7 +84,8 @@ public class SteamGameService implements GameService {
     private static final DateFormat[] RELEASE_DATE_FORMATS = new DateFormat[] { //
             new SimpleDateFormat("d MMM, yyyy"), //
             new SimpleDateFormat("MMM d, yyyy"), //
-            new SimpleDateFormat("MMM yyyy") //
+            new SimpleDateFormat("MMM yyyy"), //
+            new SimpleDateFormat("yyyy") //
     };
 
     /**

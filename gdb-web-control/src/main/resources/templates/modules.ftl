@@ -20,6 +20,7 @@
 
 <#import "modules/login.ftl" as module_login>
 <#import "modules/navigation.ftl" as module_navigation>
+<#import "modules/search.ftl" as module_search>
 
 <#macro login_form>
 	<@module_login.renderScripts />
@@ -30,3 +31,8 @@
 	<@module_navigation.renderScripts />
 	<@module_navigation.render />
 </#macro> 
+
+<#macro search>
+	<@module_search.renderScripts />
+	<@module_search.render />
+</#macro>
