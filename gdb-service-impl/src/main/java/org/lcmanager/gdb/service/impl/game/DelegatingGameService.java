@@ -62,12 +62,12 @@ public class DelegatingGameService implements GameService {
      * {@inheritDoc}
      *
      * @see org.lcmanager.gdb.service.game.GameService#retrieveGames(org.lcmanager.gdb.service.game.GameQuery,
-     *      int)
+     *      int, boolean)
      */
     @Override
     @Cacheable
-    public Paged<Game> retrieveGames(final GameQuery query, final int page) throws GameServiceException {
-        return this.brandedGameService.retrieveGames(query, page);
+    public Paged<Game> retrieveGames(final GameQuery query, final int page, final boolean loadAll) throws GameServiceException {
+        return this.brandedGameService.retrieveGames(query, page, loadAll);
     }
 
     /**

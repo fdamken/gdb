@@ -35,18 +35,56 @@ public interface GameService {
     int PAGE_SIZE = 25;
 
     /**
-     * Retrieves all games that match the given game query.
+     * Retrieves the games that match the given {@link GameQuery query} on the
+     * given page. Each page contains {@value #PAGE_SIZE} items.
+     * 
+     * <p>
+     * To speed up the loading of the items, <code>loadAll</code> can be set to
+     * <code>false</code>. If so, not all properties of every item are loaded
+     * but only the following:
+     * <ul>
+     * <li>ID</li>
+     * <li>name</li>
+     * <li>platforms</li>
+     * <li>release date</li>
+     * </ul>
+     * <p>
+     * Loading all properties can be really slow and the approximated duration
+     * is about 15 seconds. Loading only the above properties takes, depending
+     * on the implementation, less than 1 second. That more than 15 times
+     * faster!
+     * </p>
+     * </p>
+     * 
+     * @param query
+     *            The {@link GameQuery query} to search for.
+     * @param page
+     *            The page to load. Must not be less than one.
+     * @param loadAll
+     *            Whether to load all properties or not (see above).
+     * @return All found games and the page meta-data.
+     * @throws GameServiceException
+     *             If any error occurs whilst fetching the games.
+     */
+    Paged<Game> retrieveGames(final GameQuery query, final int page, final boolean loadAll) throws GameServiceException;
+
+    /**
+     * Delegates to {@link #retrieveGames(GameQuery, int, boolean)} with
+     * <code>loadAll = true</code>
      *
      * @param query
-     *            The game query to retrieve the games for.
+     *            Passed to {@link #retrieveGames(GameQuery, int, boolean)}.
      * @param page
-     *            The page to load. Each page contains {@value #PAGE_SIZE}
-     *            elements.
-     * @return The pagination containing the games that match the given query.
+     *            Passed to {@link #retrieveGames(GameQuery, int, boolean)}.
+     * @return The result of {@link #retrieveGames(GameQuery, int, boolean)}.
      * @throws GameServiceException
-     *             If any error occurs whilst retrieving the games.
+     *             If {@link #retrieveGames(GameQuery, int, boolean)} throws it.
+     * @see org.lcmanager.gdb.service.game.GameService#retrieveGames(org.lcmanager.gdb.service.game.GameQuery,
+     *      int, boolean)
      */
-    Paged<Game> retrieveGames(final GameQuery query, final int page) throws GameServiceException;
+    default Paged<Game> retrieveGames(final GameQuery query, final int page) throws GameServiceException {
+        return this.retrieveGames(query, page, false);
+    }
 
     /**
      * Retrieves the game with the given ID.

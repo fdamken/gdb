@@ -50,10 +50,10 @@ public class DatabaseGameService implements GameService {
      * {@inheritDoc}
      *
      * @see org.lcmanager.gdb.service.game.GameService#retrieveGames(org.lcmanager.gdb.service.game.GameQuery,
-     *      int)
+     *      int, boolean)
      */
     @Override
-    public Paged<Game> retrieveGames(final GameQuery query, final int page) {
+    public Paged<Game> retrieveGames(final GameQuery query, final int page, final boolean loadAll) {
         throw new UnsupportedOperationException("This operation is not supported! Use a branded service instead!");
     }
 

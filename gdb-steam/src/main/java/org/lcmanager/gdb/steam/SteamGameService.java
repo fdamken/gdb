@@ -26,6 +26,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.lcmanager.gdb.base.FunctionUtil;
 import org.lcmanager.gdb.base.Paged;
 import org.lcmanager.gdb.base.PaginationMetadata;
 import org.lcmanager.gdb.base.StreamUtil;
@@ -76,15 +78,14 @@ public class SteamGameService implements GameService {
      */
     private static final Pattern PAGINATION_LEFT_PATTERN = Pattern.compile("^showing\\s*(\\d+)\\s*-\\s*(\\d+)\\s*of\\s*(\\d+)$");
     /**
-     * The first format of a release date provided by Steam.
+     * Contains all date formats that a release date may have.
      * 
      */
-    private static final DateFormat RELEASE_DATE_FORMAT_1 = new SimpleDateFormat("d MMM, yyyy");
-    /**
-     * The second format of a release date provided by Steam.
-     * 
-     */
-    private static final DateFormat RELEASE_DATE_FORMAT_2 = new SimpleDateFormat("MMM d, yyyy");
+    private static final DateFormat[] RELEASE_DATE_FORMATS = new DateFormat[] { //
+            new SimpleDateFormat("d MMM, yyyy"), //
+            new SimpleDateFormat("MMM d, yyyy"), //
+            new SimpleDateFormat("MMM yyyy") //
+    };
 
     /**
      * The {@link GameService} used for fetching the game details. May
@@ -98,19 +99,65 @@ public class SteamGameService implements GameService {
      * {@inheritDoc}
      *
      * @see org.lcmanager.gdb.service.game.GameService#retrieveGames(org.lcmanager.gdb.service.game.GameQuery,
-     *      int)
+     *      int, boolean)
      */
     @Override
     @Cacheable
-    public Paged<Game> retrieveGames(final GameQuery query, final int page) throws GameServiceException {
+    public Paged<Game> retrieveGames(final GameQuery query, final int page, final boolean loadAll) throws GameServiceException {
         final URL url = this.buildUrl(query, page);
         final Document document = this.retrieveDocument(url);
         final PaginationMetadata completePaginationMetadata = this.extractCompletePaginationMetadata(document, page);
         final List<Integer> gameIds = this.extractGameIds(document);
 
-        final List<Game> games = new ArrayList<>();
-        for (final int gameId : gameIds) {
-            games.add(this.gameService.retrieveGame(gameId));
+        final List<Game> games;
+        if (loadAll) {
+            games = new ArrayList<>();
+            for (final int gameId : gameIds) {
+                games.add(this.gameService.retrieveGame(gameId));
+            }
+        } else {
+            try {
+                games = gameIds.stream().map(gameId -> {
+                    final Element appElement = document.getElementsByAttributeValue("data-ds-appid", String.valueOf(gameId))
+                            .get(0);
+                    final Element searchName = appElement.getElementsByClass("search_name").get(0);
+                    final Element searchReleased = appElement.getElementsByClass("search_released").get(0);
+
+                    final Game game = new Game();
+
+                    game.setId(gameId);
+
+                    game.setName(searchName.getElementsByClass("search_name").get(0).text());
+
+                    final Elements platformElements = searchName.getElementsByClass("platform_img");
+                    game.setPlatforms(platformElements.stream() //
+                            .map(Element::classNames) //
+                            .map(classNames -> {
+                                if (classNames.contains("win")) {
+                                    return OsFamily.WINDOWS;
+                                } else if (classNames.contains("mac")) {
+                                    return OsFamily.MAC;
+                                } else if (classNames.contains("linux")) {
+                                    return OsFamily.UNIX;
+                                } else {
+                                    return null;
+                                }
+                            }) //
+                            .filter(FunctionUtil.notNull()) //
+                            .collect(Collectors.toSet()) //
+                    );
+
+                    try {
+                        game.setReleaseDate(this.parseReleaseDate(searchReleased.text()));
+                    } catch (final ParseException cause) {
+                        throw new GdbExceptionWrapper(new SteamGameServiceException("Failed to parse the release data!", cause));
+                    }
+
+                    return game;
+                }).collect(Collectors.toList());
+            } catch (final GdbExceptionWrapper wrapper) {
+                throw (GameServiceException) wrapper.getCause();
+            }
         }
 
         return new Paged<>(completePaginationMetadata, games);
@@ -252,14 +299,9 @@ public class SteamGameService implements GameService {
             final Object dateObj = releaseDateMap.get("date");
             if (dateObj instanceof String && !((String) dateObj).isEmpty()) {
                 try {
-                    game.setReleaseDate(SteamGameService.RELEASE_DATE_FORMAT_1.parse((String) dateObj));
+                    game.setReleaseDate(this.parseReleaseDate((String) dateObj));
                 } catch (final ParseException cause1) {
-                    try {
-                        game.setReleaseDate(SteamGameService.RELEASE_DATE_FORMAT_2.parse((String) dateObj));
-                    } catch (final ParseException cause2) {
-                        cause2.addSuppressed(cause1);
-                        throw new SteamGameServiceException("Failed to parse the release date!", cause2);
-                    }
+                    throw new SteamGameServiceException("Failed to parse the release date!", cause1);
                 }
             }
         }
@@ -504,5 +546,40 @@ public class SteamGameService implements GameService {
             throw new SteamGameServiceException("Failed to parse the JSON from Steam!", cause);
         }
         return data;
+    }
+
+    /**
+     * Parses the given date by trying all {@link #RELEASE_DATE_FORMATS} until a
+     * matching one was found.
+     *
+     * @param date
+     *            The date string to parse.
+     * @return The parsed date.
+     * @throws ParseException
+     *             If the parsing was not successful with every date format.
+     */
+    private Date parseReleaseDate(final String date) throws ParseException {
+        Date result = null;
+
+        final List<Exception> exceptions = new ArrayList<>();
+        for (final DateFormat dateFormat : SteamGameService.RELEASE_DATE_FORMATS) {
+            try {
+                result = dateFormat.parse(date);
+
+                // The parsing was successful --> Stop trying.
+                break;
+            } catch (final ParseException | NumberFormatException ex) {
+                exceptions.add(ex);
+            }
+        }
+
+        if (result == null) {
+            final ParseException exception = new ParseException(
+                    "Failed to parse the release date! See suppressed error for more details", -1);
+            exceptions.forEach(exception::addSuppressed);
+            throw exception;
+        }
+
+        return result;
     }
 }
