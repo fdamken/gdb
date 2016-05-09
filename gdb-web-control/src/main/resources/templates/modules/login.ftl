@@ -19,7 +19,7 @@
 -->
 
 <#macro renderScripts>
-	<script src="/js/controller/loginController.js"></script>
+	<script src="/js/module/login.js"></script>
 </#macro>
 <#macro render>
 	<div ng-controller="loginController" id="login-wrapper">

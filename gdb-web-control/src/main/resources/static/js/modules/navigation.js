@@ -18,8 +18,10 @@
  * #L%
  */
 
-@import '/css/form.css';
+angular.module('gdbApp').controller('navController', ['$scope', function($scope) {
+	$scope.query = '';
 
-body {
-	margin: 0 20px 0 20px;
-}
+	$scope.executeQuery = function() {
+		console.log('Executing query ' + $scope.query + '!');
+	};
+}]);

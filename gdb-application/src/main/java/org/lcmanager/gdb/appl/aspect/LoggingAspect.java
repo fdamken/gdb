@@ -24,6 +24,7 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.lcmanager.gdb.base.BaseAspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +37,7 @@ import org.springframework.util.StopWatch;
  */
 @Component
 @Aspect
-public class LoggingAspect {
+public class LoggingAspect extends BaseAspect {
     /**
      * The log threshold (in milliseconds).
      * 
@@ -112,15 +113,6 @@ public class LoggingAspect {
             }
             logger.trace(msg);
         }
-    }
-
-    /**
-     * Pointcut for every class in the GDB.
-     *
-     */
-    @Pointcut("execution(* org.lcmanager.gdb..*.* (..))")
-    private void gdb() {
-        // Nothing to do.
     }
 
     /**

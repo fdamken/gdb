@@ -1,8 +1,8 @@
 /*
  * #%L
- * Game Database Control
+ * Game Database
  * %%
- * Copyright (C) 2016 LCManager Group
+ * Copyright (C) 2016 - 2016 LCManager Group
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,25 @@
  * limitations under the License.
  * #L%
  */
+package org.lcmanager.gdb.web.control.controller;
 
-@import '/css/form.css';
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-body {
-	margin: 0 20px 0 20px;
+/**
+ * Handles all requests on <code>/o</code> and renders the correct templates.
+ * 
+ */
+@Controller
+@RequestMapping("/o")
+public class OtherController {
+    /**
+     * Handles all requests on <code>/o</code>.
+     *
+     * @return The template to render.
+     */
+    @RequestMapping
+    public String handleRequest() {
+        return "main";
+    }
 }

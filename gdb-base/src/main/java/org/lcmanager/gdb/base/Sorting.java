@@ -19,6 +19,8 @@
  */
 package org.lcmanager.gdb.base;
 
+import java.util.Arrays;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -67,5 +69,26 @@ public class Sorting {
          * 
          */
         private final String abbreviation;
+
+        /**
+         * Finds the direction thats name or abbreviation matches the given name
+         * or abbreviation (case-insensitive).
+         *
+         * @param name
+         *            The name or abbreviation to get the direction for.
+         * @return The direction, if any.
+         * @throws IllegalArgumentException
+         *             If no direction was found for the given name or
+         *             abbreviation.
+         */
+        public static Direction get(final String name) {
+            final Direction result = Arrays.stream(Direction.values()).filter(
+                    direction -> direction.name().equalsIgnoreCase(name) || direction.getAbbreviation().equalsIgnoreCase(name))
+                    .findAny().orElse(null);
+            if (result == null) {
+                throw new IllegalArgumentException("Unsupported sorting direction name or abbreviation: " + name);
+            }
+            return result;
+        }
     }
 }

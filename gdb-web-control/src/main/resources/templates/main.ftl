@@ -18,15 +18,27 @@
  #L%
 -->
 
-<#import "modules/login.ftl" as module_login>
-<#import "modules/navigation.ftl" as module_navigation>
+<#import "gdb.ftl" as gdb>
+<#import "modules.ftl" as m>
 
-<#macro login_form>
-	<@module_login.renderScripts />
-	<@module_login.render />
-</#macro>
+<!DOCTYPE html>
+<html>
+<head>
+	<@gdb.bootstrap />
+	<@gdb.init />
+	<@gdb.head />
 
-<#macro navigation>
-	<@module_navigation.renderScripts />
-	<@module_navigation.render />
-</#macro> 
+	<meta name="robots" content="index, follow">
+
+	<title>Game Database</title>
+</head>
+<body ng-app="gdbApp" ng-cloak="true">
+	<@gdb.body />
+
+	<div id="container" class="containers">
+		<@m.navigation />
+	</div>
+
+	<@gdb.tail />
+</body>
+</html>

@@ -1,8 +1,8 @@
 /*
  * #%L
- * Game Database Control
+ * Game Database
  * %%
- * Copyright (C) 2016 LCManager Group
+ * Copyright (C) 2016 - 2016 LCManager Group
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,19 @@
  * limitations under the License.
  * #L%
  */
+package org.lcmanager.gdb.base;
 
-@import '/css/form.css';
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-body {
-	margin: 0 20px 0 20px;
+/**
+ * Declares classes not to be weaved by AspectJ.
+ *
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface NoWeave {
+    // Nothing to do.
 }

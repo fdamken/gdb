@@ -1,0 +1,20 @@
+/* Automatic hide/show of glyphicons in forms. */
+form .form-group.has-feedback span.glyphicon {
+	visibility: hidden
+}
+
+form .form-group.has-success span.glyphicon.glyphicon-ok {
+	visibility: visible;
+}
+
+form .form-group.has-success span.glyphicon.glyphicon-remove {
+	visibility: hidden;
+}
+
+form .form-group.has-error span.glyphicon.glyphicon-ok {
+	visibility: hidden;
+}
+
+form .form-group.has-error span.glyphicon.glyphicon-remove {
+	visibility: visible;
+}

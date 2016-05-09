@@ -26,6 +26,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.lcmanager.gdb.base.BaseAspect;
 import org.lcmanager.gdb.web.control.util.exception.NullContentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -45,7 +46,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 @Component
 @Aspect
-public class StatusAspect {
+public class StatusAspect extends BaseAspect {
     /**
      * The {@link ApplicationContext} used to autowire the status generator.
      * 
@@ -107,15 +108,6 @@ public class StatusAspect {
         final Object statusGenerator = this.applicationContext.getBeanFactory().autowire(clazz,
                 AutowireCapableBeanFactory.AUTOWIRE_NO, true);
         return (StatusGenerator) statusGenerator;
-    }
-
-    /**
-     * Pointcut for every class in the GDB.
-     *
-     */
-    @Pointcut("execution(* org.lcmanager.gdb..*.* (..))")
-    private void gdb() {
-        // Nothing to do.
     }
 
     /**

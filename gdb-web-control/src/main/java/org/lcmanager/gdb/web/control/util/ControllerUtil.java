@@ -20,18 +20,22 @@
 package org.lcmanager.gdb.web.control.util;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import lombok.experimental.UtilityClass;
-
+import org.lcmanager.gdb.base.PaginationMetadata;
 import org.lcmanager.gdb.web.control.util.exception.NullContentException;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.hateoas.PagedResources.PageMetadata;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import lombok.experimental.UtilityClass;
 
 /**
  * Provides utility methods for controllers and REST controllers.
@@ -84,12 +88,34 @@ public class ControllerUtil {
      * @throws NullContentException
      *             If the given content was <code>null</code>.
      */
-    public <T> Resources<T> createResources(final Iterable<T> content) {
+    public <T> Resources<T> createResources(final Collection<T> content) {
         if (content == null) {
             throw new NullContentException();
         }
 
         return new Resources<>(content);
+    }
+
+    /**
+     * Creates a resource list ({@link PagedResources}) for the given content.
+     *
+     * @param content
+     *            The content to set.
+     * @param paginationMetadata
+     *            The pagination meta-data to apply.
+     * @return The creates resources.
+     * @throws NullContentException
+     *             If the given content was <code>null</code>.
+     */
+    public <T> PagedResources<T> createResources(final Collection<T> content, final PaginationMetadata paginationMetadata) {
+        if (content == null) {
+            throw new NullContentException();
+        }
+
+        final PageMetadata metadata = new PageMetadata(paginationMetadata.getPageSize(), paginationMetadata.getPage(),
+                paginationMetadata.getTotalItems(), paginationMetadata.getTotalPages());
+
+        return new PagedResources<>(content, metadata);
     }
 
     /**

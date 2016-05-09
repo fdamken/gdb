@@ -17,25 +17,23 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.web.control.controller;
+package org.lcmanager.gdb.base;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.aspectj.lang.annotation.Pointcut;
 
 /**
- * Handles all requests on <code>/</code> and redirects them to <code>/o</code>.
+ * The base class for aspects defined by GDB. It defines some 'utility
+ * pointcuts' that should be used through the whole GDB.
  *
  */
-@Controller
-@RequestMapping("/")
-public class RootController {
+public abstract class BaseAspect {
     /**
-     * The redirector.
+     * Advises all methods within the GDB that are not tagged with the
+     * {@link NoWeave no-weaver annotation}.
      *
-     * @return A string redirecting to <code>/o</code>.
      */
-    @RequestMapping
-    public String redirect() {
-        return "redirect:/o";
+    @Pointcut("within(org.lcmanager.gdb..*) && !within(@org.lcmanager.gdb.base.NoWeave *)")
+    protected void gdb() {
+        // Nothing to do
     }
 }

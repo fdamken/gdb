@@ -17,25 +17,27 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.web.control.controller;
+package org.lcmanager.gdb.web.control.converter;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.lcmanager.gdb.base.NoWeave;
+import org.lcmanager.gdb.base.Sorting.Direction;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 /**
- * Handles all requests on <code>/</code> and redirects them to <code>/o</code>.
+ * Converts a {@link String} to a {@link Direction}.
  *
  */
-@Controller
-@RequestMapping("/")
-public class RootController {
+@Component
+@NoWeave
+public class SortingDirectionConverter implements Converter<String, Direction> {
     /**
-     * The redirector.
+     * {@inheritDoc}
      *
-     * @return A string redirecting to <code>/o</code>.
+     * @see org.springframework.core.convert.converter.Converter#convert(java.lang.Object)
      */
-    @RequestMapping
-    public String redirect() {
-        return "redirect:/o";
+    @Override
+    public Direction convert(final String source) {
+        return Direction.get(source);
     }
 }
