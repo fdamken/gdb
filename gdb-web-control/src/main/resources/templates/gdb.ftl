@@ -25,43 +25,43 @@
 	<#if dev!false>
 		<!-- CSS -->
 		<!-- Bootstrap -->
-		<link rel="stylesheet" href="/css/bootstrap.css">
-		<link rel="stylesheet" href="/css/bootstrap-theme.css">
+		<link rel="stylesheet" href="${context}/css/bootstrap.css">
+		<link rel="stylesheet" href="${context}/css/bootstrap-theme.css">
 
 		<!-- JavaScript -->
 		<!-- jQuery -->
-		<script src="/js/jquery.js"></script>
+		<script src="${context}/js/jquery.js"></script>
 		<!-- AngularJS -->
-		<script src="/js/angular.js"></script>
-		<script src="/js/angular-animate.js"></script>
-		<script src="/js/angular-resource.js"></script>
+		<script src="${context}/js/angular.js"></script>
+		<script src="${context}/js/angular-animate.js"></script>
+		<script src="${context}/js/angular-resource.js"></script>
 		<!-- Bootstrap -->
-		<script src="/js/bootstrap.js"></script>
+		<script src="${context}/js/bootstrap.js"></script>
 	<#else>
 		<!-- CSS -->
 		<!-- Bootstrap -->
-		<link rel="stylesheet" href="/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="${context}/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${context}/css/bootstrap-theme.min.css">
 
 		<!-- JavaScript -->
 		<!-- jQuery -->
-		<script src="/js/jquery.min.js"></script>
+		<script src="${context}/js/jquery.min.js"></script>
 		<!-- AngularJS -->
-		<script src="/js/angular.min.js"></script>
-		<script src="/js/angular-animate.min.js"></script>
-		<script src="/js/angular-resource.min.js"></script>
+		<script src="${context}/js/angular.min.js"></script>
+		<script src="${context}/js/angular-animate.min.js"></script>
+		<script src="${context}/js/angular-resource.min.js"></script>
 		<!-- Bootstrap -->
-		<script src="/js/bootstrap.min.js"></script>
+		<script src="${context}/js/bootstrap.min.js"></script>
 	</#if>
 </#macro>
 <#macro head>
 	<!-- GDB Stuff -->
 	<!-- CSS -->
-	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="${context}/css/main.css">
 
 	<!-- JavaScript -->
-	<script src="/js/constants.js"></script>
-	<script src="/js/gdb.js"></script>
+	<script src="${context}/js/constants.js"></script>
+	<script src="${context}/js/gdb.js"></script>
 </#macro>
 <#macro body>
 	<noscript>
@@ -77,6 +77,13 @@
 
 <!-- GDB macros. -->
 <#macro init>
+	<script>
+		if (!('Constants' in window)) {
+			window.Constants = {};
+		}
+		Constants.context = '${context}';
+	</script>
+
 	<script>
 		angular.module('gdbApp', []).factory('csrf', function() {
 			return {

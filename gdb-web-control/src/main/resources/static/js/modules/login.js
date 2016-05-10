@@ -26,7 +26,7 @@ angular.module('gdbApp').controller('loginController', ['$http', '$scope', 'csrf
 
 	$scope.onCredentialChange = function() {
 		if ($scope.username && $scope.password) {
-			$http.post('/auth', {
+			$http.post(Constants.context + '/auth', {
 				username : $scope.username,
 				password : $scope.password
 			}, {

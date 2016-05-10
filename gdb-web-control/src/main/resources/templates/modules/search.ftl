@@ -19,8 +19,8 @@
 -->
 
 <#macro renderScripts>
-	<link rel="stylesheet" href="/css/modules/search.css">
-	<script src="/js/modules/search.js"></script>
+	<link rel="stylesheet" href="${context}/css/modules/search.css">
+	<script src="${context}/js/modules/search.js"></script>
 </#macro>
 <#macro render>
 	<div ng-controller="searchController" ng-class="{ hidden : pagination.totalElements < 1 }">

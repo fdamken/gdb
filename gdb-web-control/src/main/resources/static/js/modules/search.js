@@ -63,7 +63,7 @@ gdbApp.controller('searchController', ['$scope', '$http', function($scope, $http
 			return;
 		}
 
-		$http.get('/api/game', {
+		$http.get(Constants.context + '/api/game', {
 			params : {
 				page : $scope.pagination.page,
 				term : $scope.query

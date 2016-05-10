@@ -30,7 +30,7 @@
 
 	<meta name="robots" content="noindex, follow">
 
-	<script src="/js/dev.js"></script>
+	<script src="${context}/js/dev.js"></script>
 
 	<title>GDB - Development</title>
 

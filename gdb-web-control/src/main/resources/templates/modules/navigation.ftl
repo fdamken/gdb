@@ -19,8 +19,8 @@
 -->
 
 <#macro renderScripts>
-	<link rel="stylesheet" href="/css/modules/navigation.css">
-	<script src="/js/modules/navigation.js"></script>
+	<link rel="stylesheet" href="${context}/css/modules/navigation.css">
+	<script src="${context}/js/modules/navigation.js"></script>
 </#macro>
 <#macro render>
 	<nav ng-controller="navController" id="navigation" class="navbar navbar-default">

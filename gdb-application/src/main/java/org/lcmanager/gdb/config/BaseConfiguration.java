@@ -46,8 +46,14 @@ public class BaseConfiguration {
      * Whether GDB is running in development mode.
      * 
      */
-    @Value("${dev:false}")
+    @Value("${dev}")
     private boolean dev;
+    /**
+     * The context path the GDB is using.
+     * 
+     */
+    @Value("${server.context-path}")
+    private String contextPath;
 
     /**
      * Sets the attribute <code>dev</code> to <code>true</code> if GDB is
@@ -58,5 +64,15 @@ public class BaseConfiguration {
     @ModelAttribute("dev")
     public boolean modelAttributeDev() {
         return this.dev;
+    }
+
+    /**
+     * Sets the attribute <code>context</code> to the context path of the GDB.
+     *
+     * @return The context path of the GDB.
+     */
+    @ModelAttribute("context")
+    public String modelAttributeContext() {
+        return this.contextPath;
     }
 }

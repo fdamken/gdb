@@ -26,7 +26,7 @@ gdbApp.controller('encoderController', ['$http', '$scope', 'csrf', function($htt
 
 	$scope.$watch('password', function() {
 		if ($scope.password) {
-			$http.post('/dev/encoder', $scope.password, {
+			$http.post(Constants.context + '/dev/encoder', $scope.password, {
 				headers : {
 					'X-CSRF-TOKEN' : csrf.token
 				}
@@ -49,7 +49,7 @@ gdbApp.controller('createUserController', ['$http', '$scope', 'csrf', function($
 
 	$scope.create = function() {
 		if ($scope.username && $scope.password) {
-			$http.put('/dev/user', {
+			$http.put(Constants.context + '/dev/user', {
 				username : $scope.username,
 				displayName : $scope.displayName,
 				password : $scope.password

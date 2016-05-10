@@ -18,8 +18,11 @@
  * #L%
  */
 
-window.Constants = {
-	ContentType : {
-		FORM : 'application/x-www-form-urlencoded'
-	}
-};
+if (!('Constants' in window)) {
+	window.Constants = {};
+}
+
+if (!('ContentType' in Constants)) {
+	Constants.ContentType = {};
+}
+Constants.ContentType.FORM = 'application/x-www-form-urlencoded';
