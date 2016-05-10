@@ -26,6 +26,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.lcmanager.gdb.base.ApplicationContextUtil;
 import org.lcmanager.gdb.base.BaseAspect;
 import org.lcmanager.gdb.web.control.util.exception.NullContentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +106,7 @@ public class StatusAspect extends BaseAspect {
         }
 
         final Class<? extends StatusGenerator<?>> clazz = generateStatusAnnotation.value();
-        final Object statusGenerator = this.applicationContext.getBeanFactory().autowire(clazz,
+        final Object statusGenerator = ApplicationContextUtil.getApplicationContext().getBeanFactory().autowire(clazz,
                 AutowireCapableBeanFactory.AUTOWIRE_NO, true);
         return (StatusGenerator) statusGenerator;
     }

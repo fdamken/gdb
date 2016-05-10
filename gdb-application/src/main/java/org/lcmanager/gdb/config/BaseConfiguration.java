@@ -26,8 +26,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableLoadTimeWeaving;
-import org.springframework.context.annotation.EnableLoadTimeWeaving.AspectJWeaving;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,7 +37,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
  */
 @Configuration
 @EnableAutoConfiguration
-@EnableLoadTimeWeaving(aspectjWeaving = AspectJWeaving.ENABLED)
 @EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 @EnableCaching
 @ComponentScan(basePackageClasses = BasePackageMarker.class)
