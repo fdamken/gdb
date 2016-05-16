@@ -18,9 +18,21 @@
  #L%
 -->
 
+<#import "modules/details.ftl" as module_details>
+<#import "modules/helloWorld.ftl" as module_helloWorld>
 <#import "modules/login.ftl" as module_login>
 <#import "modules/navigation.ftl" as module_navigation>
 <#import "modules/search.ftl" as module_search>
+
+<#macro details>
+	<@module_details.renderScripts />
+	<@module_details.render />
+</#macro>
+
+<#macro helloWorld>
+	<@module_helloWorld.renderScripts />
+	<@module_helloWorld.render />
+</#macro>
 
 <#macro login_form>
 	<@module_login.renderScripts />

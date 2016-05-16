@@ -46,7 +46,7 @@ public class BaseConfiguration {
      * Whether GDB is running in development mode.
      * 
      */
-    @Value("${dev}")
+    @Value("#{T(java.util.Arrays).binarySearch(environment.getActiveProfiles(), \"dev\") >= 0}")
     private boolean dev;
     /**
      * The context path the GDB is using.

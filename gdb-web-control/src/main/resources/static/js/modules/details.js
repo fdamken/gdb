@@ -18,19 +18,24 @@
  * #L%
  */
 
-#search-results-table tr.result {
-	cursor: pointer;
-}
-#search-results-table tr.result:hover {
-	background-color: #e0e0e0;
-}
+var gdbApp = angular.module('gdbApp');
 
-#search-results-table .name {
-	width: 60%;
-}
-#search-results-table .platforms {
-	width: 30%;
-}
-#search-results-table .release-date {
-	width: 10%;
-}
+gdbApp.controller('detailsController', ['$scope', '$http', 'layout', function($scope, $http, layout) {
+	$scope.gameId = null;
+
+	$scope.$on('details_show', function(event, args) {
+		$scope.gameId = args.gameId;
+
+		layout.show('details');
+	});
+
+	$scope.$watch('gameId', function() {
+		if ($scope.gameId) {
+			$http.get(Constants.context + '/api/game/' + $scope.gameId).then(function(response) {
+				$scope.gameDetails = response.data;
+			}, function(response) {
+				alert('An error occurred!'); // TODO: Replace with something cooler.
+			});
+		}
+	})
+}]);

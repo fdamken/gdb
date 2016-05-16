@@ -52,6 +52,7 @@
 		<typeHandler handler="org.lcmanager.gdb.service.impl.data.handler.UrlHandler" />
 	</typeHandlers>
 	<mappers>
+		<mapper resource="mapper/CategoryMapper.xml" />
 		<mapper resource="mapper/GameMapper.xml" />
 		<mapper resource="mapper/UserMapper.xml" />
 	</mappers>

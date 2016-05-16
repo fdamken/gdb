@@ -27,14 +27,24 @@
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="${context}/css/bootstrap.css">
 		<link rel="stylesheet" href="${context}/css/bootstrap-theme.css">
+		<!-- jQuery UI -->
+		<link rel="stylesheet" href="${context}/css/jquery-ui.css">
+		<link rel="stylesheet" href="${context}/css/jquery-ui.structure.css">
+		<!-- AngularJS -->
+		<link rel="stylesheet" href="${context}/css/angular-loading-bar.css">
 
 		<!-- JavaScript -->
 		<!-- jQuery -->
 		<script src="${context}/js/jquery.js"></script>
+		<!-- jQuery UI -->
+		<script src="${context}/js/jquery-ui.js"></script>
 		<!-- AngularJS -->
 		<script src="${context}/js/angular.js"></script>
 		<script src="${context}/js/angular-animate.js"></script>
+		<script src="${context}/js/angular-loading-bar.js"></script>
 		<script src="${context}/js/angular-resource.js"></script>
+		<script src="${context}/js/angular-smooth-scroll.js"></script>
+		<script src="${context}/js/angular-checklist-model.js"></script>
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.js"></script>
 	<#else>
@@ -42,14 +52,24 @@
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="${context}/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${context}/css/bootstrap-theme.min.css">
+		<!-- jQuery UI -->
+		<link rel="stylesheet" href="${context}/css/jquery-ui.min.css">
+		<!-- AngularJS -->
+		<link rel="stylesheet" href="${context}/css/angular-loading-bar.min.css">
 
 		<!-- JavaScript -->
 		<!-- jQuery -->
 		<script src="${context}/js/jquery.min.js"></script>
+		<!-- jQuery UI -->
+		<script src="${context}/js/jquery-ui.min.js"></script>
+		<script src="${context}/js/jquery-ui.structure.min.js"></script>
 		<!-- AngularJS -->
 		<script src="${context}/js/angular.min.js"></script>
 		<script src="${context}/js/angular-animate.min.js"></script>
+		<script src="${context}/js/angular-loading-bar.min.js"></script>
 		<script src="${context}/js/angular-resource.min.js"></script>
+		<script src="${context}/js/angular-smooth-scroll.min.js"></script>
+		<script src="${context}/js/angular-checklist-model.min.js"></script>
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.min.js"></script>
 	</#if>
@@ -61,7 +81,9 @@
 
 	<!-- JavaScript -->
 	<script src="${context}/js/constants.js"></script>
+	<script src="${context}/js/overlay.js"></script>
 	<script src="${context}/js/gdb.js"></script>
+	<script src="${context}/js/layout.js"></script>
 </#macro>
 <#macro body>
 	<noscript>
@@ -85,7 +107,11 @@
 	</script>
 
 	<script>
-		angular.module('gdbApp', []).factory('csrf', function() {
+		var gdbApp = angular.module('gdbApp', ['angular-loading-bar', 'ngAnimate', 'smoothScroll', 'checklist-model']);
+		gdbApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+			cfpLoadingBarProvider.includeSpinner = false;
+		}]);
+		gdbApp.factory('csrf', function() {
 			return {
 				parameterName : '${_csrf.parameterName}',
 				token : '${_csrf.token}'

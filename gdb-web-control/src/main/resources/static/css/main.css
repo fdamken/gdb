@@ -19,6 +19,8 @@
  */
 
 @import 'form.css';
+@import 'layout.css';
+@import 'overlay.css';
 
 * {
 	border-radius: 0 !important;
@@ -26,6 +28,18 @@
 	border-radius: 0 !important;
 }
 
+a[ng-click] {
+	cursor: pointer;
+}
+
 body {
-	margin: 0 20px 0 20px;
+	overflow-y: scroll;
+	margin: 0 50px 0 50px;
+	height: 101%;
+}
+
+#container {
+	width: 100%;
+	margin: 0;
+	padding: 0;
 }

@@ -1,8 +1,8 @@
 /*
  * #%L
- * Game Database Control
+ * Game Database
  * %%
- * Copyright (C) 2016 LCManager Group
+ * Copyright (C) 2016 - 2016 LCManager Group
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,21 @@
  * limitations under the License.
  * #L%
  */
+package org.lcmanager.gdb.service.category;
 
-#search-results-table tr.result {
-	cursor: pointer;
-}
-#search-results-table tr.result:hover {
-	background-color: #e0e0e0;
-}
+import java.util.Set;
 
-#search-results-table .name {
-	width: 60%;
-}
-#search-results-table .platforms {
-	width: 30%;
-}
-#search-results-table .release-date {
-	width: 10%;
+import org.lcmanager.gdb.service.data.model.Category;
+
+/**
+ * The category service is used for working with {@link Category categories}.
+ *
+ */
+public interface CategoryService {
+    /**
+     * Retrieves all known categories.
+     *
+     * @return All known categories.
+     */
+    Set<Category> retrieveCategories();
 }

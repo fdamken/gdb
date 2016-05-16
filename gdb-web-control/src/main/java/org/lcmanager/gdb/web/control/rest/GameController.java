@@ -116,7 +116,7 @@ public class GameController {
             @RequestParam(defaultValue = "") final String term, //
             @RequestParam(defaultValue = "") final int[] categories1, //
             @RequestParam(defaultValue = "") final int[] categories2, //
-            @RequestParam(defaultValue = "") final int[] platforms, //
+            @RequestParam(defaultValue = "") final OsFamily[] platforms, //
             @RequestParam(defaultValue = "") final String sortingTerm, //
             @RequestParam(defaultValue = "ASC") final Direction sortingDirection) throws GdbException {
         final GameQuery query = new GameQuery(term, //
@@ -127,7 +127,6 @@ public class GameController {
                         .mapToObj(categoryId -> new Category().setId(categoryId)) //
                         .collect(Collectors.toList()), //
                 Arrays.stream(platforms) //
-                        .mapToObj(OsFamily::getById) //
                         .collect(Collectors.toList()), //
                 new Sorting(sortingDirection, sortingTerm));
         final Paged<Game> games = this.gameService.retrieveGames(query, page);

@@ -18,12 +18,32 @@
  * #L%
  */
 
-angular.module('gdbApp').controller('navController', ['$scope', '$rootScope', function($scope, $rootScope) {
+var gdbApp = angular.module('gdbApp');
+
+gdbApp.controller('navController', ['$scope', '$rootScope', 'layout', function($scope, $rootScope, layout) {
+	var queryChanged = false;
+
 	$scope.query = '';
 
-	$scope.executeQuery = function() {
-		$rootScope.$broadcast('search_query-changed', {
-			query : $scope.query
-		});
+	$scope.goto = function(id) {
+		layout.show(id);
 	};
+	$scope.executeQuery = function() {
+		$rootScope.$broadcast('search_execute-query');
+	};
+
+	$scope.$watch('query', function(query) {
+		if (queryChanged) {
+			queryChanged = false;
+		} else {
+			$rootScope.$broadcast('search_query-changed', {
+				query : query
+			});
+		}
+	});
+
+	$scope.$on('nav_query-changed', function(event, args) {
+		queryChanged = true;
+		$scope.query = args.query;
+	});
 }]);

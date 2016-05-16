@@ -33,17 +33,20 @@
 			<div class="navbar-body">
 				<ul class="nav navbar-nav navbar-left">
 					<!-- Some menu entries may be added. -->
+					<li>
+						<a ng-click="goto('search')">Search</a>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="#">Login / Register</a>
+						<a>Login / Register</a>
 					</li>
 				</ul>
-				<form class="navbar-form navbar-right">
+				<form ng-submit="executeQuery()" class="navbar-form navbar-right">
 					<div class="form-group">
 						<input ng-model="query" type="search" class="form-control" placeholder="Search">
 					</div>
-					<button ng-click="executeQuery()" type="button" class="btn btn-default">Search</button>
+					<button type="submit" class="btn btn-default">Search</button>
 				</form>
 			</div>
 		</div>

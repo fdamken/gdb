@@ -1,8 +1,8 @@
 /*
  * #%L
- * Game Database Control
+ * Game Database
  * %%
- * Copyright (C) 2016 LCManager Group
+ * Copyright (C) 2016 - 2016 LCManager Group
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,14 @@
  * limitations under the License.
  * #L%
  */
+package org.lcmanager.gdb.service.impl.data.mapper;
 
-#search-results-table tr.result {
-	cursor: pointer;
-}
-#search-results-table tr.result:hover {
-	background-color: #e0e0e0;
-}
+import org.lcmanager.gdb.service.data.model.Category;
 
-#search-results-table .name {
-	width: 60%;
-}
-#search-results-table .platforms {
-	width: 30%;
-}
-#search-results-table .release-date {
-	width: 10%;
+/**
+ * Mapper for {@link Category}.
+ *
+ */
+public interface CategoryMapper extends BaseMapper<Category, Integer> {
+    // Nothing to do.
 }

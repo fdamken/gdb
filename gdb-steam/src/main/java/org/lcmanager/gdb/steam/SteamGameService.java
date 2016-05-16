@@ -85,7 +85,9 @@ public class SteamGameService implements GameService {
             new SimpleDateFormat("d MMM, yyyy"), //
             new SimpleDateFormat("MMM d, yyyy"), //
             new SimpleDateFormat("MMM yyyy"), //
-            new SimpleDateFormat("yyyy") //
+            new SimpleDateFormat("MMM, yyyy"), //
+            new SimpleDateFormat("yyyy"), //
+            new SimpleDateFormat("yyyy-MM-dd") //
     };
 
     /**
@@ -353,7 +355,15 @@ public class SteamGameService implements GameService {
             try {
                 game.setWebsite(new URL((String) websiteObj));
             } catch (final MalformedURLException cause) {
-                throw new SteamGameServiceException("Failed to parse the website URL!", cause);
+                if (cause.getMessage().contains("no protocol")) {
+                    try {
+                        game.setWebsite(new URL("http://" + (String) websiteObj));
+                    } catch (final MalformedURLException cause2) {
+                        throw new SteamGameServiceException("Failed to parse the website URL!", cause2);
+                    }
+                } else {
+                    throw new SteamGameServiceException("Failed to parse the website URL!", cause);
+                }
             }
         } else {
             final Object supportInfoObj = gameData.get("support_info");
@@ -479,9 +489,7 @@ public class SteamGameService implements GameService {
                 throw new IllegalStateException("The pagination left " + paginationLeft + " is invalid!");
             }
             totalItems = Integer.parseInt(paginationMatcher.group(3));
-            final Elements paginationRightAnchors = searchResults.getElementsByClass("search_pagination_right").get(0)
-                    .getElementsByTag("a");
-            totalPages = Integer.parseInt(paginationRightAnchors.get(paginationRightAnchors.size() - 2).text());
+            totalPages = totalItems / GameService.PAGE_SIZE + (totalItems % GameService.PAGE_SIZE == 0 ? 0 : 1);
         } else {
             totalItems = 0;
             totalPages = 1;
@@ -553,13 +561,25 @@ public class SteamGameService implements GameService {
      * Parses the given date by trying all {@link #RELEASE_DATE_FORMATS} until a
      * matching one was found.
      *
-     * @param date
+     * @param rawDate
      *            The date string to parse.
      * @return The parsed date.
      * @throws ParseException
      *             If the parsing was not successful with every date format.
      */
-    private Date parseReleaseDate(final String date) throws ParseException {
+    private Date parseReleaseDate(final String rawDate) throws ParseException {
+        if (rawDate == null || rawDate.trim().isEmpty()) {
+            return new Date(1);
+        }
+
+        final String date = rawDate.trim().toLowerCase() //
+                .replace("early", "mar") //
+                .replace("late", "oct") //
+                .replace("spring", "mar") //
+                .replace("summer", "jun") //
+                .replace("fall", "sep") //
+                .replace("winter", "dec");
+
         Date result = null;
 
         final List<Exception> exceptions = new ArrayList<>();

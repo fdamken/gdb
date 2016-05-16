@@ -19,3 +19,35 @@
  */
 
 var gdbApp = angular.module('gdbApp');
+
+gdbApp.config(['$anchorScrollProvider', function($anchorScrollProvider) {
+	$anchorScrollProvider.disableAutoScrolling = true;
+}]);
+
+gdbApp.run(['$rootScope', '$location', 'smoothScroll', function($rootScope, $location, smoothScroll) {
+	// Handles the URL #<hashes>.
+	var selfInvoke = false;
+	$rootScope.$watch(function() {
+		return $location.hash();
+	}, function(hash) {
+		if (selfInvoke) {
+			selfInvoke = false;
+			return;
+		}
+
+		hash = hash.indexOf('_r:') < 0 ? hash : hash.split('_r:')[0];
+
+		selfInvoke = true;
+		$location.hash(hash);
+
+		var element = document.getElementById(hash);
+		if (element) {
+			smoothScroll(element, {
+				offset : 80
+			});
+		}
+
+		selfInvoke = true;
+		$location.hash(hash + "_r:" + (new Date().getTime().toString(16)));
+	});
+}]);

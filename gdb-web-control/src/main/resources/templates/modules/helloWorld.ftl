@@ -18,32 +18,12 @@
  #L%
 -->
 
-<#import "gdb.ftl" as gdb>
-<#import "modules.ftl" as m>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<@gdb.bootstrap />
-	<@gdb.init />
-	<@gdb.head />
-
-	<meta name="robots" content="index, follow">
-
-	<title>Game Database</title>
-</head>
-<body ng-app="gdbApp" ng-cloak="true">
-	<@gdb.body />
-
-	<div id="container" class="container">
-		<@m.navigation />
-		<div id="content">
-			<@m.details />
-			<@m.search />
-			<@m.helloWorld />
+<#macro renderScripts>
+</#macro>
+<#macro render>
+	<div gdb-layout="{ id : 'hello-world', title : 'Hello World', side : 'left' }" class="panel panel-default overlay-parent">
+		<div class="panel-body">
+			<h1>Hello, World!</h2>
 		</div>
 	</div>
-
-	<@gdb.tail />
-</body>
-</html>
+</#macro>

@@ -29,10 +29,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.lcmanager.gdb.base.ApplicationContextUtil;
 import org.lcmanager.gdb.base.BaseAspect;
 import org.lcmanager.gdb.web.control.util.exception.NullContentException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -48,13 +45,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Component
 @Aspect
 public class StatusAspect extends BaseAspect {
-    /**
-     * The {@link ApplicationContext} used to autowire the status generator.
-     * 
-     */
-    @Autowired
-    private AbstractApplicationContext applicationContext;
-
     /**
      * The actual pointcut for intercepting the methods with status generation.
      * 

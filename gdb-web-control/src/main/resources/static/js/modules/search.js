@@ -20,32 +20,122 @@
 
 var gdbApp = angular.module('gdbApp')
 
-gdbApp.filter('platform', function() {
+gdbApp.filter('direction', function() {
 	return function(data) {
-		var result = []
-		for (var i = 0; i < data.length; i++) {
-			switch (data[i]) {
-				case 'WINDOWS':
-					result.push('Windows');
-					break;
-				case 'MAC':
-					result.push('Mac');
-					break;
-				case 'UNIX':
-					result.push('Linux');
-					break;
-				default:
-					result.push('UNKNOWN');
-					break;
-			}
+		switch (data) {
+			case 'ASC':
+				return 'Ascending';
+			case 'DESC':
+				return 'Descending';
+			default:
+				return 'Other';
+		};
+	};
+});
+gdbApp.filter('platform', function() {
+	var filter = function(platform) {
+		switch (platform) {
+			case 'WINDOWS':
+				return 'Windows';
+			case 'MAC':
+				return 'Mac';
+			case 'UNIX':
+				return 'Linux';
+			default:
+				return 'Other';
 		}
-		return result.join(', ');
+	};
+
+	return function(data) {
+		if (typeof data === 'string') {
+			return filter(data);
+		} else if (typeof data === 'object') {
+			var result = []
+			for (var i = 0; i < data.length; i++) {
+				result.push(filter(data[i]));
+			}
+			return result.join(', ');
+		} else {
+			throw 'Data must either be a string or an object!';
+		}
 	};
 });
 
-gdbApp.controller('searchController', ['$scope', '$http', function($scope, $http) {
+gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout', function($scope, $rootScope, $http, layout) {
+	var queryChanged = false;
+
+	var asToggleShow = 'Show Advanced Options';
+	var asToggleHide = 'Hide Advanced Options';
+
+	$scope.as = {
+		toggle : asToggleShow,
+
+		categories : [],
+		platforms : [],
+		sortingTerms : [
+			{
+				id : '',
+				name : 'Relevance',
+				direction : 'ASC'
+			}, {
+				id : 'Released',
+				name : 'Release Date',
+				direction : 'DESC'
+			}, {
+				id : 'Name',
+				name : 'Name',
+				direction : 'ASC'
+			}
+		]
+	};
+
+	$http.get(Constants.context + '/api/category').then(function(response) {
+		$scope.as.categories = (response.data._embedded || {
+			categoryList : []
+		}).categoryList;
+	}, function(response) {
+		alert('An error occurred!'); // TODO: Replace with something cooler.
+	});
+	$http.get(Constants.context + '/api/platform').then(function(response) {
+		$scope.as.platforms = (response.data._embedded || {
+			osFamilyList : []
+		}).osFamilyList;
+	}, function(response) {
+		alert('An error occurred!'); // TODO: Replace with something cooler.
+	});
+
+	$scope.query = {
+		term : '',
+		categories1 : [],
+		categories2 : [],
+		platforms : [],
+		sorting : {
+			term : 'Relevance',
+			direction : null
+		}
+	};
+
+	$scope.$watch('query.term', function(term) {
+		if (queryChanged) {
+			queryChanged = false;
+		} else {
+			$rootScope.$broadcast('nav_query-changed', {
+				query : term
+			});
+		}
+	});
+	$scope.$watch('query.sorting.term', function(sortingTermId) {
+		var sortingTerms = $scope.as.sortingTerms;
+		for (var i = 0; i < sortingTerms.length; i++) {
+			var sortingTerm = sortingTerms[i];
+			if (sortingTerm.id === sortingTermId) {
+				$scope.query.sorting.direction = sortingTerm.direction;
+			}
+		}
+	});
+
+	$scope.searched = false;
 	$scope.game = [];
-	$scope.query = '';
 	$scope.pagination = {
 		size : 0,
 		totalElements : 0,
@@ -53,28 +143,72 @@ gdbApp.controller('searchController', ['$scope', '$http', function($scope, $http
 		page : 0
 	}
 
-	$scope.$on('search_query-changed', function(event, args) {
-		$scope.pagination.page = 1;
-		$scope.query = args.query;
-	});
-
-	$scope.$watchGroup(['pagination.page', 'query'], function() {
-		if ($scope.pagination.page < 1) {
-			return;
+	$scope.onAdvancedToggle = function() {
+		$scope.query.categories1 = [];
+		$scope.query.categories2 = [];
+		$scope.query.platforms = [];
+		$scope.query.sorting.term = '';
+		if ($scope.as.toggle === asToggleShow) {
+			$scope.as.toggle = asToggleHide;
+		} else {
+			$scope.as.toggle = asToggleShow;
 		}
+	};
+	$scope.showDetails = function(gameId) {
+		$rootScope.$broadcast('details_show', {
+			gameId : gameId
+		});
+	};
+	$scope.executeQuery = function(oldQuery) {
+		if (!oldQuery) {
+			$scope.pagination.page = 1;
+		}
+
+		var overlay = new Overlay(jQuery('#search').parents('.overlay-parent'));
+
+		overlay.attach();
+
+		layout.show('search', 'search-results');
 
 		$http.get(Constants.context + '/api/game', {
 			params : {
 				page : $scope.pagination.page,
-				term : $scope.query
+				term : $scope.query.term,
+				categories1 : $scope.query.categories1.join(','),
+				categories2 : $scope.query.categories2.join(','),
+				platforms : $scope.query.platforms.join(','),
+				sortingTerm : $scope.query.sorting.term,
+				sortingDirection : $scope.query.sorting.direction
 			}
 		}).then(function(response) {
-			$scope.games = response.data._embedded.gameList;
+			$scope.games = (response.data._embedded || {
+				gameList : []
+			}).gameList;
 			$scope.pagination.size = response.data.page.size;
 			$scope.pagination.totalElements = response.data.page.totalElements;
 			$scope.pagination.totalPages = response.data.page.totalPages;
+
+			$scope.searched = true;
+
+			overlay.detach();
 		}, function(response) {
 			alert('An error occurred!'); // TODO: Replace with something cooler.
 		});
+	};
+
+	$scope.$on('search_query-changed', function(event, args) {
+		queryChanged = true;
+		$scope.query.term = args.query;
+	});
+	$scope.$on('search_execute-query', function() {
+		$scope.executeQuery();
+	});
+
+	$scope.$watchGroup(['pagination.page'], function() {
+		if ($scope.pagination.page < 1) {
+			return;
+		}
+
+		$scope.executeQuery(true);
 	});
 }]);
