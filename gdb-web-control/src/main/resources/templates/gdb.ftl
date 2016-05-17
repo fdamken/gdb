@@ -62,13 +62,12 @@
 		<script src="${context}/js/jquery.min.js"></script>
 		<!-- jQuery UI -->
 		<script src="${context}/js/jquery-ui.min.js"></script>
-		<script src="${context}/js/jquery-ui.structure.min.js"></script>
 		<!-- AngularJS -->
 		<script src="${context}/js/angular.min.js"></script>
 		<script src="${context}/js/angular-animate.min.js"></script>
 		<script src="${context}/js/angular-loading-bar.min.js"></script>
 		<script src="${context}/js/angular-resource.min.js"></script>
-		<script src="${context}/js/angular-smooth-scroll.min.js"></script>
+		<script src="${context}/js/angular-smooth-scroll.min.js"></script> <!-- FIXME: Minified SmoothScroll does not work?! -->
 		<script src="${context}/js/angular-checklist-model.min.js"></script>
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.min.js"></script>
