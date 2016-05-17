@@ -578,7 +578,12 @@ public class SteamGameService implements GameService {
                 .replace("spring", "mar") //
                 .replace("summer", "jun") //
                 .replace("fall", "sep") //
-                .replace("winter", "dec");
+                .replace("winter", "dec") //
+                .replace("q1", "mar") //
+                .replace("q2", "jun") //
+                .replace("q3", "sep") //
+                .replace("q4", "dec") //
+        ;
 
         Date result = null;
 
