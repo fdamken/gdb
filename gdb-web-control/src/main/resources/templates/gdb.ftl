@@ -24,6 +24,7 @@
 
 	<#if dev!false>
 		<!-- CSS -->
+		<link rel="stylesheet" href="${context}/css/spinner.css">
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="${context}/css/bootstrap.css">
 		<link rel="stylesheet" href="${context}/css/bootstrap-theme.css">
@@ -49,6 +50,7 @@
 		<script src="${context}/js/bootstrap.js"></script>
 	<#else>
 		<!-- CSS -->
+		<link rel="stylesheet" href="${context}/css/spinner.min.css">
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="${context}/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${context}/css/bootstrap-theme.min.css">

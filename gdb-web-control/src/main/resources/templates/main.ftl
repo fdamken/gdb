@@ -38,6 +38,15 @@
 	<div id="container" class="container">
 		<@m.navigation />
 		<div id="content">
+			<#if out!false>
+				<div class="alert alert-success alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert">
+						<span>&times;</span>
+					</button>
+					<strong>Logged Out!</strong> The logout was successfull.
+				</div>
+			</#if>
+
 			<@m.details />
 			<@m.search />
 			<@m.helloWorld />
@@ -45,5 +54,8 @@
 	</div>
 
 	<@gdb.tail />
+
+	<!-- Dialogs -->
+	<@m.login />
 </body>
 </html>

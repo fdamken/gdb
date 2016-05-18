@@ -37,14 +37,22 @@
 			margin-top: 20px;
 		}
 	</style>
+	<script>
+		$(function() {
+			$('#login-dialog .modal-header .close').remove();
+			$('#login-dialog').modal({
+				backdrop : false,
+				keyboard : false
+			});
+		});
+	</script>
 </head>
 <body ng-app="gdbApp" ng-cloak="true">
 	<@gdb.body />
 
-	<div id="container" class="container">
-		<@m.login_form />
-	</div>
-
 	<@gdb.tail />
+
+	<!-- Dialogs -->
+	<@m.login />
 </body>
 </html>

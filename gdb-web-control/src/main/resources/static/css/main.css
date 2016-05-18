@@ -28,14 +28,13 @@
 	border-radius: 0 !important;
 }
 
-a[ng-click] {
+a {
 	cursor: pointer;
 }
 
 body {
 	overflow-y: scroll;
 	margin: 0 50px 0 50px;
-	height: 101%;
 }
 
 #container {

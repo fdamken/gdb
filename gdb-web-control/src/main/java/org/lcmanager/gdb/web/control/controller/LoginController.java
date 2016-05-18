@@ -63,6 +63,6 @@ public class LoginController {
     @RequestMapping("/out")
     public String loggedOut(final Model model) {
         model.addAttribute("out", true);
-        return "login";
+        return "redirect:/o/logout";
     }
 }

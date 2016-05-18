@@ -19,39 +19,58 @@
 -->
 
 <#macro renderScripts>
+	<script>
+		Constants.login = {
+			failed : ${(failed!false)?c},
+			out : ${(out!false)?c}
+		};
+	</script>
+
 	<link rel="stylesheet" href="${context}/css/modules/login.css">
 	<script src="${context}/js/modules/login.js"></script>
 </#macro>
 <#macro render>
-	<div ng-controller="loginController" id="login-wrapper">
-		<div ng-class="{ 'hidden' : !filled || authenticated }" class="alert alert-danger fade in">
-			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			<strong>Login failed!</strong> The provided credentials are not correct.
-		</div>
-		<#if failed!false>
-			<input ng-model="hasError" type="hidden" value="true" />
-		</#if>
-		<#if out!false>
-			<div class="alert alert-success fade in">
-				<a href="#" class="close" data-dismiss="alert">&times;</a>
-				<strong>Logged out!</strong> You have logged out successfully.
-			</div>
-		</#if>
-		<form id="login-form" action="/login" method="POST">
-			<@gdb.csrf />
+	<div ng-controller="loginController" id="login-dialog" class="modal fade">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+					<h4 class="modal-title">Login</h4>
+				</div>
+				<div class="modal-body">
+					<div ng-show="(credsChecked && !authenticated) || login.failed" class="alert alert-danger">
+						<strong>Invalid Credentials!</strong> The provided credentials are not correct.
+					</div>
+					<form id="login-form" action="${context}/login" method="POST">
+						<@gdb.csrf />
 
-			<div ng-class="{ 'has-success' : filled && authenticated, 'has-error' : filled && !authenticated }" class="form-group has-feedback">
-				<label for="username" class="control-label">Username</label>
-				<input ng-model="username" ng-model-options="{ debounce : 500 }" type="text" id="username" class="form-control" name="username" placeholder="Username">
-				<span class="glyphicon glyphicon-ok form-control-feedback">&nbsp;</span>
-				<span class="glyphicon glyphicon-remove form-control-feedback">&nbsp;</span>
+						<div ng-class="{ 'has-success' : credsChecked && authenticated, 'has-error' : (credsChecked && !authenticated) || login.failed }" class="form-group has-feedback">
+							<label for="username" class="control-label">Username</label>
+							<input ng-model="username" ng-model-options="{ debounce : 500 }" type="text" id="username" class="form-control" name="username"  placeholder="Username" autofocus="true">
+						</div>
+						<div ng-class="{ 'has-success' : credsChecked && authenticated, 'has-error' : (credsChecked && !authenticated) || login.failed }" class="form-group has-feedback">
+							<label for="password" class="control-label">Password</label>
+							<input ng-model="password" ng-model-options="{ debounce : 500 }" type="password" id="password" class="form-control" name="password" placeholder="Password">
+						</div>
+						<div>
+							<button ng-disabled="!filled || !credsChecked || !authenticated" type="submit" class="btn btn-primary">
+								Login
+							</button>
+							<div id="login-btn-status" ng-show="filled && !credsChecked">
+								<div class="spinner">
+									<div class="double-bounce1"></div>
+									<div class="double-bounce2"></div>
+								</div>
+								<span>
+									Checking your credentials …
+								</span>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div ng-class="{ 'has-success' : filled && authenticated, 'has-error' : filled && !authenticated }" class="form-group has-feedback">
-				<label for="password" class="control-label">Password</label>
-				<input ng-model="password" ng-model-options="{ debounce : 500 }" type="password" id="password" class="form-control" name="password" placeholder="Password">
-				<span class="glyphicon glyphicon-ok form-control-feedback">&nbsp;</span>
-				<span class="glyphicon glyphicon-remove form-control-feedback">&nbsp;</span>
-			</div>
-		</form>
+		</div>
 	</div>
 </#macro>

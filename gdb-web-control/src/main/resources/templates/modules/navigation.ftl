@@ -32,15 +32,31 @@
 			</div>
 			<div class="navbar-body">
 				<ul class="nav navbar-nav navbar-left">
-					<!-- Some menu entries may be added. -->
 					<li>
 						<a ng-click="goto('search')">Search</a>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a>Login / Register</a>
+				<#if is_user || is_admin>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown">
+							${principal.displayName} <span class="caret">&nbsp;</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="divider">&nbsp;</li>
+							<li>
+								<form id="logout-form" class="hidden" action="${context}/logout" method="POST">
+									<@gdb.csrf />
+								</form>
+								<a ng-click="logout()">Logout</a>
+							</li>
+						</ul>
 					</li>
+				<#else>
+					<li>
+						<a ng-click="openLoginDialog()">Login / Register</a>
+					</li>
+				</#if>
 				</ul>
 				<form ng-submit="executeQuery()" class="navbar-form navbar-right">
 					<div class="form-group">

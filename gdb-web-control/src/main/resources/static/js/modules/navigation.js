@@ -20,7 +20,7 @@
 
 var gdbApp = angular.module('gdbApp');
 
-gdbApp.controller('navController', ['$scope', '$rootScope', 'layout', function($scope, $rootScope, layout) {
+gdbApp.controller('navController', ['$scope', '$rootScope', '$http', 'layout', function($scope, $rootScope, $http, layout) {
 	var queryChanged = false;
 
 	$scope.query = '';
@@ -30,6 +30,12 @@ gdbApp.controller('navController', ['$scope', '$rootScope', 'layout', function($
 	};
 	$scope.executeQuery = function() {
 		$rootScope.$broadcast('search_execute-query');
+	};
+	$scope.openLoginDialog = function() {
+		$rootScope.$broadcast('login_open-dialog');
+	};
+	$scope.logout = function() {
+		$('#logout-form').submit();
 	};
 
 	$scope.$watch('query', function(query) {

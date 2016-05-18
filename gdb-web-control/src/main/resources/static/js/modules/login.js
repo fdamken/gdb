@@ -18,39 +18,59 @@
  * #L%
  */
 
-angular.module('gdbApp').controller('loginController', ['$http', '$scope', 'csrf', function($http, $scope, csrf) {
-	$scope.username = null;
-	$scope.password = null;
+angular.module('gdbApp').controller('loginController', ['$http', '$scope', '$timeout', 'csrf', function($http, $scope, $timeout, csrf) {
+	$scope.username = '';
+	$scope.password = '';
+
 	$scope.filled = false;
+	$scope.credsChecked = false;
 	$scope.authenticated = false;
 
-	$scope.onCredentialChange = function() {
-		if ($scope.username && $scope.password) {
-			$http.post(Constants.context + '/auth', {
-				username : $scope.username,
-				password : $scope.password
-			}, {
-				headers : {
-					'X-CSRF-TOKEN' : csrf.token
-				}
-			}).then(function(response) {
-				$scope.filled = true;
-				$scope.authenticated = response.data.authenticated;
-			}, function(response) {
-				$scope.authenticated = false;
-				$scope.filled = true;
-			});
-		} else {
-			$scope.filled = false;
-			$scope.authenticated = false;
-		}
+	$scope.login = {
+		failed : Boolean(Constants.login.failed),
+		out : Boolean(Constants.login.out)
 	};
-	$scope.$watch('username', $scope.onCredentialChange);
-	$scope.$watch('password', $scope.onCredentialChange);
 
-	$scope.$watch('authenticated', function() {
-		if ($scope.authenticated) {
-			$('#login-form').submit();
+	var reset = function() {
+		$scope.login.failed = false;
+		$scope.login.out = false;
+		$scope.filled = false;
+		$scope.credsChecked = false;
+		$scope.authenticated = false;
+	};
+
+	$scope.$on('login_open-dialog', function() {
+		$('#login-dialog').modal('show');
+	});
+
+	var first = true;
+	$scope.$watchGroup(['username', 'password'], function() {
+		if (first) {
+			first = false;
+		} else {
+			reset();
+
+			if ($scope.username && $scope.password) {
+				$scope.filled = true;
+
+				$http.post(Constants.context + '/auth', {
+					username : $scope.username,
+					password : $scope.password
+				}, {
+					headers : {
+						'X-CSRF-TOKEN' : csrf.token
+					},
+					params : {
+						checkOnly : true
+					}
+				}).then(function(response) {
+					$scope.credsChecked = true;
+					$scope.authenticated = Boolean(response.data.authenticated);
+				}, function() {
+					$scope.credsChecked = true;
+					$scope.authenticated = false;
+				});
+			}
 		}
-	})
+	});
 }]);

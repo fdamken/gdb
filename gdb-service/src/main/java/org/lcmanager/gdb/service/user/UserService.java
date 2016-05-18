@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.lcmanager.gdb.base.StreamUtil;
 import org.lcmanager.gdb.service.data.model.User;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -63,7 +62,6 @@ public interface UserService extends UserDetailsManager {
      *      java.lang.String)
      */
     @Deprecated
-    @DependsOn
     @Override
     default void createUser(final UserDetails user) {
         throw new UnsupportedOperationException("Use org.lcmanager.gdb.service.user.UserService"
@@ -206,9 +204,13 @@ public interface UserService extends UserDetailsManager {
      *            The authority to check.
      * @param user
      *            The user to check.
-     * @return Whether the given user has the given authority.
+     * @return Whether the given user has the given authority. If the given user
+     *         is <code>null</code>, <code>false</code>.
      */
     default boolean hasAuthority(final String authority, final User user) {
+        if (user == null) {
+            return false;
+        }
         return !StreamUtil.isEmpty(user.getAuthorities().stream().parallel()
                 .filter(grantedAuthority -> grantedAuthority.getAuthority().equalsIgnoreCase(authority)));
     }

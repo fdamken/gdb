@@ -34,7 +34,7 @@
 	<@module_helloWorld.render />
 </#macro>
 
-<#macro login_form>
+<#macro login>
 	<@module_login.renderScripts />
 	<@module_login.render />
 </#macro>
