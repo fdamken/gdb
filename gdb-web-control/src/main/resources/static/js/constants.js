@@ -26,3 +26,10 @@ if (!('ContentType' in Constants)) {
 	Constants.ContentType = {};
 }
 Constants.ContentType.FORM = 'application/x-www-form-urlencoded';
+
+if (!('State' in Constants)) {
+	Constants.State = {};
+}
+Constants.State.NOTHING = 'state_nothing';
+Constants.State.LOADING = 'state_loading';
+Constants.State.LOADED = 'state_loaded';

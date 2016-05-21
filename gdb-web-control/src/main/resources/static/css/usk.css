@@ -18,26 +18,28 @@
  * #L%
  */
 
-#details-content-wrapper .description, #details-content-wrapper .facts {
-	margin-top: 20px;
-}
-
-#details-content-wrapper .facts .details-list-item {
+.usk {
 	display: block;
-	margin-top: 20px;
-}
-#details-content-wrapper .facts .details-list-item:first-child {
-	margin-top: 0;
-}
-#details-content-wrapper .facts .details-list-item label {
-	display: block;
-}
-
-#screenshots .item .img {
-	height: 495px;
-	width: 100%;
-	background-color: black;
+	height: 100px;
+	width: 100px;
 	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+}
+
+.usk.usk-undefined .usk.usk-null, .usk.usk- {
+	background-image: url('../images/usk/usk.png');	
+}
+.usk.usk-0 {
+	background-image: url('../images/usk/usk-0.png');
+}
+.usk.usk-6 {
+	background-image: url('../images/usk/usk-6.png');
+}
+.usk.usk-12 {
+	background-image: url('../images/usk/usk-12.png');
+}
+.usk.usk-16 {
+	background-image: url('../images/usk/usk-16.png');
+}
+.usk.usk-18 {
+	background-image: url('../images/usk/usk-18.png');
 }

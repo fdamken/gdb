@@ -18,6 +18,8 @@
  #L%
 -->
 
+<#import "../loadingIndicator.ftl" as li>
+
 <#macro renderScripts>
 	<link rel="stylesheet" href="${context}/css/modules/search.css">
 	<script src="${context}/js/modules/search.js"></script>
@@ -91,41 +93,44 @@
 				</div>
 				<hr />
 				<div id="search-results">
-					<div id="search-results-wrapper" ng-class="{ hidden : !searched }">
-						<div id="search-result.nothing" ng-class="{ hidden : pagination.totalElements > 0 }" class="alert alert-info">
-							No results where returned for that query.
-						</div>
-						<div ng-class="{ hidden : pagination.totalElements <= 0 }">
-							<table id="search-results-table" class="table table-bordered table-striped">
-								<tr>
-									<th class="name">Name</th>
-									<th class="platforms">Platforms</th>
-									<th class="release-date">Release Date</th>
-								</tr>
-								<tr ng-repeat="game in games" ng-click="showDetails(game.id)" class="result">
-									<td class="name">{{ game.name }}</td>
-									<td class="platforms">{{ game.platforms | platform }}</td>
-									<td class="release-date">{{ game.releaseDate | date : 'dd.MM.yyyy' }}</td>
-								</tr>
-							</table>
-							<ul class="pagination">
-								<li ng-class="{ disabled : pagination.page <= 1 }">
-									<a ng-click="(pagination.page > 1) && (pagination.page = pagination.page - 1)">
-										<span>&laquo;</span>
-									</a>
-								</li>
-								<li class="active">
-									<a href="#/#search">
-										{{ pagination.page }} <span class="sr-only">(current)</span>
-									</a>
-								</li>
-								<li ng-class="{ disabled : pagination.page >= pagination.totalPages }">
-									<a ng-click="(pagination.page < pagination.totalPages) && (pagination.page = pagination.page + 1)">
-										<span>&raquo;</span>
-									</a>
-								</li>
-							</ul>
-						</div>
+					<div id="search-results-wrapper" ng-show="state !== null">
+						<@li.nothing msg="No games found!" />
+
+						<@li.loading />
+
+						<@li.loaded_start />
+
+						<table id="search-results-table" class="table table-bordered table-striped">
+							<tr>
+								<th class="name">Name</th>
+								<th class="platforms">Platforms</th>
+								<th class="release-date">Release Date</th>
+							</tr>
+							<tr ng-repeat="game in games" ng-click="showDetails(game.id)" class="result">
+								<td class="name">{{ game.name }}</td>
+								<td class="platforms">{{ game.platforms | platform }}</td>
+								<td class="release-date">{{ game.releaseDate | date : 'dd.MM.yyyy' }}</td>
+							</tr>
+						</table>
+						<ul class="pagination">
+							<li ng-class="{ disabled : pagination.page <= 1 }">
+								<a ng-click="(pagination.page > 1) && (pagination.page = pagination.page - 1)">
+									<span>&laquo;</span>
+								</a>
+							</li>
+							<li class="active">
+								<a href="#/#search">
+									{{ pagination.page }} <span class="sr-only">(current)</span>
+								</a>
+							</li>
+							<li ng-class="{ disabled : pagination.page >= pagination.totalPages }">
+								<a ng-click="(pagination.page < pagination.totalPages) && (pagination.page = pagination.page + 1)">
+									<span>&raquo;</span>
+								</a>
+							</li>
+						</ul>
+
+						<@li.loaded_end />
 					</div>
 				</div>
 			</div>

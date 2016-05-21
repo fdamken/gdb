@@ -113,7 +113,9 @@ var LayoutPart = function(config) {
 			}, 0);
 		};
 
+		var $layoutBody = _$element.children('.layout-body');
 		if (show) {
+			$layoutBody.css('width', contentWidth - 40);
 			if (animate) {
 				doAnimation(true, function() {
 					_$element.removeClass('layout-hidden').addClass('layout-visible');
@@ -129,6 +131,7 @@ var LayoutPart = function(config) {
 				_$element.removeClass('layout-hidden').addClass('layout-visible');
 			}
 		} else {
+			$layoutBody.css('width', '');
 			if (animate) {
 				doAnimation(false, function() {
 					_$element.removeClass('layout-visible').addClass('layout-hidden');

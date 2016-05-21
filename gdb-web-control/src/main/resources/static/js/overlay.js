@@ -27,9 +27,11 @@ window.Overlay = function($elementParam) {
 	var $overlay = $('<div></div>').addClass('overlay');
 
 	me.attach = function() {
+		$element.addClass('overlay-attached');
 		$element.prepend($overlay);
 	};
 	me.detach = function() {
 		$overlay.detach();
+		$element.removeClass('overlay-attached');
 	};
 };

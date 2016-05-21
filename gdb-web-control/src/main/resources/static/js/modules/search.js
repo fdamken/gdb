@@ -18,54 +18,15 @@
  * #L%
  */
 
-var gdbApp = angular.module('gdbApp')
-
-gdbApp.filter('direction', function() {
-	return function(data) {
-		switch (data) {
-			case 'ASC':
-				return 'Ascending';
-			case 'DESC':
-				return 'Descending';
-			default:
-				return 'Other';
-		};
-	};
-});
-gdbApp.filter('platform', function() {
-	var filter = function(platform) {
-		switch (platform) {
-			case 'WINDOWS':
-				return 'Windows';
-			case 'MAC':
-				return 'Mac';
-			case 'UNIX':
-				return 'Linux';
-			default:
-				return 'Other';
-		}
-	};
-
-	return function(data) {
-		if (typeof data === 'string') {
-			return filter(data);
-		} else if (typeof data === 'object') {
-			var result = []
-			for (var i = 0; i < data.length; i++) {
-				result.push(filter(data[i]));
-			}
-			return result.join(', ');
-		} else {
-			throw 'Data must either be a string or an object!';
-		}
-	};
-});
+var gdbApp = angular.module('gdbApp');
 
 gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout', function($scope, $rootScope, $http, layout) {
 	var queryChanged = false;
 
 	var asToggleShow = 'Show Advanced Options';
 	var asToggleHide = 'Hide Advanced Options';
+
+	$scope.state = null;
 
 	$scope.as = {
 		toggle : asToggleShow,
@@ -134,7 +95,6 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 		}
 	});
 
-	$scope.searched = false;
 	$scope.game = [];
 	$scope.pagination = {
 		size : 0,
@@ -164,9 +124,7 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 			$scope.pagination.page = 1;
 		}
 
-		var overlay = new Overlay(jQuery('#search').parents('.overlay-parent'));
-
-		overlay.attach();
+		$scope.state = Constants.State.LOADING;
 
 		layout.show('search', 'search-results');
 
@@ -188,9 +146,11 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 			$scope.pagination.totalElements = response.data.page.totalElements;
 			$scope.pagination.totalPages = response.data.page.totalPages;
 
-			$scope.searched = true;
-
-			overlay.detach();
+			if ($scope.pagination.totalElements > 0) {
+				$scope.state = Constants.State.LOADED;
+			} else {
+				$scope.state = Constants.State.NOTHING;
+			}
 		}, function(response) {
 			alert('An error occurred!'); // TODO: Replace with something cooler.
 		});
