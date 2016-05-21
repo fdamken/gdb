@@ -26,8 +26,6 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 	var asToggleShow = 'Show Advanced Options';
 	var asToggleHide = 'Hide Advanced Options';
 
-	$scope.state = null;
-
 	$scope.as = {
 		toggle : asToggleShow,
 
@@ -95,6 +93,7 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 		}
 	});
 
+	$scope.searched = false;
 	$scope.game = [];
 	$scope.pagination = {
 		size : 0,
@@ -124,7 +123,9 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 			$scope.pagination.page = 1;
 		}
 
-		$scope.state = Constants.State.LOADING;
+		var overlay = new Overlay(jQuery('#search').parents('.overlay-parent'));
+
+		overlay.attach();
 
 		layout.show('search', 'search-results');
 
@@ -146,11 +147,9 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 			$scope.pagination.totalElements = response.data.page.totalElements;
 			$scope.pagination.totalPages = response.data.page.totalPages;
 
-			if ($scope.pagination.totalElements > 0) {
-				$scope.state = Constants.State.LOADED;
-			} else {
-				$scope.state = Constants.State.NOTHING;
-			}
+			$scope.searched = true;
+
+			overlay.detach();
 		}, function(response) {
 			alert('An error occurred!'); // TODO: Replace with something cooler.
 		});
