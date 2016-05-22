@@ -29,3 +29,9 @@
 #content {
 	margin-top: 60px;
 }
+
+.navbar-brand img {
+	background-color: white;
+	height: 64px;
+	margin-top: -12px;
+}
