@@ -458,8 +458,8 @@
 					<excludes>
 						<!-- Contains frontend libraries -->
 						<exclude>**/resources/public/**/*</exclude>
-						<!-- Spring parses JSON files as-is which
-						     causes any header to fail the parsing. -->
+						<!-- Spring parses JSON files as-is which causes any header to fail 
+							the parsing. -->
 						<exclude>**/*spring*json</exclude>
 					</excludes>
 					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
