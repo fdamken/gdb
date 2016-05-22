@@ -29,6 +29,6 @@
 	cursor: progress;
 }
 
-.overlay-parent {
+.overlay-parent.overlay-attached {
 	position: relative;
 }

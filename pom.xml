@@ -456,12 +456,10 @@
 				</executions>
 				<configuration>
 					<excludes>
-						<exclude>**/angular*js</exclude>
-						<exclude>**/jquery*js</exclude>
-						<exclude>**/bootstrap*js</exclude>
-						<exclude>**/angular*css</exclude>
-						<exclude>**/jquery*css</exclude>
-						<exclude>**/bootstrap*css</exclude>
+						<!-- Contains frontend libraries -->
+						<exclude>**/resources/public/**/*</exclude>
+						<!-- Spring parses JSON files as-is which causes any header to fail 
+							the parsing. -->
 						<exclude>**/*spring*json</exclude>
 					</excludes>
 					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>

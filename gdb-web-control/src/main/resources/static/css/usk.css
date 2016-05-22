@@ -18,20 +18,28 @@
  * #L%
  */
 
-#navigation {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	z-index: 1000;
+.usk {
+	display: block;
+	height: 100px;
+	width: 100px;
+	background-size: contain;
 }
 
-#content {
-	margin-top: 60px;
+.usk.usk-undefined .usk.usk-null, .usk.usk- {
+	background-image: url('../images/usk/usk.png');	
 }
-
-.navbar-brand img {
-	background-color: white;
-	height: 64px;
-	margin-top: -12px;
+.usk.usk-0 {
+	background-image: url('../images/usk/usk-0.png');
+}
+.usk.usk-6 {
+	background-image: url('../images/usk/usk-6.png');
+}
+.usk.usk-12 {
+	background-image: url('../images/usk/usk-12.png');
+}
+.usk.usk-16 {
+	background-image: url('../images/usk/usk-16.png');
+}
+.usk.usk-18 {
+	background-image: url('../images/usk/usk-18.png');
 }

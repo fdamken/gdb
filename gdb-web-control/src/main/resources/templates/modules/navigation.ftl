@@ -26,8 +26,8 @@
 	<nav ng-controller="navController" id="navigation" class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand">
-					<img alt="Brand" src="/images/brand.png" />
+				<a class="navbar-brand" href="#">
+					<img alt="Brand" src="${context}/images/brand/brand_64.png" />
 				</a>
 			</div>
 			<div class="navbar-body">

@@ -18,6 +18,8 @@
  #L%
 -->
 
+<#import "../loadingIndicator.ftl" as li>
+
 <#macro renderScripts>
 	<link rel="stylesheet" href="${context}/css/modules/details.css">
 	<script src="${context}/js/modules/details.js"></script>
@@ -26,9 +28,103 @@
 	<div gdb-layout="{ id : 'details', title : 'Game Details', side : 'right' }" class="panel panel-default overlay-parent">
 		<div id="details-content-wrapper" class="panel-body">
 			<div ng-controller="detailsController" id="details-content">
-				<pre>
-{{ gameDetails | json }}
-				</pre>
+				<@li.nothing msg="Please search and select a game." title="No details available!" />
+
+				<@li.loading />
+
+				<@li.loaded_start />
+
+				<div class="header">
+					<div class="col-sm-12">
+						<h1>{{ gameDetails.name }}</h1>
+					</div>
+				</div>
+
+				<div class="eyecatcher">
+					<div class="col-sm-10">
+						<div id="screenshots" class="screenshots carousel slide" data-ride="carousel" data-interval="false">
+							<ol class="carousel-indicators">
+								<li ng-repeat="(i, screenshot) in gameDetails.screenshots" ng-class="{ active : i === 0 }" data-target="#screenshots" data-slide-to="{{ i }}">&nbsp;</li>
+							</ol>
+							<div class="carousel-inner">
+								<div ng-repeat="(i, screenshot) in gameDetails.screenshots" ng-class="{ active : i === 0 }" class="item">
+									<div class="img" ng-style="{ 'background-image' : 'url(' + screenshot.image + ')' }">&nbsp;</div>
+								</div>
+							</div>
+							<a class="left carousel-control" data-target="#screenshots" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left">&nbsp;</span>
+							</a>
+							<a class="right carousel-control" data-target="#screenshots" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right">&nbsp;</span>
+							</a>
+						</div>
+					</div>
+					<div class="raw-details col-sm-2">
+						<span ng-class="'usk-' + gameDetails.requiredAge" class="usk">&nbsp;</span>
+					</div>
+				</div>
+
+				<div class="detailed">
+					<div class="description col-sm-8">
+						<p ng-bind-html="trust(gameDetails.description)">
+							<!-- Inserted by AngularJS -->
+						</p>
+					</div>
+					<div class="facts col-sm-4">
+						<div class="details-list-item genres">
+							<label>
+								<ng-pluralize count="gameDetails.genres.length" when="{ one : 'Genre', other : 'Genres' }" />
+							</label>
+							<ul class="comma-separated">
+								<li ng-repeat="genre in gameDetails.genres">
+									<span class="value">{{ genre.description }}</span>
+								</li>
+							</ul>
+						</div>
+						<div class="details-list-item categories">
+							<label>
+								<ng-pluralize count="gameDetails.categories.length" when="{ one : 'Category', other : 'Categories' }" />
+							</label>
+							<ul class="comma-separated">
+								<li ng-repeat="category in gameDetails.categories">
+									<span class="value">{{ category.description }}</span>
+								</li>
+							</ul>
+						</div>
+						<div class="details-list-item publishers">
+							<label>
+								<ng-pluralize count="gameDetails.publishers.length" when="{ one : 'Publisher', other : 'Publishers' }" />
+							</label>
+							<ul class="comma-separated">
+								<li ng-repeat="publisher in gameDetails.publishers">
+									<span class="value">{{ publisher.name }}</span>
+								</li>
+							</ul>
+						</div>
+						<div class="details-list-item developers">
+							<label>
+								<ng-pluralize count="gameDetails.developers.length" when="{ one : 'Developer', other : 'Developers' }" />
+							</label>
+							<ul class="comma-separated">
+								<li ng-repeat="developer in gameDetails.developers">
+									<span class="value">{{ developer.name }}</span>
+								</li>
+							</ul>
+						</div>
+						<div class="details-list-item platforms">
+							<label>
+								<ng-pluralize count="gameDetails.platforms.length" when="{ one : 'Platform', other : 'Platforms' }" />
+							</label>
+							<ul class="comma-separated">
+								<li ng-repeat="platform in gameDetails.platforms">
+									<span class="value">{{ platform | platform }}</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<@li.loaded_end />
 			</div>
 		</div>
 	</div>

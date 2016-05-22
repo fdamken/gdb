@@ -20,22 +20,47 @@
 
 var gdbApp = angular.module('gdbApp');
 
-gdbApp.controller('detailsController', ['$scope', '$http', 'layout', function($scope, $http, layout) {
+gdbApp.controller('detailsController', ['$scope', '$http', '$sce', '$timeout', 'layout', function($scope, $http, $sce, $timeout, layout) {
 	$scope.gameId = null;
+	$scope.state = Constants.State.NOTHING;
+
+	$scope.trust = function(html) {
+		return $sce.trustAsHtml(html);	
+	};
+
+	var carouselInterval;
+	var restartCarousel = function() {
+		clearInterval(carouselInterval);
+		var $carousel = $('#screenshots');
+		carouselInterval = setInterval(function() {
+			if (!$carousel.is(':hover')) {
+				$carousel.carousel('next');
+			}
+		}, 5000);
+	};
 
 	$scope.$on('details_show', function(event, args) {
 		$scope.gameId = args.gameId;
 
 		layout.show('details');
+		restartCarousel();
 	});
 
 	$scope.$watch('gameId', function() {
 		if ($scope.gameId) {
+			$scope.state = Constants.State.LOADING;
+
 			$http.get(Constants.context + '/api/game/' + $scope.gameId).then(function(response) {
 				$scope.gameDetails = response.data;
+
+				$timeout(function() {
+					$scope.state = Constants.State.LOADED;
+				});
 			}, function(response) {
 				alert('An error occurred!'); // TODO: Replace with something cooler.
 			});
+		} else {
+			$scope.state = Constants.State.NOTHING;
 		}
-	})
+	});
 }]);

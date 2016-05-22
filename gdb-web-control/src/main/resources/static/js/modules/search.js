@@ -18,48 +18,7 @@
  * #L%
  */
 
-var gdbApp = angular.module('gdbApp')
-
-gdbApp.filter('direction', function() {
-	return function(data) {
-		switch (data) {
-			case 'ASC':
-				return 'Ascending';
-			case 'DESC':
-				return 'Descending';
-			default:
-				return 'Other';
-		};
-	};
-});
-gdbApp.filter('platform', function() {
-	var filter = function(platform) {
-		switch (platform) {
-			case 'WINDOWS':
-				return 'Windows';
-			case 'MAC':
-				return 'Mac';
-			case 'UNIX':
-				return 'Linux';
-			default:
-				return 'Other';
-		}
-	};
-
-	return function(data) {
-		if (typeof data === 'string') {
-			return filter(data);
-		} else if (typeof data === 'object') {
-			var result = []
-			for (var i = 0; i < data.length; i++) {
-				result.push(filter(data[i]));
-			}
-			return result.join(', ');
-		} else {
-			throw 'Data must either be a string or an object!';
-		}
-	};
-});
+var gdbApp = angular.module('gdbApp');
 
 gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout', function($scope, $rootScope, $http, layout) {
 	var queryChanged = false;

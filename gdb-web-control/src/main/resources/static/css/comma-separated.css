@@ -18,20 +18,24 @@
  * #L%
  */
 
-#navigation {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	z-index: 1000;
+ul.comma-separated {
+	display: block;
+	list-style: none;
 }
 
-#content {
-	margin-top: 60px;
+ul.comma-separated li {
+	display: inline-block;
+	font-size: 0;
 }
 
-.navbar-brand img {
-	background-color: white;
-	height: 64px;
-	margin-top: -12px;
+ul.comma-separated li .value {
+	font-size: 11pt;
+}
+
+ul.comma-separated li .value::after {
+	content: ',\00a0';
+}
+
+ul.comma-separated li:last-child .value::after {
+	content: '';
 }

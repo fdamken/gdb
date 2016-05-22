@@ -91,11 +91,11 @@
 				</div>
 				<hr />
 				<div id="search-results">
-					<div id="search-results-wrapper" ng-class="{ hidden : !searched }">
-						<div id="search-result.nothing" ng-class="{ hidden : pagination.totalElements > 0 }" class="alert alert-info">
+					<div id="search-results-wrapper" ng-show="searched">
+						<div id="search-result.nothing" ng-show="pagination.totalElements <= 0" class="alert alert-info">
 							No results where returned for that query.
 						</div>
-						<div ng-class="{ hidden : pagination.totalElements <= 0 }">
+						<div ng-show="pagination.totalElements > 0">
 							<table id="search-results-table" class="table table-bordered table-striped">
 								<tr>
 									<th class="name">Name</th>
