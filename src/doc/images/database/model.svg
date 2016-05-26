@@ -149,36 +149,36 @@
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="561.268" y="-123.014">n</text>
   </g>
   <g>
-    <rect style="fill: #ffffff" x="-192.475" y="252.307" width="226.2" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-192.475" y="252.307" width="226.2" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="-79.375" y="266.307">Processor</text>
-    <rect style="fill: #ffffff" x="-192.475" y="270.307" width="226.2" height="179"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-192.475" y="270.307" width="226.2" height="179"/>
-    <polygon style="fill: #000000" points="-189.475,280.307 -187.475,283.307 -185.475,280.307 -187.475,277.307 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="286.307">id</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="286.307">INT</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-183.475" y1="287.907" x2="-42.575" y2="287.907"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="-178.475" y="300.307">AUTO_INCREMENT</text>
-    <ellipse style="fill: #000000" cx="-187.475" cy="317.307" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="323.307">brandId</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="323.307">INT</text>
-    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="-178.475" y="337.307">unique with model</text>
-    <ellipse style="fill: #000000" cx="-187.475" cy="354.307" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="360.307">model</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="360.307">VARCHAR(128)</text>
-    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="-178.475" y="374.307">unique with brand</text>
-    <ellipse style="fill: #000000" cx="-187.475" cy="391.307" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="397.307">cores</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="397.307">INT</text>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="-187.475" cy="407.307" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="413.307">threads</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="413.307">INT</text>
-    <ellipse style="fill: #000000" cx="-187.475" cy="423.307" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="429.307">frequency</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="429.307">INT</text>
-    <ellipse style="fill: #000000" cx="-187.475" cy="439.307" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="445.307">instructionSet</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="445.307">INT</text>
+    <rect style="fill: #ffffff" x="-192.475" y="252.306" width="226.2" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-192.475" y="252.306" width="226.2" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="-79.375" y="266.306">Processor</text>
+    <rect style="fill: #ffffff" x="-192.475" y="270.306" width="226.2" height="179"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-192.475" y="270.306" width="226.2" height="179"/>
+    <polygon style="fill: #000000" points="-189.475,280.306 -187.475,283.306 -185.475,280.306 -187.475,277.306 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="286.306">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="286.306">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-183.475" y1="287.906" x2="-42.575" y2="287.906"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="-178.475" y="300.306">AUTO_INCREMENT</text>
+    <ellipse style="fill: #000000" cx="-187.475" cy="317.306" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="323.306">brandId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="323.306">INT</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="-178.475" y="337.306">unique with model</text>
+    <ellipse style="fill: #000000" cx="-187.475" cy="354.306" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="360.306">model</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="360.306">VARCHAR(128)</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="-178.475" y="374.306">unique with brand</text>
+    <ellipse style="fill: #000000" cx="-187.475" cy="391.306" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="397.306">cores</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="397.306">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="-187.475" cy="407.306" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="413.306">threads</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="413.306">INT</text>
+    <ellipse style="fill: #000000" cx="-187.475" cy="423.306" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="429.306">frequency</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="429.306">INT</text>
+    <ellipse style="fill: #000000" cx="-187.475" cy="439.306" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-183.475" y="445.306">instructionSet</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-65.675" y="445.306">INT</text>
   </g>
   <g>
     <rect style="fill: #ffffff" x="-393.526" y="642.298" width="226.2" height="18"/>
@@ -213,25 +213,25 @@
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-266.726" y="835.298">INT</text>
   </g>
   <g>
-    <rect style="fill: #ffffff" x="258.617" y="785.772" width="119.85" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="258.617" y="785.772" width="119.85" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="318.542" y="799.772">Requirement</text>
-    <rect style="fill: #ffffff" x="258.617" y="803.772" width="119.85" height="89"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="258.617" y="803.772" width="119.85" height="89"/>
-    <polygon style="fill: #000000" points="261.617,813.772 263.617,816.772 265.617,813.772 263.617,810.772 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="267.617" y="819.772">id</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.217" y="819.772">INT</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="267.617" y1="821.372" x2="362.317" y2="821.372"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="272.617" y="833.772">AUTO_INCREMENT</text>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="263.617" cy="850.772" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="267.617" y="856.772">osFamily</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.217" y="856.772">INT</text>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="263.617" cy="866.772" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="267.617" y="872.772">memory</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.217" y="872.772">INT</text>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="263.617" cy="882.772" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="267.617" y="888.772">storage</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.217" y="888.772">INT</text>
+    <rect style="fill: #ffffff" x="258.616" y="785.772" width="119.85" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="258.616" y="785.772" width="119.85" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="318.541" y="799.772">Requirement</text>
+    <rect style="fill: #ffffff" x="258.616" y="803.772" width="119.85" height="89"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="258.616" y="803.772" width="119.85" height="89"/>
+    <polygon style="fill: #000000" points="261.616,813.772 263.616,816.772 265.616,813.772 263.616,810.772 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="267.616" y="819.772">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.216" y="819.772">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="267.616" y1="821.372" x2="362.316" y2="821.372"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="272.616" y="833.772">AUTO_INCREMENT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="263.616" cy="850.772" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="267.616" y="856.772">osFamily</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.216" y="856.772">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="263.616" cy="866.772" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="267.616" y="872.772">memory</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.216" y="872.772">INT</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="263.616" cy="882.772" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="267.616" y="888.772">storage</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="339.216" y="888.772">INT</text>
   </g>
   <g>
     <rect style="fill: #ffffff" x="158.454" y="335.14" width="207.15" height="18"/>
@@ -249,8 +249,8 @@
     <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="167.454" y1="386.74" x2="331.454" y2="386.74"/>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="348.504,785.772 348.504,587.456 313.817,587.456 313.817,389.14 "/>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="352.504" y="781.772">1</text>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="348.503,785.772 348.503,587.456 313.817,587.456 313.817,389.14 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="352.503" y="781.772">1</text>
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="317.817" y="401.14">n</text>
   </g>
   <g>
@@ -478,9 +478,9 @@
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="949.562" y="803.322">INT</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="867.762,807.322 867.762,827.322 623.114,827.322 623.114,794.772 378.467,794.772 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="867.762,807.322 867.762,827.322 623.114,827.322 623.114,794.772 378.466,794.772 "/>
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="871.762" y="819.322">1</text>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="382.467" y="790.772">n</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="382.466" y="790.772">n</text>
   </g>
   <g>
     <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1430.97,538.666 1410.97,538.666 1410.97,827.322 905.062,827.322 905.062,807.322 "/>
@@ -488,54 +488,54 @@
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="909.062" y="819.322">n</text>
   </g>
   <g>
-    <rect style="fill: #ffffff" x="85.3775" y="569.861" width="159.4" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="85.3775" y="569.861" width="159.4" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="165.077" y="583.861">Requirement_Processor</text>
-    <rect style="fill: #ffffff" x="85.3775" y="587.861" width="159.4" height="36"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="85.3775" y="587.861" width="159.4" height="36"/>
-    <polygon style="fill: #000000" points="88.3775,597.861 90.3775,600.861 92.3775,597.861 90.3775,594.861 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="94.3775" y="603.861">requirementId</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="204.477" y="603.861">INT</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="94.3775" y1="605.461" x2="227.577" y2="605.461"/>
-    <polygon style="fill: #000000" points="88.3775,613.861 90.3775,616.861 92.3775,613.861 90.3775,610.861 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="94.3775" y="619.861">processorId</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="204.477" y="619.861">INT</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="94.3775" y1="621.461" x2="227.577" y2="621.461"/>
+    <rect style="fill: #ffffff" x="85.3774" y="569.862" width="159.4" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="85.3774" y="569.862" width="159.4" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="165.077" y="583.862">Requirement_Processor</text>
+    <rect style="fill: #ffffff" x="85.3774" y="587.862" width="159.4" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="85.3774" y="587.862" width="159.4" height="36"/>
+    <polygon style="fill: #000000" points="88.3774,597.862 90.3774,600.862 92.3774,597.862 90.3774,594.862 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="94.3774" y="603.862">requirementId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="204.477" y="603.862">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="94.3774" y1="605.462" x2="227.577" y2="605.462"/>
+    <polygon style="fill: #000000" points="88.3774,613.862 90.3774,616.862 92.3774,613.862 90.3774,610.862 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="94.3774" y="619.862">processorId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="204.477" y="619.862">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="94.3774" y1="621.462" x2="227.577" y2="621.462"/>
   </g>
   <g>
-    <rect style="fill: #ffffff" x="-34.5784" y="694.179" width="152.6" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-34.5784" y="694.179" width="152.6" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="41.7216" y="708.179">Requirement_Graphics</text>
-    <rect style="fill: #ffffff" x="-34.5784" y="712.179" width="152.6" height="36"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-34.5784" y="712.179" width="152.6" height="36"/>
-    <polygon style="fill: #000000" points="-31.5784,722.179 -29.5784,725.179 -27.5784,722.179 -29.5784,719.179 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-25.5784" y="728.179">requirementId</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="84.5216" y="728.179">INT</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-25.5784" y1="729.779" x2="107.622" y2="729.779"/>
-    <polygon style="fill: #000000" points="-31.5784,738.179 -29.5784,741.179 -27.5784,738.179 -29.5784,735.179 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-25.5784" y="744.179">graphicsId</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="84.5216" y="744.179">INT</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-25.5784" y1="745.779" x2="107.622" y2="745.779"/>
+    <rect style="fill: #ffffff" x="-34.5784" y="694.18" width="152.6" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-34.5784" y="694.18" width="152.6" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="41.7216" y="708.18">Requirement_Graphics</text>
+    <rect style="fill: #ffffff" x="-34.5784" y="712.18" width="152.6" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-34.5784" y="712.18" width="152.6" height="36"/>
+    <polygon style="fill: #000000" points="-31.5784,722.18 -29.5784,725.18 -27.5784,722.18 -29.5784,719.18 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-25.5784" y="728.18">requirementId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="84.5216" y="728.18">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-25.5784" y1="729.78" x2="107.622" y2="729.78"/>
+    <polygon style="fill: #000000" points="-31.5784,738.18 -29.5784,741.18 -27.5784,738.18 -29.5784,735.18 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-25.5784" y="744.18">graphicsId</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="84.5216" y="744.18">INT</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="-25.5784" y1="745.78" x2="107.622" y2="745.78"/>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="288.579,785.772 288.579,766.976 79.8716,766.976 79.8716,748.179 "/>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="292.579" y="781.772">1</text>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="83.8716" y="760.179">n</text>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="288.578,785.772 288.578,766.976 79.8716,766.976 79.8716,748.18 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="292.578" y="781.772">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="83.8716" y="760.18">n</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-79.375,252.307 -79.375,232.307 61.1408,232.307 61.1408,643.861 125.227,643.861 125.227,623.861 "/>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-75.375" y="248.307">1</text>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="129.227" y="635.861">n</text>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-79.375,252.306 -79.375,232.306 61.1408,232.306 61.1408,643.862 125.227,643.862 125.227,623.862 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-75.375" y="248.306">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="129.227" y="635.862">n</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="318.542,785.772 318.542,704.817 204.927,704.817 204.927,623.861 "/>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="322.542" y="781.772">1</text>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="208.927" y="635.861">n</text>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="318.541,785.772 318.541,704.817 204.927,704.817 204.927,623.862 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="322.541" y="781.772">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="208.927" y="635.862">n</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-280.426,642.298 -280.426,622.298 -119.352,622.298 -119.352,768.179 41.7216,768.179 41.7216,748.179 "/>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-276.426" y="638.298">1</text>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="45.7216" y="760.179">n</text>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-280.426,642.298 -280.426,622.298 -119.352,622.298 -119.352,768.18 41.7216,768.18 41.7216,748.18 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-276.426" y="638.298">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="45.7216" y="760.18">n</text>
   </g>
   <g>
     <rect style="fill: #ffffff" x="-466.42" y="427.462" width="149.2" height="18"/>
@@ -553,13 +553,13 @@
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-416.62" y="498.462">VARCHAR(128)</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-79.375,449.307 -79.375,469.307 -216.948,469.307 -216.948,407.462 -354.52,407.462 -354.52,427.462 "/>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-75.375" y="461.307">1</text>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-350.52" y="423.462">n</text>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-79.375,449.306 -79.375,469.306 -216.948,469.306 -216.948,407.462 -354.52,407.462 -354.52,427.462 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-75.375" y="461.306">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-350.52" y="423.462">n</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-280.426,839.298 -280.426,859.298 -522.457,859.298 -522.457,407.462 -429.12,407.462 -429.12,427.462 "/>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-276.426" y="851.298">1</text>
-    <text font-size="9.59961" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-425.12" y="423.462">n</text>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-280.426,839.298 -280.426,859.298 -522.456,859.298 -522.456,407.462 -429.12,407.462 -429.12,427.462 "/>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-276.426" y="851.298">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-425.12" y="423.462">n</text>
   </g>
 </svg>

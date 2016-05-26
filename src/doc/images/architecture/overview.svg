@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
-<svg width="49cm" height="25cm" viewBox="18 138 963 483" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="49cm" height="27cm" viewBox="18 118 963 523" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g>
-    <rect style="fill: #ebebeb" x="20" y="140" width="960" height="380"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="20" y="140" width="960" height="380"/>
+    <rect style="fill: #ebebeb" x="20" y="120" width="960" height="420"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="20" y="120" width="960" height="420"/>
     <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="500" y="333.9">
       <tspan x="500" y="333.9"></tspan>
     </text>
@@ -26,28 +26,28 @@
     <rect style="fill: #b5b5b5" x="140" y="380" width="160" height="40"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="140" y="380" width="160" height="40"/>
     <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="403.9">
-      <tspan x="220" y="403.9">GDB Steam Accessor</tspan>
+      <tspan x="220" y="403.9">GDB NVIDIA Mapper</tspan>
     </text>
   </g>
   <g>
     <rect style="fill: #b5b5b5" x="140" y="320" width="160" height="40"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="140" y="320" width="160" height="40"/>
     <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="343.9">
-      <tspan x="220" y="343.9">GDB Intel Accessor</tspan>
+      <tspan x="220" y="343.9">GDB Intel Mapper</tspan>
     </text>
   </g>
   <g>
     <rect style="fill: #b5b5b5" x="140" y="260" width="160" height="40"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="140" y="260" width="160" height="40"/>
     <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="283.9">
-      <tspan x="220" y="283.9">GDB AMD Accessor</tspan>
+      <tspan x="220" y="283.9">GDB AMD Mapper</tspan>
     </text>
   </g>
   <g>
-    <rect style="fill: #ff6000" x="780" y="420" width="140" height="40"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="780" y="420" width="140" height="40"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="850" y="443.9">
-      <tspan x="850" y="443.9">GDB Web Control</tspan>
+    <rect style="fill: #ff6000" x="780" y="440" width="140" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="780" y="440" width="140" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="850" y="463.9">
+      <tspan x="850" y="463.9">GDB Web Control</tspan>
     </text>
   </g>
   <g>
@@ -56,23 +56,12 @@
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="302.236,400 312.236,395 309.736,400 312.236,405 "/>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="440,330 380,330 380,280 309.736,280 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="440,320 380,320 380,280 309.736,280 "/>
     <polygon style="fill: #000000" points="302.236,280 312.236,275 309.736,280 312.236,285 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="302.236,280 312.236,275 309.736,280 312.236,285 "/>
   </g>
-  <g>
-    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="440" y1="340" x2="309.736" y2="340"/>
-    <polygon style="fill: #000000" points="302.236,340 312.236,335 309.736,340 312.236,345 "/>
-    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="302.236,340 312.236,335 309.736,340 312.236,345 "/>
-  </g>
-  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="400" y="316.95">
-    <tspan x="400" y="316.95">Uses</tspan>
-  </text>
-  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="400" y="371.9">
-    <tspan x="400" y="371.9">Uses</tspan>
-  </text>
-  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="340" y="351.9">
-    <tspan x="340" y="351.9">Uses</tspan>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="360" y="336.95">
+    <tspan x="360" y="336.95">Uses</tspan>
   </text>
   <g>
     <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="660" y1="340" x2="769" y2="340"/>
@@ -83,31 +72,31 @@
     <tspan x="680" y="356.95">Implements</tspan>
   </text>
   <g>
-    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="850" y1="415.528" x2="850" y2="364.472"/>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="845,407.764 850,417.764 855,407.764 "/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="850" y1="435.528" x2="850" y2="364.472"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="845,427.764 850,437.764 855,427.764 "/>
     <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="855,372.236 850,362.236 845,372.236 "/>
   </g>
   <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="840" y="391.9">
     <tspan x="840" y="391.9">Communicates</tspan>
   </text>
-  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 20; stroke: #d0d0d0" points="550,360 550,440 780,440 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 20; stroke: #d0d0d0" points="550,360 550,460 780,460 "/>
   <text font-size="12.8" style="fill: #d0d0d0;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="560" y="431.9">
     <tspan x="560" y="431.9">Wired by Spring</tspan>
   </text>
   <g>
-    <rect style="fill: #91ff00" x="780" y="580" width="140" height="40"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="780" y="580" width="140" height="40"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="850" y="603.9">
-      <tspan x="850" y="603.9">User</tspan>
+    <rect style="fill: #91ff00" x="780" y="600" width="140" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="780" y="600" width="140" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="850" y="623.9">
+      <tspan x="850" y="623.9">User</tspan>
     </text>
   </g>
   <g>
-    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="850" y1="464.472" x2="850" y2="575.528"/>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="855,472.236 850,462.236 845,472.236 "/>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="845,567.764 850,577.764 855,567.764 "/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="850" y1="484.472" x2="850" y2="595.528"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="855,492.236 850,482.236 845,492.236 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="845,587.764 850,597.764 855,587.764 "/>
   </g>
-  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="840" y="551.9">
-    <tspan x="840" y="551.9">Communicates</tspan>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="840" y="591.9">
+    <tspan x="840" y="591.9">Communicates</tspan>
   </text>
   <g>
     <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="140,280 119,280 119,240 815,240 815,310.264 "/>
@@ -125,12 +114,46 @@
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="885,317.764 880,307.764 885,310.264 890,307.764 "/>
   </g>
   <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="780" y="231.9">
-    <tspan x="780" y="231.9">Implements</tspan>
+    <tspan x="780" y="231.9">Implements &amp; Uses</tspan>
   </text>
   <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="780" y="211.9">
-    <tspan x="780" y="211.9">Implements</tspan>
+    <tspan x="780" y="211.9">Implements &amp; Uses</tspan>
   </text>
   <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="780" y="251.9">
-    <tspan x="780" y="251.9">Implements</tspan>
+    <tspan x="780" y="251.9">Implements &amp; Uses</tspan>
+  </text>
+  <g>
+    <rect style="fill: #b5b5b5" x="140" y="440" width="160" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="140" y="440" width="160" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="463.9">
+      <tspan x="220" y="463.9">GDB Steam Mapper</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="140,460 60,460 60,180 940,180 940,340 929.736,340 "/>
+    <polygon style="fill: #000000" points="922.236,340 932.236,335 929.736,340 932.236,345 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="922.236,340 932.236,335 929.736,340 932.236,345 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="780" y="191.9">
+    <tspan x="780" y="191.9">Implements &amp; Uses</tspan>
+  </text>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="440,360 400,360 400,460 309.736,460 "/>
+    <polygon style="fill: #000000" points="302.236,460 312.236,455 309.736,460 312.236,465 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="302.236,460 312.236,455 309.736,460 312.236,465 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="440,330 370,330 370,340 309.736,340 "/>
+    <polygon style="fill: #000000" points="302.236,340 312.236,335 309.736,340 312.236,345 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="302.236,340 312.236,335 309.736,340 312.236,345 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="360" y="396.202">
+    <tspan x="360" y="396.202">Uses</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="360" y="456.202">
+    <tspan x="360" y="456.202">Uses</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="360" y="276.202">
+    <tspan x="360" y="276.202">Uses</tspan>
   </text>
 </svg>
