@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import org.lcmanager.gdb.base.Formatable;
@@ -106,6 +107,25 @@ public class Brand implements BaseModel<Integer>, Formatable {
          * 
          */
         private final String name;
+
+        public static boolean isWellKnownBrand(final Brand brand) {
+            return brand.getId() >= 1 && brand.getId() <= 3;
+        }
+
+        public static WellKnownBrand getWellKnownBrand(final Brand brand) {
+            if (!WellKnownBrand.isWellKnownBrand(brand)) {
+                throw new IllegalArgumentException("Brand is not a well-known brand!");
+            }
+
+            final int id = brand.getId();
+            final WellKnownBrand result = Arrays.stream(WellKnownBrand.values()) //
+                    .filter(value -> value.getId() == id) //
+                    .findFirst().get();
+            if (result == null) {
+                throw new IllegalArgumentException("Invalid id: " + id + ". Not found!");
+            }
+            return result;
+        }
 
         /**
          *

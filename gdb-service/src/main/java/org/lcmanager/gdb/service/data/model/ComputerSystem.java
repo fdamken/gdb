@@ -19,55 +19,62 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
+import org.lcmanager.gdb.service.data.util.OsFamily;
+import org.lcmanager.gdb.service.data.util.OsFamilyAware;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * Represents a processor and all its relevant technical data.
+ * A computer system represents the setup of a user's computer (e.g. which
+ * graphics card he has).
  *
  */
 @Data
 @Accessors(chain = true)
-public class Processor implements BaseModel<Integer> {
+public class ComputerSystem implements BaseModel<Integer>, OsFamilyAware {
     /**
      * The serial version UID.
      *
      */
-    private static final long serialVersionUID = -1608938574683528407L;
+    private static final long serialVersionUID = -3419779176506771984L;
 
+    // ~ Direct ~
     /**
-     * The ID of this processor.
+     * The ID of this system.
      * 
      */
     private Integer id;
     /**
-     * The brand of the processor.
+     * The OS family of this system.
      * 
      */
-    private Brand brand;
+    private OsFamily osFamily;
     /**
-     * The model ID of the processor.
+     * The memory of this system in mebibyte.
      * 
      */
-    private String model;
+    private int memory;
     /**
-     * The number of processor cores.
+     * The storage of this system is mebibyte.
      * 
      */
-    private Integer cores;
+    private int storage;
+
+    // ~ Mapped ~
     /**
-     * The number of processor threads.
+     * The operating system that is installed in this system.
      * 
      */
-    private Integer threads;
+    private OperatingSystem operatingSystem;
     /**
-     * The processor frequency in megahertz.
+     * The processor of this system.
      * 
      */
-    private Integer frequency;
+    private Processor processor;
     /**
-     * The with of the instruction set (e.g. 32 or 64 Bit).
+     * The graphics card of this system.
      * 
      */
-    private Integer instructionSet;
+    private Graphics graphics;
 }

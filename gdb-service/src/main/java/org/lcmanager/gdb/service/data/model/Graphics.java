@@ -31,7 +31,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Graphics implements BaseModel<Integer>, Comparable<Graphics> {
+public class Graphics implements BaseModel<Integer> {
     /**
      * The pattern that a DirectX version must match.
      * 
@@ -169,16 +169,5 @@ public class Graphics implements BaseModel<Integer>, Comparable<Graphics> {
         }
 
         return encodedOpenGlVersion;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    @Override
-    public int compareTo(final Graphics graphics) {
-        // TODO Auto-generated method body.
-        return 0;
     }
 }
