@@ -32,6 +32,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.lcmanager.gdb.base.CollectionUtil;
+import org.lcmanager.gdb.base.NumberUtil;
 import org.lcmanager.gdb.nvidia.exception.NvidiaGraphicsServiceException;
 import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.data.model.Brand;
@@ -94,13 +95,6 @@ public class NvidiaGraphicsService implements GraphicsService {
             Pattern.CASE_INSENSITIVE);
 
     /**
-     * A regular expression to extract a number from a string. The number group
-     * is named <code>num</code>.
-     * 
-     */
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("^.*?(?<num>\\d+).*$");
-
-    /**
      * {@inheritDoc}
      *
      * @see org.lcmanager.gdb.service.graphics.GraphicsService#retrieveGraphics(org.lcmanager.gdb.service.data.model.Brand,
@@ -116,7 +110,7 @@ public class NvidiaGraphicsService implements GraphicsService {
 
         final GpuType gpuType = GpuType.getByModel(model);
         final URL url = gpuType.buildUrl(model);
-        final Document document = this.retrieveDocument(url);
+        final Document document = NvidiaGraphicsService.retrieveDocument(url);
         final Map<String, String> data = this.extractSpecifications(gpuType, document);
 
         final Graphics graphics = new Graphics();
@@ -142,9 +136,15 @@ public class NvidiaGraphicsService implements GraphicsService {
         graphics.setFrequency(CollectionUtil.findValue(data, key -> {
             return NvidiaGraphicsService.FREQUENCY_KEY_PATTERN.matcher(key).matches();
         }, value -> {
-            final Matcher matcher = NvidiaGraphicsService.NUMBER_PATTERN.matcher(value);
-            matcher.matches();
-            return Integer.parseInt(matcher.group("num"));
+            final String lowerValue = value.toLowerCase().trim();
+            final int number = NumberUtil.extractNumber(lowerValue);
+            if (lowerValue.endsWith("ghz")) {
+                return number * 1000;
+            } else if (lowerValue.endsWith("khz")) {
+                return number / 1000;
+            } else {
+                return number;
+            }
         }));
 
         graphics.setMemory(CollectionUtil.findValue(data, key -> {
@@ -152,9 +152,7 @@ public class NvidiaGraphicsService implements GraphicsService {
                     && !NvidiaGraphicsService.MEMORY_KEY_PATTERN_NEGATIVE.matcher(key).matches();
         }, value -> {
             final String lowerValue = value.toLowerCase().trim();
-            final Matcher matcher = NvidiaGraphicsService.NUMBER_PATTERN.matcher(lowerValue);
-            matcher.matches();
-            final int number = Integer.parseInt(matcher.group("num"));
+            final int number = NumberUtil.extractNumber(lowerValue);
             if (lowerValue.endsWith("gb") || lowerValue.endsWith("gib")) {
                 return number * 1024;
             } else if (lowerValue.endsWith("kb") || lowerValue.endsWith("kib")) {
@@ -187,7 +185,7 @@ public class NvidiaGraphicsService implements GraphicsService {
      *             If any error occurs whilst retrieving the document (e.g. an
      *             Error 404: Not Found).
      */
-    private Document retrieveDocument(final URL url) throws GraphicsServiceException {
+    private static Document retrieveDocument(final URL url) throws GraphicsServiceException {
         try {
             return Jsoup.connect(url.toString()).get();
         } catch (final IOException cause) {

@@ -28,6 +28,7 @@ import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Processor;
 import org.lcmanager.gdb.service.processor.ProcessorService;
+import org.lcmanager.gdb.service.processor.exception.ProcessorServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -60,7 +61,7 @@ public class DelegatingProcessorService implements ProcessorService {
      */
     @Override
     @Cacheable
-    public Processor retrieveProcessor(final Brand brand, final String model) {
+    public Processor retrieveProcessor(final Brand brand, final String model) throws ProcessorServiceException {
         if (!this.isResponsible(brand)) {
             throw new UnsupportedOperationException("Brand " + brand + " is not supported!");
         }

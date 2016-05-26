@@ -459,8 +459,7 @@ public class SteamGameService implements GameService {
      */
     private Document retrieveDocument(final URL url) throws GameServiceException {
         try {
-            return Jsoup.connect(url.toString()).userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                    + "(KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36").get();
+            return Jsoup.connect(url.toString()).get();
         } catch (final IOException cause) {
             throw new SteamGameServiceException("Failed to fetch the games from Steam!", cause);
         }
