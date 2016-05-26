@@ -32,19 +32,34 @@ gdbApp.controller('detailsController', ['$scope', '$http', '$sce', '$timeout', '
 	var restartCarousel = function() {
 		clearInterval(carouselInterval);
 		var $carousel = $('#screenshots');
+
+		$carousel.css('height', Math.ceil($carousel.width() / (16 / 9)));
+
 		carouselInterval = setInterval(function() {
 			if (!$carousel.is(':hover')) {
 				$carousel.carousel('next');
 			}
 		}, 5000);
 	};
+	var stopCarousel = function() {
+		clearInterval(carouselInterval);
+	};
 
 	$scope.$on('details_show', function(event, args) {
 		$scope.gameId = args.gameId;
 
 		layout.show('details');
-		restartCarousel();
 	});
+	$scope.$on('layout_on-show', function(event, args) {
+		if (args.layoutPart === 'details' && $scope.state === Constants.State.LOADED) {
+			$timeout(restartCarousel);
+		}
+	})
+	$scope.$on('layout_on-hide', function(event, args) {
+		if (args.layoutPart === 'details') {
+			stopCarousel();
+		}
+	})
 
 	$scope.$watch('gameId', function() {
 		if ($scope.gameId) {
@@ -55,6 +70,8 @@ gdbApp.controller('detailsController', ['$scope', '$http', '$sce', '$timeout', '
 
 				$timeout(function() {
 					$scope.state = Constants.State.LOADED;
+
+					$timeout(restartCarousel);
 				});
 			}, function(response) {
 				alert('An error occurred!'); // TODO: Replace with something cooler.

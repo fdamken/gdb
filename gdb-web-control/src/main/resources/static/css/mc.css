@@ -18,28 +18,34 @@
  * #L%
  */
 
-.usk {
+.mc {
 	display: block;
-	height: 100px;
-	width: 100px;
-	background-size: contain;
 }
 
-.usk.usk-undefined .usk.usk-null, .usk.usk- {
-	background-image: url('../images/usk/usk.png');	
+.mc .mc-logo {
+	height: 30px;
 }
-.usk.usk-0 {
-	background-image: url('../images/usk/usk-0.png');
+
+.mc .mc-score {
+	font-size: 200%;
+	font-weight: bold;
+	float: right;
 }
-.usk.usk-6 {
-	background-image: url('../images/usk/usk-6.png');
+.mc .mc-score[data-score^="0"] {
+	color: blue;
 }
-.usk.usk-12 {
-	background-image: url('../images/usk/usk-12.png');
+.mc .mc-score[data-score^="1"], .mc .mc-score[data-score^="2"], .mc .mc-score[data-score^="3"] {
+	color: red;
 }
-.usk.usk-16 {
-	background-image: url('../images/usk/usk-16.png');
+.mc .mc-score[data-score^="4"], .mc .mc-score[data-score^="5"], .mc .mc-score[data-score^="6"] {
+	color: yellow;
 }
-.usk.usk-18 {
-	background-image: url('../images/usk/usk-18.png');
+.mc .mc-score[data-score^="7"], .mc .mc-score[data-score^="8"], .mc .mc-score[data-score^="9"], .mc .mc-score[data-score="100"] {
+	color: green;
+}
+.mc .mc-score::after {
+	content: " / 100";
+	color: initial;
+	font-size: 50%;
+	font-weight: normal;
 }

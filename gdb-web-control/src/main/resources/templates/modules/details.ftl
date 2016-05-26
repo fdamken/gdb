@@ -41,7 +41,7 @@
 				</div>
 
 				<div class="eyecatcher">
-					<div class="col-sm-10">
+					<div class="col-sm-9">
 						<div id="screenshots" class="screenshots carousel slide" data-ride="carousel" data-interval="false">
 							<ol class="carousel-indicators">
 								<li ng-repeat="(i, screenshot) in gameDetails.screenshots" ng-class="{ active : i === 0 }" data-target="#screenshots" data-slide-to="{{ i }}">&nbsp;</li>
@@ -59,8 +59,24 @@
 							</a>
 						</div>
 					</div>
-					<div class="raw-details col-sm-2">
-						<span ng-class="'usk-' + gameDetails.requiredAge" class="usk">&nbsp;</span>
+					<div class="raw-details col-sm-3">
+						<a class="header-image" href="{{ gameDetails.website }}" target="_blank">
+							<img ng-src="{{ gameDetails.headerImage }}" alt="Header Image">
+						</a>
+						<a ng-show="gameDetails.metacriticUrl !== null" class="mc" href="{{ gameDetails.metacriticUrl }}" target="_blank">
+							<img src="${context}/images/mc/logo_inverted.png" alt="Metacritic Logo" class="mc-logo">&nbsp;</span>
+							<span class="mc-score" data-score="{{ gameDetails.metacriticScore }}">{{ gameDetails.metacriticScore }}</span>
+						</a>
+						<div class="facts-raw">
+							<div class="details-list-item release-date">
+								<label>Release Date</label>
+								<span class="details-value">{{ gameDetails.releaseDate | date }}</span>
+							</div>
+							<div class="details-list-item website">
+								<label>Website</label>
+								<a class="details-value" href="{{ gameDetails.website }}" target="_blank">{{ gameDetails.website | host }}</a>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -75,7 +91,7 @@
 							<label>
 								<ng-pluralize count="gameDetails.genres.length" when="{ one : 'Genre', other : 'Genres' }" />
 							</label>
-							<ul class="comma-separated">
+							<ul class="details-value comma-separated">
 								<li ng-repeat="genre in gameDetails.genres">
 									<span class="value">{{ genre.description }}</span>
 								</li>
@@ -85,7 +101,7 @@
 							<label>
 								<ng-pluralize count="gameDetails.categories.length" when="{ one : 'Category', other : 'Categories' }" />
 							</label>
-							<ul class="comma-separated">
+							<ul class="details-value comma-separated">
 								<li ng-repeat="category in gameDetails.categories">
 									<span class="value">{{ category.description }}</span>
 								</li>
@@ -95,7 +111,7 @@
 							<label>
 								<ng-pluralize count="gameDetails.publishers.length" when="{ one : 'Publisher', other : 'Publishers' }" />
 							</label>
-							<ul class="comma-separated">
+							<ul class="details-value comma-separated">
 								<li ng-repeat="publisher in gameDetails.publishers">
 									<span class="value">{{ publisher.name }}</span>
 								</li>
@@ -105,7 +121,7 @@
 							<label>
 								<ng-pluralize count="gameDetails.developers.length" when="{ one : 'Developer', other : 'Developers' }" />
 							</label>
-							<ul class="comma-separated">
+							<ul class="details-value comma-separated">
 								<li ng-repeat="developer in gameDetails.developers">
 									<span class="value">{{ developer.name }}</span>
 								</li>
@@ -115,7 +131,7 @@
 							<label>
 								<ng-pluralize count="gameDetails.platforms.length" when="{ one : 'Platform', other : 'Platforms' }" />
 							</label>
-							<ul class="comma-separated">
+							<ul class="details-value comma-separated">
 								<li ng-repeat="platform in gameDetails.platforms">
 									<span class="value">{{ platform | platform }}</span>
 								</li>

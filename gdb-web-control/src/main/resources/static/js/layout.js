@@ -181,12 +181,37 @@ var LayoutPart = function(config) {
 	};
 };
 
-gdbApp.factory('layout', [function() {
+gdbApp.factory('layout', ['$rootScope', function($rootScope) {
 	var layoutPartsBySide = {
 		right : [],
 		left : []
 	};
 	var layoutPartsById = {};
+
+	var showAndHide = function(animate, showParts, hideParts) {
+		for (var i = 0; i < showParts.length; i++) {
+			var showPart = showParts[i];
+			showPart.show({
+				animate : animate,
+				callback : function() {
+					$rootScope.$broadcast('layout_on-show', {
+						layoutPart : showPart.getId()
+					});
+				}
+			});
+		}
+		for (var i = 0; i < hideParts.length; i++) {
+			var hidePart = hideParts[i];
+			hidePart.hide({
+				animate : animate,
+				callback : function() {
+					$rootScope.$broadcast('layout_on-hide', {
+						layoutPart : hidePart.getId()
+					});
+				}
+			});
+		}
+	};
 
 	layoutFactory = {
 		addLayoutPart : function(layoutPart) {
@@ -223,12 +248,7 @@ gdbApp.factory('layout', [function() {
 			var hideParts = layoutPartsBySide[side === 'right' ? 'left' : 'right'];
 
 			if (!layoutPart.isShown()) {
-				for (var i = 0; i < showParts.length; i++) {
-					showParts[i].show(animate);
-				}
-				for (var i = 0; i < hideParts.length; i++) {
-					hideParts[i].hide(animate);
-				}
+				showAndHide(animate, showParts, hideParts);
 			}
 
 			if (elementId === null) {
@@ -244,12 +264,7 @@ gdbApp.factory('layout', [function() {
 			var hideParts = layoutPartsBySide[side];
 			var showParts = layoutPartsBySide[side === 'right' ? 'left' : 'right'];
 
-			for (var i = 0; i < showParts.length; i++) {
-				showParts[i].show(animate);
-			}
-			for (var i = 0; i < hideParts.length; i++) {
-				hideParts[i].hide(animate);
-			}
+			showAndHide(animate, showParts, hideParts);
 		}
 	};
 

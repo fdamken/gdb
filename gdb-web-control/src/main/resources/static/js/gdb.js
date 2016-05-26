@@ -20,7 +20,6 @@
 
 var gdbApp = angular.module('gdbApp');
 
-
 gdbApp.filter('direction', function() {
 	return function(data) {
 		switch (data) {
@@ -59,6 +58,11 @@ gdbApp.filter('platform', function() {
 		} else {
 			throw 'Data must either be a string or an object!';
 		}
+	};
+});
+gdbApp.filter('host', function() {
+	return function(url) {
+		return $('<a></a>').attr('href', url).prop('host');
 	};
 });
 

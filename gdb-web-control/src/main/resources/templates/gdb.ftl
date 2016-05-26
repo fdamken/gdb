@@ -46,7 +46,6 @@
 		<script src="${context}/js/angular-resource.js"></script>
 		<script src="${context}/js/angular-smooth-scroll.js"></script>
 		<script src="${context}/js/angular-checklist-model.js"></script>
-		<script src="${context}/js/angular-ui-bootstrap.js"></script>
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.js"></script>
 	<#else>
@@ -72,7 +71,6 @@
 		<script src="${context}/js/angular-resource.min.js"></script>
 		<script src="${context}/js/angular-smooth-scroll.min.js"></script> <!-- FIXME: Minified SmoothScroll does not work?! -->
 		<script src="${context}/js/angular-checklist-model.min.js"></script>
-		<script src="${context}/js/angular-ui-bootstrap.min.js"></script>
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.min.js"></script>
 	</#if>

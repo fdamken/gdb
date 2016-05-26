@@ -22,22 +22,43 @@
 	margin-top: 20px;
 }
 
-#details-content-wrapper .facts .details-list-item {
+#details-content-wrapper .details-list-item {
 	display: block;
 	margin-top: 20px;
 }
-#details-content-wrapper .facts .details-list-item:first-child {
+#details-content-wrapper .details-list-item:first-child {
 	margin-top: 0;
 }
-#details-content-wrapper .facts .details-list-item label {
+#details-content-wrapper .details-list-item label {
 	display: block;
 }
+#details-content-wrapper .details-list-item .details-value {
+	padding: 0 0 0 40px;
+}
 
+#details-content-wrapper .facts-raw {
+	margin-top: 20px;
+}
+
+#screenshots .carousel-inner {
+	height: 100%;
+}
+#screenshots .item {
+	height: 100%;
+}
 #screenshots .item .img {
-	height: 495px;
 	width: 100%;
+	height: 100%;
 	background-color: black;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+#details-content-wrapper .header-image {
+	display: block;
+	margin-bottom: 10px;
+}
+#details-content-wrapper .header-image img {
+	width: 100%;
 }
