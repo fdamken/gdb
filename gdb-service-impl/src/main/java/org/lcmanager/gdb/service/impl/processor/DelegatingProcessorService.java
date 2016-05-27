@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.lcmanager.gdb.base.StreamUtil;
+import org.lcmanager.gdb.base.health.NoHealthTrace;
 import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Brand;
@@ -75,6 +76,7 @@ public class DelegatingProcessorService implements ProcessorService {
      * @see org.lcmanager.gdb.service.processor.ProcessorService#isResponsible(org.lcmanager.gdb.service.data.model.Brand)
      */
     @Override
+    @NoHealthTrace
     public boolean isResponsible(final Brand brand) {
         return !StreamUtil.isEmpty(this.filterResponsibleServices(brand));
     }

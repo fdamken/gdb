@@ -33,6 +33,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.base.NumberUtil;
+import org.lcmanager.gdb.base.health.NoHealthTrace;
 import org.lcmanager.gdb.nvidia.exception.NvidiaGraphicsServiceException;
 import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.data.model.Brand;
@@ -171,6 +172,7 @@ public class NvidiaGraphicsService implements GraphicsService {
      * @see org.lcmanager.gdb.service.graphics.GraphicsService#isResponsible(org.lcmanager.gdb.service.data.model.Brand)
      */
     @Override
+    @NoHealthTrace
     public boolean isResponsible(final Brand brand) {
         return WellKnownBrand.NVIDIA.getBrand().equals(brand);
     }

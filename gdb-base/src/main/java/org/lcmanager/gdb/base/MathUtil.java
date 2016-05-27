@@ -97,10 +97,14 @@ public strictfp class MathUtil {
      * @param basicValue
      *            The basic value.
      * @param percentageValue
-     *            The percentage value.
+     *            The percentage value. If <code>0</code>, this returns
+     *            <code>0</code>.
      * @return The percentage.
      */
     public static int calulatePercentage(final int basicValue, final int percentageValue) {
+        if (percentageValue == 0) {
+            return 0;
+        }
         return (int) ((double) percentageValue / (double) basicValue * 100);
     }
 

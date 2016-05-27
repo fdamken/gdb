@@ -31,6 +31,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.base.NumberUtil;
+import org.lcmanager.gdb.base.health.NoHealthTrace;
 import org.lcmanager.gdb.intel.exception.IntelProcessorServiceException;
 import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.data.model.Brand;
@@ -149,6 +150,17 @@ public class IntelProcessorService implements ProcessorService {
     }
 
     /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.service.processor.ProcessorService#isResponsible(org.lcmanager.gdb.service.data.model.Brand)
+     */
+    @Override
+    @NoHealthTrace
+    public boolean isResponsible(final Brand brand) {
+        return Brand.WellKnownBrand.INTEL.getBrand().equals(brand);
+    }
+
+    /**
      * Retrieves the {@link Document} that contains the specifications for the
      * given processor model.
      *
@@ -244,15 +256,5 @@ public class IntelProcessorService implements ProcessorService {
         } catch (final IOException cause) {
             throw new IntelProcessorServiceException("Failed to fetch the Intel data!", cause);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @see org.lcmanager.gdb.service.processor.ProcessorService#isResponsible(org.lcmanager.gdb.service.data.model.Brand)
-     */
-    @Override
-    public boolean isResponsible(final Brand brand) {
-        return Brand.WellKnownBrand.INTEL.getBrand().equals(brand);
     }
 }

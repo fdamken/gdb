@@ -1,14 +1,22 @@
 {
-    "properties": [
-        {
-            "name": "log.threshold",
-            "type": "java.lang.Integer",
-            "description": "The time is milliseconds that a method must take in order to be logged."
-        },
-        {
-            "name": "dev",
-            "type": "java.lang.Boolean",
-            "description": "Whether to run in development mode or not. Must be 'true' to run in development mode."
-        }
-    ]
+	"properties": 
+	[
+		{
+			"name": "log.threshold",
+			"type": "java.lang.Integer",
+			"description": "The time is milliseconds that a method must take in order to be logged."
+		},
+
+		{
+			"name": "dev",
+			"type": "java.lang.Boolean",
+			"description": "Whether to run in development mode or not. Must be 'true' to run in development mode."
+		},
+
+		{
+			"name": "health.unstable-threshold",
+			"type": "java.lang.Integer",
+			"description": "The threshold when to switch a service from health 'UP' to health 'UNSTABLE' in percentages. The base value is the total count of calls, the percentage value is the count of failed calls."
+		}
+	]
 }

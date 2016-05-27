@@ -20,6 +20,7 @@
 package org.lcmanager.gdb.service.game;
 
 import org.lcmanager.gdb.base.Paged;
+import org.lcmanager.gdb.base.health.HealthRelevant;
 import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.game.exception.GameServiceException;
 
@@ -27,7 +28,7 @@ import org.lcmanager.gdb.service.game.exception.GameServiceException;
  * The game service is used for any interaction with games.
  *
  */
-public interface GameService {
+public interface GameService extends HealthRelevant {
     /**
      * The site of any page. {@value #PAGE_SIZE}.
      * 

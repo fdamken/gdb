@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.service.graphics;
 
+import org.lcmanager.gdb.base.health.HealthRelevant;
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Graphics;
 import org.lcmanager.gdb.service.graphics.exception.GraphicsServiceException;
@@ -28,7 +29,7 @@ import org.lcmanager.gdb.service.graphics.exception.GraphicsServiceException;
  * them from 3rd party sources).
  *
  */
-public interface GraphicsService {
+public interface GraphicsService extends HealthRelevant {
     /**
      * Retrieves the graphics card with the given model identifier of the given
      * {@link Brand}.
