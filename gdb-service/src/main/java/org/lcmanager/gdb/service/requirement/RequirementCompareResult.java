@@ -19,18 +19,28 @@
  */
 package org.lcmanager.gdb.service.requirement;
 
+import org.lcmanager.gdb.base.MathUtil;
+
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Represents the result of a comparison executed by the
+ * {@link RequirementComparator}.
+ *
+ */
 @Data
 @Builder
 public class RequirementCompareResult implements CompareResult {
     /**
-     * The count of the compared properties.
-     *
+     * The compare result of the basic criteria of a system.
+     * 
+     * <p>
+     * NOTE: This is a KO-criteria!
+     * </p>
+     * 
      */
-    private static final int PROPERTY_COUNT = 1;
-
+    private final BasicCompareResult basicCompareResult;
     /**
      * The compare result of the processor.
      * 
@@ -40,6 +50,15 @@ public class RequirementCompareResult implements CompareResult {
      * 
      */
     private final ProcessorCompareResult processorCompareResult;
+    /**
+     * The compare result of the graphics card.
+     * 
+     * <p>
+     * NOTE: This is a KO-criteria!
+     * </p>
+     * 
+     */
+    private final GraphicsCompareResult graphicsCompareResult;
 
     /**
      * {@inheritDoc}
@@ -48,12 +67,12 @@ public class RequirementCompareResult implements CompareResult {
      */
     @Override
     public int getPercentage() {
-        if (this.processorCompareResult.getPercentage() == 0) {
+        if (this.basicCompareResult.getPercentage() == 0 || this.processorCompareResult.getPercentage() == 0
+                || this.graphicsCompareResult.getPercentage() == 0) {
             return 0;
         }
 
-        final int sum = 0 //
-                + this.processorCompareResult.getPercentage();
-        return sum / RequirementCompareResult.PROPERTY_COUNT;
+        return MathUtil.average(CompareResult::getPercentage, this.basicCompareResult, this.processorCompareResult,
+                this.graphicsCompareResult);
     }
 }

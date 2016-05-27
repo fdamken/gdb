@@ -108,10 +108,27 @@ public class Brand implements BaseModel<Integer>, Formatable {
          */
         private final String name;
 
+        /**
+         * Checks whether the given {@link Brand} is a well-known brand.
+         *
+         * @param brand
+         *            The {@link Brand} to check.
+         * @return Whether the given {@link Brand} is a well-known brand or not.
+         */
         public static boolean isWellKnownBrand(final Brand brand) {
             return brand.getId() >= 1 && brand.getId() <= 3;
         }
 
+        /**
+         * Finds the well-known brand that matches the given brand.
+         *
+         * @param brand
+         *            The brand to find the well-known brand for.
+         * @return The well-known brand, if any.
+         * @throws IllegalArgumentException
+         *             If the given brand is not a well-known brand or it was
+         *             not found.
+         */
         public static WellKnownBrand getWellKnownBrand(final Brand brand) {
             if (!WellKnownBrand.isWellKnownBrand(brand)) {
                 throw new IllegalArgumentException("Brand is not a well-known brand!");

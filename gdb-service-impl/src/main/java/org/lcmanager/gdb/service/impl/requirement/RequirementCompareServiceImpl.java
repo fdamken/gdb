@@ -27,6 +27,10 @@ import org.lcmanager.gdb.service.requirement.RequirementCompareService;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of {@link RequirementCompareService}.
+ *
+ */
 @Service
 @CacheConfig(cacheNames = "requirement-compare-service")
 public class RequirementCompareServiceImpl implements RequirementCompareService {

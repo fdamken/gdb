@@ -28,15 +28,15 @@ import org.lcmanager.gdb.base.MathUtil;
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Brand.WellKnownBrand;
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
-import org.lcmanager.gdb.service.data.model.Processor;
+import org.lcmanager.gdb.service.data.model.Graphics;
 import org.lcmanager.gdb.service.data.model.Requirement;
 
 /**
- * Compares the properties of the {@link Processor} of a {@link Requirement} and
+ * Compares the properties of the {@link Graphics} of a {@link Requirement} and
  * a {@link ComputerSystem}.
  *
  */
-public class ProcessorComparator implements Comparator<ProcessorCompareResult> {
+public class GraphicsComparator implements Comparator<GraphicsCompareResult> {
     /**
      * {@inheritDoc}
      *
@@ -44,27 +44,20 @@ public class ProcessorComparator implements Comparator<ProcessorCompareResult> {
      *      org.lcmanager.gdb.service.data.model.ComputerSystem)
      */
     @Override
-    public ProcessorCompareResult compare(final Requirement requirement, final ComputerSystem computerSystem) {
-        final Processor processor = computerSystem.getProcessor();
-        final Brand bestMatchingBrand = this.getBestMatchingBrand(processor.getBrand(), requirement.getProcessors().keySet());
-        final Processor requiredProcessor = requirement.getProcessors().get(bestMatchingBrand);
+    public GraphicsCompareResult compare(final Requirement requirement, final ComputerSystem computerSystem) {
+        final Graphics graphics = computerSystem.getGraphics();
+        final Brand bestMatchingBrand = this.getBestMatchingBrand(graphics.getBrand(), requirement.getGraphics().keySet());
+        final Graphics requiredGraphics = requirement.getGraphics().get(bestMatchingBrand);
 
-        final ProcessorCompareResult.ProcessorCompareResultBuilder builder = ProcessorCompareResult.builder();
+        final GraphicsCompareResult.GraphicsCompareResultBuilder builder = GraphicsCompareResult.builder();
 
-        builder.coreScorePercentage(MathUtil.calulatePercentage(requiredProcessor.getCores(), processor.getCores()));
+        builder.memoryScorePercentage(MathUtil.calulatePercentage(requiredGraphics.getMemory(), graphics.getMemory()));
 
-        builder.frequencyScorePercentage(MathUtil.calulatePercentage(requiredProcessor.getFrequency(), processor.getFrequency()));
+        builder.frequencyScorePercentage(MathUtil.calulatePercentage(requiredGraphics.getFrequency(), graphics.getFrequency()));
 
-        final int instructionSetScorePercentage;
-        if (requiredProcessor.getInstructionSet() > processor.getInstructionSet()) {
-            instructionSetScorePercentage = 0;
-        } else {
-            instructionSetScorePercentage = MathUtil.calulatePercentage(requiredProcessor.getInstructionSet(),
-                    processor.getInstructionSet());
-        }
-        builder.instructionSetScorePercentage(instructionSetScorePercentage);
+        builder.directXScorePercentage(requiredGraphics.encodeDirectXVersion() > graphics.encodeDirectXVersion() ? 0 : 100);
 
-        builder.threadsScorePercentage(MathUtil.calulatePercentage(requiredProcessor.getThreads(), processor.getThreads()));
+        builder.openGlScorePercentage(requiredGraphics.encodeOpenGlVersion() > graphics.encodeOpenGlVersion() ? 0 : 100);
 
         return builder.build();
     }
@@ -99,9 +92,9 @@ public class ProcessorComparator implements Comparator<ProcessorCompareResult> {
                 .collect(Collectors.toList());
 
         Brand result = null;
-        if (wellKnownBrand == WellKnownBrand.AMD && wellKnownBrands.contains(WellKnownBrand.INTEL)) {
-            result = WellKnownBrand.INTEL.getBrand();
-        } else if (wellKnownBrand == WellKnownBrand.INTEL && wellKnownBrands.contains(WellKnownBrand.AMD)) {
+        if (wellKnownBrand == WellKnownBrand.AMD && wellKnownBrands.contains(WellKnownBrand.NVIDIA)) {
+            result = WellKnownBrand.NVIDIA.getBrand();
+        } else if (wellKnownBrand == WellKnownBrand.NVIDIA && wellKnownBrands.contains(WellKnownBrand.AMD)) {
             result = WellKnownBrand.AMD.getBrand();
         }
         if (!brandCollection.contains(result)) {

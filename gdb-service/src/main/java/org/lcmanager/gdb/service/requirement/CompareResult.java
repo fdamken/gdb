@@ -20,14 +20,43 @@
 package org.lcmanager.gdb.service.requirement;
 
 import org.lcmanager.gdb.base.MathUtil;
+import org.lcmanager.gdb.service.data.model.ComputerSystem;
+import org.lcmanager.gdb.service.data.model.Requirement;
 
+/**
+ * A compare result is the result of a comparison executed by a
+ * {@link Comparator comparator}.
+ *
+ */
 public interface CompareResult {
+    /**
+     * Calculates the percentage score the compared {@link ComputerSystem
+     * computer system} matches the {@link Requirement requirements}.
+     * 
+     * <p>
+     * If the compare result contains multiple properties, the returned value is
+     * a summary of these.
+     * </p>
+     *
+     * @return The percentage score.
+     */
     int getPercentage();
 
+    /**
+     *
+     * @return The normalized result of {@link #getPercentage()}.
+     * @see org.lcmanager.gdb.base.MathUtil#normalizePercentage(int)
+     */
     default int getNormalizedPercentage() {
         return MathUtil.normalizePercentage(this.getPercentage());
     }
 
+    /**
+     *
+     * @return Whether the requirements have been satisfied or not. That is if
+     *         {@link #getPercentage()} returns a value equal to or higher than
+     *         <code>100</code>.
+     */
     default boolean isSatisfied() {
         return this.getPercentage() >= 100;
     }

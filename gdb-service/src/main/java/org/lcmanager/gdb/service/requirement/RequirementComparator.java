@@ -22,7 +22,28 @@ package org.lcmanager.gdb.service.requirement;
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
 import org.lcmanager.gdb.service.data.model.Requirement;
 
+/**
+ * Compares a {@link Requirement} with a {@link ComputerSystem}.
+ *
+ */
 public class RequirementComparator implements Comparator<RequirementCompareResult> {
+    /**
+     * The {@link BasicComparator} used for comparing the basic properties of a
+     * requirement.
+     * 
+     */
+    private final BasicComparator basicComparator = new BasicComparator();
+    /**
+     * The {@link ProcessorComparator} used for comparing processors.
+     * 
+     */
+    private final ProcessorComparator processorComparator = new ProcessorComparator();
+    /**
+     * The {@link GraphicsComparator} used for comparing graphics cards.
+     * 
+     */
+    private final GraphicsComparator graphicsComparator = new GraphicsComparator();
+
     /**
      * {@inheritDoc}
      *
@@ -33,7 +54,11 @@ public class RequirementComparator implements Comparator<RequirementCompareResul
     public RequirementCompareResult compare(final Requirement requirement, final ComputerSystem computerSystem) {
         final RequirementCompareResult.RequirementCompareResultBuilder builder = RequirementCompareResult.builder();
 
-        builder.processorCompareResult(new ProcessorComparator().compare(requirement, computerSystem));
+        builder.basicCompareResult(this.basicComparator.compare(requirement, computerSystem));
+
+        builder.processorCompareResult(this.processorComparator.compare(requirement, computerSystem));
+
+        builder.graphicsCompareResult(this.graphicsComparator.compare(requirement, computerSystem));
 
         return builder.build();
     }

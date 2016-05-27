@@ -19,5 +19,14 @@
  */
 package org.lcmanager.gdb.service.requirement;
 
+import org.lcmanager.gdb.service.data.model.ComputerSystem;
+import org.lcmanager.gdb.service.data.model.Requirement;
+
+/**
+ * This service is used for comparing {@link Requirement requirements} with
+ * {@link ComputerSystem computer systems}.
+ *
+ */
 public interface RequirementCompareService extends Comparator<RequirementCompareResult> {
+    // Nothing to do.
 }

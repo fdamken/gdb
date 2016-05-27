@@ -22,6 +22,30 @@ package org.lcmanager.gdb.service.requirement;
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
 import org.lcmanager.gdb.service.data.model.Requirement;
 
+/**
+ * A comparator can compare {@link Requirement requirements} with
+ * {@link ComputerSystem computer systems} and produces a {@link CompareResult}
+ * that contains the result data.
+ *
+ * @param <T>
+ *            The type of the {@link CompareResult} that is produced.
+ */
 public interface Comparator<T extends CompareResult> {
+    /**
+     * Compares the given {@link Requirement requirement} with the given
+     * {@link ComputerSystem computer system}.
+     * 
+     * <p>
+     * <b> NOTE: This may not compare all properties of a requirement! Please
+     * lookup the resulting {@link CompareResult} type for the actual compared
+     * properties or read the documentation of the implementing class. </b>
+     * </p>
+     * 
+     * @param requirement
+     *            The {@link Requirement requirement} to compare.
+     * @param computerSystem
+     *            The {@link ComputerSystem computer system} to compare.
+     * @return The result of the comparison as a {@link CompareResult}.
+     */
     T compare(final Requirement requirement, final ComputerSystem computerSystem);
 }

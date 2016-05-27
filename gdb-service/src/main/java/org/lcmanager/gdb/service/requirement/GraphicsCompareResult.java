@@ -26,36 +26,40 @@ import lombok.Data;
 
 /**
  * Represents the result of a comparison executed by the
- * {@link ProcessorComparator}.
+ * {@link GraphicsComparator}.
  *
  */
 @Data
 @Builder
-public class ProcessorCompareResult implements CompareResult {
+public class GraphicsCompareResult implements CompareResult {
     /**
-     * The score of the core count.
+     * The score of the graphics memory.
      * 
      */
-    private final int coreScorePercentage;
+    private final int memoryScorePercentage;
     /**
      * The score of the frequency.
      * 
      */
     private final int frequencyScorePercentage;
     /**
-     * The score of the instruction set.
+     * The score of the DirectX version.
      * 
      * <p>
      * NOTE: This is a KO-criteria!
      * </p>
      * 
      */
-    private final int instructionSetScorePercentage;
+    private final int directXScorePercentage;
     /**
-     * The score of the threads.
+     * The score of the OpenGL version.
+     * 
+     * <p>
+     * NOTE: This is a KO-criteria!
+     * </p>
      * 
      */
-    private final int threadsScorePercentage;
+    private final int openGlScorePercentage;
 
     /**
      * {@inheritDoc}
@@ -64,11 +68,11 @@ public class ProcessorCompareResult implements CompareResult {
      */
     @Override
     public int getPercentage() {
-        if (this.instructionSetScorePercentage == 0) {
+        if (this.directXScorePercentage == 0 || this.openGlScorePercentage == 0) {
             return 0;
         }
 
-        return MathUtil.average(this.coreScorePercentage, this.frequencyScorePercentage, this.instructionSetScorePercentage,
-                this.threadsScorePercentage);
+        return MathUtil.average(this.memoryScorePercentage, this.frequencyScorePercentage, this.directXScorePercentage,
+                this.openGlScorePercentage);
     }
 }
