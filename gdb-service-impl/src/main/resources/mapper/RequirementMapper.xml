@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Game Database
+  %%
+  Copyright (C) 2016 - 2016 LCManager Group
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.RequirementMapper">
+	<resultMap type="Requirement" id="requirement">
+		<id property="id" column="requirementId" />
+		<result property="osFamily" column="requirementOsFamily" />
+		<result property="memory" column="requirementMemory" />
+		<result property="storage" column="requirementStorage" />
+		<collection property="processorAdder" ofType="Processor" foreignColumn="requirementId">
+			<id property="id" column="processorId" />
+			<result property="model" column="processorModel" />
+			<result property="cores" column="processorCores" />
+			<result property="threads" column="processorThreads" />
+			<result property="frequency" column="processorFrequency" />
+			<result property="instructionSet" column="processorInstructionSet" />
+			<association property="brand" javaType="Brand" foreignColumn="processorId">
+				<id property="id" column="processorBrandId" />
+				<result property="name" column="processorBrandName" />
+			</association>
+		</collection>
+		<collection property="graphicsAdder" ofType="Graphics" foreignColumn="requirementId">
+			<id property="id" column="graphicsId" />
+			<result property="model" column="graphicsModel" />
+			<result property="memory" column="graphicsMemory" />
+			<result property="frequency" column="graphicsFrequency" />
+			<result property="directXVersion" column="graphicsDirectXVersion" />
+			<result property="openGlVersion" column="graphicsOpenGlVersion" />
+			<association property="brand" javaType="Brand" foreignColumn="graphicsId">
+				<id property="id" column="graphicsBrandId" />
+				<result property="name" column="graphicsBrandName" />
+			</association>
+		</collection>
+		<collection property="operatingSystems" ofType="OperatingSystem" foreignColumn="requirementId">
+			<id property="id" column="osId" />
+			<result property="osFamily" column="osFamily" />
+			<result property="name" column="osName" />
+			<association property="version" javaType="Version" foreignColumn="osId">
+				<constructor>
+					<arg column="osVersionName" javaType="String" />
+					<arg column="osVersionMajor" javaType="int" />
+					<arg column="osVersionMinor" javaType="int" />
+					<arg column="osVersionBugfx" javaType="int" />
+					<arg column="osVersionBuild" javaType="int" />
+				</constructor>
+			</association>
+			<association property="developer" javaType="Developer" foreignColumn="osId">
+				<id property="id" column="osDeveloperId" />
+				<result property="name" column="osDeveloperName" />
+			</association>
+		</collection>
+	</resultMap>
+
+	<!-- Methods from BaseMapper. -->
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO Requirement (
+			id,
+			osFamily,
+			memory,
+			storage
+		) VALUES (
+			#{obj.id},
+			#{obj.osFamily},
+			#{obj.memory},
+			#{obj.storage}
+		)
+	</insert>
+	<update id="update" parameterType="Map">
+		UPDATE
+			Requirement
+		SET
+			osFamily = #{obj.osFamily},
+			memory = #{obj.memory},
+			storage = #{obj.storage}
+		WHERE
+			id = #{obj.id}
+	</update>
+	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO Requirement (
+			id,
+			osFamily,
+			memory,
+			storage
+		) VALUES (
+			#{obj.id},
+			#{obj.osFamily},
+			#{obj.memory},
+			#{obj.storage}
+		) ON DUPLICATE KEY UPDATE
+			osFamily = #{obj.osFamily},
+			memory = #{obj.memory},
+			storage = #{obj.storage}
+	</insert>
+	<delete id="delete" parameterType="Map">
+		DELETE
+		FROM
+			Requirement
+		WHERE
+			id = #{id}
+	</delete>
+	<select id="exists" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			Requirement
+		WHERE
+			id = #{obj.id}
+	</select>
+	<select id="findById" parameterType="Map" resultMap="requirement">
+		SELECT
+			*
+		FROM
+			View_Requirement
+		WHERE
+			requirementId = #{id}
+	</select>
+	<select id="find" resultMap="requirement">
+		SELECT
+			*
+		FROM
+			View_Requirement
+	</select>
+
+	<!-- Methods from RequirementMapper. -->
+	<insert id="addOperatingSystem" parameterType="Map">
+		INSERT IGNORE INTO Requirement_OperatingSystem (
+			requirementId,
+			operatingSystemId
+		) VALUES (
+			#{id},
+			#{osId}
+		)
+	</insert>
+	<delete id="removeOperatingSystem" parameterType="Map">
+		DELETE
+		FROM
+			Requirement_OperatingSystem
+		WHERE
+			requirementId = #{id}
+			AND
+			operatingSystemId = #{osId}
+	</delete>
+	<insert id="addProcessor" parameterType="Map">
+		INSERT IGNORE INTO Requirement_Processor (
+			requirementId,
+			processorId
+		) VALUES (
+			#{id},
+			#{processorId}
+		)
+	</insert>
+	<delete id="removeProcessor" parameterType="Map">
+		DELETE
+		FROM
+			Requirement_Processor
+		WHERE
+			requirementId = #{id}
+			AND
+			processorId = #{processorId}
+	</delete>
+	<insert id="addGraphics" parameterType="Map">
+		INSERT INGORE INTO Requirement_Graphics (
+			requirementId,
+			graphicsId
+		) VALUES (
+			#{id},
+			#{graphicsId}
+		)
+	</insert>
+	<delete id="removeGraphics" parameterType="Map">
+		DELETE
+		FROM
+			Requirement_Graphics
+		WHERE
+			requirementId = #{id}
+			AND
+			graphicsId = #{graphicsId}
+	</delete>
+</mapper>

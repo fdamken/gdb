@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Game Database
+  %%
+  Copyright (C) 2016 - 2016 LCManager Group
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.ProcessorMapper">
+	<resultMap type="Processor" id="processor">
+		<id property="id" column="processorId" />
+		<result property="model" column="processorModel" />
+		<result property="cores" column="processorCores" />
+		<result property="threads" column="processorThreads" />
+		<result property="frequency" column="processorFrequency" />
+		<result property="instructionSet" column="processorInstructionSet" />
+		<association property="brand" javaType="Brand" foreignColumn="processorId">
+			<id property="id" column="processorBrandId" />
+			<result property="name" column="processorBrandName" />
+		</association>
+	</resultMap>
+
+	<!-- Methods from BaseMapper. -->
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO Processor (
+			id,
+			brandId,
+			model,
+			cores,
+			threads,
+			frequency,
+			instructionSet
+		) VALUES (
+			#{obj.id},
+			#{obj.brand.id},
+			#{obj.model},
+			#{obj.cores},
+			#{obj.threads},
+			#{obj.frequency},
+			#{obj.instructionSet}
+		)
+	</insert>
+	<update id="update" parameterType="Map">
+		UPDATE
+			Processor
+		SET
+			id = #{obj.id},
+			brandId = #{obj.brand.id},
+			model = #{obj.model},
+			cores = #{obj.cores},
+			threads = #{obj.threads},
+			frequency = #{obj.frequency},
+			instructionSet = #{obj.instructionSet}
+	</update>
+	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO Processor (
+			id,
+			brandId,
+			model,
+			cores,
+			threads,
+			frequency,
+			instructionSet
+		) VALUES (
+			#{obj.id},
+			#{obj.brand.id},
+			#{obj.model},
+			#{obj.cores},
+			#{obj.threads},
+			#{obj.frequency},
+			#{obj.instructionSet}
+		) ON DUPLICATE KEY UPDATE
+			id = #{obj.id},
+			brandId = #{obj.brand.id},
+			model = #{obj.model},
+			cores = #{obj.cores},
+			threads = #{obj.threads},
+			frequency = #{obj.frequency},
+			instructionSet = #{obj.instructionSet}
+	</insert>
+	<delete id="delete" parameterType="Map">
+		DELETE
+		FROM
+			Processor
+		WHERE
+			id = #{id}
+	</delete>
+	<select id="exists" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			Processor
+		WHERE
+			id = #{id}
+	</select>
+	<select id="findById" parameterType="Map" resultMap="processor">
+		SELECT
+			*
+		FROM
+			View_Processor
+		WHERE
+			processorId = #{id}
+	</select>
+	<select id="find" resultMap="processor">
+		SELECT
+			*
+		FROM
+			View_Processor
+	</select>
+
+	<!-- Methods from ProcessorMapper. -->
+</mapper>

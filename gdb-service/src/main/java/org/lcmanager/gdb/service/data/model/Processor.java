@@ -41,11 +41,6 @@ public class Processor implements BaseModel<Integer> {
      */
     private Integer id;
     /**
-     * The brand of the processor.
-     * 
-     */
-    private Brand brand;
-    /**
      * The model ID of the processor.
      * 
      */
@@ -70,4 +65,11 @@ public class Processor implements BaseModel<Integer> {
      * 
      */
     private Integer instructionSet;
+
+    // ~ Mapped ~
+    /**
+     * The brand of the processor.
+     * 
+     */
+    private Brand brand;
 }

@@ -55,11 +55,6 @@ public class ComputerSystem implements BaseModel<Integer>, OsFamilyAware {
      * 
      */
     private int memory;
-    /**
-     * The storage of this system is mebibyte.
-     * 
-     */
-    private int storage;
 
     // ~ Mapped ~
     /**

@@ -55,11 +55,6 @@ public class Graphics implements BaseModel<Integer> {
      */
     private Integer id;
     /**
-     * The brand of this graphics card.
-     * 
-     */
-    private Brand brand;
-    /**
      * The model of this graphics card.
      * 
      */
@@ -84,6 +79,13 @@ public class Graphics implements BaseModel<Integer> {
      * 
      */
     private String openGlVersion;
+
+    // ~ Mapped ~
+    /**
+     * The brand of this graphics card.
+     * 
+     */
+    private Brand brand;
 
     /**
      * Encodes the DirectX version in the format <code>XXYYYZZZ</code> where

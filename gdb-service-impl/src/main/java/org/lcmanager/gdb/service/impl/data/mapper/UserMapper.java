@@ -121,6 +121,49 @@ public interface UserMapper extends BaseMapper<User, Integer> {
     void removeAuthority(@Param("id") int id, @Param("authority") String authority);
 
     /**
+     * Adds the computer system with the given ID to the user with the given ID.
+     *
+     * @param id
+     *            The ID of the user to add the computer system to.
+     * @param computerSystemId
+     *            The ID of the computer system to add to the user.
+     */
+    void addComputerSystem(@Param("id") int id, @Param("computerSystemId") int computerSystemId);
+
+    /**
+     * Removes the computer system with the given ID from the user with the
+     * given ID.
+     *
+     * @param id
+     *            The ID of the user to remove the computer system from.
+     * @param computerSystemId
+     *            The ID of the computer system to remove from the user.
+     */
+    void removeComputerSystem(@Param("id") int id, @Param("computerSystemId") int computerSystemId);
+
+    /**
+     * Sets the computer system from the given user with the given ID as
+     * primary.
+     *
+     * @param id
+     *            The ID of the user.
+     * @param computerSystemId
+     *            The ID of the computer system to set as primary.
+     */
+    void setComputerSystemPrimary(@Param("id") int id, @Param("computerSystemId") int computerSystemId);
+
+    /**
+     * Sets the computer system from the given user with the given ID as
+     * secondary.
+     *
+     * @param id
+     *            The ID of the user.
+     * @param computerSystemId
+     *            The ID of the computer system to set as secondary.
+     */
+    void setComputerSystemSecondary(@Param("id") int id, @Param("computerSystemId") int computerSystemId);
+
+    /**
      * Checks whether any user with the given user name exists.
      *
      * @param userName

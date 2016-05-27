@@ -21,6 +21,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.GameMapper">
+	<!-- Magic. Do not touch! -->
 	<resultMap type="Game" id="game">
 		<id property="id" column="gameId" />
 		<result property="name" column="gameName" />
@@ -216,4 +217,150 @@
 	</select>
 
 	<!-- Methods from GameMapper. -->
+<!--
+addDeveloper(int, int)
+removeDeveloper(int, int)
+addPlatform(int, OsFamily)
+removePlatform(int, OsFamily)
+addPublisher(int, int)
+removePublisher(int, int)
+addCategory(int, int)
+removeCategory(int, int)
+addGenre(int, int)
+removeGenre(int, int)
+addScreenshot(int, int)
+removeScreenshot(int, int)
+addRequirement(int, OsFamily, int, RequirementType)
+removeRequirement(int, OsFamily)
+-->
+	<insert id="addDeveloper" parameterType="Map">
+		INSERT IGNORE INTO Game_Developer (
+			gameId,
+			developerId
+		) VALUES (
+			#{id},
+			#{developerId}
+		)
+	</insert>
+	<delete id="removeDeveloper" parameterType="Map">
+		DELETE
+		FROM
+			Game_Developer
+		WHERE
+			gameId = #{id}
+			AND
+			developerId = #{developerId}
+	</delete>
+	<insert id="addPlatform" parameterType="Map">
+		INSERT IGNORE INTO Game_OsFamily (
+			gameId,
+			osFamily
+		) VALUES (
+			#{id},
+			#{platform}
+		)
+	</insert>
+	<delete id="removePlatform" parameterType="Map">
+		DELETE
+		FROM
+			Game_OsFamily
+		WHERE
+			gameId = #{id}
+			AND
+			osFamilyId = #{platform}
+	</delete>
+	<insert id="addPublisher" parameterType="Map">
+		INSERT IGNORE INTO Game_Publisher (
+			gameId,
+			publisherId
+		) VALUES (
+			#{id},
+			#{publisherId}
+		)
+	</insert>
+	<delete id="removePublisher" parameterType="Map">
+		DELETE
+		FROM
+			Game_Publisher
+		WHERE
+			gameId = #{id}
+			AND
+			publisherId = #{publisherId}
+	</delete>
+	<insert id="addCategory" parameterType="Map">
+		INSERT IGNORE INTO Game_Category (
+			gameId,
+			categoryId
+		) VALUES (
+			#{id},
+			#{categoryId}
+		)
+	</insert>
+	<delete id="removeCategory" parameterType="Map">
+		DELETE
+		FROM
+			Game_Category
+		WHERE
+			gameId = #{id}
+			AND
+			categoryId = #{categoryId}
+	</delete>
+	<insert id="addGenre" parameterType="Map">
+		INSERT IGNORE INTO Game_Genre (
+			gameId,
+			genreId
+		) VALUES (
+			#{id},
+			#{genreId}
+		)
+	</insert>
+	<delete id="removeGenre" parameterType="Map">
+		DELETE
+		FROM
+			Game_Genre
+		WHERE
+			gameId = #{id}
+			AND
+			genreId = #{genreId}
+	</delete>
+	<insert id="addScreenshot" parameterType="Map">
+		INSERT IGNORE INTO Game_Screenshot (
+			gameId,
+			screenshotId
+		) VALUES (
+			#{id},
+			#{screenshotId}
+		)
+	</insert>
+	<delete id="removeScreenshot" parameterType="Map">
+		DELETE
+		FROM
+			Game_Screenshot
+		WHERE
+			gameId = #{id}
+			AND
+			screenshotId = #{screenshotId}
+	</delete>
+	<insert id="addRequirement" parameterType="Map">
+		INSERT IGNORE INTO Game_Requirement (
+			gameId,
+			osFamily,
+			requirementId,
+			reqType
+		) VALUES (
+			#{id},
+			#{platform},
+			#{requirementId},
+			#{requirementType}
+		)
+	</insert>
+	<delete id="removeRequirement" parameterType="Map">
+		DELETE
+		FROM
+			Game_Requirement
+		WHERE
+			gameId = #{id}
+			AND
+			osFamily = #{platform}
+	</delete>
 </mapper>

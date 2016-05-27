@@ -142,6 +142,44 @@
 			AND
 			authority = #{authority}
 	</delete>
+	<insert id="addComputerSystem" parameterType="Map">
+		INSERT IGNORE INTO User_ComputerSystem (
+			userId,
+			computerSystemId
+		) VALUES (
+			#{id},
+			#{computerSystemId}
+		)
+	</insert>
+	<delete id="removeComputerSystem" parameterType="Map">
+		DELETE
+		FROM
+			User_ComputerSystem
+		WHERE
+			userId = #{id}
+			AND
+			computerSystemId = #{computerSystemId}
+	</delete>
+	<update id="makeComputerSystemPrimary" parameterType="Map">
+		UPDATE
+			User_ComputerSystem
+		SET
+			primary = TRUE
+		WHERE
+			userId = #{id}
+			AND
+			computerSystemId = #{computerSystemId}
+	</update>
+	<update id="makeComputerSystemSecondary" parameterType="Map">
+		UPDATE
+			User_ComputerSystem
+		SET
+			primary = FALSE
+		WHERE
+			userId = #{id}
+			AND
+			computerSystemId = #{computerSystemId}
+	</update>
 	<select id="existsUserName" parameterType="Map" resultType="boolean">
 		SELECT
 			COUNT(*)

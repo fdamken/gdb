@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Game Database
+  %%
+  Copyright (C) 2016 - 2016 LCManager Group
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.OperatingSystemMapper">
+	<resultMap type="OperatingSystem" id="operatingSystem">
+		<id property="id" column="osId" />
+		<result property="osFamily" column="osFamily" />
+		<result property="name" column="osName" />
+		<association property="version" javaType="Version" foreignColumn="osId">
+			<constructor>
+				<arg column="osVersionName" javaType="String" />
+				<arg column="osVersionMajor" javaType="int" />
+				<arg column="osVersionMinor" javaType="int" />
+				<arg column="osVersionBugfx" javaType="int" />
+				<arg column="osVersionBuild" javaType="int" />
+			</constructor>
+		</association>
+		<association property="developer" javaType="Developer" foreignColumn="osId">
+			<id property="id" column="osDeveloperId" />
+			<result property="name" column="osDeveloperName" />
+		</association>
+	</resultMap>
+
+	<!-- Methods from BaseMapper. -->
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO OperatingSystem (
+			id,
+			developerId,
+			osFamily,
+			name,
+			versionName,
+			versionMajor,
+			versionMinor,
+			versionBugfx,
+			versionBuild
+		) VALUES (
+			#{obj.id},
+			#{obj.developer.id},
+			#{obj.osFamily},
+			#{obj.name},
+			#{obj.version.name},
+			#{obj.version.major},
+			#{obj.version.minor},
+			#{obj.version.bugfx},
+			#{obj.version.build}
+		)
+	</insert>
+	<update id="update" parameterType="Map">
+		UPDATE
+			OperatingSystem
+		SET
+			developerId = #{obj.developer.id},
+			osFamily = #{obj.osFamily},
+			name = #{obj.name},
+			versionName = #{obj.version.name},
+			versionMajor = #{obj.version.major},
+			versionMinor = #{obj.version.minor},
+			versionBugfx = #{obj.version.bugfx},
+			versionBuild = #{obj.version.build}
+	</update>
+	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO OperatingSystem (
+			id,
+			developerId,
+			osFamily,
+			name,
+			versionName,
+			versionMajor,
+			versionMinor,
+			versionBugfx,
+			versionBuild
+		) VALUES (
+			#{obj.id},
+			#{obj.developer.id},
+			#{obj.osFamily},
+			#{obj.name},
+			#{obj.version.name},
+			#{obj.version.major},
+			#{obj.version.minor},
+			#{obj.version.bugfx},
+			#{obj.version.build}
+		) ON DUPLICATE KEY UPDATE
+			developerId = #{obj.developer.id},
+			osFamily = #{obj.osFamily},
+			name = #{obj.name},
+			versionName = #{obj.version.name},
+			versionMajor = #{obj.version.major},
+			versionMinor = #{obj.version.minor},
+			versionBugfx = #{obj.version.bugfx},
+			versionBuild = #{obj.version.build}
+	</insert>
+	<delete id="delete" parameterType="Map">
+		DELETE
+		FROM
+			OperatingSystem
+		WHERE
+			id = #{id}
+	</delete>
+	<select id="exists" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			OperatingSystem
+		WHERE
+			id = #{id}
+	</select>
+	<select id="findById" parameterType="Map" resultMap="operatingSystem">
+		SELECT
+			*
+		FROM
+			View_OperatingSystem
+		WHERE
+			osId = #{id}
+	</select>
+	<select id="find" resultMap="operatingSystem">
+		SELECT
+			*
+		FROM
+			View_OperatingSystem
+	</select>
+
+	<!-- Methods from OperatingSystemMapper. -->
+</mapper>

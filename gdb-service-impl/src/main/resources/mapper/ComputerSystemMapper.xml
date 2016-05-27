@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Game Database
+  %%
+  Copyright (C) 2016 - 2016 LCManager Group
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.ComputerSystemMapper">
+	<resultMap type="ComputerSystem" id="computerSystem">
+		<id property="id" column="computerSystemId" />
+		<result property="osFamily" column="computerSystemOsFamily" />
+		<result property="memory" column="computerSystemMemory" />
+		<association property="operatingSystem" javaType="OperatingSystem" foreignColumn="computerSystemId">
+			<id property="id" column="osId" />
+			<result property="osFamily" column="osFamily" />
+			<result property="name" column="osName" />
+			<association property="version" javaType="Version" foreignColumn="osId">
+				<constructor>
+					<arg column="osVersionName" javaType="String" />
+					<arg column="osVersionMajor" javaType="int" />
+					<arg column="osVersionMinor" javaType="int" />
+					<arg column="osVersionBugfx" javaType="int" />
+					<arg column="osVersionBuild" javaType="int" />
+				</constructor>
+			</association>
+			<association property="developer" javaType="Developer" foreignColumn="osId">
+				<id property="id" column="osDeveloperId" />
+				<result property="name" column="osDeveloperName" />
+			</association>
+		</association>
+		<association property="processor" javaType="Processor" foreignColumn="computerSystemId">
+			<id property="id" column="processorId" />
+			<result property="model" column="processorModel" />
+			<result property="cores" column="processorCores" />
+			<result property="threads" column="processorThreads" />
+			<result property="frequency" column="processorFrequency" />
+			<result property="instructionSet" column="processorInstructionSet" />
+			<association property="brand" javaType="Brand" foreignColumn="processorId">
+				<id property="id" column="processorBrandId" />
+				<result property="name" column="processorBrandName" />
+			</association>
+		</association>
+		<association property="graphics" javaType="Graphics" foreignColumn="computerSystemId">
+			<id property="id" column="graphicsId" />
+			<result property="model" column="graphicsModel" />
+			<result property="memory" column="graphicsMemory" />
+			<result property="frequency" column="graphicsFrequency" />
+			<result property="directXVersion" column="graphicsDirectXVersion" />
+			<result property="openGlVersion" column="graphicsOpenGlVersion" />
+			<association property="brand" javaType="Brand" foreignColumn="graphicsId">
+				<id property="id" column="graphicsBrandId" />
+				<result property="name" column="graphicsBrandName" />
+			</association>
+		</association>
+	</resultMap>
+
+	<!-- Methods from BaseMapper. -->
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO ComputerSystem (
+			id,
+			operatingSystemId,
+			processorId,
+			graphicsId,
+			memory
+		) VALUES (
+			#{obj.id},
+			#{obj.operatingSystem.id},
+			#{obj.processor.id},
+			#{obj.graphics.id},
+			#{obj.memory}
+		)
+	</insert>
+	<update id="update" parameterType="Map">
+		UPDATE
+			ComputerSystem
+		SET
+			operatingSystemId = #{obj.operatingSystem.id},
+			processorId = #{obj.processor.id},
+			graphicsId = #{obj.graphics.id},
+			memory = #{obj.memory}
+		WHERE
+			id = #{obj.id}
+	</update>
+	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+		INSERT INTO ComputerSystem (
+			id,
+			operatingSystemId,
+			processorId,
+			graphicsId,
+			memory
+		) VALUES (
+			#{obj.id},
+			#{obj.operatingSystem.id},
+			#{obj.processor.id},
+			#{obj.graphics.id},
+			#{obj.memory}
+		) ON DUPLICATE KEY UPDATE
+			operatingSystemId = #{obj.operatingSystem.id},
+			processorId = #{obj.processor.id},
+			graphicsId = #{obj.graphics.id},
+			memory = #{obj.memory}
+	</insert>
+	<delete id="delete" parameterType="Map">
+		DELETE
+		FROM
+			ComputerSystem
+		WHERE
+			id = #{id}
+	</delete>
+	<select id="exists" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			ComputerSystem
+		WHERE
+			id = #{obj.id}
+	</select>
+	<select id="findById" parameterType="Map" resultMap="computerSystem">
+		SELECT
+			*
+		FROM
+			View_ComputerSystem
+		WHERE
+			computerSystemId = #{id}
+	</select>
+	<select id="find" resultMap="computerSystem">
+		SELECT
+			*
+		FROM
+			View_ComputerSystem
+	</select>
+
+	<!-- Methods from ComputerSystemMapper. -->
+	<select id="findPrimaryByUser" parameterType="Map" resultMap="computerSystem">
+		SELECT
+			VC.*
+		FROM
+			User AS Us
+		LEFT JOIN User_ComputerSysten AS UC ON Us.id = UC.userId
+		LEFT JOIN View_ComputerSystem AS VC ON VC.id = UC.computerSystemId
+		WHERE
+			Us.id = #{userId}
+		ORDER BY UC.primary DESC
+		LIMIT 1
+	</select>
+	<select id="findByUser" parameterType="Map" resultMap="computerSystem">
+		SELECT
+			VC.*
+		FROM
+			User AS Us
+		LEFT JOIN User_ComputerSysten AS UC ON Us.id = UC.userId
+		LEFT JOIN View_ComputerSystem AS VC ON VC.id = UC.computerSystemId
+		WHERE
+			Us.id = #{userId}
+		ORDER BY UC.primary DESC
+	</select>
+</mapper>

@@ -172,6 +172,29 @@ CREATE TABLE IF NOT EXISTS Requirement_OperatingSystem (
 	FOREIGN KEY (operatingSystemId) REFERENCES OperatingSystem(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
+-- Create table 'ComputerSystem'.
+CREATE TABLE IF NOT EXISTS ComputerSystem (
+	id INT NOT NULL,
+	operatingSystemId INT NOT NULL,
+	processorId INT NOT NULL,
+	graphicsId INT NOT NULL,
+	memory INT,
+	PRIMARY KEY (id),
+	FOREIGN KEY (operatingSystemId) REFERENCES OperatingSystem(id),
+	FOREIGN KEY (processorId) REFERENCES Processor(id),
+	FOREIGN KEY (graphicsId) REFERENCES Graphics(id)
+) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
+
+-- Create table 'User_ComputerSystem'.
+CREATE TABLE IF NOT EXISTS User_ComputerSystem (
+	userId INT NOT NULL,
+	computerSystemId INT NOT NULL,
+	primarySystem BOOLEAN NOT NULL DEFAULT FALSE,
+	PRIMARY KEY (userId, computerSystemId),
+	FOREIGN KEY (userId) REFERENCES User(id),
+	FOREIGN KEY (computerSystemId) REFERENCES ComputerSystem(id)
+) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
+
 -- Create table 'Game'.
 CREATE TABLE IF NOT EXISTS Game (
 	id INT NOT NULL,
@@ -256,6 +279,112 @@ CREATE TABLE IF NOT EXISTS Game_Requirement (
 	-- View Creation --
 	-------------------
 
+-- Create view 'View_Processor'.
+CREATE OR REPLACE VIEW View_Processor AS
+	SELECT
+		Pr.id				AS processorId,
+		Pr.model			AS processorModel,
+		Pr.cores			AS processorCores,
+		Pr.threads			AS processorThreads,
+		Pr.frequency		AS processorFrequency,
+		Pr.instructionSet	AS processorInstructionSet,
+		Br.id				AS processorBrandId,
+		Br.name				AS processorBrandName
+	FROM
+		Processor AS Pr
+	LEFT JOIN Brand AS Br ON Br.id = Pr.brandId
+;
+
+-- Create view 'View_Graphics'.
+CREATE OR REPLACE VIEW View_Graphics AS
+	SELECT
+		Gr.id				AS graphicsId,
+		Gr.model			AS graphicsModel,
+		Gr.memory			AS graphicsMemory,
+		Gr.frequency		AS graphicsFrequency,
+		Gr.directXVersion	AS graphicsDirectYVersion,
+		Gr.openGlVersion	AS graphicsOpenGlVersion,
+		Br.id				AS graphicsBrandId,
+		Br.name				AS graphicsBrandName
+	FROM
+		Graphics AS Gr
+	LEFT JOIN Brand AS Br ON Br.id = Gr.brandId
+;
+
+-- Create view 'View_OperatingSystem'.
+CREATE OR REPLACE VIEW View_OperatingSystem AS
+	SELECT
+		OS.id				AS osId,
+		OS.osFamily			AS osFamily,
+		OS.name				AS osName,
+		OS.versionName		AS osVersionName,
+		OS.versionMajor		AS osVersionMajor,
+		OS.versionMinor		AS osVersionMinor,
+		OS.versionBugfx		AS osVersionBugfx,
+		OS.versionBuild		AS osVersionBuild,
+		De.id				AS osDeveloperId,
+		De.name				AS osDeveloperName
+	FROM
+		OperatingSystem AS OS
+	LEFT JOIN Developer AS De ON De.id = OS.developerId
+;
+
+-- Create view 'View_Requirement'.
+CREATE OR REPLACE VIEW View_Requirement AS
+	SELECT
+		Re.id				AS requirementId,
+		Re.osFamily			AS requirementOsFamily,
+		Re.memory			AS requirementMemory,
+		Re.storage			AS requirementStorage,
+		VO.*,
+		VP.*,
+		VG.*
+	FROM
+		Requirement AS Re
+	LEFT JOIN Requirement_OperatingSystem	AS ReOS ON ReOS.requirementId	= Re.id
+	LEFT JOIN View_OperatingSystem			AS VO	ON VO.osId				= ReOS.operatingSystemId
+	LEFT JOIN Requirement_Processor			AS RePr	ON RePr.requirementId	= Re.id
+	LEFT JOIN View_Processor				AS VP	ON VP.processorId		= RePr.processorId
+	LEFT JOIN Requirement_Graphics			AS ReGr	ON ReGr.requirementId	= Re.id
+	LEFT JOIN View_Graphics					AS VG	ON VG.graphicsId		= ReGr.graphicsId
+;
+
+-- Create view 'View_ComputerSystem'.
+CREATE OR REPLACE VIEW View_ComputerSystem AS
+	SELECT
+		CS.id		AS computerSystemId,
+		CS.memory	AS computerSystemMemory,
+		VO.*,
+		VP.*,
+		VG.*
+	FROM
+		ComputerSystem AS CS
+	LEFT JOIN View_OperatingSystem	AS VO ON VO.osId		= CS.operatingSystemId
+	LEFT JOIN View_Processor		AS VP ON VP.processorId	= CS.processorId
+	LEFT JOIN View_Graphics			AS VG ON VG.graphicsId	= CS.graphicsId
+;
+
+-- Create view 'View_Requirement'.
+CREATE OR REPLACE VIEW View_Requirement AS
+	SELECT
+		Re.id		AS requirementId,
+		Re.osFamily	AS requirementOsFamily,
+		Re.memory	AS requirementMemory,
+		Re.storage	AS requirementStorage,
+		VO.*,
+		VP.*,
+		VG.*
+	FROM
+		Requirement AS Re
+	LEFT JOIN Requirement_OperatingSystem	AS RO ON Re.id			= RO.requirementId
+	LEFT JOIN View_OperatingSystem			AS VO ON VO.osId		= RO.operatingSystemId
+	LEFT JOIN Requirement_Processor			AS RP ON Re.id			= RP.requirementId
+	LEFT JOIN View_Processor				AS VP ON VP.processorId	= RP.processorId
+	LEFT JOIN Requirement_Graphics			AS RG ON Re.id			= RG.requirementId
+	LEFT JOIN View_Graphics					AS VG ON VG.graphicsId	= RG.graphicsId 
+;
+
+-- Create view 'View_Game'.
 CREATE OR REPLACE VIEW View_Game AS
 	SELECT
 		Ga.id				AS gameId,

@@ -28,6 +28,11 @@ import org.lcmanager.gdb.service.data.model.BaseModel;
 /**
  * This is the base interface for any MyBatis mapper and is also used to detect
  * the base package for the mapper scan.
+ * 
+ * <p>
+ * <b> NOTE: Mapped properties are not saved into the database when inserting
+ * them. </b>
+ * </p>
  *
  * @param <T>
  *            The type of the model this mapper is for.
@@ -86,6 +91,7 @@ public interface BaseMapper<T extends BaseModel<I>, I extends Serializable> {
      * <p>
      * <b> If no model with the given ID exists, nothing happens. </b>
      * </p>
+     * private Integer id;
      *
      * @param id
      *            The ID of the model to delete.
