@@ -36,6 +36,7 @@
 		<!-- Model type. -->
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Brand" alias="Brand" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Category" alias="Category" />
+		<typeAlias type="org.lcmanager.gdb.service.data.model.ComputerSystem" alias="ComputerSystem" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Developer" alias="Developer" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Game" alias="Game" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Genre" alias="Genre" />
@@ -53,8 +54,18 @@
 		<typeHandler handler="org.lcmanager.gdb.service.impl.data.handler.UrlHandler" />
 	</typeHandlers>
 	<mappers>
+		<mapper resource="mapper/BrandMapper.xml" />
 		<mapper resource="mapper/CategoryMapper.xml" />
+		<mapper resource="mapper/ComputerSystemMapper.xml" />
+		<mapper resource="mapper/DeveloperMapper.xml" />
 		<mapper resource="mapper/GameMapper.xml" />
+		<mapper resource="mapper/GenreMapper.xml" />
+		<mapper resource="mapper/GraphicsMapper.xml" />
+		<mapper resource="mapper/OperatingSystemMapper.xml" />
+		<mapper resource="mapper/ProcessorMapper.xml" />
+		<mapper resource="mapper/PublisherMapper.xml" />
+		<mapper resource="mapper/RequirementMapper.xml" />
+		<mapper resource="mapper/ScreenshotMapper.xml" />
 		<mapper resource="mapper/UserMapper.xml" />
 	</mappers>
 </configuration>

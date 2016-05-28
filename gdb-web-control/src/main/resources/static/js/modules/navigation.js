@@ -37,6 +37,9 @@ gdbApp.controller('navController', ['$scope', '$rootScope', '$http', 'layout', f
 	$scope.logout = function() {
 		$('#logout-form').submit();
 	};
+	$scope.openPreferences = function() {
+		$rootScope.$broadcast('preferences_open-dialog');
+	};
 
 	$scope.$watch('query', function(query) {
 		if (queryChanged) {

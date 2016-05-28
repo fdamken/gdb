@@ -82,7 +82,9 @@ public interface UserService extends UserDetailsManager {
      * @see org.springframework.security.provisioning.UserDetailsManager#deleteUser(java.lang.String)
      */
     @Override
-    void deleteUser(String userName);
+    default void deleteUser(final String userName) {
+        this.deleteUser(this.retrieveUser(userName).getId());
+    }
 
     /**
      * {@inheritDoc}
@@ -108,6 +110,24 @@ public interface UserService extends UserDetailsManager {
      *            The password of the user to create.
      */
     void createUser(final User user, final String password);
+
+    /**
+     * Deletes the given user.
+     *
+     * @param user
+     *            The user to delete.
+     */
+    void deleteUser(final User user);
+
+    /**
+     * Deletes the user with the given ID.
+     *
+     * @param id
+     *            The ID of the user to delete.
+     */
+    default void deleteUser(final int id) {
+        this.deleteUser(this.retrieveUser(id));
+    }
 
     // ~ Read Only ~
     /**
@@ -350,7 +370,7 @@ public interface UserService extends UserDetailsManager {
     }
 
     /**
-     * Avicts the given authority from the given user.
+     * Evicts the given authority from the given user.
      * 
      * <p>
      * The available authorities are listed in
@@ -365,7 +385,7 @@ public interface UserService extends UserDetailsManager {
     void evictAuthority(final GrantedAuthority authority, final User user);
 
     /**
-     * Avicts the given authority from the given user.
+     * Evicts the given authority from the given user.
      * 
      * <p>
      * The available authorities are listed in
@@ -382,7 +402,7 @@ public interface UserService extends UserDetailsManager {
     }
 
     /**
-     * Avicts the given authority from the current user.
+     * Evicts the given authority from the current user.
      * 
      * <p>
      * The available authorities are listed in
@@ -397,7 +417,7 @@ public interface UserService extends UserDetailsManager {
     }
 
     /**
-     * Avicts the given authority from the current user.
+     * Evicts the given authority from the current user.
      * 
      * <p>
      * The available authorities are listed in
@@ -409,5 +429,21 @@ public interface UserService extends UserDetailsManager {
      */
     default void evictAuthority(final String authority) {
         this.evictAuthority(new SimpleGrantedAuthority(authority));
+    }
+
+    /**
+     * Evicts all authorities from the given user.
+     *
+     * @param user
+     *            The user to evict all authorities from.
+     */
+    void evictAllAuthorities(final User user);
+
+    /**
+     * Evicts all authorities from the current user.
+     *
+     */
+    default void evictAllAuthorities() {
+        this.evictAllAuthorities(this.retrieveUser());
     }
 }

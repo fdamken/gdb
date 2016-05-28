@@ -177,6 +177,13 @@
 	</select>
 
 	<!-- Methods from ComputerSystemMapper. -->
+	<delete id="deleteByUser" parameterType="Map">
+		DELETE
+		FROM
+			ComputerSystem
+		WHERE
+			userId = #{userId}
+	</delete>
 	<select id="findPrimaryByUser" parameterType="Map" resultMap="computerSystem">
 		SELECT
 			*

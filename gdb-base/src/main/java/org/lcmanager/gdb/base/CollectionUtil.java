@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.base;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -39,6 +40,62 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class CollectionUtil {
+    /**
+     * Filters out all elements from <code>left</code> that are present in
+     * <code>right</code> and returns the result.
+     * 
+     * <p>
+     * Formal:
+     * 
+     * <pre>
+     * A := left
+     * A := right
+     * D := result
+     *
+     * D := { x | (x &#x2208; A) &#x2227; (x &#x2209; B) }
+     * </pre>
+     * </p>
+     *
+     * @param left
+     *            The left collection.
+     * @param right
+     *            The right collection.
+     * @return The left-difference of <code>left</code> and <code>right</code>.
+     */
+    public static <T> Collection<T> leftDifference(final Collection<? extends T> left, final Collection<? extends T> right) {
+        final List<T> result = new ArrayList<>(left);
+        result.removeAll(right);
+        return result;
+    }
+
+    /**
+     * Filters out all elements from <code>right</code> that are present in
+     * <code>left</code> and returns the result.
+     * 
+     * <p>
+     * Formal:
+     * 
+     * <pre>
+     * A := left
+     * A := right
+     * D := result
+     *
+     * D := { x | (x &#x2209; A) &#x2227; (x &#x2208; B) }
+     * </pre>
+     * </p>
+     *
+     * @param left
+     *            The left collection.
+     * @param right
+     *            The right collection.
+     * @return The right-difference of <code>left</code> and <code>right</code>.
+     */
+    public static <T> Collection<T> rightDifference(final Collection<? extends T> left, final Collection<? extends T> right) {
+        final List<T> result = new ArrayList<>(right);
+        result.removeAll(left);
+        return result;
+    }
+
     /**
      * Finds a value of the given map that is associated with the key that the
      * given predicate returns <code>true</code> for.

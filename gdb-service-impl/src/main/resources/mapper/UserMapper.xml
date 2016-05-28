@@ -93,7 +93,7 @@
 		FROM
 			View_User
 		WHERE
-			id = #{id}
+			userId = #{id}
 	</select>
 	<select id="find" resultMap="user">
 		SELECT
@@ -135,6 +135,13 @@
 			userId = #{id}
 			AND
 			authority = #{authority}
+	</delete>
+	<delete id="removeAuthorities" parameterType="Map">
+		DELETE
+		FROM
+			User_Authority
+		WHERE
+			userId = #{id}
 	</delete>
 	<insert id="addComputerSystem" parameterType="Map">
 		INSERT IGNORE INTO User_ComputerSystem (

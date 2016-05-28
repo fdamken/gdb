@@ -121,6 +121,14 @@ public interface UserMapper extends BaseMapper<User, Integer> {
     void removeAuthority(@Param("id") int id, @Param("authority") String authority);
 
     /**
+     * Removes all authorities granted to the user with the given ID.
+     * 
+     * @param id
+     *            The ID of the user to remove all authorities from.
+     */
+    void removeAuthorities(@Param("id") int id);
+
+    /**
      * Adds the computer system with the given ID to the user with the given ID.
      *
      * @param id

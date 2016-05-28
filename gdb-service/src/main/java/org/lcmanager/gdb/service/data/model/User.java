@@ -20,12 +20,20 @@
 package org.lcmanager.gdb.service.data.model;
 
 import java.util.Collection;
-
-import lombok.Data;
-import lombok.experimental.Accessors;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
 /**
  * Provides an expendable user class to the basic {@link UserDetails} of Spring.
@@ -68,6 +76,7 @@ public class User implements BaseModel<Integer>, UserDetails {
      * The {@link GrantedAuthority authorities} this user is mapped to.
      * 
      */
+    @Getter(onMethod = @__({ @JsonIgnore }))
     private Collection<? extends GrantedAuthority> authorities;
 
     // ~ Static fields for Spring ~
@@ -113,5 +122,29 @@ public class User implements BaseModel<Integer>, UserDetails {
             user.setUsername(userDetails.getUsername());
         }
         return user;
+    }
+
+    /**
+     * Maps {@link #getAuthorities()} to a list of strings of the authority
+     * names.
+     *
+     * @return {@link #getAuthorities()} as a list of strings of the authority
+     *         names.
+     */
+    @JsonProperty("authorities")
+    public List<String> getAuthorityList() {
+        return this.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+    }
+
+    /**
+     * Sets {@link #setAuthorities(Collection)} by mapping the list of string to
+     * a list of authorities.
+     *
+     * @param authorityList
+     *            The list of the names of authorities to set.
+     */
+    @JsonSetter("authorities")
+    public void setAuthorityList(final List<String> authorityList) {
+        this.setAuthorities(authorityList.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
     }
 }

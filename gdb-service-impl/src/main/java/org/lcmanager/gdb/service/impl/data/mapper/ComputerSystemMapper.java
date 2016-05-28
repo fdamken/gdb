@@ -30,6 +30,14 @@ import org.lcmanager.gdb.service.data.model.ComputerSystem;
  */
 public interface ComputerSystemMapper extends BaseMapper<ComputerSystem, Integer> {
     /**
+     * Deletes all computer systems owned by the user with the given ID.
+     *
+     * @param userId
+     *            The ID of the user that owns all computer systems to delete.
+     */
+    void deleteByUser(@Param("userId") int userId);
+
+    /**
      * Finds the primary computer system of the given user.
      *
      * @param userId

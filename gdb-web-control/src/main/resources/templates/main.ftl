@@ -56,6 +56,11 @@
 	<@gdb.tail />
 
 	<!-- Dialogs -->
-	<@m.login />
+	<#if !is_user && !is_admin>
+		<@m.login />
+	</#if>
+	<#if is_user || is_admin>
+		<@m.preferences />
+	</#if>
 </body>
 </html>

@@ -21,7 +21,9 @@ package org.lcmanager.gdb.service.impl.user;
 
 import java.util.List;
 
+import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.service.data.model.User;
+import org.lcmanager.gdb.service.impl.data.mapper.ComputerSystemMapper;
 import org.lcmanager.gdb.service.impl.data.mapper.UserMapper;
 import org.lcmanager.gdb.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +81,12 @@ public class UserServiceImpl implements UserService {
      */
     @Autowired
     private UserMapper userMapper;
+    /**
+     * The {@link ComputerSystemMapper}.
+     * 
+     */
+    @Autowired
+    private ComputerSystemMapper computerSystemMapper;
 
     /**
      * {@inheritDoc}
@@ -124,20 +132,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @CacheEvict(key = "#userDetails.username")
     public void updateUser(final UserDetails userDetails) {
-        this.userMapper.update(User.makeUser(userDetails));
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @see org.lcmanager.gdb.service.user.UserService#deleteUser(java.lang.String)
-     */
-    @Override
-    @PreAuthorize("(authentication.name == #userName) || hasRole('ADMIN')")
-    @Transactional
-    @CacheEvict
-    public void deleteUser(final String userName) {
-        this.userMapper.deleteUserName(userName);
+        final User newUser = User.makeUser(userDetails);
+        final User oldUser = this.retrieveUser(newUser.getId());
+        this.userMapper.update(newUser);
+        CollectionUtil.leftDifference(oldUser.getAuthorities(), newUser.getAuthorities()).forEach(authority -> {
+            this.evictAuthority(authority, newUser);
+        });
+        CollectionUtil.rightDifference(oldUser.getAuthorities(), newUser.getAuthorities()).forEach(authority -> {
+            this.assignAuthority(authority, newUser);
+        });
     }
 
     /**
@@ -184,8 +187,23 @@ public class UserServiceImpl implements UserService {
      *      java.lang.String)
      */
     @Override
+    @Transactional
     public void createUser(final User user, final String password) {
         this.userMapper.insert(user, this.passwordEncoder.encode(password));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.service.user.UserService#deleteUser(org.lcmanager.gdb.service.data.model.User)
+     */
+    @Override
+    @Transactional
+    @CacheEvict(key = "#user.username")
+    public void deleteUser(final User user) {
+        this.evictAllAuthorities(user);
+        this.computerSystemMapper.deleteByUser(user.getId());
+        this.userMapper.delete(user.getId());
     }
 
     /**
@@ -194,6 +212,7 @@ public class UserServiceImpl implements UserService {
      * @see org.lcmanager.gdb.service.user.UserService#retrieveUsers()
      */
     @Override
+    @Transactional(readOnly = true)
     public List<User> retrieveUsers() {
         return this.userMapper.find();
     }
@@ -233,5 +252,17 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(key = "#user.username")
     public void evictAuthority(final GrantedAuthority authority, final User user) {
         this.userMapper.removeAuthority(user.getId(), authority.getAuthority());
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.service.user.UserService#evictAllAuthorities(org.lcmanager.gdb.service.data.model.User)
+     */
+    @Override
+    @Transactional
+    @CacheEvict(key = "#user.username")
+    public void evictAllAuthorities(final User user) {
+        this.userMapper.removeAuthorities(user.getId());
     }
 }

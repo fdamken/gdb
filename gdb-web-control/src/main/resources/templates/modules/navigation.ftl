@@ -43,6 +43,9 @@
 							${principal.displayName} <span class="caret">&nbsp;</span>
 						</a>
 						<ul class="dropdown-menu">
+							<li>
+								<a ng-click="openPreferences()">Preferences</a>
+							</li>
 							<li class="divider">&nbsp;</li>
 							<li>
 								<form id="logout-form" class="hidden" action="${context}/logout" method="POST">

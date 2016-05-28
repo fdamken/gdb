@@ -105,6 +105,8 @@
 			window.Constants = {};
 		}
 		Constants.context = '${context}';
+		Constants.isUser = ${is_user?c};
+		Constants.isAdmin = ${is_admin?c};
 	</script>
 
 	<script>

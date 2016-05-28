@@ -36,6 +36,7 @@ import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,6 +66,7 @@ public class UserController {
      */
     @RequestMapping
     @Cacheable
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ResourceSupport> handleFind() {
         final Resources<User> resource = ControllerUtil.createResources(this.userService.retrieveUsers());
 
@@ -113,6 +115,35 @@ public class UserController {
     }
 
     /**
+     * Sets the properties of the user with the given ID to the properties of
+     * the given (new) user.
+     *
+     * @param id
+     *            The ID of the user to update.
+     * @param newUser
+     *            The properties of the new user.
+     */
+    @RequestMapping(path = "/{id}",
+                    method = RequestMethod.PATCH)
+    @PreAuthorize("hasRole('ADMIN')")
+    public void modifyUser(@PathVariable final int id, @RequestBody final User newUser) {
+        this.userService.updateUser(newUser.setId(this.userService.retrieveUser(id).getId()));
+    }
+
+    /**
+     * Deletes the user with the given ID.
+     *
+     * @param id
+     *            The ID of the user to delete.
+     */
+    @RequestMapping(path = "/{id}",
+                    method = RequestMethod.DELETE)
+    @PreAuthorize("hasRole('ADMIN')")
+    public void deleteUser(@PathVariable final int id) {
+        this.userService.deleteUser(id);
+    }
+
+    /**
      * Finds the user with the given ID.
      *
      * @param id
@@ -121,6 +152,7 @@ public class UserController {
      */
     @RequestMapping("/{id}")
     @Cacheable
+    @PreAuthorize("(authentication.id == #id || hasRole('ADMIN'))")
     public ResponseEntity<ResourceSupport> handleFindById(@PathVariable final int id) {
         final Resource<User> resource = ControllerUtil.createResource(this.userService.retrieveUser(id));
 
