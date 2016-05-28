@@ -55,8 +55,23 @@ public class ComputerSystem implements BaseModel<Integer>, OsFamilyAware {
      * 
      */
     private int memory;
+    /**
+     * Whether this computer system is the primary system of the user.
+     * 
+     */
+    private boolean primary;
+    /**
+     * The description of this computer system.
+     * 
+     */
+    private String description;
 
     // ~ Mapped ~
+    /**
+     * The owner of this system.
+     * 
+     */
+    private User owner;
     /**
      * The operating system that is installed in this system.
      * 

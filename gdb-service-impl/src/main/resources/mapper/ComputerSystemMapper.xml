@@ -25,6 +25,19 @@
 		<id property="id" column="computerSystemId" />
 		<result property="osFamily" column="computerSystemOsFamily" />
 		<result property="memory" column="computerSystemMemory" />
+		<result property="primary" column="computerSystemPrimary" />
+		<result property="description" column="computerSystemDescription" />
+		<association property="owner" javaType="User" foreignColumn="computerSystemId">
+			<id property="id" column="userId" />
+			<result property="username" column="userName" />
+			<result property="displayName" column="userDisplayName" />
+			<result property="enabled" column="userEnabled" />
+			<collection property="authorities" ofType="Authority" foreignColumn="userId">
+				<constructor>
+					<arg javaType="String" column="userAuthority" />
+				</constructor>
+			</collection>
+		</association>
 		<association property="operatingSystem" javaType="OperatingSystem" foreignColumn="computerSystemId">
 			<id property="id" column="osId" />
 			<result property="osFamily" column="osFamily" />
@@ -73,47 +86,65 @@
 	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
 		INSERT INTO ComputerSystem (
 			id,
+			userId,
 			operatingSystemId,
 			processorId,
 			graphicsId,
-			memory
+			memory,
+			primarySystem,
+			description,
 		) VALUES (
 			#{obj.id},
+			#{obj.owner.id},
 			#{obj.operatingSystem.id},
 			#{obj.processor.id},
 			#{obj.graphics.id},
-			#{obj.memory}
+			#{obj.memory},
+			#{obj.primary},
+			#{obj.description}
 		)
 	</insert>
 	<update id="update" parameterType="Map">
 		UPDATE
 			ComputerSystem
 		SET
+			userId = #{obj.owner.id}
 			operatingSystemId = #{obj.operatingSystem.id},
 			processorId = #{obj.processor.id},
 			graphicsId = #{obj.graphics.id},
-			memory = #{obj.memory}
+			memory = #{obj.memory},
+			primarySystem = #{obj.primary},
+			description = #{obj.description}
 		WHERE
 			id = #{obj.id}
 	</update>
 	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
 		INSERT INTO ComputerSystem (
 			id,
+			userId,
 			operatingSystemId,
 			processorId,
 			graphicsId,
-			memory
+			memory,
+			primarySystem,
+			description,
 		) VALUES (
 			#{obj.id},
+			#{obj.owner.id},
 			#{obj.operatingSystem.id},
 			#{obj.processor.id},
 			#{obj.graphics.id},
-			#{obj.memory}
+			#{obj.memory},
+			#{obj.primary},
+			#{obj.description}
 		) ON DUPLICATE KEY UPDATE
+			userId = #{obj.owner.id}
 			operatingSystemId = #{obj.operatingSystem.id},
 			processorId = #{obj.processor.id},
 			graphicsId = #{obj.graphics.id},
-			memory = #{obj.memory}
+			memory = #{obj.memory},
+			primarySystem = #{obj.primary},
+			description = #{obj.description}
 	</insert>
 	<delete id="delete" parameterType="Map">
 		DELETE
@@ -148,25 +179,21 @@
 	<!-- Methods from ComputerSystemMapper. -->
 	<select id="findPrimaryByUser" parameterType="Map" resultMap="computerSystem">
 		SELECT
-			VC.*
+			*
 		FROM
-			User AS Us
-		LEFT JOIN User_ComputerSysten AS UC ON Us.id = UC.userId
-		LEFT JOIN View_ComputerSystem AS VC ON VC.id = UC.computerSystemId
+			View_ComputerSystem
 		WHERE
-			Us.id = #{userId}
-		ORDER BY UC.primary DESC
+			userId = #{userId}
+		ORDER BY primary DESC
 		LIMIT 1
 	</select>
 	<select id="findByUser" parameterType="Map" resultMap="computerSystem">
 		SELECT
-			VC.*
+			*
 		FROM
-			User AS Us
-		LEFT JOIN User_ComputerSysten AS UC ON Us.id = UC.userId
-		LEFT JOIN View_ComputerSystem AS VC ON VC.id = UC.computerSystemId
+			View_ComputerSystem
 		WHERE
-			Us.id = #{userId}
-		ORDER BY UC.primary DESC
+			userId = #{userId}
+		ORDER BY primary DESC
 	</select>
 </mapper>

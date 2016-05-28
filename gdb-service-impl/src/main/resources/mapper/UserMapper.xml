@@ -22,28 +22,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.UserMapper">
 	<resultMap type="User" id="user">
-		<id property="id" column="id" />
-		<result property="username" column="username" />
-		<result property="displayName" column="displayName" />
-		<result property="enabled" column="enabled" />
-		<collection property="authorities" ofType="org.springframework.security.core.authority.SimpleGrantedAuthority">
+		<id property="id" column="userId" />
+		<result property="username" column="userName" />
+		<result property="displayName" column="userDisplayName" />
+		<result property="enabled" column="userEnabled" />
+		<collection property="authorities" ofType="Authority" foreignColumn="userId">
 			<constructor>
-				<arg javaType="String" column="authority" />
+				<arg javaType="String" column="userAuthority" />
 			</constructor>
 		</collection>
 	</resultMap>
-
-	<sql id="selectUser">
-		SELECT
-			U.id,
-			U.username,
-			U.displayName,
-			U.enabled,
-			UA.authority
-		FROM
-			User AS U
-		LEFT JOIN User_Authority AS UA ON U.id = UA.userId
-	</sql>
 
 	<!-- Methods from BaseMapper. -->
 	<update id="update" parameterType="Map">
@@ -87,12 +75,18 @@
 			id = #{id}
 	</select>
 	<select id="findById" parameterType="Map" resultMap="user">
-		<include refid="selectUser" />
+		SELECT
+			*
+		FROM
+			View_User
 		WHERE
 			id = #{id}
 	</select>
 	<select id="find" resultMap="user">
-		<include refid="selectUser" />
+		SELECT
+			*
+		FROM
+			View_User
 	</select>
 
 	<!-- Methods from UserMapper. -->
@@ -189,7 +183,10 @@
 			username = #{userName}
 	</select>
 	<select id="findByUserName" parameterType="Map" resultMap="user">
-		<include refid="selectUser" />
+		SELECT
+			*
+		FROM
+			View_User
 		WHERE
 			username = #{userName}
 	</select>

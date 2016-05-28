@@ -31,6 +31,7 @@
 		<typeAlias type="org.lcmanager.gdb.service.data.util.OsFamily" alias="OsFamily" />
 		<typeAlias type="org.lcmanager.gdb.service.data.util.RequirementType" alias="RequirementType" />
 		<typeAlias type="org.lcmanager.gdb.service.data.util.TypedRequirement" alias="TypedRequirement" />
+		<typeAlias type="org.springframework.security.core.authority.SimpleGrantedAuthority" alias="Authority" />
 
 		<!-- Model type. -->
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Brand" alias="Brand" />

@@ -175,24 +175,18 @@ CREATE TABLE IF NOT EXISTS Requirement_OperatingSystem (
 -- Create table 'ComputerSystem'.
 CREATE TABLE IF NOT EXISTS ComputerSystem (
 	id INT NOT NULL,
+	userId INT NOT NULL,
 	operatingSystemId INT NOT NULL,
 	processorId INT NOT NULL,
 	graphicsId INT NOT NULL,
-	memory INT,
+	memory INT NOT NULL,
+	primarySystem BOOLEAN NOT NULL DEFAULT FALSE,
+	description VARCHAR(128) NOT NULL,
 	PRIMARY KEY (id),
+	FOREIGN KEY (userId) REFERENCES User(id),
 	FOREIGN KEY (operatingSystemId) REFERENCES OperatingSystem(id),
 	FOREIGN KEY (processorId) REFERENCES Processor(id),
 	FOREIGN KEY (graphicsId) REFERENCES Graphics(id)
-) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
-
--- Create table 'User_ComputerSystem'.
-CREATE TABLE IF NOT EXISTS User_ComputerSystem (
-	userId INT NOT NULL,
-	computerSystemId INT NOT NULL,
-	primarySystem BOOLEAN NOT NULL DEFAULT FALSE,
-	PRIMARY KEY (userId, computerSystemId),
-	FOREIGN KEY (userId) REFERENCES User(id),
-	FOREIGN KEY (computerSystemId) REFERENCES ComputerSystem(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
 -- Create table 'Game'.
@@ -279,6 +273,19 @@ CREATE TABLE IF NOT EXISTS Game_Requirement (
 	-- View Creation --
 	-------------------
 
+-- Create view 'View_User'.
+CREATE OR REPLACE VIEW View_User AS
+	SELECT
+		U.id			AS userId,
+		U.username		AS userName,
+		U.displayName	AS userDisplayName,
+		U.enabled		AS userEnabled,
+		UA.authority	AS userAuthority
+	FROM
+		User AS U
+	LEFT JOIN User_Authority AS UA ON U.id = UA.userId
+;
+
 -- Create view 'View_Processor'.
 CREATE OR REPLACE VIEW View_Processor AS
 	SELECT
@@ -352,13 +359,18 @@ CREATE OR REPLACE VIEW View_Requirement AS
 -- Create view 'View_ComputerSystem'.
 CREATE OR REPLACE VIEW View_ComputerSystem AS
 	SELECT
-		CS.id		AS computerSystemId,
-		CS.memory	AS computerSystemMemory,
+		CS.id				AS computerSystemId,
+		CS.userId			AS computerSystemOwnerId,
+		CS.memory			AS computerSystemMemory,
+		CS.primarySystem	AS computerSystemPrimary,
+		CS.description		AS computerSystemDescription,
+		VU.*,
 		VO.*,
 		VP.*,
 		VG.*
 	FROM
 		ComputerSystem AS CS
+	LEFT JOIN View_User				AS VU ON VU.userId		= CS.userId
 	LEFT JOIN View_OperatingSystem	AS VO ON VO.osId		= CS.operatingSystemId
 	LEFT JOIN View_Processor		AS VP ON VP.processorId	= CS.processorId
 	LEFT JOIN View_Graphics			AS VG ON VG.graphicsId	= CS.graphicsId
