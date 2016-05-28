@@ -34,6 +34,19 @@
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="user.id">
+		INSERT INTO User (
+			username,
+			displayName,
+			password,
+			enabled
+		) VALUES (
+			#{user.username},
+			#{user.displayName},
+			#{password},
+			#{user.enabled}
+		)
+	</insert>
 	<update id="update" parameterType="Map">
 		UPDATE
 			User
@@ -90,19 +103,6 @@
 	</select>
 
 	<!-- Methods from UserMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="user.id">
-		INSERT INTO User (
-			username,
-			displayName,
-			password,
-			enabled
-		) VALUES (
-			#{user.username},
-			#{user.displayName},
-			#{password},
-			#{user.enabled}
-		)
-	</insert>
 	<update id="updatePassword" parameterType="Map">
 		UPDATE
 			User
