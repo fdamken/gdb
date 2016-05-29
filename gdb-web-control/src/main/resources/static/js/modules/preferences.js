@@ -64,7 +64,10 @@ gdbApp.controller('preferencesController', ['$http', '$scope', '$timeout', 'csrf
 	}, Dialog.ajaxError);
 
 	$scope.$on('preferences_open-dialog', function() {
-		$('#preferences-dialog').modal('show');
+		$('#preferences-dialog').modal({
+			keyboard : false,
+			show : true
+		});
 	});
 
 	if (Constants.isUser) {

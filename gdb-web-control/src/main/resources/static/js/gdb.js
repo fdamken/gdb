@@ -18,6 +18,19 @@
  * #L%
  */
 
+$(function() {
+	// Enables the usage of multiple, overlapping modals.
+	// Thanks to A1rPun who mentioned this solution on
+	// StackOverflow (http://stackoverflow.com/a/24914782).
+	$(document).on('show.bs.modal', '.modal', function () {
+		var zIndex = 1040 + (10 * $('.modal:visible').length);
+		$(this).css('z-index', zIndex);
+		setTimeout(function() {
+			$('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+		}, 0);
+	});
+});
+
 var gdbApp = angular.module('gdbApp');
 
 gdbApp.filter('direction', function() {
