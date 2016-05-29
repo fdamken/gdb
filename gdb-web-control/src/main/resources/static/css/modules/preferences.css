@@ -18,11 +18,16 @@
  * #L%
  */
 
+#preferences-dialog .table-body td {
+	vertical-align: middle;
+}
+
+#preference-computer-systems .computer-systems .table-body {
+	cursor: pointer;
+}
+
 #preference-users .users .table-body .ds-btn button {
 	width: 100%;
-}
-#preference-users .users .table-body td {
-	vertical-align: middle;
 }
 #preference-users .users .table-body .roles div {
 	display: inline;
@@ -34,4 +39,25 @@
 
 #preference-users .users .table-body .saving {
 	padding-left: 20px;
+}
+
+#cs-dialog .pg-brand {
+	display: inline;
+	width: 25%;
+	float: left;
+	margin-right: 5px;
+}
+#cs-dialog .pg-model {
+	display: inline;
+	width: 50%;
+}
+#cs-dialog .checking-spinner {
+	display: inline;
+}
+#cs-dialog .checking-spinner div {
+	display: inline-block;
+}
+
+#cs-new-system {
+	width: 100%;
 }

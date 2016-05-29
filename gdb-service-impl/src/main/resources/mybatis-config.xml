@@ -41,7 +41,6 @@
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Game" alias="Game" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Genre" alias="Genre" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Graphics" alias="Graphics" />
-		<typeAlias type="org.lcmanager.gdb.service.data.model.OperatingSystem" alias="OperatingSystem" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Processor" alias="Processor" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Publisher" alias="Publisher" />
 		<typeAlias type="org.lcmanager.gdb.service.data.model.Requirement" alias="Requirement" />
@@ -61,7 +60,6 @@
 		<mapper resource="mapper/GameMapper.xml" />
 		<mapper resource="mapper/GenreMapper.xml" />
 		<mapper resource="mapper/GraphicsMapper.xml" />
-		<mapper resource="mapper/OperatingSystemMapper.xml" />
 		<mapper resource="mapper/ProcessorMapper.xml" />
 		<mapper resource="mapper/PublisherMapper.xml" />
 		<mapper resource="mapper/RequirementMapper.xml" />

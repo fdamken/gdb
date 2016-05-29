@@ -73,11 +73,6 @@ public class ComputerSystem implements BaseModel<Integer>, OsFamilyAware, Compar
      */
     private User owner;
     /**
-     * The operating system that is installed in this system.
-     * 
-     */
-    private OperatingSystem operatingSystem;
-    /**
      * The processor of this system.
      * 
      */

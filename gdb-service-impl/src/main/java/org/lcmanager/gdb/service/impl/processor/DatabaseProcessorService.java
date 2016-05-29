@@ -88,9 +88,11 @@ public class DatabaseProcessorService implements ProcessorService {
     @Override
     @Transactional
     public void save(final Processor processor) {
-        if (processor.getId() != null && this.processorMapper.exists(processor.getId())) {
+        if (processor == null || processor.getId() != null && this.processorMapper.exists(processor.getId())) {
             return;
         }
+
+        processor.setModel(processor.getModel().toLowerCase());
 
         final Brand brand = processor.getBrand();
         if (this.brandMapper.existsName(brand.getName())) {

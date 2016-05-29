@@ -87,24 +87,6 @@
 					<result property="name" column="requirementGraphicsBrandName" />
 				</association>
 			</collection>
-			<collection property="operatingSystems" ofType="OperatingSystem" foreignColumn="requirementOperatingSystemRequirementId">
-				<id property="id" column="requirementOperatingSystemId" />
-				<result property="osFamily" column="requirementOperatingSystemFamily" />
-				<result property="name" column="requirementOperatingSystemName" />
-				<association property="version" javaType="Version" foreignColumn="requirementOperatingSystemRequirementId">
-					<constructor>
-						<arg column="requirementOperatingSystemVersionName" javaType="String" />
-						<arg column="requirementOperatingSystemVersionMajor" javaType="int" />
-						<arg column="requirementOperatingSystemVersionMinor" javaType="int" />
-						<arg column="requirementOperatingSystemVersionBugfx" javaType="int" />
-						<arg column="requirementOperatingSystemVersionBuild" javaType="int" />
-					</constructor>
-				</association>
-				<association property="developer" javaType="Developer" foreignColumn="requirementOperatingSystemRequirementId">
-					<id property="id" column="requirementOperatingSystemDeveloperId" />
-					<result property="name" column="requirementOperatingSystemDeveloperName" />
-				</association>
-			</collection>
 		</collection>
 	</resultMap>
 
@@ -150,18 +132,6 @@
 		requirementOsFamily,
 		requirementMemory,
 		requirementStorage,
-
-		requirementOperatingSystemRequirementId,
-		requirementOperatingSystemId,
-		requirementOperatingSystemFamily,
-		requirementOperatingSystemName,
-		requirementOperatingSystemVersionName,
-		requirementOperatingSystemVersionMajor,
-		requirementOperatingSystemVersionMinor,
-		requirementOperatingSystemVersionBugfx,
-		requirementOperatingSystemVersionBuild,
-		requirementOperatingSystemDeveloperId,
-		requirementOperatingSystemDeveloperName,
 
 		requirementProcessorRequirementId,
 		requirementProcessorId,

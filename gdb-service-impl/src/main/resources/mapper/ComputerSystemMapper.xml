@@ -38,24 +38,6 @@
 				</constructor>
 			</collection>
 		</association>
-		<association property="operatingSystem" javaType="OperatingSystem" foreignColumn="computerSystemId">
-			<id property="id" column="osId" />
-			<result property="osFamily" column="osFamily" />
-			<result property="name" column="osName" />
-			<association property="version" javaType="Version" foreignColumn="osId">
-				<constructor>
-					<arg column="osVersionName" javaType="String" />
-					<arg column="osVersionMajor" javaType="int" />
-					<arg column="osVersionMinor" javaType="int" />
-					<arg column="osVersionBugfx" javaType="int" />
-					<arg column="osVersionBuild" javaType="int" />
-				</constructor>
-			</association>
-			<association property="developer" javaType="Developer" foreignColumn="osId">
-				<id property="id" column="osDeveloperId" />
-				<result property="name" column="osDeveloperName" />
-			</association>
-		</association>
 		<association property="processor" javaType="Processor" foreignColumn="computerSystemId">
 			<id property="id" column="processorId" />
 			<result property="model" column="processorModel" />
@@ -86,15 +68,15 @@
 	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
 		INSERT INTO ComputerSystem (
 			userId,
-			operatingSystemId,
+			osFamily,
 			processorId,
 			graphicsId,
 			memory,
 			primarySystem,
-			description,
+			description
 		) VALUES (
 			#{obj.owner.id},
-			#{obj.operatingSystem.id},
+			#{obj.osFamily},
 			#{obj.processor.id},
 			#{obj.graphics.id},
 			#{obj.memory},
@@ -106,8 +88,8 @@
 		UPDATE
 			ComputerSystem
 		SET
-			userId = #{obj.owner.id}
-			operatingSystemId = #{obj.operatingSystem.id},
+			userId = #{obj.owner.id},
+			osFamily = #{obj.osFamily},
 			processorId = #{obj.processor.id},
 			graphicsId = #{obj.graphics.id},
 			memory = #{obj.memory},
@@ -118,26 +100,24 @@
 	</update>
 	<insert id="save" parameterType="Map">
 		INSERT INTO ComputerSystem (
-			id,
 			userId,
-			operatingSystemId,
+			osFamily,
 			processorId,
 			graphicsId,
 			memory,
 			primarySystem,
-			description,
+			description
 		) VALUES (
-			#{obj.id},
 			#{obj.owner.id},
-			#{obj.operatingSystem.id},
+			#{obj.osFamily},
 			#{obj.processor.id},
 			#{obj.graphics.id},
 			#{obj.memory},
 			#{obj.primary},
 			#{obj.description}
 		) ON DUPLICATE KEY UPDATE
-			userId = #{obj.owner.id}
-			operatingSystemId = #{obj.operatingSystem.id},
+			userId = #{obj.owner.id},
+			osFamily = #{obj.osFamily},
 			processorId = #{obj.processor.id},
 			graphicsId = #{obj.graphics.id},
 			memory = #{obj.memory},

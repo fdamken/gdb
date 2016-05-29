@@ -49,7 +49,6 @@
 
 			<@m.details />
 			<@m.search />
-			<@m.helloWorld />
 		</div>
 	</div>
 

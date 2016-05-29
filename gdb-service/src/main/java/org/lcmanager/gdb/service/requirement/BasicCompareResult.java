@@ -42,11 +42,6 @@ public class BasicCompareResult implements CompareResult {
      */
     private final int osFamilyScorePercentage;
     /**
-     * The score of the operating system.
-     * 
-     */
-    private final int operatingSystemScorePercentage;
-    /**
      * The score of the memory (RAM).
      * 
      */
@@ -63,6 +58,6 @@ public class BasicCompareResult implements CompareResult {
             return 0;
         }
 
-        return MathUtil.average(this.osFamilyScorePercentage, this.osFamilyScorePercentage, this.memoryScorePercentage);
+        return MathUtil.average(this.osFamilyScorePercentage, this.memoryScorePercentage);
     }
 }

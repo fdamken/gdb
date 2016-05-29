@@ -129,7 +129,7 @@
 		WHERE
 			brandId = #{brand.id}
 			AND
-			model = #{model}
+			LOWER(model) = LOWER(#{model})
 	</select>
 	<select id="findByBrandAndModel" parameterType="Map" resultMap="graphics">
 		SELECT
@@ -139,6 +139,6 @@
 		WHERE
 			graphicsBrandId = #{brand.id}
 			AND
-			graphicsModel = #{model}
+			LOWER(graphicsModel) = LOWER(#{model})
 	</select>
 </mapper>

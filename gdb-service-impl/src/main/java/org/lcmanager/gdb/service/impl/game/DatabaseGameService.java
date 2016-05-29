@@ -137,7 +137,7 @@ public class DatabaseGameService implements GameService {
     @Override
     @Transactional
     public void save(final Game game) {
-        if (game.getId() != null && this.gameMapper.exists(game.getId())) {
+        if (game == null || game.getId() != null && this.gameMapper.exists(game.getId())) {
             return;
         }
 

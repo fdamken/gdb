@@ -50,24 +50,6 @@
 				<result property="name" column="graphicsBrandName" />
 			</association>
 		</collection>
-		<collection property="operatingSystems" ofType="OperatingSystem" foreignColumn="requirementId">
-			<id property="id" column="osId" />
-			<result property="osFamily" column="osFamily" />
-			<result property="name" column="osName" />
-			<association property="version" javaType="Version" foreignColumn="osId">
-				<constructor>
-					<arg column="osVersionName" javaType="String" />
-					<arg column="osVersionMajor" javaType="int" />
-					<arg column="osVersionMinor" javaType="int" />
-					<arg column="osVersionBugfx" javaType="int" />
-					<arg column="osVersionBuild" javaType="int" />
-				</constructor>
-			</association>
-			<association property="developer" javaType="Developer" foreignColumn="osId">
-				<id property="id" column="osDeveloperId" />
-				<result property="name" column="osDeveloperName" />
-			</association>
-		</collection>
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
@@ -139,24 +121,6 @@
 	</select>
 
 	<!-- Methods from RequirementMapper. -->
-	<insert id="addOperatingSystem" parameterType="Map">
-		INSERT IGNORE INTO Requirement_OperatingSystem (
-			requirementId,
-			operatingSystemId
-		) VALUES (
-			#{id},
-			#{osId}
-		)
-	</insert>
-	<delete id="removeOperatingSystem" parameterType="Map">
-		DELETE
-		FROM
-			Requirement_OperatingSystem
-		WHERE
-			requirementId = #{id}
-			AND
-			operatingSystemId = #{osId}
-	</delete>
 	<insert id="addProcessor" parameterType="Map">
 		INSERT IGNORE INTO Requirement_Processor (
 			requirementId,

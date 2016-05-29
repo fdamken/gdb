@@ -28,8 +28,10 @@ import org.lcmanager.gdb.service.data.model.User;
 import org.lcmanager.gdb.service.impl.data.mapper.ComputerSystemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of {@link ComputerSystemService}.
@@ -48,9 +50,52 @@ public class ComputerSystemServiceImpl implements ComputerSystemService {
     /**
      * {@inheritDoc}
      *
+     * @see org.lcmanager.gdb.service.cs.ComputerSystemService#addComputerSystem(org.lcmanager.gdb.service.data.model.User,
+     *      org.lcmanager.gdb.service.data.model.ComputerSystem)
+     */
+    @Override
+    @Transactional
+    public void addComputerSystem(final User user, final ComputerSystem computerSystem) {
+        this.computerSystemMapper.insert(computerSystem.setOwner(user));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.service.cs.ComputerSystemService#deleteComputerSystem(org.lcmanager.gdb.service.data.model.User,
+     *      int)
+     */
+    @Override
+    @Transactional
+    @CacheEvict(key = "#user")
+    public void deleteComputerSystem(final User user, final int computerSystemId) {
+        this.checkOwnership(user, computerSystemId);
+
+        this.computerSystemMapper.delete(computerSystemId);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.service.cs.ComputerSystemService#updateComputerSystem(org.lcmanager.gdb.service.data.model.User,
+     *      org.lcmanager.gdb.service.data.model.ComputerSystem)
+     */
+    @Override
+    @Transactional
+    @CacheEvict(key = "#user")
+    public void updateComputerSystem(final User user, final ComputerSystem computerSystem) {
+        this.checkOwnership(user, computerSystem);
+
+        this.computerSystemMapper.update(computerSystem.setOwner(user));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @see org.lcmanager.gdb.service.cs.ComputerSystemService#retrievePrimaryComputerSystem(org.lcmanager.gdb.service.data.model.User)
      */
     @Override
+    @Transactional(readOnly = true)
     @Cacheable
     public ComputerSystem retrievePrimaryComputerSystem(final User user) {
         return this.computerSystemMapper.findPrimaryByUser(user.getId());
@@ -62,8 +107,27 @@ public class ComputerSystemServiceImpl implements ComputerSystemService {
      * @see org.lcmanager.gdb.service.cs.ComputerSystemService#retrieveComputerSystems(org.lcmanager.gdb.service.data.model.User)
      */
     @Override
+    @Transactional(readOnly = true)
     @Cacheable
     public SortedSet<ComputerSystem> retrieveComputerSystems(final User user) {
         return new TreeSet<>(this.computerSystemMapper.findByUser(user.getId()));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.service.cs.ComputerSystemService#isOwnedBy(org.lcmanager.gdb.service.data.model.User,
+     *      int)
+     */
+    @Override
+    @Transactional(readOnly = true)
+    @Cacheable
+    public boolean isOwnedBy(final User user, final int computerSystemId) {
+        if (user == null) {
+            throw new IllegalArgumentException("User must not be null!");
+        }
+
+        final ComputerSystem computerSystem = this.computerSystemMapper.findById(computerSystemId);
+        return computerSystem == null || user.getId() == computerSystem.getOwner().getId();
     }
 }

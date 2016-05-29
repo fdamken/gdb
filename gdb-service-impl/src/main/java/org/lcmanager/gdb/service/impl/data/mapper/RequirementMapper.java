@@ -28,28 +28,6 @@ import org.lcmanager.gdb.service.data.model.Requirement;
  */
 public interface RequirementMapper extends BaseMapper<Requirement, Integer> {
     /**
-     * Adds the operating system with the given ID to the game with the given
-     * ID.
-     *
-     * @param id
-     *            The ID of the game to add the operating system to.
-     * @param osId
-     *            The ID of the operating system to add to the game.
-     */
-    void addOperatingSystem(@Param("id") int id, @Param("osId") int osId);
-
-    /**
-     * Removes the operating system with the given ID from the game with the
-     * given ID.
-     *
-     * @param id
-     *            The ID of the game to remove the operating system from.
-     * @param osId
-     *            The ID of the operating system to remove from the game.
-     */
-    void removeOperatingSystem(@Param("id") int id, @Param("osId") int osId);
-
-    /**
      * Adds the processor with the given ID to the game with the given ID.
      *
      * @param id

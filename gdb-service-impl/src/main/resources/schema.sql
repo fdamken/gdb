@@ -148,35 +148,11 @@ CREATE TABLE IF NOT EXISTS Requirement_Graphics (
 	FOREIGN KEY (graphicsId) REFERENCES Graphics(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
 
--- Create table 'OperatingSystem'.
-CREATE TABLE IF NOT EXISTS OperatingSystem (
-	id INT NOT NULL AUTO_INCREMENT,
-	developerId INT NOT NULL,
-	osFamily INT NOT NULL,
-	name VARCHAR(128) NOT NULL,
-	versionName VARCHAR(128) NULL,
-	versionMajor INT NOT NULL,
-	versionMinor INT NULL,
-	versionBugfx INT NULL,
-	versionBuild INT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (developerId) REFERENCES Developer(id)
-) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
-
--- Create table 'Requirement_OperatingSystem'.
-CREATE TABLE IF NOT EXISTS Requirement_OperatingSystem (
-	requirementId INT NOT NULL,
-	operatingSystemId INT NOT NULL,
-	PRIMARY KEY (requirementId, operatingSystemId),
-	FOREIGN KEY (requirementId) REFERENCES Requirement(id),
-	FOREIGN KEY (operatingSystemId) REFERENCES OperatingSystem(id)
-) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
-
 -- Create table 'ComputerSystem'.
 CREATE TABLE IF NOT EXISTS ComputerSystem (
 	id INT NOT NULL AUTO_INCREMENT,
 	userId INT NOT NULL,
-	operatingSystemId INT NOT NULL,
+	osFamily INT NOT NULL,
 	processorId INT NOT NULL,
 	graphicsId INT NOT NULL,
 	memory INT NOT NULL,
@@ -184,7 +160,6 @@ CREATE TABLE IF NOT EXISTS ComputerSystem (
 	description VARCHAR(128) NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (userId) REFERENCES User(id),
-	FOREIGN KEY (operatingSystemId) REFERENCES OperatingSystem(id),
 	FOREIGN KEY (processorId) REFERENCES Processor(id),
 	FOREIGN KEY (graphicsId) REFERENCES Graphics(id)
 ) CHARACTER SET utf8 COLLATE utf8_bin ENGINE InnoDB;
@@ -318,24 +293,6 @@ CREATE OR REPLACE VIEW View_Graphics AS
 	LEFT JOIN Brand AS Br ON Br.id = Gr.brandId
 ;
 
--- Create view 'View_OperatingSystem'.
-CREATE OR REPLACE VIEW View_OperatingSystem AS
-	SELECT
-		OS.id				AS osId,
-		OS.osFamily			AS osFamily,
-		OS.name				AS osName,
-		OS.versionName		AS osVersionName,
-		OS.versionMajor		AS osVersionMajor,
-		OS.versionMinor		AS osVersionMinor,
-		OS.versionBugfx		AS osVersionBugfx,
-		OS.versionBuild		AS osVersionBuild,
-		De.id				AS osDeveloperId,
-		De.name				AS osDeveloperName
-	FROM
-		OperatingSystem AS OS
-	LEFT JOIN Developer AS De ON De.id = OS.developerId
-;
-
 -- Create view 'View_Requirement'.
 CREATE OR REPLACE VIEW View_Requirement AS
 	SELECT
@@ -343,13 +300,10 @@ CREATE OR REPLACE VIEW View_Requirement AS
 		Re.osFamily			AS requirementOsFamily,
 		Re.memory			AS requirementMemory,
 		Re.storage			AS requirementStorage,
-		VO.*,
 		VP.*,
 		VG.*
 	FROM
 		Requirement AS Re
-	LEFT JOIN Requirement_OperatingSystem	AS ReOS ON ReOS.requirementId	= Re.id
-	LEFT JOIN View_OperatingSystem			AS VO	ON VO.osId				= ReOS.operatingSystemId
 	LEFT JOIN Requirement_Processor			AS RePr	ON RePr.requirementId	= Re.id
 	LEFT JOIN View_Processor				AS VP	ON VP.processorId		= RePr.processorId
 	LEFT JOIN Requirement_Graphics			AS ReGr	ON ReGr.requirementId	= Re.id
@@ -361,17 +315,16 @@ CREATE OR REPLACE VIEW View_ComputerSystem AS
 	SELECT
 		CS.id				AS computerSystemId,
 		CS.userId			AS computerSystemOwnerId,
+		CS.osFamily			AS computerSystemOsFamily,
 		CS.memory			AS computerSystemMemory,
 		CS.primarySystem	AS computerSystemPrimary,
 		CS.description		AS computerSystemDescription,
 		VU.*,
-		VO.*,
 		VP.*,
 		VG.*
 	FROM
 		ComputerSystem AS CS
 	LEFT JOIN View_User				AS VU ON VU.userId		= CS.userId
-	LEFT JOIN View_OperatingSystem	AS VO ON VO.osId		= CS.operatingSystemId
 	LEFT JOIN View_Processor		AS VP ON VP.processorId	= CS.processorId
 	LEFT JOIN View_Graphics			AS VG ON VG.graphicsId	= CS.graphicsId
 ;
@@ -383,13 +336,10 @@ CREATE OR REPLACE VIEW View_Requirement AS
 		Re.osFamily	AS requirementOsFamily,
 		Re.memory	AS requirementMemory,
 		Re.storage	AS requirementStorage,
-		VO.*,
 		VP.*,
 		VG.*
 	FROM
 		Requirement AS Re
-	LEFT JOIN Requirement_OperatingSystem	AS RO ON Re.id			= RO.requirementId
-	LEFT JOIN View_OperatingSystem			AS VO ON VO.osId		= RO.operatingSystemId
 	LEFT JOIN Requirement_Processor			AS RP ON Re.id			= RP.requirementId
 	LEFT JOIN View_Processor				AS VP ON VP.processorId	= RP.processorId
 	LEFT JOIN Requirement_Graphics			AS RG ON Re.id			= RG.requirementId
@@ -441,18 +391,6 @@ CREATE OR REPLACE VIEW View_Game AS
 		Re.memory			AS requirementMemory,
 		Re.storage			AS requirementStorage,
 
-		ReOp.requirementId	AS requirementOperatingSystemRequirementId,
-		Op.id				AS requirementOperatingSystemId,
-		Op.osFamily			AS requirementOperatingSystemFamily,
-		Op.name				AS requirementOperatingSystemName,
-		Op.versionName		AS requirementOperatingSystemVersionName,
-		Op.versionMajor		AS requirementOperatingSystemVersionMajor,
-		Op.versionMinor		AS requirementOperatingSystemVersionMinor,
-		Op.versionBugfx		AS requirementOperatingSystemVersionBugfx,
-		Op.versionBuild		AS requirementOperatingSystemVersionBuild,
-		Df.id				AS requirementOperatingSystemDeveloperId,
-		Df.name				AS requirementOperatingSystemDeveloperName,
-
 		RePr.requirementId	AS requirementProcessorRequirementId,
 		Pr.id				AS requirementProcessorId,
 		Pr.model			AS requirementProcessorModel,
@@ -494,12 +432,6 @@ CREATE OR REPLACE VIEW View_Game AS
 	-- Requirement
 	LEFT JOIN Game_Requirement	AS GaRe	ON Ga.id = GaRe.gameId
 	LEFT JOIN Requirement		AS Re	ON Re.id = GaRe.requirementId
-	-- Requirement: Operating System
-	LEFT JOIN Requirement_OperatingSystem
-								AS ReOp	ON Re.id = ReOp.requirementId
-	LEFT JOIN OperatingSystem	AS Op	ON Op.id = ReOp.operatingSystemId
-	-- Requirement: Developer
-	LEFT JOIN Developer			AS Df	ON Df.id = Op.developerId
 	-- Requirement: Processor
 	LEFT JOIN Requirement_Processor
 								AS RePr	ON Re.id = RePr.requirementId

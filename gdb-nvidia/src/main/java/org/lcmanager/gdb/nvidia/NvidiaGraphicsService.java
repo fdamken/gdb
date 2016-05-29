@@ -34,7 +34,6 @@ import org.jsoup.select.Elements;
 import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.base.NumberUtil;
 import org.lcmanager.gdb.base.health.NoHealthTrace;
-import org.lcmanager.gdb.nvidia.exception.NvidiaGraphicsServiceException;
 import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Brand.WellKnownBrand;
@@ -114,6 +113,10 @@ public class NvidiaGraphicsService implements GraphicsService {
         final Document document = NvidiaGraphicsService.retrieveDocument(url);
         final Map<String, String> data = this.extractSpecifications(gpuType, document);
 
+        if (data == null || data.isEmpty()) {
+            return null;
+        }
+
         final Graphics graphics = new Graphics();
         graphics.setBrand(WellKnownBrand.NVIDIA.getBrand());
         graphics.setModel(model);
@@ -191,7 +194,7 @@ public class NvidiaGraphicsService implements GraphicsService {
         try {
             return Jsoup.connect(url.toString()).get();
         } catch (final IOException cause) {
-            throw new NvidiaGraphicsServiceException("Failed to fetch the Nvidia data!", cause);
+            return null;
         }
     }
 
@@ -206,6 +209,10 @@ public class NvidiaGraphicsService implements GraphicsService {
      * @return The extracted specifications in a key-value storage.
      */
     private Map<String, String> extractSpecifications(final GpuType gpuType, final Document document) {
+        if (document == null) {
+            return null;
+        }
+
         final Map<String, String> specifications = new HashMap<>();
         switch (gpuType) {
             case DESKTOP:

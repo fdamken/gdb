@@ -108,6 +108,10 @@ public class IntelProcessorService implements ProcessorService {
         final Document detailsDocument = this.retrieveDetailsDocument(model);
         final Map<String, String> specifications = this.extractSpecifications(detailsDocument);
 
+        if (specifications == null || specifications.isEmpty()) {
+            return null;
+        }
+
         final Processor processor = new Processor();
         processor.setBrand(brand);
         processor.setModel(model);
@@ -198,7 +202,7 @@ public class IntelProcessorService implements ProcessorService {
                         .toUrl());
             }
         }
-        throw new IntelProcessorServiceException("Failed to retrieve processor URL for the model " + model + "!");
+        return null;
     }
 
     /**
@@ -209,6 +213,10 @@ public class IntelProcessorService implements ProcessorService {
      * @return The extracted specifications.
      */
     private Map<String, String> extractSpecifications(final Document detailsDocument) {
+        if (detailsDocument == null) {
+            return null;
+        }
+
         final Map<String, String> specs = new ConcurrentHashMap<>();
         detailsDocument.getElementsByClass("specs").stream() //
                 .map(specTable -> specTable.getElementsByTag("tr")) //

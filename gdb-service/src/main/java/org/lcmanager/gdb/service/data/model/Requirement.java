@@ -26,7 +26,6 @@ import java.util.Map;
 import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.service.data.util.OsFamily;
 import org.lcmanager.gdb.service.data.util.OsFamilyAware;
-import org.lcmanager.gdb.service.data.util.OsFamilyAwareOperatingSystemList;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -70,11 +69,6 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
 
     // ~ Mapped ~
     /**
-     * The operating systems that are supported.
-     * 
-     */
-    private OsFamilyAwareOperatingSystemList operatingSystems;
-    /**
      * The processor of this requirement.
      * 
      */
@@ -100,28 +94,6 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
      */
     @Getter(AccessLevel.PRIVATE)
     private final transient List<Graphics> graphicsAdder = CollectionUtil.createAddOnlyList(this::addGraphics);
-
-    /**
-     * Sets {@link #operatingSystems}.
-     * 
-     * <p>
-     * <b> WARNING: If the OS family of the given list is not <code>null</code>
-     * or equal to {@link #osFamily}, an error occurs. </b>
-     * </p>
-     * 
-     * @param operatingSystems
-     *            The {@link #operatingSystems} to set.
-     * @return <code>this</code>
-     */
-    public Requirement setOperatingSystems(final OsFamilyAwareOperatingSystemList operatingSystems) {
-        if (operatingSystems.getOsFamily() != null && !operatingSystems.getOsFamily().equals(this.osFamily)) {
-            throw new IllegalArgumentException("OperatingSystems must belong to the OS family " + this.osFamily + "!");
-        }
-
-        this.operatingSystems = operatingSystems;
-
-        return this;
-    }
 
     /**
      * Adds the given processor to {@link #processors}.

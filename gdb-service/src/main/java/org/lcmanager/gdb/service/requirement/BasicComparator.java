@@ -39,17 +39,8 @@ public class BasicComparator implements Comparator<BasicCompareResult> {
     public BasicCompareResult compare(final Requirement requirement, final ComputerSystem computerSystem) {
         final BasicCompareResult.BasicCompareResultBuilder builder = BasicCompareResult.builder();
 
-        final boolean osFamilyMatch = requirement.getOsFamily().equals(computerSystem.getOperatingSystem().getOsFamily());
+        final boolean osFamilyMatch = requirement.getOsFamily().equals(computerSystem.getOsFamily());
         builder.osFamilyScorePercentage(osFamilyMatch ? 100 : 0);
-
-        final int operatingSystemScorePercentage;
-        if (osFamilyMatch && requirement.getOperatingSystems().contains(computerSystem.getOperatingSystem())) {
-            operatingSystemScorePercentage = 100;
-        } else {
-            operatingSystemScorePercentage = 0;
-        }
-
-        builder.operatingSystemScorePercentage(operatingSystemScorePercentage);
 
         builder.memoryScorePercentage(MathUtil.calulatePercentage(requirement.getMemory(), computerSystem.getMemory()));
 

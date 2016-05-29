@@ -129,7 +129,7 @@
 		WHERE
 			brandId = #{brand.id}
 			AND
-			model = #{model}
+			LOWER(model) = LOWER(#{model})
 	</select>
 	<select id="findByBrandAndModel" parameterType="Map" resultMap="processor">
 		SELECT
@@ -139,6 +139,6 @@
 		WHERE
 			processorBrandId = #{brand.id}
 			AND
-			processorModel = #{model}
+			LOWER(processorModel) = LOWER(#{model})
 	</select>
 </mapper>

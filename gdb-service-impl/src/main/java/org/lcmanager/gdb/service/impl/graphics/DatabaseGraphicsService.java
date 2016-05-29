@@ -85,9 +85,11 @@ public class DatabaseGraphicsService implements GraphicsService {
     @Override
     @Transactional
     public void save(final Graphics graphics) {
-        if (graphics.getId() != null && this.graphicsMapper.exists(graphics.getId())) {
+        if (graphics == null || graphics.getId() != null && this.graphicsMapper.exists(graphics.getId())) {
             return;
         }
+
+        graphics.setModel(graphics.getModel());
 
         final Brand brand = graphics.getBrand();
         if (this.brandMapper.existsName(brand.getName())) {
