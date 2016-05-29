@@ -60,7 +60,7 @@
 													<th class="col-sm-3 graphics">Graphics</th>
 													<th class="col-sm-1 actions" colspan="1">&nbsp;</th>
 												</tr>
-												<tr ng-repeat="(i, system) in cs.systems | filter : cs.systemSearch" ng-click="cs.editSystem(i)" class="table-body" data-system="{{ i }}">
+												<tr ng-repeat="(i, system) in cs.systems | filter : cs.systemSearch" ng-click="cs.editSystem(i)" ng-class="{ success : system.primary }" class="table-body" data-system="{{ i }}">
 													<td class="col-sm-2 description">{{ system.description }}</td>
 													<td class="col-sm-3 os">{{ system.osFamily | platform }}</td>
 													<td class="col-sm-3 processor">{{ system.processor.formatted }}</td>

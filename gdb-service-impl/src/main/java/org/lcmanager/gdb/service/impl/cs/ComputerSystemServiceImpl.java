@@ -19,8 +19,9 @@
  */
 package org.lcmanager.gdb.service.impl.cs;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.lcmanager.gdb.service.cs.ComputerSystemService;
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
@@ -109,8 +110,10 @@ public class ComputerSystemServiceImpl implements ComputerSystemService {
     @Override
     @Transactional(readOnly = true)
     @Cacheable
-    public SortedSet<ComputerSystem> retrieveComputerSystems(final User user) {
-        return new TreeSet<>(this.computerSystemMapper.findByUser(user.getId()));
+    public List<ComputerSystem> retrieveComputerSystems(final User user) {
+        final List<ComputerSystem> result = new ArrayList<>(this.computerSystemMapper.findByUser(user.getId()));
+        Collections.sort(result);
+        return result;
     }
 
     /**

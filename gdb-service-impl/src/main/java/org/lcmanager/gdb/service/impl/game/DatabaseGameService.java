@@ -259,8 +259,6 @@ public class DatabaseGameService implements GameService {
 
         final int requirementId = requirement.getId();
 
-        // TODO: Insert operating system.
-
         final Map<Brand, Processor> processors = CollectionUtil.orEmpty(requirement.getProcessors());
         processors.values().stream() //
                 .mapToInt(Processor::getId) //

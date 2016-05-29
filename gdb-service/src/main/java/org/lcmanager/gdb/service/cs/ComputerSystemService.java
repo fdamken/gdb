@@ -19,7 +19,7 @@
  */
 package org.lcmanager.gdb.service.cs;
 
-import java.util.SortedSet;
+import java.util.List;
 
 import org.lcmanager.gdb.base.health.HealthRelevant;
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
@@ -78,7 +78,7 @@ public interface ComputerSystemService extends HealthRelevant {
      *            The user to retrieve all computer systems for.
      * @return All computer systems of the given user.
      */
-    SortedSet<ComputerSystem> retrieveComputerSystems(final User user);
+    List<ComputerSystem> retrieveComputerSystems(final User user);
 
     /**
      * Checks whether the given user owns the computer system with the given ID.
