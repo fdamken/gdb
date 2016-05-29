@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.service.impl.data.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.lcmanager.gdb.service.data.model.Brand;
 
 /**
@@ -26,5 +27,21 @@ import org.lcmanager.gdb.service.data.model.Brand;
  *
  */
 public interface BrandMapper extends BaseMapper<Brand, Integer> {
-    // Nothing to do.
+    /**
+     * Checks whether any brand with the given name exist.
+     *
+     * @param name
+     *            The name to check.
+     * @return Whether any brand with the given name exists or not.
+     */
+    boolean existsName(@Param("name") String name);
+
+    /**
+     * Finds the brand with the given name.
+     *
+     * @param name
+     *            The name of the brand to find.
+     * @return The found brand, if any.
+     */
+    Brand findByName(@Param("name") String name);
 }

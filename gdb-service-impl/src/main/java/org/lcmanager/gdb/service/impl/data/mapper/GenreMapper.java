@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.service.impl.data.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.lcmanager.gdb.service.data.model.Genre;
 
 /**
@@ -26,5 +27,21 @@ import org.lcmanager.gdb.service.data.model.Genre;
  *
  */
 public interface GenreMapper extends BaseMapper<Genre, Integer> {
-    // Nothing to do.
+    /**
+     * Checks whether any genre with the given description exist.
+     *
+     * @param description
+     *            The description to check.
+     * @return Whether any genre with the given description exists or not.
+     */
+    boolean existsDescription(@Param("description") String description);
+
+    /**
+     * Finds the genre with the given description.
+     *
+     * @param description
+     *            The description of the genre to find.
+     * @return The found genre, if any.
+     */
+    Genre findByDescription(@Param("description") String description);
 }

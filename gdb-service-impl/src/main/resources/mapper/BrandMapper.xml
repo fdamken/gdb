@@ -27,12 +27,10 @@
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
 		INSERT INTO Brand (
-			id,
 			name
 		) VALUES (
-			#{obj.id},
 			#{obj.name}
 		)
 	</insert>
@@ -44,7 +42,7 @@
 		WHERE
 			id = #{obj.id}
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
 		INSERT INTO Brand (
 			id,
 			name
@@ -87,4 +85,21 @@
 	</select>
 
 	<!-- Methods from BrandMapper. -->
+	<select id="existsName" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			Brand
+		WHERE
+			name = #{name}
+	</select>
+	<select id="findByName" resultMap="brand">
+		SELECT
+			id,
+			name
+		FROM
+			Brand
+		WHERE
+			name = #{name}
+	</select>
 </mapper>

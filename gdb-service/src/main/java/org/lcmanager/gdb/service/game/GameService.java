@@ -97,4 +97,14 @@ public interface GameService extends HealthRelevant {
      *             If any error occurs whilst retrieving the game.
      */
     Game retrieveGame(final int gameId) throws GameServiceException;
+
+    /**
+     * Saves/caches the given game.
+     *
+     * @param game
+     *            The game to save/cache.
+     */
+    default void save(final Game game) {
+        throw new UnsupportedOperationException("This operation is not supporter by default!");
+    }
 }

@@ -19,49 +19,40 @@
  */
 package org.lcmanager.gdb.service.impl.processor;
 
-import java.util.List;
-import java.util.stream.Stream;
-
-import org.lcmanager.gdb.base.StreamUtil;
-import org.lcmanager.gdb.base.health.NoHealthTrace;
-import org.lcmanager.gdb.service.annotation.Branded;
 import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Processor;
+import org.lcmanager.gdb.service.impl.data.mapper.BrandMapper;
+import org.lcmanager.gdb.service.impl.data.mapper.ProcessorMapper;
 import org.lcmanager.gdb.service.processor.ProcessorService;
 import org.lcmanager.gdb.service.processor.exception.ProcessorServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * An implementation of {@link ProcessorService} that delegates to the branded
- * processor services.
+ * A generic implementation of {@link ProcessorService} that accesses the
+ * database.
  *
  */
-@Service
+@Service("dbProcessorService")
 @Generic
-@Primary
-@CacheConfig(cacheNames = "delegating-processor-service")
-public class DelegatingProcessorService implements ProcessorService {
+@CacheConfig(cacheNames = "db-processor-service")
+public class DatabaseProcessorService implements ProcessorService {
     /**
-     * The generic {@link DatabaseProcessorService}.
+     * The {@link ProcessorMapper}.
      * 
      */
     @Autowired
-    @Qualifier("dbProcessorService")
-    @Generic
-    private ProcessorService dbProcessorService;
+    private ProcessorMapper processorMapper;
     /**
-     * All branded {@link ProcessorService}.
+     * The {@link BrandMapper}.
      * 
      */
-    @Autowired(required = false)
-    @Branded
-    private List<ProcessorService> processorServices;
+    @Autowired
+    private BrandMapper brandMapper;
 
     /**
      * {@inheritDoc}
@@ -70,18 +61,13 @@ public class DelegatingProcessorService implements ProcessorService {
      *      java.lang.String)
      */
     @Override
+    @Transactional(readOnly = true)
     @Cacheable
     public Processor retrieveProcessor(final Brand brand, final String model) throws ProcessorServiceException {
-        if (!this.isResponsible(brand)) {
-            throw new UnsupportedOperationException("Brand " + brand + " is not supported!");
+        if (!this.processorMapper.existsBrandModel(brand, model)) {
+            return null;
         }
-
-        Processor processor = this.dbProcessorService.retrieveProcessor(brand, model);
-        if (processor == null) {
-            processor = this.filterResponsibleServices(brand).findAny().get().retrieveProcessor(brand, model);
-            this.dbProcessorService.save(processor);
-        }
-        return processor;
+        return this.processorMapper.findByBrandAndModel(brand, model);
     }
 
     /**
@@ -90,20 +76,29 @@ public class DelegatingProcessorService implements ProcessorService {
      * @see org.lcmanager.gdb.service.processor.ProcessorService#isResponsible(org.lcmanager.gdb.service.data.model.Brand)
      */
     @Override
-    @NoHealthTrace
     public boolean isResponsible(final Brand brand) {
-        return !StreamUtil.isEmpty(this.filterResponsibleServices(brand));
+        return true;
     }
 
     /**
-     * Finds all services that are responsible for the given brand and returns
-     * them as a {@link Stream}.
+     * {@inheritDoc}
      *
-     * @param brand
-     *            The brand to find all responsible services for.
-     * @return A stream of responsible services.
+     * @see org.lcmanager.gdb.service.processor.ProcessorService#save(org.lcmanager.gdb.service.data.model.Processor)
      */
-    private Stream<ProcessorService> filterResponsibleServices(final Brand brand) {
-        return this.processorServices.stream().filter(processorService -> processorService.isResponsible(brand));
+    @Override
+    @Transactional
+    public void save(final Processor processor) {
+        if (processor.getId() != null && this.processorMapper.exists(processor.getId())) {
+            return;
+        }
+
+        final Brand brand = processor.getBrand();
+        if (this.brandMapper.existsName(brand.getName())) {
+            brand.setId(this.brandMapper.findByName(brand.getName()).getId());
+        } else {
+            this.brandMapper.insert(brand);
+        }
+
+        this.processorMapper.insert(processor);
     }
 }

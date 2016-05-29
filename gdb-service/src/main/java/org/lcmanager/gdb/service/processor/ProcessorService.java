@@ -52,4 +52,14 @@ public interface ProcessorService extends HealthRelevant {
      * @return Whether this service is responsible for the given brand.
      */
     boolean isResponsible(Brand brand);
+
+    /**
+     * Saves/caches the given processor.
+     *
+     * @param processor
+     *            The processor to save/cache.
+     */
+    default void save(final Processor processor) {
+        throw new UnsupportedOperationException("This operation is not supporter by default!");
+    }
 }

@@ -19,6 +19,8 @@
  */
 package org.lcmanager.gdb.service.impl.data.mapper;
 
+import org.apache.ibatis.annotations.Param;
+import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Graphics;
 
 /**
@@ -26,5 +28,27 @@ import org.lcmanager.gdb.service.data.model.Graphics;
  *
  */
 public interface GraphicsMapper extends BaseMapper<Graphics, Integer> {
-    // Nothing to do.
+    /**
+     * Checks whether any graphics card with the given model by the given brand
+     * exists.
+     *
+     * @param brand
+     *            The brand to check.
+     * @param model
+     *            The model to check.
+     * @return Whether any graphics card with with the given model by the given
+     *         brand exists or not.
+     */
+    boolean existsBrandModel(@Param("brand") Brand brand, @Param("model") String model);
+
+    /**
+     * Finds the graphics card with the given model by the given brand.
+     *
+     * @param brand
+     *            The brand of the graphics card to find.
+     * @param model
+     *            The model of the graphics card to find.
+     * @return The found graphics card, if any.
+     */
+    Graphics findByBrandAndModel(@Param("brand") Brand brand, @Param("model") String model);
 }

@@ -25,11 +25,11 @@
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
 	</insert>
 	<update id="update" parameterType="Map">
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
 	</insert>
 	<delete id="delete" parameterType="Map">
 	</delete>

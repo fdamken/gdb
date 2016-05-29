@@ -185,13 +185,85 @@
 	</sql>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
+		INSERT INTO Game (
+			id,
+			name,
+			requiredAge,
+			description,
+			headerImage,
+			website,
+			metacriticScore,
+			metacriticUrl,
+			releaseDate,
+			backgroundImage
+		) VALUES (
+			#{obj.id},
+			#{obj.name},
+			#{obj.requiredAge},
+			#{obj.description},
+			#{obj.headerImage},
+			#{obj.website},
+			#{obj.metacriticScore},
+			#{obj.metacriticUrl},
+			#{obj.releaseDate},
+			#{obj.backgroundImage}
+		)
 	</insert>
 	<update id="update" parameterType="Map">
+		UPDATE
+			Game
+		SET
+			name = #{obj.name},
+			requiredAge = #{obj.requiredAge},
+			description = #{obj.description},
+			headerImage = #{obj.headerImage},
+			website = #{obj.website},
+			metacriticScore = #{obj.metacriticScore},
+			metacriticUrl = #{obj.metacriticUrl},
+			releaseDate = #{obj.releaseDate},
+			backgroundImage = #{obj.backgroundImage}
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
+		INSERT INTO Game (
+			id,
+			name,
+			requiredAge,
+			description,
+			headerImage,
+			website,
+			metacriticScore,
+			metacriticUrl,
+			releaseDate,
+			backgroundImage
+		) VALUES (
+			#{obj.id},
+			#{obj.name},
+			#{obj.requiredAge},
+			#{obj.description},
+			#{obj.headerImage},
+			#{obj.website},
+			#{obj.metacriticScore},
+			#{obj.metacriticUrl},
+			#{obj.releaseDate},
+			#{obj.backgroundImage}
+		) ON DUPLICATE KEY UPDATE
+			name = #{obj.name},
+			requiredAge = #{obj.requiredAge},
+			description = #{obj.description},
+			headerImage = #{obj.headerImage},
+			website = #{obj.website},
+			metacriticScore = #{obj.metacriticScore},
+			metacriticUrl = #{obj.metacriticUrl},
+			releaseDate = #{obj.releaseDate},
+			backgroundImage = #{obj.backgroundImage}
 	</insert>
 	<delete id="delete" parameterType="Map">
+		DELETE
+		FROM
+			Game
+		WHERE
+			id = #{id}
 	</delete>
 	<select id="exists" parameterType="Map" resultType="boolean">
 		SELECT
@@ -217,22 +289,6 @@
 	</select>
 
 	<!-- Methods from GameMapper. -->
-<!--
-addDeveloper(int, int)
-removeDeveloper(int, int)
-addPlatform(int, OsFamily)
-removePlatform(int, OsFamily)
-addPublisher(int, int)
-removePublisher(int, int)
-addCategory(int, int)
-removeCategory(int, int)
-addGenre(int, int)
-removeGenre(int, int)
-addScreenshot(int, int)
-removeScreenshot(int, int)
-addRequirement(int, OsFamily, int, RequirementType)
-removeRequirement(int, OsFamily)
--->
 	<insert id="addDeveloper" parameterType="Map">
 		INSERT IGNORE INTO Game_Developer (
 			gameId,

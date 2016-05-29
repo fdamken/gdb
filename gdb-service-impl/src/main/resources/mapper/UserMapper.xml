@@ -34,7 +34,7 @@
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="user.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="user.id" keyColumn="id">
 		INSERT INTO User (
 			username,
 			displayName,
@@ -57,7 +57,7 @@
 		WHERE
 			id = #{obj.id}
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
 		INSERT INTO User (
 			username,
 			displayName,

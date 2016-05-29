@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.service.impl.data.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.lcmanager.gdb.service.data.model.Category;
 
 /**
@@ -26,5 +27,21 @@ import org.lcmanager.gdb.service.data.model.Category;
  *
  */
 public interface CategoryMapper extends BaseMapper<Category, Integer> {
-    // Nothing to do.
+    /**
+     * Checks whether any category with the given description exist.
+     *
+     * @param description
+     *            The description to check.
+     * @return Whether any category with the given description exists or not.
+     */
+    boolean existsDescription(@Param("description") String description);
+
+    /**
+     * Finds the category with the given description.
+     *
+     * @param description
+     *            The description of the category to find.
+     * @return The found category, if any.
+     */
+    Category findByDescription(@Param("description") String description);
 }

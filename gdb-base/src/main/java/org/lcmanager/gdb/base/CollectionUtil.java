@@ -19,8 +19,8 @@
  */
 package org.lcmanager.gdb.base;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -41,59 +41,116 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class CollectionUtil {
     /**
-     * Filters out all elements from <code>left</code> that are present in
-     * <code>right</code> and returns the result.
+     * Unions the given sets.
      * 
      * <p>
      * Formal:
      * 
      * <pre>
      * A := left
-     * A := right
-     * D := result
-     *
-     * D := { x | (x &#x2208; A) &#x2227; (x &#x2209; B) }
+     * B := right
+     * R := result
+     * 
+     * R := { x | (x &#x2208; A) &#x2228; (x &#x2208; B) }
      * </pre>
      * </p>
      *
      * @param left
-     *            The left collection.
+     *            The left set.
      * @param right
-     *            The right collection.
+     *            The right set.
+     * @return The union of both sets.
+     */
+    public static <T> Set<T> union(final Set<? extends T> left, final Set<? extends T> right) {
+        final Set<T> result = new HashSet<>(left);
+        result.addAll(right);
+        return result;
+    }
+
+    /**
+     * Filters out all elements from <code>left</code> that are present in
+     * <code>right</code>.
+     * 
+     * <p>
+     * Formal:
+     * 
+     * <pre>
+     * A := left
+     * B := right
+     * R := result
+     *
+     * R := { x | (x &#x2208; A) &#x2227; (x &#x2209; B) }
+     * </pre>
+     * </p>
+     *
+     * @param left
+     *            The left set.
+     * @param right
+     *            The right set.
      * @return The left-difference of <code>left</code> and <code>right</code>.
      */
-    public static <T> Collection<T> leftDifference(final Collection<? extends T> left, final Collection<? extends T> right) {
-        final List<T> result = new ArrayList<>(left);
+    public static <T> Set<T> leftDifference(final Set<? extends T> left, final Set<? extends T> right) {
+        final Set<T> result = new HashSet<>(left);
         result.removeAll(right);
         return result;
     }
 
     /**
+     * Delegates to {@link #leftDifference(Set, Set)}.
+     *
+     * @param left
+     *            Passed to {@link #leftDifference(Set, Set)}.
+     * @param right
+     *            Passed to {@link #leftDifference(Set, Set)}.
+     * @return The result of {@link #leftDifference(Set, Set)}.
+     * @see org.lcmanager.gdb.base.CollectionUtil#leftDifference(java.util.Set,
+     *      java.util.Set)
+     */
+    public static <T> Set<T> leftDifference(final Collection<? extends T> left, final Collection<? extends T> right) {
+        return CollectionUtil.leftDifference(new HashSet<>(left), new HashSet<>(right));
+    }
+
+    /**
      * Filters out all elements from <code>right</code> that are present in
-     * <code>left</code> and returns the result.
+     * <code>left</code>.
      * 
      * <p>
      * Formal:
      * 
      * <pre>
      * A := left
-     * A := right
-     * D := result
+     * B := right
+     * R := result
      *
-     * D := { x | (x &#x2209; A) &#x2227; (x &#x2208; B) }
+     * R := { x | (x &#x2209; A) &#x2227; (x &#x2208; B) }
      * </pre>
      * </p>
      *
      * @param left
-     *            The left collection.
+     *            The left set.
      * @param right
-     *            The right collection.
+     *            The right set.
      * @return The right-difference of <code>left</code> and <code>right</code>.
      */
-    public static <T> Collection<T> rightDifference(final Collection<? extends T> left, final Collection<? extends T> right) {
-        final List<T> result = new ArrayList<>(right);
+    public static <T> Set<T> rightDifference(final Set<? extends T> left, final Set<? extends T> right) {
+        final Set<T> result = new HashSet<>(right);
         result.removeAll(left);
         return result;
+    }
+
+    /**
+     * Delegates to {@link #rightDifference(Set, Set)}.
+     *
+     * @param left
+     *            Passed to {@link #rightDifference(Set, Set)}.
+     * @param right
+     *            Passed to {@link #rightDifference(Set, Set)}.
+     * @return The result of {@link #rightDifference(Set, Set)}.
+     * @see org.lcmanager.gdb.base.CollectionUtil#rightDifference(java.util.Set,
+     *      java.util.Set)
+     */
+    public static <T> Set<T> rightDifference(final Collection<? extends T> left, final Collection<? extends T> right) {
+        return CollectionUtil.rightDifference(new HashSet<>(left), new HashSet<>(right));
     }
 
     /**

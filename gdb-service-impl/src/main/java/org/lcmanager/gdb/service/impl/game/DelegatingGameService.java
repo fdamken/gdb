@@ -81,6 +81,7 @@ public class DelegatingGameService implements GameService {
         Game game = this.dbGameService.retrieveGame(gameId);
         if (game == null) {
             game = this.brandedGameService.retrieveGame(gameId);
+            this.dbGameService.save(game);
         }
         return game;
     }

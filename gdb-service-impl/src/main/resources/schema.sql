@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS Requirement_OperatingSystem (
 
 -- Create table 'ComputerSystem'.
 CREATE TABLE IF NOT EXISTS ComputerSystem (
-	id INT NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	userId INT NOT NULL,
 	operatingSystemId INT NOT NULL,
 	processorId INT NOT NULL,

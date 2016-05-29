@@ -27,7 +27,7 @@
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
 		INSERT INTO Genre (
 			id,
 			description
@@ -44,7 +44,7 @@
 		WHERE
 			id = #{obj.id}
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
 		INSERT INTO Genre (
 			id,
 			description
@@ -87,4 +87,21 @@
 	</select>
 
 	<!-- Methods from GenreMapper. -->
+	<select id="existsDescription" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			Genre
+		WHERE
+			description = #{description}
+	</select>
+	<select id="findByDescription" resultMap="genre">
+		SELECT
+			id,
+			description
+		FROM
+			Genre
+		WHERE
+			description = #{description}
+	</select>
 </mapper>

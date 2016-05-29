@@ -23,36 +23,34 @@
 <mapper namespace="org.lcmanager.gdb.service.impl.data.mapper.PublisherMapper">
 	<resultMap type="Publisher" id="publisher">
 		<id property="id" column="id" />
-		<result property="description" column="description" />
+		<result property="name" column="name" />
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
 		INSERT INTO Publisher (
-			id,
-			description
+			name
 		) VALUES (
-			#{obj.id},
-			#{obj.description}
+			#{obj.name}
 		)
 	</insert>
 	<update id="update" parameterType="Map">
 		UPDATE
 			Publisher
 		SET
-			description = #{obj.description}
+			description = #{obj.name}
 		WHERE
 			id = #{obj.id}
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
 		INSERT INTO Publisher (
 			id,
-			description
+			name
 		) VALUES (
 			#{obj.id},
-			#{obj.description}
+			#{obj.name}
 		) ON DUPLICATE KEY UPDATE
-			description = #{obj.description}
+			description = #{obj.name}
 	</insert>
 	<delete id="delete" parameterType="Map">
 		DELETE
@@ -72,7 +70,7 @@
 	<select id="findById" parameterType="Map" resultMap="publisher">
 		SELECT
 			id,
-			description
+			name
 		FROM
 			Publisher
 		WHERE
@@ -81,10 +79,27 @@
 	<select id="find" resultMap="publisher">
 		SELECT
 			id,
-			description
+			name
 		FROM
 			Publisher
 	</select>
 
 	<!-- Methods from PublisherMapper. -->
+	<select id="existsName" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			Publisher
+		WHERE
+			name = #{name}
+	</select>
+	<select id="findByName" resultMap="publisher">
+		SELECT
+			id,
+			name
+		FROM
+			Publisher
+		WHERE
+			name = #{name}
+	</select>
 </mapper>

@@ -41,9 +41,8 @@
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
 		INSERT INTO OperatingSystem (
-			id,
 			developerId,
 			osFamily,
 			name,
@@ -53,7 +52,6 @@
 			versionBugfx,
 			versionBuild
 		) VALUES (
-			#{obj.id},
 			#{obj.developer.id},
 			#{obj.osFamily},
 			#{obj.name},
@@ -77,7 +75,7 @@
 			versionBugfx = #{obj.version.bugfx},
 			versionBuild = #{obj.version.build}
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
 		INSERT INTO OperatingSystem (
 			id,
 			developerId,

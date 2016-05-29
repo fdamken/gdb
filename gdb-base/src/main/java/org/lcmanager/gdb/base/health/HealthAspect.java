@@ -84,7 +84,6 @@ public class HealthAspect extends BaseAspect {
             + "&& !execution(@org.lcmanager.gdb.base.health.NoHealthTrace * *(..))")
     public Object aroundHealthRelevant(final ProceedingJoinPoint joinPoint) throws Throwable {
         final Class<?> clazz = joinPoint.getTarget().getClass();
-        System.out.println(clazz);
 
         this.incrementTotal(clazz);
 
@@ -110,7 +109,6 @@ public class HealthAspect extends BaseAspect {
     @Around("execution(* org.lcmanager.gdb.base.health.HealthRelevant+ .health())")
     public Health aroundHealth(final ProceedingJoinPoint joinPoint) {
         final Class<?> clazz = joinPoint.getTarget().getClass();
-        System.out.println(clazz);
         final int totalCount = this.nullOrZero(this.total.get(this.makeCountKey(clazz)));
         final int errorCount = this.nullOrZero(this.error.get(this.makeCountKey(clazz)));
         final Health.Builder healthBuilder;

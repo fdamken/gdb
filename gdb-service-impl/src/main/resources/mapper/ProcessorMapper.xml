@@ -35,9 +35,8 @@
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
 		INSERT INTO Processor (
-			id,
 			brandId,
 			model,
 			cores,
@@ -45,7 +44,6 @@
 			frequency,
 			instructionSet
 		) VALUES (
-			#{obj.id},
 			#{obj.brand.id},
 			#{obj.model},
 			#{obj.cores},
@@ -66,7 +64,7 @@
 			frequency = #{obj.frequency},
 			instructionSet = #{obj.instructionSet}
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
 		INSERT INTO Processor (
 			id,
 			brandId,
@@ -123,4 +121,24 @@
 	</select>
 
 	<!-- Methods from ProcessorMapper. -->
+	<select id="existsBrandModel" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			Processor
+		WHERE
+			brandId = #{brand.id}
+			AND
+			model = #{model}
+	</select>
+	<select id="findByBrandAndModel" parameterType="Map" resultMap="processor">
+		SELECT
+			*
+		FROM
+			View_Processor
+		WHERE
+			processorBrandId = #{brand.id}
+			AND
+			processorModel = #{model}
+	</select>
 </mapper>

@@ -28,13 +28,11 @@
 	</resultMap>
 
 	<!-- Methods from BaseMapper. -->
-	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id" keyColumn="id">
 		INSERT INTO Screenshot (
-			id,
 			thumbnail,
 			image
 		) VALUES (
-			#{obj.id},
 			#{obj.thumbnail},
 			#{obj.image}
 		)
@@ -48,7 +46,7 @@
 		WHERE
 			id = #{obj.id}
 	</update>
-	<insert id="save" parameterType="Map" useGeneratedKeys="true" keyProperty="obj.id">
+	<insert id="save" parameterType="Map">
 		INSERT INTO Screenshot (
 			id,
 			thumbnail,

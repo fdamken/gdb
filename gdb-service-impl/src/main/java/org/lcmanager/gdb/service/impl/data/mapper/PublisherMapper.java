@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.service.impl.data.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.lcmanager.gdb.service.data.model.Publisher;
 
 /**
@@ -26,5 +27,21 @@ import org.lcmanager.gdb.service.data.model.Publisher;
  *
  */
 public interface PublisherMapper extends BaseMapper<Publisher, Integer> {
-    // Nothing to do.
+    /**
+     * Checks whether any publisher with the given name exist.
+     *
+     * @param name
+     *            The name to check.
+     * @return Whether any publisher with the given name exists or not.
+     */
+    boolean existsName(@Param("name") String name);
+
+    /**
+     * Finds the publisher with the given name.
+     *
+     * @param name
+     *            The name of the publisher to find.
+     * @return The found publisher, if any.
+     */
+    Publisher findByName(@Param("name") String name);
 }

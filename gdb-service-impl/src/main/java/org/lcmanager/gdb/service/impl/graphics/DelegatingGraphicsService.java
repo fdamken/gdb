@@ -31,6 +31,7 @@ import org.lcmanager.gdb.service.data.model.Graphics;
 import org.lcmanager.gdb.service.graphics.GraphicsService;
 import org.lcmanager.gdb.service.graphics.exception.GraphicsServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
@@ -46,6 +47,14 @@ import org.springframework.stereotype.Service;
 @Primary
 @CacheConfig(cacheNames = "delegating-graphics-service")
 public class DelegatingGraphicsService implements GraphicsService {
+    /**
+     * The generic {@link DatabaseGraphicsService}.
+     * 
+     */
+    @Autowired
+    @Qualifier("dbGraphicsService")
+    @Generic
+    private GraphicsService dbGraphicsService;
     /**
      * All branded {@link GraphicsService}.
      * 
@@ -67,7 +76,13 @@ public class DelegatingGraphicsService implements GraphicsService {
             throw new UnsupportedOperationException("Brand " + brand + " is not supported!");
         }
 
-        return this.filterResponsibleServices(brand).findAny().get().retrieveGraphics(brand, model);
+        Graphics graphics = this.dbGraphicsService.retrieveGraphics(brand, model);
+        if (graphics == null) {
+            graphics = this.filterResponsibleServices(brand).findAny().get().retrieveGraphics(brand, model);
+            this.dbGraphicsService.save(graphics);
+        }
+
+        return graphics;
     }
 
     /**

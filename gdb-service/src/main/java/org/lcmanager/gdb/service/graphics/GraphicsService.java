@@ -52,4 +52,14 @@ public interface GraphicsService extends HealthRelevant {
      * @return Whether this service is responsible for the given brand.
      */
     boolean isResponsible(Brand brand);
+
+    /**
+     * Saves/caches the given graphics card.
+     *
+     * @param graphics
+     *            The graphics card to save/cache.
+     */
+    default void save(final Graphics graphics) {
+        throw new UnsupportedOperationException("This operation is not supporter by default!");
+    }
 }
