@@ -52,16 +52,12 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 		$scope.as.categories = (response.data._embedded || {
 			categoryList : []
 		}).categoryList;
-	}, function(response) {
-		alert('An error occurred!'); // TODO: Replace with something cooler.
-	});
+	}, Dialog.ajaxError);
 	$http.get(Constants.context + '/api/platform').then(function(response) {
 		$scope.as.platforms = (response.data._embedded || {
 			osFamilyList : []
 		}).osFamilyList;
-	}, function(response) {
-		alert('An error occurred!'); // TODO: Replace with something cooler.
-	});
+	}, Dialog.ajaxError);
 
 	$scope.query = {
 		term : '',
@@ -150,9 +146,7 @@ gdbApp.controller('searchController', ['$scope', '$rootScope', '$http', 'layout'
 			$scope.searched = true;
 
 			overlay.detach();
-		}, function(response) {
-			alert('An error occurred!'); // TODO: Replace with something cooler.
-		});
+		}, Dialog.ajaxError);
 	};
 
 	$scope.$on('search_query-changed', function(event, args) {

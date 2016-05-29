@@ -134,9 +134,7 @@ gdbApp.controller('registerController', ['$http', '$scope', '$timeout', 'csrf', 
 					$scope.usernameValid = !response.data.content.exists;
 
 					$scope.usernameLastChanged = new Date().getTime();
-				}, function(response) {
-					alert('An error occurred!'); // TODO: Replace with something cooler.
-				});
+				}, Dialog.ajaxError);
 			} else {
 				$scope.usernameChecked = true;
 				$scope.usernameValid = false;
@@ -197,9 +195,7 @@ gdbApp.controller('registerController', ['$http', '$scope', '$timeout', 'csrf', 
 				}
 			}).then(function() {
 				$('#register-form').submit();
-			}, function() {
-				alert('An error occurred!'); // TODO: Replace with something cooler.
-			});
+			}, Dialog.ajaxError);
 		}
 	};
 }]);

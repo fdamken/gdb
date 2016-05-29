@@ -73,9 +73,7 @@ gdbApp.controller('detailsController', ['$scope', '$http', '$sce', '$timeout', '
 
 					$timeout(restartCarousel);
 				});
-			}, function(response) {
-				alert('An error occurred!'); // TODO: Replace with something cooler.
-			});
+			}, Dialog.ajaxError);
 		} else {
 			$scope.state = Constants.State.NOTHING;
 		}

@@ -28,6 +28,7 @@
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="${context}/css/bootstrap.css">
 		<link rel="stylesheet" href="${context}/css/bootstrap-theme.css">
+		<link rel="stylesheet" href="${context}/css/bootstrap-dialog.css">
 		<!-- jQuery UI -->
 		<link rel="stylesheet" href="${context}/css/jquery-ui.css">
 		<link rel="stylesheet" href="${context}/css/jquery-ui.structure.css">
@@ -48,12 +49,14 @@
 		<script src="${context}/js/angular-checklist-model.js"></script>
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.js"></script>
+		<script src="${context}/js/bootstrap-dialog.js"></script>
 	<#else>
 		<!-- CSS -->
 		<link rel="stylesheet" href="${context}/css/spinner.min.css">
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="${context}/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${context}/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="${context}/css/bootstrap-dialog.min.css">
 		<!-- jQuery UI -->
 		<link rel="stylesheet" href="${context}/css/jquery-ui.min.css">
 		<!-- AngularJS -->
@@ -73,6 +76,7 @@
 		<script src="${context}/js/angular-checklist-model.min.js"></script>
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.min.js"></script>
+		<script src="${context}/js/bootstrap-dialog.min.js"></script>
 	</#if>
 </#macro>
 <#macro head>
@@ -83,6 +87,7 @@
 	<!-- JavaScript -->
 	<script src="${context}/js/constants.js"></script>
 	<script src="${context}/js/overlay.js"></script>
+	<script src="${context}/js/dialog.js"></script>
 	<script src="${context}/js/gdb.js"></script>
 	<script src="${context}/js/layout.js"></script>
 </#macro>

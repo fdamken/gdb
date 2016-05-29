@@ -59,9 +59,7 @@ gdbApp.controller('preferencesController', ['$http', '$scope', '$timeout', 'csrf
 
 		$http.get(Constants.context + '/api/user').then(function(response) {
 			$scope.users = response.data._embedded.userList;
-		}, function() {
-			alert('An error occurred!'); // TODO: Replace with something cooler.
-		});
+		}, Dialog.ajaxError);
 
 		$scope.saveUser = function(index) {
 			var user = $scope.users[index];
@@ -73,21 +71,21 @@ gdbApp.controller('preferencesController', ['$http', '$scope', '$timeout', 'csrf
 			}).then(function() {
 				user.saving = false;
 				user.dirty = false;
-			}, function() {
-				alert('An error occurred!'); // TODO: Replace with something cooler.
-			});
+
+				Dialog.success('Data for user ' + user.username + ' saved successfully!');
+			}, Dialog.ajaxError);
 		};
 		$scope.deleteUser = function(index) {
 			var user = $scope.users[index];
-			$scope.users.splice(index, 1);
-			$http.delete(Constants.context + '/api/user/' + encodeURIComponent(user.id), {
-				headers : {
-					'X-CSRF-TOKEN' : csrf.token
-				}
-			}).then(function() {
-				// Already removed from UI --> No message necessary.
-			}, function() {
-				alert('An error occurred!'); // TODO: Replace with something cooler.
+			Dialog.confirm('Are you sure you want to delete the user ' + user.username + '?', true, function() {
+				$scope.users.splice(index, 1);
+				$http.delete(Constants.context + '/api/user/' + encodeURIComponent(user.id), {
+					headers : {
+						'X-CSRF-TOKEN' : csrf.token
+					}
+				}).then(function() {
+					Dialog.success('User ' + user.username + ' deleted successfully!');
+				}, Dialog.ajaxError);
 			});
 		};
 	}
