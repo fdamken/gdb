@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.service.impl.data.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.lcmanager.gdb.service.data.model.Developer;
 
 /**
@@ -26,5 +27,21 @@ import org.lcmanager.gdb.service.data.model.Developer;
  *
  */
 public interface DeveloperMapper extends BaseMapper<Developer, Integer> {
-    // Nothing to do.
+    /**
+     * Checks whether any developer with the given name exist.
+     *
+     * @param name
+     *            The name to check.
+     * @return Whether any developer with the given name exists or not.
+     */
+    boolean existsName(@Param("name") String name);
+
+    /**
+     * Finds the developer with the given name.
+     *
+     * @param name
+     *            The name of the developer to find.
+     * @return The found developer, if any.
+     */
+    Developer findByName(@Param("name") String name);
 }

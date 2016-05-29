@@ -19,6 +19,10 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
+import java.util.Locale;
+
+import org.lcmanager.gdb.base.Formatable;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -28,7 +32,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Processor implements BaseModel<Integer> {
+public class Processor implements BaseModel<Integer>, Formatable {
     /**
      * The serial version UID.
      *
@@ -72,4 +76,14 @@ public class Processor implements BaseModel<Integer> {
      * 
      */
     private Brand brand;
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.base.Formatable#format(java.util.Locale)
+     */
+    @Override
+    public String format(final Locale locale) {
+        return this.brand.format() + " " + this.model;
+    }
 }

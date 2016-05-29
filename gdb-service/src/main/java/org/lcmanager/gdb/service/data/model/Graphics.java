@@ -19,8 +19,11 @@
  */
 package org.lcmanager.gdb.service.data.model;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.lcmanager.gdb.base.Formatable;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -31,7 +34,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class Graphics implements BaseModel<Integer> {
+public class Graphics implements BaseModel<Integer>, Formatable {
     /**
      * The pattern that a DirectX version must match.
      * 
@@ -86,6 +89,16 @@ public class Graphics implements BaseModel<Integer> {
      * 
      */
     private Brand brand;
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see org.lcmanager.gdb.base.Formatable#format(java.util.Locale)
+     */
+    @Override
+    public String format(final Locale locale) {
+        return this.brand.format() + " " + this.model;
+    }
 
     /**
      * Encodes the DirectX version in the format <code>XXYYYZZZ</code> where

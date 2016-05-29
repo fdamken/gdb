@@ -189,7 +189,7 @@
 			View_ComputerSystem
 		WHERE
 			userId = #{userId}
-		ORDER BY primary DESC
+		ORDER BY computerSystemPrimary DESC
 		LIMIT 1
 	</select>
 	<select id="findByUser" parameterType="Map" resultMap="computerSystem">
@@ -199,6 +199,6 @@
 			View_ComputerSystem
 		WHERE
 			userId = #{userId}
-		ORDER BY primary DESC
+		ORDER BY computerSystemPrimary DESC
 	</select>
 </mapper>

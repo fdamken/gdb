@@ -21,12 +21,12 @@ package org.lcmanager.gdb.service.data.model;
 
 import java.util.Locale;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
-
 import org.lcmanager.gdb.base.Formatable;
 import org.lcmanager.gdb.base.Version;
 import org.lcmanager.gdb.service.data.util.OsFamily;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * Represents an operating system including its version and the developer.
@@ -75,10 +75,20 @@ public class OperatingSystem implements BaseModel<Integer>, Formatable {
     /**
      * {@inheritDoc}
      *
-     * @see java.lang.Object#toString()
+     * @see org.lcmanager.gdb.base.Formatable#format(java.util.Locale)
      */
     @Override
     public String format(final Locale locale) {
         return this.developer.getName() + " " + this.name + " " + this.version;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return this.format();
     }
 }

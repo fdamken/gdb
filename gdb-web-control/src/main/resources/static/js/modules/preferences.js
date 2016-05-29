@@ -48,21 +48,39 @@ gdbApp.directive('gdbDirty', [function() {
 }]);
 
 gdbApp.controller('preferencesController', ['$http', '$scope', '$timeout', 'csrf', function($http, $scope, $timeout, csrf) {
+	$scope.roles = ['ROLE_USER', 'ROLE_ADMIN'];
+
 	$scope.$on('preferences_open-dialog', function() {
 		$('#preferences-dialog').modal('show');
 	});
 
-	if (Constants.isAdmin) {
-		$scope.roles = ['ROLE_USER', 'ROLE_ADMIN'];
+	if (Constants.isUser) {
+		// Computer systems tab.
 
-		$scope.users = [];
+		$scope.cs = {
+			systemSearch : '',
+			systems : []
+		};
+
+		$http.get(Constants.context + '/api/computer-system').then(function(response) {
+			$scope.cs.systems = ((response.data._embedded || {}).computerSystemList || []);
+		});
+	}
+
+	if (Constants.isAdmin) {
+		// Users tab.
+
+		$scope.users = {
+			userSearch : '',
+			users : []
+		};
 
 		$http.get(Constants.context + '/api/user').then(function(response) {
-			$scope.users = response.data._embedded.userList;
+			$scope.users.users = ((response.data._embedded || {}).userList || []);
 		}, Dialog.ajaxError);
 
 		$scope.saveUser = function(index) {
-			var user = $scope.users[index];
+			var user = $scope.users.users[index];
 			user.saving = true;
 			$http.patch(Constants.context + '/api/user/' + encodeURIComponent(user.id), user, {
 				headers : {
@@ -76,9 +94,9 @@ gdbApp.controller('preferencesController', ['$http', '$scope', '$timeout', 'csrf
 			}, Dialog.ajaxError);
 		};
 		$scope.deleteUser = function(index) {
-			var user = $scope.users[index];
+			var user = $scope.users.users[index];
 			Dialog.confirm('Are you sure you want to delete the user ' + user.username + '?', true, function() {
-				$scope.users.splice(index, 1);
+				$scope.users.users.splice(index, 1);
 				$http.delete(Constants.context + '/api/user/' + encodeURIComponent(user.id), {
 					headers : {
 						'X-CSRF-TOKEN' : csrf.token

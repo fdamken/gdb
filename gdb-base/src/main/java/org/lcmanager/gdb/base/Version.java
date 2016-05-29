@@ -19,6 +19,8 @@
  */
 package org.lcmanager.gdb.base;
 
+import java.util.Locale;
+
 import lombok.Value;
 
 /**
@@ -28,7 +30,7 @@ import lombok.Value;
  *
  */
 @Value
-public class Version {
+public class Version implements Formatable {
     /**
      * The code name of this version.
      * 
@@ -113,8 +115,8 @@ public class Version {
      *            <code>-1</code>.
      */
     public Version(final String codename, final Integer major, final Integer minor, final Integer bugfx, final Integer build) {
-        this(codename, major == null ? -1 : major, minor == null ? -1 : minor, bugfx == null ? -1 : bugfx, build == null ? -1
-                : build);
+        this(codename, major == null ? -1 : major, minor == null ? -1 : minor, bugfx == null ? -1 : bugfx,
+                build == null ? -1 : build);
     }
 
     /**
@@ -214,10 +216,10 @@ public class Version {
     /**
      * {@inheritDoc}
      *
-     * @see java.lang.Object#toString()
+     * @see org.lcmanager.gdb.base.Formatable#format(Locale)
      */
     @Override
-    public String toString() {
+    public String format(final Locale locale) {
         final String result;
         if (this.codename == null) {
             final StringBuilder resultBuilder = new StringBuilder(String.valueOf(this.major));
@@ -235,5 +237,15 @@ public class Version {
             result = this.codename;
         }
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return this.format();
     }
 }

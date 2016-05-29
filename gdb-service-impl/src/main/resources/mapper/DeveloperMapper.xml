@@ -85,4 +85,21 @@
 	</select>
 
 	<!-- Methods from DeveloperMapper. -->
+	<select id="existsName" parameterType="Map" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			Developer
+		WHERE
+			name = #{name}
+	</select>
+	<select id="findByName" parameterType="Map" resultType="Developer">
+		SELECT
+			id,
+			name
+		FROM
+			Developer
+		WHERE
+			name = #{name}
+	</select>
 </mapper>

@@ -35,8 +35,8 @@ public interface Formatable {
      * <p>
      * <b> NOTE: Localization/Internationalization is not specified and
      * therefore some implementations may return English text however
-     * {@link #format(Locale)} was invoked using a German locale and vice versa.
-     * </b>
+     * {@link #format(Locale)} was invoked using a German locale and vice
+     * versa. </b>
      * </p>
      *
      * @param locale
@@ -52,5 +52,14 @@ public interface Formatable {
      */
     default String format() {
         return this.format(Locale.getDefault());
+    }
+
+    /**
+     * Invokes {@link #format()}.
+     *
+     * @return {@link #format()}.
+     */
+    default String getFormatted() {
+        return this.format();
     }
 }

@@ -33,7 +33,6 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -94,7 +93,6 @@ public class UserServiceImpl implements UserService {
      * @see org.lcmanager.gdb.service.user.UserService#loadUserByUsername(java.lang.String)
      */
     @Override
-    @PreAuthorize("(authentication.name == #userName) || hasRole('ADMIN')")
     @Transactional(readOnly = true)
     @Cacheable
     public User loadUserByUsername(final String userName) throws UsernameNotFoundException {
@@ -128,7 +126,6 @@ public class UserServiceImpl implements UserService {
      * @see org.lcmanager.gdb.service.user.UserService#updateUser(org.springframework.security.core.userdetails.UserDetails)
      */
     @Override
-    @PreAuthorize("(authentication.name == #userDetails.username) || hasRole('ADMIN')")
     @Transactional
     @CacheEvict(key = "#userDetails.username")
     public void updateUser(final UserDetails userDetails) {

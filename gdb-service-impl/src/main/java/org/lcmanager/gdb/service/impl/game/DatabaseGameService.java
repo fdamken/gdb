@@ -19,14 +19,15 @@
  */
 package org.lcmanager.gdb.service.impl.game;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
+import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.base.Paged;
 import org.lcmanager.gdb.service.annotation.Generic;
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Category;
+import org.lcmanager.gdb.service.data.model.Developer;
 import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.data.model.Genre;
 import org.lcmanager.gdb.service.data.model.Graphics;
@@ -39,6 +40,7 @@ import org.lcmanager.gdb.service.data.util.RequirementType;
 import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
 import org.lcmanager.gdb.service.impl.data.mapper.CategoryMapper;
+import org.lcmanager.gdb.service.impl.data.mapper.DeveloperMapper;
 import org.lcmanager.gdb.service.impl.data.mapper.GameMapper;
 import org.lcmanager.gdb.service.impl.data.mapper.GenreMapper;
 import org.lcmanager.gdb.service.impl.data.mapper.PublisherMapper;
@@ -70,6 +72,12 @@ public class DatabaseGameService implements GameService {
      */
     @Autowired
     private PublisherMapper publisherMapper;
+    /**
+     * The {@link DeveloperMapper}.
+     * 
+     */
+    @Autowired
+    private DeveloperMapper developerMapper;
     /**
      * The {@link CategoryMapper}.
      * 
@@ -137,7 +145,7 @@ public class DatabaseGameService implements GameService {
 
         final int gameId = game.getId();
 
-        final Set<OsFamily> platforms = game.getPlatforms();
+        final Set<OsFamily> platforms = CollectionUtil.orEmpty(game.getPlatforms());
         platforms.stream().forEach(platform -> this.gameMapper.addPlatform(gameId, platform));
 
         final Set<Publisher> publishers = game.getPublishers();
@@ -158,7 +166,25 @@ public class DatabaseGameService implements GameService {
                     this.gameMapper.addPublisher(gameId, publisherId);
                 });
 
-        final Set<Category> categories = game.getCategories();
+        final Set<Developer> developers = CollectionUtil.orEmpty(game.getDevelopers());
+        developers.stream() //
+                .parallel() //
+                .filter(developer -> !this.developerMapper.existsName(developer.getName())) //
+                .forEach(this.developerMapper::insert);
+        developers.stream() //
+                .parallel() //
+                .filter(developer -> developer.getId() == null) //
+                .forEach(developer -> {
+                    developer.setId(this.developerMapper.findByName(developer.getName()).getId());
+                });
+        developers.stream() //
+                .parallel() //
+                .mapToInt(Developer::getId) //
+                .forEach(developerId -> {
+                    this.gameMapper.addDeveloper(gameId, developerId);
+                });
+
+        final Set<Category> categories = CollectionUtil.orEmpty(game.getCategories());
         categories.stream() //
                 .parallel() //
                 .filter(category -> !this.categoryMapper.existsDescription(category.getDescription())) //
@@ -176,7 +202,7 @@ public class DatabaseGameService implements GameService {
                     this.gameMapper.addCategory(gameId, categoryId);
                 });
 
-        final Set<Genre> genres = game.getGenres();
+        final Set<Genre> genres = CollectionUtil.orEmpty(game.getGenres());
         genres.stream() //
                 .parallel() //
                 .filter(genre -> !this.genreMapper.existsDescription(genre.getDescription())) //
@@ -194,7 +220,7 @@ public class DatabaseGameService implements GameService {
                     this.gameMapper.addGenre(gameId, genreId);
                 });
 
-        final Set<Screenshot> screenshots = game.getScreenshots();
+        final Set<Screenshot> screenshots = CollectionUtil.orEmpty(game.getScreenshots());
         screenshots.stream() //
                 .parallel() //
                 .forEach(this.screenshotMapper::insert);
@@ -205,8 +231,7 @@ public class DatabaseGameService implements GameService {
                     this.gameMapper.addScreenshot(gameId, screenshotId);
                 });
 
-        final Map<OsFamily, Requirement> minimumRequirements = game.getMinimumRequirements() == null ? Collections.emptyMap()
-                : game.getMinimumRequirements();
+        final Map<OsFamily, Requirement> minimumRequirements = CollectionUtil.orEmpty(game.getMinimumRequirements());
         minimumRequirements.entrySet().stream()//
                 .parallel() //
                 .forEach(entry -> {
@@ -214,8 +239,7 @@ public class DatabaseGameService implements GameService {
                     this.gameMapper.addRequirement(gameId, entry.getKey(), entry.getValue().getId(), RequirementType.MINIMUM);
                 });
 
-        final Map<OsFamily, Requirement> recommendedRequirements = game.getRecommendedRequirements() == null
-                ? Collections.emptyMap() : game.getRecommendedRequirements();
+        final Map<OsFamily, Requirement> recommendedRequirements = CollectionUtil.orEmpty(game.getRecommendedRequirements());
         recommendedRequirements.entrySet().stream()//
                 .parallel() //
                 .forEach(entry -> {
@@ -237,14 +261,18 @@ public class DatabaseGameService implements GameService {
 
         // TODO: Insert operating system.
 
-        final Map<Brand, Processor> processors = requirement.getProcessors();
-        processors.values().stream().mapToInt(Processor::getId).forEach(processorId -> {
-            this.requirementMapper.addProcessor(requirementId, processorId);
-        });
+        final Map<Brand, Processor> processors = CollectionUtil.orEmpty(requirement.getProcessors());
+        processors.values().stream() //
+                .mapToInt(Processor::getId) //
+                .forEach(processorId -> {
+                    this.requirementMapper.addProcessor(requirementId, processorId);
+                });
 
-        final Map<Brand, Graphics> graphics = requirement.getGraphics();
-        graphics.values().stream().mapToInt(Graphics::getId).forEach(graphicsId -> {
-            this.requirementMapper.addGraphics(requirementId, graphicsId);
-        });
+        final Map<Brand, Graphics> graphics = CollectionUtil.orEmpty(requirement.getGraphics());
+        graphics.values().stream()//
+                .mapToInt(Graphics::getId)//
+                .forEach(graphicsId -> {
+                    this.requirementMapper.addGraphics(requirementId, graphicsId);
+                });
     }
 }

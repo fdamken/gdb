@@ -20,6 +20,7 @@
 package org.lcmanager.gdb.base;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -40,6 +41,42 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class CollectionUtil {
+    /**
+     * Checks whether the given list is <code>null</code>. If so, an empty list
+     * is returned.
+     *
+     * @param list
+     *            The list to check.
+     * @return The given list or an empty list.
+     */
+    public static <T> List<T> orEmpty(final List<T> list) {
+        return list == null ? Collections.emptyList() : list;
+    }
+
+    /**
+     * Checks whether the given set is <code>null</code>. If so, an empty set is
+     * returned.
+     *
+     * @param set
+     *            The set to check.
+     * @return The given set or an empty list.
+     */
+    public static <T> Set<T> orEmpty(final Set<T> set) {
+        return set == null ? Collections.emptySet() : set;
+    }
+
+    /**
+     * Checks whether the given map is <code>null</code>. If so, an empty map is
+     * returned.
+     *
+     * @param map
+     *            The map to check.
+     * @return The given map or an empty list.
+     */
+    public static <K, V> Map<K, V> orEmpty(final Map<K, V> map) {
+        return map == null ? Collections.emptyMap() : map;
+    }
+
     /**
      * Unions the given sets.
      * 

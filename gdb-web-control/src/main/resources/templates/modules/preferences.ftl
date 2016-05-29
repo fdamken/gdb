@@ -48,7 +48,23 @@
 					<div class="tab-content">
 						<#if is_user>
 							<div id="preference-computer-systems" class="tab-pane active">
-								Hello
+								<div class="computer-systems">
+									<input ng-model="cs.systemSearch.$" class="form-control" type="text" placeholder="Search Computer System">
+									<table class="table table-striped table-hover">
+										<tr class="table-head">
+											<th class="col-sm-3">Description</th>
+											<th class="col-sm-3">Operating System</th>
+											<th class="col-sm-3">Processor</th>
+											<th class="col-sm-3">Graphics</th>
+										</tr>
+										<tr ng-repeat="(i, system) in cs.systems | filter : cs.systemSearch" class="table-body" data-system="{{ i }}">
+											<td class="col-sm-3 description">{{ system.description }}</td>
+											<td class="col-sm-3 os">{{ system.operatingSystem.formatted }}</td>
+											<td class="col-sm-3 processor">{{ system.processor.formatted }}</td>
+											<td class="col-sm-3 graphics">{{ system.graphics.formatted }}</td>
+										</tr>
+									</table>
+								</div>
 							</div>
 						</#if>
 						<#if is_admin>
@@ -58,15 +74,15 @@
 								<div id="preference-users" class="tab-pane active">
 							</#if>
 								<div class="users">
-									<input ng-model="userSearch.$" class="form-control" type="text" placeholder="Search User">
-									<table class="table">
+									<input ng-model="users.userSearch.$" class="form-control" type="text" placeholder="Search User">
+									<table class="table table-striped">
 										<tr class="table-head">
 											<th class="col-sm-3 username">Username</th>
 											<th class="col-sm-4 display-name">Display Name</th>
 											<th class="col-sm-3 roles">Roles</th>
 											<th class="col-sm-2 actions" colspan="2">&nbsp;</th>
 										</tr>
-										<tr ng-repeat="(i, user) in users | filter : userSearch" class="table-body" data-user="{{ i }}">
+										<tr ng-repeat="(i, user) in users.users | filter : users.userSearch" class="table-body" data-user="{{ i }}">
 											<td class="col-sm-3 username">{{ user.username }}</td>
 											<td class="col-sm-4 display-name">
 												<input gdb-dirty="user" ng-model="user.displayName" ng-disabled="user.saving" type="text" class="form-control" placeholder="Display Name">

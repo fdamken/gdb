@@ -32,7 +32,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class ComputerSystem implements BaseModel<Integer>, OsFamilyAware {
+public class ComputerSystem implements BaseModel<Integer>, OsFamilyAware, Comparable<ComputerSystem> {
     /**
      * The serial version UID.
      *
@@ -87,4 +87,14 @@ public class ComputerSystem implements BaseModel<Integer>, OsFamilyAware {
      * 
      */
     private Graphics graphics;
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(final ComputerSystem that) {
+        return -Boolean.compare(this.primary, that.primary);
+    }
 }
