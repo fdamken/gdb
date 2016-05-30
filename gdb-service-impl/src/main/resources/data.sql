@@ -40,4 +40,7 @@ INSERT IGNORE INTO Brand (
 ), (
 	3,
 	"Nvidia"
+), (
+	4,
+	"Generic"
 );

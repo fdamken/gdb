@@ -20,6 +20,7 @@
 package org.lcmanager.gdb.service.requirement;
 
 import org.lcmanager.gdb.base.MathUtil;
+import org.lcmanager.gdb.service.compare.CompareResult;
 
 import lombok.Builder;
 import lombok.Data;
@@ -64,7 +65,7 @@ public class GraphicsCompareResult implements CompareResult {
     /**
      * {@inheritDoc}
      *
-     * @see org.lcmanager.gdb.service.requirement.CompareResult#getPercentage()
+     * @see org.lcmanager.gdb.service.compare.CompareResult#getPercentage()
      */
     @Override
     public int getPercentage() {

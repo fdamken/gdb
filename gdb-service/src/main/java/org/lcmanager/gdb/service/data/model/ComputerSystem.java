@@ -54,12 +54,12 @@ public class ComputerSystem implements BaseModel<Integer>, OsFamilyAware, Compar
      * The memory of this system in mebibyte.
      * 
      */
-    private int memory;
+    private Integer memory;
     /**
      * Whether this computer system is the primary system of the user.
      * 
      */
-    private boolean primary;
+    private Boolean primary;
     /**
      * The description of this computer system.
      * 

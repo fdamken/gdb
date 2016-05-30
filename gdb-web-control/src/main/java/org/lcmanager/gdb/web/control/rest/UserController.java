@@ -22,6 +22,7 @@ package org.lcmanager.gdb.web.control.rest;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.base.CommonConstants;
 import org.lcmanager.gdb.service.data.model.User;
 import org.lcmanager.gdb.service.user.UserService;
@@ -91,12 +92,12 @@ public class UserController {
         final String password = body.get("password");
 
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
-            return ResponseEntity.badRequest().body(ControllerUtil.<String, String>createMap(map -> {
+            return ResponseEntity.badRequest().body(CollectionUtil.<String, String>createMap(map -> {
                 map.put("msg", "Both username and password must be given!");
             }));
         }
         if (this.userService.userExists(username)) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(ControllerUtil.<String, String>createMap(map -> {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(CollectionUtil.<String, String>createMap(map -> {
                 map.put("msg", "The user already exists!");
             }));
         }
@@ -109,7 +110,7 @@ public class UserController {
         this.userService.createUser(user, password);
         this.userService.assignAuthority(CommonConstants.Role.USER_AUTHORITY, user);
 
-        return ResponseEntity.ok().body(ControllerUtil.<String, String>createMap(map -> {
+        return ResponseEntity.ok().body(CollectionUtil.<String, String>createMap(map -> {
             map.put("msg", "User created!");
         }));
     }

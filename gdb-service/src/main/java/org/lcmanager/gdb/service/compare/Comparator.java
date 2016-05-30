@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.lcmanager.gdb.service.requirement;
+package org.lcmanager.gdb.service.compare;
 
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
 import org.lcmanager.gdb.service.data.model.Requirement;

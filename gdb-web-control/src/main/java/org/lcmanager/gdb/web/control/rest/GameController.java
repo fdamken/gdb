@@ -20,27 +20,37 @@
 package org.lcmanager.gdb.web.control.rest;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.lcmanager.gdb.base.Paged;
 import org.lcmanager.gdb.base.Sorting;
 import org.lcmanager.gdb.base.Sorting.Direction;
 import org.lcmanager.gdb.base.exception.GdbException;
+import org.lcmanager.gdb.service.cs.ComputerSystemService;
 import org.lcmanager.gdb.service.data.model.Category;
+import org.lcmanager.gdb.service.data.model.ComputerSystem;
 import org.lcmanager.gdb.service.data.model.Game;
+import org.lcmanager.gdb.service.data.model.User;
 import org.lcmanager.gdb.service.data.util.OsFamily;
+import org.lcmanager.gdb.service.game.GameCompareResult;
+import org.lcmanager.gdb.service.game.GameCompareService;
 import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
+import org.lcmanager.gdb.service.user.UserService;
 import org.lcmanager.gdb.web.control.status.GenerateStatus;
 import org.lcmanager.gdb.web.control.util.ControllerUtil;
+import org.lcmanager.gdb.web.control.util.exception.NullContentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,31 +66,29 @@ import org.springframework.web.bind.annotation.RestController;
 @CacheConfig(cacheNames = "game-controller")
 public class GameController {
     /**
+     * The {@link UserService}.
+     * 
+     */
+    @Autowired
+    private UserService userService;
+    /**
      * The {@link GameService}.
      * 
      */
     @Autowired
     private GameService gameService;
-
     /**
-     * Retrieves a single game.
-     *
-     * @param gameId
-     *            The ID the of game to retrieve.
-     * @return The retrieved game wrapped by a {@link ResponseEntity}.
-     * @throws GdbException
-     *             If any GDB error occurs.
+     * The {@link ComputerSystemService}.
+     * 
      */
-    @RequestMapping("/{gameId}")
-    @Cacheable
-    public ResponseEntity<ResourceSupport> handleById(@PathVariable final int gameId) throws GdbException {
-        final Resource<Game> resource = ControllerUtil.createResource(this.gameService.retrieveGame(gameId));
-
-        resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(GameController.class).handleById(gameId))
-                .withSelfRel());
-
-        return ControllerUtil.createResponse(resource);
-    }
+    @Autowired
+    private ComputerSystemService computerSystemService;
+    /**
+     * The {@link GameCompareService}.
+     * 
+     */
+    @Autowired
+    private GameCompareService gameCompareService;
 
     /**
      * Searches for games.
@@ -134,6 +142,94 @@ public class GameController {
 
         resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(GameController.class).handleFind(page, term,
                 categories1, categories2, platforms, sortingTerm, sortingDirection)).withSelfRel());
+
+        return ControllerUtil.createResponse(resource);
+    }
+
+    /**
+     * Retrieves a single game.
+     *
+     * @param gameId
+     *            The ID the of game to retrieve.
+     * @return The retrieved game wrapped by a {@link ResponseEntity}.
+     * @throws GdbException
+     *             If any GDB error occurs.
+     */
+    @RequestMapping("/{gameId}")
+    @Cacheable
+    public ResponseEntity<ResourceSupport> handleById(@PathVariable final int gameId) throws GdbException {
+        final Resource<Game> resource = ControllerUtil.createResource(this.gameService.retrieveGame(gameId));
+
+        resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(GameController.class).handleById(gameId))
+                .withSelfRel());
+
+        return ControllerUtil.createResponse(resource);
+    }
+
+    /**
+     * Compares the game with the given ID to all computer systems the current
+     * user has.
+     *
+     * @param gameId
+     *            The ID of the game to compare.
+     * @return The result of the comparison.
+     * @throws GdbException
+     *             If any error occurs.
+     */
+    @RequestMapping("/{gameId}/compare")
+    @PreAuthorize("hasRole('USER')")
+    @Cacheable
+    public ResponseEntity<ResourceSupport> handleCompare(@PathVariable final int gameId) throws GdbException {
+        final User user = this.userService.retrieveUser();
+        final Game game = this.gameService.retrieveGame(gameId);
+        if (game == null) {
+            throw new NullContentException();
+        }
+        final List<ComputerSystem> computerSystems = this.computerSystemService.retrieveComputerSystems(user);
+        if (computerSystems == null) {
+            throw new NullContentException();
+        }
+        final List<GameCompareResult> gameCompareResult = computerSystems.stream().parallel() //
+                .map(computerSystem -> this.gameCompareService.compare(game, computerSystem)) //
+                .collect(Collectors.toList());
+
+        final Resources<GameCompareResult> resource = ControllerUtil.createResources(gameCompareResult);
+
+        resource.add(ControllerLinkBuilder
+                .linkTo(ControllerLinkBuilder.methodOn(GameController.class).handleComparePrimary(gameId)).withSelfRel());
+
+        return ControllerUtil.createResponse(resource);
+    }
+
+    /**
+     * Compares the game with the given ID to the primary computer system of the
+     * current user.
+     *
+     * @param gameId
+     *            The ID of the game to compare.
+     * @return The result of the comparison.
+     * @throws GdbException
+     *             If any error occurs.
+     */
+    @RequestMapping("/{gameId}/compare/primary")
+    @PreAuthorize("hasRole('USER')")
+    @Cacheable
+    public ResponseEntity<ResourceSupport> handleComparePrimary(@PathVariable final int gameId) throws GdbException {
+        final User user = this.userService.retrieveUser();
+        final Game game = this.gameService.retrieveGame(gameId);
+        if (game == null) {
+            throw new NullContentException();
+        }
+        final ComputerSystem computerSystem = this.computerSystemService.retrievePrimaryComputerSystem(user);
+        if (computerSystem == null) {
+            throw new NullContentException();
+        }
+        final GameCompareResult gameCompareResult = this.gameCompareService.compare(game, computerSystem);
+
+        final Resource<GameCompareResult> resource = ControllerUtil.createResource(gameCompareResult);
+
+        resource.add(ControllerLinkBuilder
+                .linkTo(ControllerLinkBuilder.methodOn(GameController.class).handleComparePrimary(gameId)).withSelfRel());
 
         return ControllerUtil.createResponse(resource);
     }

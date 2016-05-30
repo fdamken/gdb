@@ -95,7 +95,12 @@ public class Brand implements BaseModel<Integer>, Formatable {
          * Represents the brand <code>Nvidia</code>.
          * 
          */
-        NVIDIA(3, "Nvidia");
+        NVIDIA(3, "Nvidia"),
+        /**
+         * A generic brand that is not bound.
+         * 
+         */
+        GENERIC(4, "Generic");
 
         /**
          * The ID of this brand.
@@ -116,7 +121,7 @@ public class Brand implements BaseModel<Integer>, Formatable {
          * @return Whether the given {@link Brand} is a well-known brand or not.
          */
         public static boolean isWellKnownBrand(final Brand brand) {
-            return brand.getId() >= 1 && brand.getId() <= 3;
+            return brand.getId() >= 1 && brand.getId() <= WellKnownBrand.values().length;
         }
 
         /**

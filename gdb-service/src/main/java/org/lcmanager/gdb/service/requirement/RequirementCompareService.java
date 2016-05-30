@@ -19,6 +19,7 @@
  */
 package org.lcmanager.gdb.service.requirement;
 
+import org.lcmanager.gdb.service.compare.Comparator;
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
 import org.lcmanager.gdb.service.data.model.Requirement;
 

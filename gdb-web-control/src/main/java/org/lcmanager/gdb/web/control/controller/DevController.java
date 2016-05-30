@@ -21,9 +21,9 @@ package org.lcmanager.gdb.web.control.controller;
 
 import java.util.Map;
 
+import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.service.data.model.User;
 import org.lcmanager.gdb.service.user.UserService;
-import org.lcmanager.gdb.web.control.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -102,12 +102,12 @@ public class DevController {
         final String password = body.get("password");
 
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
-            return ResponseEntity.badRequest().body(ControllerUtil.<String, String>createMap(map -> {
+            return ResponseEntity.badRequest().body(CollectionUtil.<String, String>createMap(map -> {
                 map.put("msg", "Both username and password must be given!");
             }));
         }
         if (this.userService.userExists(username)) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(ControllerUtil.<String, String>createMap(map -> {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(CollectionUtil.<String, String>createMap(map -> {
                 map.put("msg", "The user already exists!");
             }));
         }
@@ -119,7 +119,7 @@ public class DevController {
         }
         this.userService.createUser(user, password);
 
-        return ResponseEntity.ok().body(ControllerUtil.<String, String>createMap(map -> {
+        return ResponseEntity.ok().body(CollectionUtil.<String, String>createMap(map -> {
             map.put("msg", "User created!");
         }));
     }

@@ -140,7 +140,7 @@
 			processorId = #{processorId}
 	</delete>
 	<insert id="addGraphics" parameterType="Map">
-		INSERT INGORE INTO Requirement_Graphics (
+		INSERT IGNORE INTO Requirement_Graphics (
 			requirementId,
 			graphicsId
 		) VALUES (

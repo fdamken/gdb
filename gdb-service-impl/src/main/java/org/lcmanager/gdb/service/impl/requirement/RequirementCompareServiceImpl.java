@@ -43,7 +43,7 @@ public class RequirementCompareServiceImpl implements RequirementCompareService 
     /**
      * {@inheritDoc}
      *
-     * @see org.lcmanager.gdb.service.requirement.Comparator#compare(org.lcmanager.gdb.service.data.model.Requirement,
+     * @see org.lcmanager.gdb.service.compare.Comparator#compare(org.lcmanager.gdb.service.data.model.Requirement,
      *      org.lcmanager.gdb.service.data.model.ComputerSystem)
      */
     @Override

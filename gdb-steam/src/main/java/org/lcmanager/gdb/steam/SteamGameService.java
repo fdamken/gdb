@@ -27,10 +27,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -39,23 +44,33 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.base.FunctionUtil;
+import org.lcmanager.gdb.base.NumberUtil;
 import org.lcmanager.gdb.base.Paged;
 import org.lcmanager.gdb.base.PaginationMetadata;
 import org.lcmanager.gdb.base.StreamUtil;
 import org.lcmanager.gdb.base.exception.GdbExceptionWrapper;
 import org.lcmanager.gdb.service.annotation.Branded;
+import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Category;
 import org.lcmanager.gdb.service.data.model.Developer;
 import org.lcmanager.gdb.service.data.model.Game;
 import org.lcmanager.gdb.service.data.model.Genre;
 import org.lcmanager.gdb.service.data.model.Publisher;
+import org.lcmanager.gdb.service.data.model.Requirement;
 import org.lcmanager.gdb.service.data.model.Screenshot;
 import org.lcmanager.gdb.service.data.util.OsFamily;
 import org.lcmanager.gdb.service.game.GameQuery;
 import org.lcmanager.gdb.service.game.GameService;
 import org.lcmanager.gdb.service.game.exception.GameServiceException;
+import org.lcmanager.gdb.service.graphics.GraphicsService;
+import org.lcmanager.gdb.service.graphics.exception.GraphicsServiceException;
+import org.lcmanager.gdb.service.processor.ProcessorService;
+import org.lcmanager.gdb.service.processor.exception.ProcessorServiceException;
 import org.lcmanager.gdb.steam.exception.SteamGameServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.cache.annotation.CacheConfig;
@@ -72,6 +87,12 @@ import io.mikael.urlbuilder.UrlBuilder;
 @Branded
 @CacheConfig(cacheNames = "steam-game-service")
 public class SteamGameService implements GameService {
+    /**
+     * The logger.
+     * 
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SteamGameService.class);
+
     /**
      * The pattern of Steams <code>'pagination_left'</code> element.
      * 
@@ -97,6 +118,18 @@ public class SteamGameService implements GameService {
      */
     @Autowired
     private GameService gameService;
+    /**
+     * The {@link ProcessorService}.
+     * 
+     */
+    @Autowired
+    private ProcessorService processorService;
+    /**
+     * The {@link GraphicsService}.
+     * 
+     */
+    @Autowired
+    private GraphicsService graphicsService;
 
     /**
      * {@inheritDoc}
@@ -264,8 +297,6 @@ public class SteamGameService implements GameService {
             }
         }
 
-        game.setMinimumRequirements(null); // TODO
-
         final Object nameObj = gameData.get("name");
         if (nameObj instanceof String) {
             game.setName((String) nameObj);
@@ -293,8 +324,6 @@ public class SteamGameService implements GameService {
                     .map(publisher -> new Publisher().setName(publisher)) //
                     .collect(Collectors.toSet()));
         }
-
-        game.setRecommendedRequirements(null); // TODO
 
         final Object releaseDateObj = gameData.get("release_date");
         if (releaseDateObj instanceof Map) {
@@ -388,7 +417,174 @@ public class SteamGameService implements GameService {
             }
         }
 
+        try {
+            this.extractRequirements(game, gameData);
+        } catch (final NullPointerException ex) {
+            SteamGameService.LOGGER.error("Failed to retrieve the requirements! Continuing with no requirements set...", ex);
+
+            game.setMinimumRequirements(new HashMap<>());
+            game.setRecommendedRequirements(new HashMap<>());
+        }
+
         return game;
+    }
+
+    /**
+     * Extracts the minimum and recommended requirements from the given game
+     * data and inserts it into the given game.
+     *
+     * @param game
+     *            The game to insert the requirements into.
+     * @param gameData
+     *            The data to retrieve the required data from.
+     * @throws GameServiceException
+     *             If any error occurs.
+     */
+    @SuppressWarnings("unchecked")
+    private void extractRequirements(final Game game, final Map<String, Object> gameData) throws GameServiceException {
+        final Map<OsFamily, Object> requirements = new HashMap<>();
+        final Object pcRequirementsObj = gameData.get("pc_requirements");
+        if (pcRequirementsObj instanceof Map) {
+            requirements.put(OsFamily.WINDOWS, pcRequirementsObj);
+        }
+        final Object macRequirementsObj = gameData.get("mac_requirements");
+        if (macRequirementsObj instanceof Map) {
+            requirements.put(OsFamily.MAC, macRequirementsObj);
+        }
+        final Object linuxRequirementsObj = gameData.get("linux_requirements");
+        if (linuxRequirementsObj instanceof Map) {
+            requirements.put(OsFamily.UNIX, linuxRequirementsObj);
+        }
+        final List<Map.Entry<OsFamily, Map<String, String>>> mappedRequirements = requirements.entrySet().stream() //
+                .filter(entry -> (entry.getValue() instanceof Map)) //
+                .map(entry -> CollectionUtil.createMapEntry(entry.getKey(), (Map<String, String>) entry.getValue())) //
+                .filter(entry -> entry.getKey() != null) //
+                .filter(entry -> entry.getValue() != null) //
+                .collect(Collectors.toList());
+
+        final Function<? super Entry<OsFamily, String>, ? extends Entry<OsFamily, Requirement>> toRequirement = entry -> {
+            try {
+                return CollectionUtil.createMapEntry(entry.getKey(), this.parseRequirement(entry.getKey(), entry.getValue()));
+            } catch (final GameServiceException cause) {
+                throw new GdbExceptionWrapper(cause);
+            }
+        };
+
+        final Map<OsFamily, Requirement> minimumRequirements = new ConcurrentHashMap<>();
+        try {
+            mappedRequirements.stream() //
+                    .map(entry -> CollectionUtil.createMapEntry(entry.getKey(), entry.getValue().get("minimum"))) //
+                    .filter(entry -> entry.getValue() != null) //
+                    .map(toRequirement).forEach(entry -> minimumRequirements.put(entry.getKey(), entry.getValue()));
+        } catch (final GdbExceptionWrapper wrapper) {
+            throw (GameServiceException) wrapper.getCause();
+        }
+        game.setMinimumRequirements(minimumRequirements);
+
+        final Map<OsFamily, Requirement> recommendedRequirements = new ConcurrentHashMap<>();
+        try {
+            mappedRequirements.stream() //
+                    .map(entry -> CollectionUtil.createMapEntry(entry.getKey(), entry.getValue().get("recommended"))) //
+                    .filter(entry -> entry.getValue() != null) //
+                    .map(toRequirement).forEach(entry -> recommendedRequirements.put(entry.getKey(), entry.getValue()));
+        } catch (final GdbExceptionWrapper wrapper) {
+            throw (GameServiceException) wrapper.getCause();
+        }
+        game.setRecommendedRequirements(recommendedRequirements);
+    }
+
+    /**
+     * Parses the given data as a requirement.
+     *
+     * @param osFamily
+     *            The {@link OsFamily} of the requirement.
+     * @param source
+     *            The data to parse. This must be the HTML that is returned by
+     *            the Steam API!
+     * @return The parsed requirement.
+     * @throws GameServiceException
+     *             If any error occurs.
+     */
+    private Requirement parseRequirement(final OsFamily osFamily, final String source) throws GameServiceException {
+        final Element element = Jsoup.parseBodyFragment(source).body();
+
+        final Map<String, String> data = new HashMap<>();
+        final Consumer<? super Element> addToData = valueElement -> {
+            final Elements keyElements = valueElement.getElementsByTag("strong");
+            if (keyElements.size() > 0) {
+                final Element keyElement = keyElements.get(0);
+                data.put(keyElement.ownText().replace(":", "").toLowerCase(), valueElement.ownText());
+            }
+        };
+        element.getElementsByTag("li").forEach(addToData);
+        element.getElementsByTag("p").forEach(addToData);
+
+        final Requirement requirement = new Requirement();
+        requirement.setOsFamily(osFamily);
+
+        requirement.setMemory(CollectionUtil.findValue(data, "memory"::equalsIgnoreCase, value -> {
+            final String lowerValue = value.toLowerCase().trim();
+            final int number = NumberUtil.extractNumber(lowerValue);
+
+            final int result;
+            if (lowerValue.contains("gb")) {
+                result = number * 1024;
+            } else if (lowerValue.contains("kb")) {
+                result = number / 1024;
+            } else {
+                result = number;
+            }
+            return result;
+        }));
+
+        requirement.setStorage(CollectionUtil.findValue(data, "storage"::equalsIgnoreCase, value -> {
+            final String lowerValue = value.toLowerCase().trim();
+            final int number = NumberUtil.extractNumber(lowerValue);
+
+            final int result;
+            if (lowerValue.contains("gb")) {
+                result = number * 1024;
+            } else if (lowerValue.contains("kb")) {
+                result = number / 1024;
+            } else {
+                result = number;
+            }
+            return result;
+        }));
+
+        // TODO: Fill with real parsing.
+        try {
+            requirement.setProcessors(CollectionUtil.findValue(data, "processor"::equalsIgnoreCase, value -> {
+                return CollectionUtil.createMap(map -> {
+                    try {
+                        map.put(Brand.WellKnownBrand.INTEL.getBrand(),
+                                this.processorService.retrieveProcessor(Brand.WellKnownBrand.INTEL.getBrand(), "Core i5-4690"));
+                    } catch (final ProcessorServiceException cause) {
+                        throw new GdbExceptionWrapper(cause);
+                    }
+                });
+            }));
+        } catch (final GdbExceptionWrapper wrapper) {
+            throw new SteamGameServiceException("Failed to retrieve the required processors!", wrapper.getCause());
+        }
+
+        // TODO: Fill with real parsing.
+        try {
+            requirement.setGraphics(CollectionUtil.findValue(data, "graphics"::equalsIgnoreCase, value -> {
+                return CollectionUtil.createMap(map -> {
+                    try {
+                        map.put(Brand.WellKnownBrand.NVIDIA.getBrand(),
+                                this.graphicsService.retrieveGraphics(Brand.WellKnownBrand.NVIDIA.getBrand(), "GeForce GTX 970"));
+                    } catch (final GraphicsServiceException cause) {
+                        throw new GdbExceptionWrapper(cause);
+                    }
+                });
+            }));
+        } catch (final GdbExceptionWrapper wrapper) {
+            throw new SteamGameServiceException("Failed to retrieve the required graphics cards!", wrapper.getCause());
+        }
+
+        return requirement;
     }
 
     /**
@@ -567,7 +763,7 @@ public class SteamGameService implements GameService {
      *             If the parsing was not successful with every date format.
      */
     private Date parseReleaseDate(final String rawDate) throws ParseException {
-        if (rawDate == null || rawDate.trim().isEmpty()) {
+        if (rawDate == null || rawDate.trim().isEmpty() || rawDate.trim().equalsIgnoreCase("tba")) {
             return new Date(1);
         }
 

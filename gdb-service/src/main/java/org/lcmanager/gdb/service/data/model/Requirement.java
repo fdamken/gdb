@@ -60,12 +60,12 @@ public class Requirement implements BaseModel<Integer>, OsFamilyAware {
      * The memory of this requirement in mebibyte.
      * 
      */
-    private int memory;
+    private Integer memory;
     /**
      * The storage of this requirement is mebibyte.
      * 
      */
-    private int storage;
+    private Integer storage;
 
     // ~ Mapped ~
     /**

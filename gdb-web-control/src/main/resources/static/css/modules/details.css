@@ -62,3 +62,10 @@
 #details-content-wrapper .header-image img {
 	width: 100%;
 }
+
+#req-satisfy {
+	border-top: 1px solid #dddddd;
+	margin-top: 10px;
+	padding: 10px;
+	padding-bottom: 0;
+}

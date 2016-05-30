@@ -284,7 +284,7 @@ CREATE OR REPLACE VIEW View_Graphics AS
 		Gr.model			AS graphicsModel,
 		Gr.memory			AS graphicsMemory,
 		Gr.frequency		AS graphicsFrequency,
-		Gr.directXVersion	AS graphicsDirectYVersion,
+		Gr.directXVersion	AS graphicsDirectXVersion,
 		Gr.openGlVersion	AS graphicsOpenGlVersion,
 		Br.id				AS graphicsBrandId,
 		Br.name				AS graphicsBrandName

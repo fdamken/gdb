@@ -77,6 +77,12 @@
 								<a class="details-value" href="{{ gameDetails.website }}" target="_blank">{{ gameDetails.website | host }}</a>
 							</div>
 						</div>
+						<#if is_user>
+							<div ng-show="reqSatisfy.enabled" id="req-satisfy">
+								<span ng-show="reqSatisfy.minimum" id="req-satisfy-minimum"></span>
+								<span ng-show="reqSatisfy.recommended" id="req-satisfy-recommended"></span>
+							</div>
+						</#if>
 					</div>
 				</div>
 

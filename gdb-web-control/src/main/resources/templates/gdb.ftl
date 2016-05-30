@@ -50,6 +50,9 @@
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.js"></script>
 		<script src="${context}/js/bootstrap-dialog.js"></script>
+		<!-- D3.js -->
+		<script src="${context}/js/d3.js"></script>
+		<script src="${context}/js/gauge.js"></script>
 	<#else>
 		<!-- CSS -->
 		<link rel="stylesheet" href="${context}/css/spinner.min.css">
@@ -77,6 +80,9 @@
 		<!-- Bootstrap -->
 		<script src="${context}/js/bootstrap.min.js"></script>
 		<script src="${context}/js/bootstrap-dialog.min.js"></script>
+		<!-- D3.js -->
+		<script src="${context}/js/d3.min.js"></script>
+		<script src="${context}/js/gauge.js"></script>
 	</#if>
 </#macro>
 <#macro head>

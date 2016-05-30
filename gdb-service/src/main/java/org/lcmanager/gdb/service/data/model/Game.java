@@ -26,15 +26,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.experimental.Accessors;
-
 import org.lcmanager.gdb.base.CollectionUtil;
 import org.lcmanager.gdb.service.data.util.OsFamily;
 import org.lcmanager.gdb.service.data.util.RequirementType;
 import org.lcmanager.gdb.service.data.util.TypedRequirement;
+
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
 /**
  * Represents the details of any game.
@@ -64,7 +64,7 @@ public class Game implements BaseModel<Integer> {
      * The minimum age that is required to play the game (in years).
      * 
      */
-    private int requiredAge;
+    private Integer requiredAge;
     /**
      * A detailed description of the game.
      * 
@@ -84,7 +84,7 @@ public class Game implements BaseModel<Integer> {
      * The store on Metacritic.
      * 
      */
-    private int metacriticScore;
+    private Integer metacriticScore;
     /**
      * The URL to the Metacritic test.
      * 

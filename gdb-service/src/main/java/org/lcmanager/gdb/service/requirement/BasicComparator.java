@@ -20,6 +20,7 @@
 package org.lcmanager.gdb.service.requirement;
 
 import org.lcmanager.gdb.base.MathUtil;
+import org.lcmanager.gdb.service.compare.Comparator;
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
 import org.lcmanager.gdb.service.data.model.Requirement;
 
@@ -32,7 +33,7 @@ public class BasicComparator implements Comparator<BasicCompareResult> {
     /**
      * {@inheritDoc}
      *
-     * @see org.lcmanager.gdb.service.requirement.Comparator#compare(org.lcmanager.gdb.service.data.model.Requirement,
+     * @see org.lcmanager.gdb.service.compare.Comparator#compare(org.lcmanager.gdb.service.data.model.Requirement,
      *      org.lcmanager.gdb.service.data.model.ComputerSystem)
      */
     @Override

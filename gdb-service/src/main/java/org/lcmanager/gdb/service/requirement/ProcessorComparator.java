@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.lcmanager.gdb.base.MathUtil;
+import org.lcmanager.gdb.service.compare.Comparator;
 import org.lcmanager.gdb.service.data.model.Brand;
 import org.lcmanager.gdb.service.data.model.Brand.WellKnownBrand;
 import org.lcmanager.gdb.service.data.model.ComputerSystem;
@@ -40,7 +41,7 @@ public class ProcessorComparator implements Comparator<ProcessorCompareResult> {
     /**
      * {@inheritDoc}
      *
-     * @see org.lcmanager.gdb.service.requirement.Comparator#compare(org.lcmanager.gdb.service.data.model.Requirement,
+     * @see org.lcmanager.gdb.service.compare.Comparator#compare(org.lcmanager.gdb.service.data.model.Requirement,
      *      org.lcmanager.gdb.service.data.model.ComputerSystem)
      */
     @Override
@@ -98,7 +99,7 @@ public class ProcessorComparator implements Comparator<ProcessorCompareResult> {
                 .map(WellKnownBrand::getWellKnownBrand) //
                 .collect(Collectors.toList());
 
-        Brand result = null;
+        Brand result = WellKnownBrand.GENERIC.getBrand();
         if (wellKnownBrand == WellKnownBrand.AMD && wellKnownBrands.contains(WellKnownBrand.INTEL)) {
             result = WellKnownBrand.INTEL.getBrand();
         } else if (wellKnownBrand == WellKnownBrand.INTEL && wellKnownBrands.contains(WellKnownBrand.AMD)) {

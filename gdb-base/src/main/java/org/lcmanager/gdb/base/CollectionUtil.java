@@ -19,8 +19,10 @@
  */
 package org.lcmanager.gdb.base;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -41,6 +43,25 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class CollectionUtil {
+    /**
+     * Creates a new map and passes it to each of the given consumers to enable
+     * them to fill the map. This allows inline-map-creation.
+     *
+     * @param <K>
+     *            The key type.
+     * @param <V>
+     *            The value type.
+     * @param consumer
+     *            An array of consumers that are filling the map.
+     * @return The created map.
+     */
+    @SafeVarargs
+    public <K, V> Map<K, V> createMap(final Consumer<Map<K, V>>... consumer) {
+        final Map<K, V> map = new HashMap<>();
+        Arrays.stream(consumer).forEach(c -> c.accept(map));
+        return map;
+    }
+
     /**
      * Checks whether the given list is <code>null</code>. If so, an empty list
      * is returned.
@@ -216,8 +237,11 @@ public class CollectionUtil {
      *         or the associated value is null or no key was found matched.
      */
     public static <K, V, R> R findValue(final Map<K, V> map, final Predicate<K> keyPredicate, final Function<V, R> finisher) {
-        final V value = map
-                .get(map.keySet().stream().filter(FunctionUtil.notNull()).filter(keyPredicate::test).findAny().orElse(null));
+        final K key = map.keySet().stream().filter(FunctionUtil.notNull()).filter(keyPredicate::test).findAny().orElse(null);
+        if (key == null) {
+            return null;
+        }
+        final V value = map.get(key);
         if (value == null) {
             return null;
         }
@@ -346,6 +370,16 @@ public class CollectionUtil {
          */
         public MapEntryImpl(final K key) {
             this(key, null);
+        }
+
+        /**
+         * {@inheritDoc}
+         *
+         * @see java.lang.Object#toString()
+         */
+        @Override
+        public String toString() {
+            return "MapEntryImpl [key=" + this.key + ", value=" + this.value + "]";
         }
 
         /**

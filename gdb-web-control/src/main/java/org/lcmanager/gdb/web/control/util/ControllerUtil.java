@@ -19,11 +19,7 @@
  */
 package org.lcmanager.gdb.web.control.util;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Consumer;
 
 import org.lcmanager.gdb.base.PaginationMetadata;
 import org.lcmanager.gdb.web.control.util.exception.NullContentException;
@@ -43,25 +39,6 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class ControllerUtil {
-    /**
-     * Creates a new map and passes it to each of the given consumers to enable
-     * them to fill the map. This allows inline-map-creation.
-     *
-     * @param <K>
-     *            The key type.
-     * @param <V>
-     *            The value type.
-     * @param consumer
-     *            An array of consumers that are filling the map.
-     * @return The created map.
-     */
-    @SafeVarargs
-    public <K, V> Map<K, V> createMap(final Consumer<Map<K, V>>... consumer) {
-        final Map<K, V> map = new HashMap<>();
-        Arrays.stream(consumer).forEach(c -> c.accept(map));
-        return map;
-    }
-
     /**
      * Creates a simple resource for the given content.
      *
