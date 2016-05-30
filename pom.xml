@@ -558,7 +558,7 @@
 		<profile>
 			<id>release</id>
 			<build>
-				<defaultGoal>clean deploy site-deploy</defaultGoal>
+				<defaultGoal>clean deploy</defaultGoal>
 			</build>
 		</profile>
 		<profile>
